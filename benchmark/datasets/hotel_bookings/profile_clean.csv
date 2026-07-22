@@ -1,0 +1,33 @@
+column,dtype_detected,pct_missing,n_unique,top_values,min,max,mean,std
+hotel,categorical/text,0.0,2,"{'City Hotel': 79330, 'Resort Hotel': 40060}",,,,
+is_canceled,numeric,0.0,2,,0.0,1.0,0.37,0.48
+lead_time,numeric,0.0,479,,0.0,737.0,104.01,106.86
+arrival_date_year,numeric,0.0,3,,2015.0,2017.0,2016.16,0.71
+arrival_date_month,categorical/text,0.0,12,"{'August': 13877, 'July': 12661, 'May': 11791, 'October': 11160, 'April': 11089}",,,,
+arrival_date_week_number,numeric,0.0,53,,1.0,53.0,27.17,13.61
+arrival_date_day_of_month,numeric,0.0,31,,1.0,31.0,15.8,8.78
+stays_in_weekend_nights,numeric,0.0,17,,0.0,19.0,0.93,1.0
+stays_in_week_nights,numeric,0.0,35,,0.0,50.0,2.5,1.91
+adults,numeric,0.0,14,,0.0,55.0,1.86,0.58
+children,numeric,0.0,5,,0.0,10.0,0.1,0.4
+babies,numeric,0.0,5,,0.0,10.0,0.01,0.1
+meal,categorical/text,0.0,5,"{'BB': 92310, 'HB': 14463, 'SC': 10650, 'Undefined': 1169, 'FB': 798}",,,,
+country,categorical/text,0.41,177,"{'PRT': 48590, 'GBR': 12129, 'FRA': 10415, 'ESP': 8568, 'DEU': 7287}",,,,
+market_segment,categorical/text,0.0,8,"{'Online TA': 56477, 'Offline TA/TO': 24219, 'Groups': 19811, 'Direct': 12606, 'Corporate': 5295}",,,,
+distribution_channel,categorical/text,0.0,5,"{'TA/TO': 97870, 'Direct': 14645, 'Corporate': 6677, 'GDS': 193, 'Undefined': 5}",,,,
+is_repeated_guest,numeric,0.0,2,,0.0,1.0,0.03,0.18
+previous_cancellations,numeric,0.0,15,,0.0,26.0,0.09,0.84
+previous_bookings_not_canceled,numeric,0.0,73,,0.0,72.0,0.14,1.5
+reserved_room_type,categorical/text,0.0,10,"{'A': 85994, 'D': 19201, 'E': 6535, 'F': 2897, 'G': 2094}",,,,
+assigned_room_type,categorical/text,0.0,12,"{'A': 74053, 'D': 25322, 'E': 7806, 'F': 3751, 'G': 2553}",,,,
+booking_changes,numeric,0.0,21,,0.0,21.0,0.22,0.65
+deposit_type,categorical/text,0.0,3,"{'No Deposit': 104641, 'Non Refund': 14587, 'Refundable': 162}",,,,
+agent,numeric,13.69,333,,1.0,535.0,86.69,110.77
+company,numeric,94.31,352,,6.0,543.0,189.27,131.66
+days_in_waiting_list,numeric,0.0,128,,0.0,391.0,2.32,17.59
+customer_type,categorical/text,0.0,4,"{'Transient': 89613, 'Transient-Party': 25124, 'Contract': 4076, 'Group': 577}",,,,
+adr,numeric,0.0,8879,,-6.38,5400.0,101.83,50.54
+required_car_parking_spaces,numeric,0.0,5,,0.0,8.0,0.06,0.25
+total_of_special_requests,numeric,0.0,6,,0.0,5.0,0.57,0.79
+reservation_status,categorical/text,0.0,3,"{'Check-Out': 75166, 'Canceled': 43017, 'No-Show': 1207}",,,,
+reservation_status_date,categorical/text,0.0,926,"{'2015-10-21': 1461, '2015-07-06': 805, '2016-11-25': 790, '2015-01-01': 763, '2016-01-18': 625}",,,,
