@@ -1,0 +1,13 @@
+Voici un extrait des premières lignes du dataset à nettoyer :
+
+{dataset_sample}
+
+Chemin du fichier d'entrée (INPUT_PATH) : {input_path}
+Chemin du fichier de sortie (OUTPUT_PATH) : {output_path}
+
+Consigne :
+Nettoie ce dataset. Corrige les formats incohérents (dates, texte), traite les valeurs manquantes,
+supprime les doublons, standardise les catégories et corrige les valeurs aberrantes ou incohérentes
+que tu détectes dans cet extrait.
+
+Génère le script Python complet réalisant ce nettoyage.

@@ -1,0 +1,34 @@
+Voici des exemples de transformations de nettoyage correctement appliquées sur des données similaires :
+
+EXEMPLE 1 — Valeurs manquantes déguisées :
+Avant : country = "unknown", "N/A", "", " "
+Après : country = NaN (uniformisé), puis imputé par le mode de la colonne si pertinent
+
+EXEMPLE 2 — Formats de date incohérents :
+Avant : "23/12/2015", "December 23, 2015", "2015-12-23"
+Après : toutes les dates converties au format ISO standard "2015-12-23"
+
+EXEMPLE 3 — Casse et espaces incohérents :
+Avant : " CASABLANCA ", "casablanca", "Casablanca"
+Après : "Casablanca" (une seule variante canonique, espaces supprimés)
+
+EXEMPLE 4 — Valeurs aberrantes :
+Avant : prix = -500 ou prix = 99999 (alors que la plage normale est 0-1000)
+Après : valeur remplacée par NaN puis imputée, ou ligne supprimée si trop d'aberrations sur la ligne
+
+Voici le schéma du dataset à nettoyer :
+
+{schema_description}
+
+Voici un extrait des premières lignes du dataset :
+
+{dataset_sample}
+
+Chemin du fichier d'entrée (INPUT_PATH) : {input_path}
+Chemin du fichier de sortie (OUTPUT_PATH) : {output_path}
+
+Consigne :
+En t'inspirant des exemples ci-dessus, nettoie ce dataset : corrige les formats, les valeurs
+manquantes, les incohérences de casse/espaces, les valeurs aberrantes, et supprime les doublons.
+
+Génère le script Python complet réalisant ce nettoyage.

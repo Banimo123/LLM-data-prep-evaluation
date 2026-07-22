@@ -1,0 +1,22 @@
+Un précédent script de nettoyage a été généré et exécuté sur ce dataset, mais l'exécution a produit
+l'erreur ou le problème suivant :
+
+{execution_feedback}
+
+Voici le script précédent qui a échoué ou produit un résultat insatisfaisant :
+
+{previous_script}
+
+Voici le schéma du dataset concerné :
+
+{schema_description}
+
+Chemin du fichier d'entrée (INPUT_PATH) : {input_path}
+Chemin du fichier de sortie (OUTPUT_PATH) : {output_path}
+
+Consigne :
+Corrige le script ci-dessus pour résoudre le problème signalé, tout en conservant les parties du
+script qui fonctionnaient correctement. Ne réécris pas depuis zéro si seule une partie du script
+pose problème.
+
+Génère le script Python corrigé, complet et exécutable.
