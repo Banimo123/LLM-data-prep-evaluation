@@ -1,0 +1,9 @@
+{
+  "success": false,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\DELL\\Downloads\\llm-data-prep-evaluation\\workflows\\generated\\hotel_bookings__simple.py\", line 9, in <module>\n    df = pd.read_csv(INPUT_PATH, error_bad_lines=False)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: read_csv() got an unexpected keyword argument 'error_bad_lines'\n",
+  "returncode": 1,
+  "duration_seconds": 1.87,
+  "error_message": "TypeError: read_csv() got an unexpected keyword argument 'error_bad_lines'",
+  "script_path": "workflows/generated/hotel_bookings__simple.py"
+}
