@@ -36,13 +36,13 @@ def _call_ollama(prompt: str, model: str = None, temperature: float = 0.2) -> st
             "stream": False,
             "options": {"temperature": temperature},
         },
-        timeout=300,
+        timeout=600,
     )
     response.raise_for_status()
     return response.json()["response"]
 
 
-def _call_mistral_api(prompt: str, model: str = None, temperature: float = 0.2, max_retries: int = 3) -> str:
+def _call_mistral_api(prompt: str, model: str = None, temperature: float = 0.2, max_retries: int = 5) -> str:
     """
     Appelle l'API Mistral (tier gratuit "Experiment").
     Gère le rate limit (erreur 429) avec un retry + backoff exponentiel.
@@ -63,7 +63,13 @@ def _call_mistral_api(prompt: str, model: str = None, temperature: float = 0.2, 
     }
 
     for attempt in range(max_retries):
-        response = requests.post(url, headers=headers, json=payload, timeout=120)
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=120)
+        except requests.exceptions.ConnectionError as e:
+            wait_time = 2 ** attempt
+            print(f"Erreur de connexion réseau. Nouvelle tentative dans {wait_time}s... ({e})")
+            time.sleep(wait_time)
+            continue
 
         if response.status_code == 429:
             wait_time = 2 ** attempt  # backoff exponentiel : 1s, 2s, 4s...
@@ -74,7 +80,7 @@ def _call_mistral_api(prompt: str, model: str = None, temperature: float = 0.2, 
         response.raise_for_status()
         return response.json()["choices"][0]["message"]["content"]
 
-    raise RuntimeError("Échec après plusieurs tentatives : rate limit Mistral API dépassé.")
+    raise RuntimeError("Échec après plusieurs tentatives : problème réseau ou rate limit Mistral API.")
 
 
 def call_llm(prompt: str, provider: str = None, model: str = None, temperature: float = 0.2) -> str:
