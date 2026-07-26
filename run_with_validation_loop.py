@@ -20,8 +20,8 @@ MAX_ATTEMPTS = 3
 
 DATASET_CSV = "benchmark/datasets/hotel_bookings/noisy_low.csv"
 INPUT_PATH = "benchmark/datasets/hotel_bookings/noisy_low.csv"
-OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_low__validated.csv"
-GENERATED_SCRIPT_PATH = Path("workflows/generated/hotel_bookings__validated.py")
+OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_low__profile.csv"
+GENERATED_SCRIPT_PATH = Path("workflows/generated/hotel_bookings__profile.py")
 FAILED_SCRIPT_DIR = Path("workflows/failed")
 
 # S'assurer que les dossiers existent
@@ -53,10 +53,10 @@ def build_validation_prompt(previous_script: str, execution_feedback: str) -> st
 
 
 def main():
-    # --- Tentative 1 : approche "simple" ---
-    print("=== Tentative 1 : génération initiale (approche simple) ===")
+    # --- Tentative 1 : approche "profile" (donne mode/médiane pour imputation intelligente) ---
+    print("=== Tentative 1 : génération initiale (approche profile) ===")
     prompt = build_prompt(
-        approach="simple",
+        approach="profile",
         dataset_csv_path=DATASET_CSV,
         input_path=INPUT_PATH,
         output_path=OUTPUT_PATH,
