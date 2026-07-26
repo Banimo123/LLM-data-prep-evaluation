@@ -66,6 +66,10 @@ if "lead_time" in df.columns:
 # stays_in_week_nights - correction des valeurs aberrantes (max 999 -> 99)
 if "stays_in_week_nights" in df.columns:
     q99 = df["stays_in_week_nights"].quantile(0.99)
+    q99 = int(round(q99))
+    df["stays_in_week_nights"] = pd.to_numeric(df["stays_in_week_nights"], errors="coerce")
+    df["stays_in_week_nights"] = df["stays_in_week_nights"].fillna(0)
+    df["stays_in_week_nights"] = df["stays_in_week_nights"].astype(int)
     df.loc[df["stays_in_week_nights"] > q99, "stays_in_week_nights"] = q99
     log["outliers_corrected"]["stays_in_week_nights"] = f"capped at 99th percentile: {q99}"
 
@@ -77,6 +81,10 @@ if "adr" in df.columns:
 # days_in_waiting_list - correction des valeurs aberrantes (max 8993 -> 99th percentile)
 if "days_in_waiting_list" in df.columns:
     q99 = df["days_in_waiting_list"].quantile(0.99)
+    q99 = int(round(q99))
+    df["days_in_waiting_list"] = pd.to_numeric(df["days_in_waiting_list"], errors="coerce")
+    df["days_in_waiting_list"] = df["days_in_waiting_list"].fillna(0)
+    df["days_in_waiting_list"] = df["days_in_waiting_list"].astype(int)
     df.loc[df["days_in_waiting_list"] > q99, "days_in_waiting_list"] = q99
     log["outliers_corrected"]["days_in_waiting_list"] = f"capped at 99th percentile: {q99}"
 
@@ -84,23 +92,32 @@ if "days_in_waiting_list" in df.columns:
 # hotel - harmonisation des variantes (ex: "City Hotel  " -> "City Hotel")
 if "hotel" in df.columns:
     df["hotel"] = df["hotel"].str.strip()
-    df["hotel"] = df["hotel"].replace({"City Hotel  ": "City Hotel"})
+    df["hotel"] = df["hotel"].replace({"City Hotel  ": "City Hotel", "Reort Hotel": "Resort Hotel"})
     log["categories_harmonized"]["hotel"] = "stripped and harmonized variants"
 
 # deposit_type - harmonisation des variantes (ex: "No Deposit  " -> "No Deposit")
 if "deposit_type" in df.columns:
     df["deposit_type"] = df["deposit_type"].str.strip()
-    df["deposit_type"] = df["deposit_type"].replace({"No Deposit  ": "No Deposit"})
+    df["deposit_type"] = df["deposit_type"].replace({"No Deposit  ": "No Deposit", "NO DEPosit": "No Deposit"})
     log["categories_harmonized"]["deposit_type"] = "stripped and harmonized variants"
+
+# customer_type - harmonisation des variantes
+if "customer_type" in df.columns:
+    df["customer_type"] = df["customer_type"].str.strip().str.title()
+    df["customer_type"] = df["customer_type"].replace({"Transient": "Transient", "Transient-Party": "Transient-Party"})
+    log["categories_harmonized"]["customer_type"] = "stripped and harmonized variants"
 
 # adults - conversion en numérique (certaines valeurs sont textuelles)
 if "adults" in df.columns:
+    df["adults"] = df["adults"].apply(lambda x: re.sub(r'[^0-9]', '', str(x)) if isinstance(x, str) else x)
     df["adults"] = pd.to_numeric(df["adults"], errors="coerce")
-    log["formats_corrected"]["adults"] = "converted to numeric"
+    df["adults"] = df["adults"].fillna(0).astype(int)
+    log["formats_corrected"]["adults"] = "converted to numeric and cleaned text values"
 
 # children - conversion en numérique (certaines valeurs sont textuelles)
 if "children" in df.columns:
     df["children"] = pd.to_numeric(df["children"], errors="coerce")
+    df["children"] = df["children"].fillna(0).astype(int)
     log["formats_corrected"]["children"] = "converted to numeric"
 
 # 4. Correction des formats

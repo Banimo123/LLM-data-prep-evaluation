@@ -1,0 +1,4 @@
+noise_level,noise_rates,execution_success,execution_error,precision,recall,f1,tp,fp,fn,n_rows_lost_by_workflow,n_error_cells_lost_with_dropped_rows,columns_dropped_by_workflow
+low,"{'missing': 0.05, 'format': 0.075, 'outliers': 0.01, 'typos': 0.04}",True,,0.9698,0.3689,0.5345,24882,774,42564,18179,801,[]
+medium,"{'missing': 0.1, 'format': 0.15, 'outliers': 0.02, 'typos': 0.08}",True,,0.2828,0.2671,0.2748,36037,91372,98869,10145,1264,[]
+high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,0.9731,0.3401,0.504,91753,2541,178064,2809,812,[]

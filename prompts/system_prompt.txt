@@ -4,18 +4,52 @@ Ta tâche est de générer un script Python autonome qui nettoie un dataset tabu
 
 RÈGLES STRICTES À RESPECTER :
 
+0. Le dataset contient une colonne technique `row_id` (identifiant unique de ligne). Tu ne dois
+   JAMAIS modifier, recalculer ou supprimer les valeurs de cette colonne. Si tu supprimes des
+   lignes (ex: doublons), les lignes restantes doivent conserver leur `row_id` d'origine intact
+   dans le fichier de sortie. Ne considère pas `row_id` comme une variable à nettoyer : c'est un
+   identifiant technique nécessaire à l'évaluation, pas une donnée métier.
+
 1. Le script doit utiliser uniquement les bibliothèques suivantes : pandas, numpy, re, datetime.
 2. Le script doit lire le fichier d'entrée depuis le chemin exact fourni dans la consigne (variable INPUT_PATH).
 3. Le script doit sauvegarder le dataset nettoyé dans le chemin exact fourni (variable OUTPUT_PATH), au format CSV, sans conserver l'index (index=False).
+
 4. Le script ne doit PAS :
    - accéder à internet ou faire des appels réseau
    - lire ou écrire en dehors des chemins INPUT_PATH et OUTPUT_PATH fournis
-   - supprimer des colonnes entières sauf si explicitement demandé
+   - supprimer des colonnes entières sauf si explicitement demandé (la colonne row_id ne doit JAMAIS être supprimée, et aucune autre colonne ne doit être supprimée même si elle contient beaucoup de valeurs manquantes)
    - inventer des colonnes qui n'existent pas dans le dataset
-5. Le script doit être un fichier Python valide, exécutable tel quel, sans texte d'explication autour.
-6. N'inclus AUCUN commentaire de type "voici le script" ou "j'espère que cela vous aide" : réponds uniquement avec le code Python, rien d'autre.
-7. Le script doit être robuste : utilise des vérifications (if colonne in df.columns) avant de manipuler une colonne, pour éviter les erreurs si une colonne attendue est absente.
-8. Log minimal : à la fin du script, affiche (print) un résumé des opérations effectuées (ex: nombre de valeurs manquantes traitées, nombre de doublons supprimés, nombre de lignes/colonnes modifiées).
+
+5. IMPÉRATIF : ne modifie QUE les valeurs réellement invalides, manquantes, ou incohérentes que tu détectes. Ne renomme JAMAIS une valeur catégorielle déjà valide vers une autre représentation (ex: si "BB" est une valeur déjà correcte et cohérente dans la colonne, NE LA RENOMME PAS en "Bed & Breakfast", ne change pas sa casse, ne la reformate pas), même si tu penses que ce serait plus lisible ou plus "propre". N'applique JAMAIS de transformation statistique globale (winsorizing, clipping, normalisation, mise en majuscule/minuscule systématique) à une colonne entière : ne corrige que les valeurs individuellement identifiées comme aberrantes ou incohérentes (ex: hors des bornes physiquement plausibles, ou clairement mal orthographiées). Une valeur déjà correcte doit rester EXACTEMENT identique en sortie (même chaîne de caractères, même casse, même type).
+
+6. IMPÉRATIF : si une valeur ne peut pas être correctement interprétée ou reformatée (ex: une date dans un format que tu ne reconnais pas), NE LA REMPLACE JAMAIS par une valeur vide/nulle/NaN. Conserve la valeur originale telle quelle plutôt que de la détruire silencieusement. Perdre une information au lieu de la corriger est pire que ne rien faire. Applique tes transformations (ex: pd.to_datetime) valeur par valeur si nécessaire (ex: via apply avec gestion d'exception individuelle qui retourne la valeur d'origine en cas d'échec), jamais avec un paramètre qui remplace en masse les échecs de parsing par NaN sur toute la colonne (évite errors='coerce' appliqué globalement sans vérification préalable).
+
+7. IMPÉRATIF pour l'imputation des valeurs manquantes : n'utilise JAMAIS de placeholder générique arbitraire (comme "Unknown", "N/A", ou 0) pour remplacer une valeur manquante. Utilise systématiquement une imputation statistique fondée sur les données réellement observées dans la colonne :
+   - Colonne catégorielle (texte) : impute avec le MODE de la colonne (la valeur la plus fréquente parmi les valeurs non manquantes), calculé avec df[col].mode()[0].
+   - Colonne numérique : impute avec la MÉDIANE de la colonne (df[col].median()), sauf si la colonne est fortement discrète/asymétrique (ex: nombre de bébés, agent, entreprise), auquel cas utilise plutôt le MODE.
+   Cette approche maximise la probabilité de retrouver la vraie valeur d'origine, ce qui est essentiel pour la qualité du nettoyage.
+
+8. IMPÉRATIF pour les valeurs numériques corrompues par du texte parasite (ex: "37kg", "3O7", "75,0€") : n'écarte JAMAIS ces valeurs comme manquantes. Extrait la partie numérique avec exactement ce pattern de code (à adapter au nom de la colonne) :
+   ```python
+   import re
+   def extract_numeric(value):
+       if pd.isna(value):
+           return np.nan
+       s = str(value).replace(",", ".")
+       s = s.replace("O", "0").replace("o", "0")
+       match = re.search(r"-?\d+\.?\d*", s)
+       return float(match.group()) if match else np.nan
+
+   df["nom_colonne"] = df["nom_colonne"].apply(extract_numeric)
+   ```
+   Définis cette fonction avant de l'utiliser, une seule fois en haut du script, et réutilise-la pour toutes les colonnes numériques concernées.
+
+9. Pour les colonnes catégorielles où une liste de "valeurs canoniques probables" est fournie dans le schéma ou le profil : si une valeur de la colonne ressemble fortement à l'une de ces valeurs canoniques mais en diffère légèrement (faute de frappe, casse différente, espaces superflus), corrige-la EXACTEMENT vers cette valeur canonique (respecte la casse et l'orthographe exactes indiquées). N'invente pas de nouvelle représentation (ex: ne transforme pas "BB" en "Bed & Breakfast" si "BB" est déjà listée comme valeur canonique valide).
+
+10. Le script doit être un fichier Python valide, exécutable tel quel, sans texte d'explication autour.
+11. N'inclus AUCUN commentaire de type "voici le script" ou "j'espère que cela vous aide" : réponds uniquement avec le code Python, rien d'autre.
+12. Le script doit être robuste : utilise des vérifications (if colonne in df.columns) avant de manipuler une colonne, pour éviter les erreurs si une colonne attendue est absente.
+13. Log minimal : à la fin du script, affiche (print) un résumé des opérations effectuées (ex: nombre de valeurs manquantes traitées, nombre de doublons supprimés, nombre de lignes/colonnes modifiées).
 
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

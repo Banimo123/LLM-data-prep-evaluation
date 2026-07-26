@@ -1,163 +1,247 @@
 import pandas as pd
 import numpy as np
 import re
-from datetime import datetime
+from datetime import datetime, date
 
 INPUT_PATH = "benchmark/datasets/hotel_bookings/noisy_low.csv"
 OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_low__validated.csv"
 
-def clean_hotel_bookings(input_path, output_path):
-    df = pd.read_csv(input_path)
+# Load the dataset
+df = pd.read_csv(INPUT_PATH)
 
-    operations_log = {
-        'missing_values_handled': {},
-        'duplicates_removed': 0,
-        'format_corrections': {},
-        'outliers_corrected': {},
-        'category_standardizations': {}
-    }
+# Initialize logging variables
+operations_log = {
+    'missing_values_filled': 0,
+    'duplicates_removed': 0,
+    'date_formats_corrected': 0,
+    'numeric_corrections': 0,
+    'categorical_standardized': 0,
+    'rows_removed': 0
+}
 
-    # Correction des formats de colonnes
-    if 'lead_time' in df.columns:
-        df['lead_time'] = df['lead_time'].replace({'O': '0'}, regex=True)
-        df['lead_time'] = pd.to_numeric(df['lead_time'], errors='coerce').fillna(0).astype(int)
-        operations_log['format_corrections']['lead_time'] = "Corrected O to 0 and converted to int"
+# Ensure row_id is present and set as index for deduplication
+if 'row_id' in df.columns:
+    df.set_index('row_id', inplace=True, drop=False)
 
-    if 'children' in df.columns:
-        df['children'] = pd.to_numeric(df['children'], errors='coerce').fillna(0).astype(int)
-        operations_log['format_corrections']['children'] = "Converted to int"
+# 1. Handle duplicates (keeping first occurrence)
+initial_rows = len(df)
+df.drop_duplicates(subset=[col for col in df.columns if col != 'row_id'], keep='first', inplace=True)
+operations_log['duplicates_removed'] = initial_rows - len(df)
 
-    if 'babies' in df.columns:
-        df['babies'] = pd.to_numeric(df['babies'], errors='coerce').fillna(0).astype(int)
-        operations_log['format_corrections']['babies'] = "Converted to int"
+# 2. Correct lead_time (detected '342O' which should be 342)
+if 'lead_time' in df.columns:
+    def correct_lead_time(val):
+        if isinstance(val, str):
+            val = re.sub(r'[^0-9]', '', val)
+            if val:
+                return int(val)
+        return val
+    df['lead_time'] = df['lead_time'].apply(correct_lead_time)
+    operations_log['numeric_corrections'] += df['lead_time'].apply(lambda x: isinstance(x, str)).sum()
 
-    if 'adults' in df.columns:
-        df['adults'] = df['adults'].replace({'O': '0'}, regex=True)
-        df['adults'] = pd.to_numeric(df['adults'], errors='coerce').fillna(0).astype(int)
-        operations_log['format_corrections']['adults'] = "Corrected O to 0 and converted to int"
+# 3. Correct children column (detected 0.0 which should be 0)
+if 'children' in df.columns:
+    def safe_convert_to_int(val):
+        if pd.isna(val):
+            return 0
+        try:
+            if isinstance(val, str) and '.' in val:
+                return int(float(val))
+            return int(val)
+        except (ValueError, TypeError):
+            return val
+    df['children'] = df['children'].apply(safe_convert_to_int)
+    operations_log['missing_values_filled'] += df['children'].isna().sum()
+    operations_log['numeric_corrections'] += df['children'].apply(lambda x: isinstance(x, (float, str))).sum()
 
-    if 'adr' in df.columns:
-        df['adr'] = pd.to_numeric(df['adr'], errors='coerce')
-        operations_log['format_corrections']['adr'] = "Converted to numeric"
+# 4. Correct meal column (standardize 'BB' to 'BB' - no change needed as per rules)
+if 'meal' in df.columns:
+    valid_meals = ['BB', 'HB', 'FB', 'SC', 'Undefined']
+    df['meal'] = df['meal'].apply(lambda x: x if x in valid_meals else x)
 
-    # Traitement des dates
-    if 'reservation_status_date' in df.columns:
-        def parse_date(date_str):
-            if pd.isna(date_str):
-                return pd.NaT
+# 5. Correct country column (standardize case)
+if 'country' in df.columns:
+    df['country'] = df['country'].str.upper()
+    operations_log['categorical_standardized'] += df['country'].notna().sum()
+
+# 6. Correct date formats in reservation_status_date
+if 'reservation_status_date' in df.columns:
+    def parse_date(date_str):
+        if pd.isna(date_str):
+            return date_str
+        date_str = str(date_str).strip()
+        # Try multiple date formats
+        for fmt in ('%B %d, %Y', '%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y'):
             try:
-                return pd.to_datetime(date_str, format='%B %d, %Y', errors='coerce')
-            except:
-                try:
-                    return pd.to_datetime(date_str, format='%Y-%m-%d', errors='coerce')
-                except:
-                    return pd.NaT
+                return datetime.strptime(date_str, fmt).date()
+            except ValueError:
+                continue
+        return date_str  # Return original if no format matches
 
-        df['reservation_status_date'] = df['reservation_status_date'].apply(parse_date)
-        operations_log['format_corrections']['reservation_status_date'] = "Standardized date format"
+    df['reservation_status_date'] = df['reservation_status_date'].apply(parse_date)
+    operations_log['date_formats_corrected'] += df['reservation_status_date'].apply(
+        lambda x: isinstance(x, (datetime, date))).sum()
 
-    # Standardisation des catégories
-    if 'meal' in df.columns:
-        meal_mapping = {
-            'BB': 'Bed & Breakfast',
-            'HB': 'Half Board',
-            'FB': 'Full Board',
-            'SC': 'Self Catering',
-            'Undefined': 'Undefined/SC'
-        }
-        df['meal'] = df['meal'].replace(meal_mapping)
-        operations_log['category_standardizations']['meal'] = f"Standardized to {list(meal_mapping.values())}"
+# 7. Correct arrival_date_month (standardize case)
+if 'arrival_date_month' in df.columns:
+    month_map = {
+        'january': 'January', 'february': 'February', 'march': 'March',
+        'april': 'April', 'may': 'May', 'june': 'June',
+        'july': 'July', 'august': 'August', 'september': 'September',
+        'october': 'October', 'november': 'November', 'december': 'December'
+    }
+    df['arrival_date_month'] = df['arrival_date_month'].str.capitalize().map(month_map).fillna(df['arrival_date_month'])
+    operations_log['categorical_standardized'] += df['arrival_date_month'].notna().sum()
 
-    if 'market_segment' in df.columns:
-        df['market_segment'] = df['market_segment'].str.title()
-        operations_log['category_standardizations']['market_segment'] = "Capitalized values"
+# 8. Correct adults column (minimum 1 adult per booking)
+if 'adults' in df.columns:
+    def safe_convert_adults(val):
+        if pd.isna(val):
+            return 1
+        try:
+            if isinstance(val, str):
+                val = re.sub(r'[^0-9]', '', val)
+                if val:
+                    return max(1, int(val))
+            return max(1, int(val))
+        except (ValueError, TypeError):
+            return 1
+    df['adults'] = df['adults'].apply(safe_convert_adults)
+    operations_log['numeric_corrections'] += (df['adults'] < 1).sum()
 
-    if 'distribution_channel' in df.columns:
-        df['distribution_channel'] = df['distribution_channel'].str.title()
-        operations_log['category_standardizations']['distribution_channel'] = "Capitalized values"
+# 9. Correct babies column (ensure non-negative)
+if 'babies' in df.columns:
+    def safe_convert_babies(val):
+        if pd.isna(val):
+            return 0
+        try:
+            return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+        except (ValueError, TypeError):
+            return 0
+    df['babies'] = df['babies'].apply(safe_convert_babies)
+    operations_log['numeric_corrections'] += (df['babies'] < 0).sum()
 
-    if 'customer_type' in df.columns:
-        df['customer_type'] = df['customer_type'].str.title()
-        operations_log['category_standardizations']['customer_type'] = "Capitalized values"
+# 10. Correct adr (average daily rate) - ensure non-negative
+if 'adr' in df.columns:
+    def safe_convert_adr(val):
+        if pd.isna(val):
+            return 0.0
+        try:
+            return max(0.0, float(val))
+        except (ValueError, TypeError):
+            return val
+    df['adr'] = df['adr'].apply(safe_convert_adr)
+    operations_log['numeric_corrections'] += (df['adr'] < 0).sum()
 
-    # Correction des valeurs aberrantes
-    if 'adults' in df.columns:
-        df['adults'] = df['adults'].where(df['adults'] >= 0, 0)
-        df['adults'] = df['adults'].where(df['adults'] <= 4, 4)
-        operations_log['outliers_corrected']['adults'] = "Clipped to 0-4 range"
+# 11. Correct stays_in_weekend_nights and stays_in_week_nights (ensure non-negative)
+for col in ['stays_in_weekend_nights', 'stays_in_week_nights']:
+    if col in df.columns:
+        def safe_convert_nights(val):
+            if pd.isna(val):
+                return 0
+            try:
+                return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+            except (ValueError, TypeError):
+                return 0
+        df[col] = df[col].apply(safe_convert_nights)
+        operations_log['numeric_corrections'] += (df[col] < 0).sum()
 
-    if 'children' in df.columns:
-        df['children'] = df['children'].where(df['children'] >= 0, 0)
-        df['children'] = df['children'].where(df['children'] <= 10, 10)
-        operations_log['outliers_corrected']['children'] = "Clipped to 0-10 range"
+# 12. Correct previous_cancellations and previous_bookings_not_canceled (ensure non-negative)
+for col in ['previous_cancellations', 'previous_bookings_not_canceled']:
+    if col in df.columns:
+        def safe_convert_count(val):
+            if pd.isna(val):
+                return 0
+            try:
+                return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+            except (ValueError, TypeError):
+                return 0
+        df[col] = df[col].apply(safe_convert_count)
+        operations_log['numeric_corrections'] += (df[col] < 0).sum()
 
-    if 'babies' in df.columns:
-        df['babies'] = df['babies'].where(df['babies'] >= 0, 0)
-        df['babies'] = df['babies'].where(df['babies'] <= 4, 4)
-        operations_log['outliers_corrected']['babies'] = "Clipped to 0-4 range"
+# 13. Correct days_in_waiting_list (ensure non-negative)
+if 'days_in_waiting_list' in df.columns:
+    def safe_convert_waiting(val):
+        if pd.isna(val):
+            return 0
+        try:
+            return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+        except (ValueError, TypeError):
+            return 0
+    df['days_in_waiting_list'] = df['days_in_waiting_list'].apply(safe_convert_waiting)
+    operations_log['numeric_corrections'] += (df['days_in_waiting_list'] < 0).sum()
 
-    if 'stays_in_weekend_nights' in df.columns:
-        df['stays_in_weekend_nights'] = pd.to_numeric(df['stays_in_weekend_nights'], errors='coerce').fillna(0).astype(int)
-        df['stays_in_weekend_nights'] = df['stays_in_weekend_nights'].where(df['stays_in_weekend_nights'] >= 0, 0)
-        df['stays_in_weekend_nights'] = df['stays_in_weekend_nights'].where(df['stays_in_weekend_nights'] <= 14, 14)
-        operations_log['outliers_corrected']['stays_in_weekend_nights'] = "Clipped to 0-14 range"
+# 14. Correct total_of_special_requests (ensure non-negative)
+if 'total_of_special_requests' in df.columns:
+    def safe_convert_requests(val):
+        if pd.isna(val):
+            return 0
+        try:
+            return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+        except (ValueError, TypeError):
+            return 0
+    df['total_of_special_requests'] = df['total_of_special_requests'].apply(safe_convert_requests)
+    operations_log['numeric_corrections'] += (df['total_of_special_requests'] < 0).sum()
 
-    if 'stays_in_week_nights' in df.columns:
-        df['stays_in_week_nights'] = pd.to_numeric(df['stays_in_week_nights'], errors='coerce').fillna(0).astype(int)
-        df['stays_in_week_nights'] = df['stays_in_week_nights'].where(df['stays_in_week_nights'] >= 0, 0)
-        df['stays_in_week_nights'] = df['stays_in_week_nights'].where(df['stays_in_week_nights'] <= 50, 50)
-        operations_log['outliers_corrected']['stays_in_week_nights'] = "Clipped to 0-50 range"
+# 15. Correct required_car_parking_spaces (ensure non-negative)
+if 'required_car_parking_spaces' in df.columns:
+    def safe_convert_parking(val):
+        if pd.isna(val):
+            return 0
+        try:
+            return max(0, int(float(val))) if isinstance(val, str) and '.' in val else max(0, int(val))
+        except (ValueError, TypeError):
+            return 0
+    df['required_car_parking_spaces'] = df['required_car_parking_spaces'].apply(safe_convert_parking)
+    operations_log['numeric_corrections'] += (df['required_car_parking_spaces'] < 0).sum()
 
-    # Traitement des valeurs manquantes
-    if 'country' in df.columns:
-        df['country'] = df['country'].fillna('Unknown')
-        operations_log['missing_values_handled']['country'] = f"Filled {df['country'].isna().sum()} missing values with 'Unknown'"
+# 16. Correct agent and company (convert to string if numeric, keep NaN as is)
+for col in ['agent', 'company']:
+    if col in df.columns:
+        df[col] = df[col].apply(lambda x: str(int(float(x))) if pd.notna(x) and str(x).replace('.', '').isdigit() else x)
 
-    if 'agent' in df.columns:
-        df['agent'] = pd.to_numeric(df['agent'], errors='coerce').fillna(0).astype(int)
-        operations_log['missing_values_handled']['agent'] = f"Filled {df['agent'].isna().sum()} missing values with 0"
+# 17. Correct market_segment and distribution_channel (standardize case)
+for col in ['market_segment', 'distribution_channel']:
+    if col in df.columns:
+        df[col] = df[col].str.upper()
+        operations_log['categorical_standardized'] += df[col].notna().sum()
 
-    if 'company' in df.columns:
-        df['company'] = pd.to_numeric(df['company'], errors='coerce').fillna(0).astype(int)
-        operations_log['missing_values_handled']['company'] = f"Filled {df['company'].isna().sum()} missing values with 0"
+# 18. Correct customer_type (standardize case)
+if 'customer_type' in df.columns:
+    df['customer_type'] = df['customer_type'].str.capitalize()
+    operations_log['categorical_standardized'] += df['customer_type'].notna().sum()
 
-    if 'meal' in df.columns:
-        df['meal'] = df['meal'].fillna('Undefined/SC')
-        operations_log['missing_values_handled']['meal'] = f"Filled {df['meal'].isna().sum()} missing values with 'Undefined/SC'"
+# 19. Correct deposit_type (standardize case)
+if 'deposit_type' in df.columns:
+    df['deposit_type'] = df['deposit_type'].str.title()
+    operations_log['categorical_standardized'] += df['deposit_type'].notna().sum()
 
-    # Suppression des doublons
-    initial_rows = len(df)
-    df = df.drop_duplicates()
-    operations_log['duplicates_removed'] = initial_rows - len(df)
+# 20. Correct reservation_status (standardize case)
+if 'reservation_status' in df.columns:
+    df['reservation_status'] = df['reservation_status'].str.title()
+    operations_log['categorical_standardized'] += df['reservation_status'].notna().sum()
 
-    # Vérification de la cohérence des données
-    if all(col in df.columns for col in ['adults', 'children', 'babies']):
-        df = df[(df['adults'] + df['children'] + df['babies']) > 0]
-        operations_log['outliers_corrected']['guests'] = f"Removed {initial_rows - len(df)} rows with 0 guests"
+# 21. Remove rows with invalid dates (after correction attempts)
+if 'reservation_status_date' in df.columns:
+    invalid_dates = df['reservation_status_date'].apply(lambda x: not isinstance(x, (datetime, date)) and pd.notna(x))
+    operations_log['rows_removed'] += invalid_dates.sum()
+    df = df[~invalid_dates]
 
-    # Sauvegarde du fichier nettoyé
-    df.to_csv(output_path, index=False)
+# 22. Ensure row_id is preserved in output
+if 'row_id' in df.columns:
+    df.reset_index(drop=True, inplace=True)
 
-    # Affichage du log des opérations
-    print("\n=== Data Cleaning Summary ===")
-    print(f"Initial rows: {initial_rows}")
-    print(f"Final rows: {len(df)}")
-    print(f"Duplicates removed: {operations_log['duplicates_removed']}")
+# Save the cleaned dataset
+df.to_csv(OUTPUT_PATH, index=False)
 
-    print("\nMissing values handled:")
-    for col, action in operations_log['missing_values_handled'].items():
-        print(f"- {col}: {action}")
-
-    print("\nFormat corrections:")
-    for col, action in operations_log['format_corrections'].items():
-        print(f"- {col}: {action}")
-
-    print("\nCategory standardizations:")
-    for col, action in operations_log['category_standardizations'].items():
-        print(f"- {col}: {action}")
-
-    print("\nOutliers corrected:")
-    for col, action in operations_log['outliers_corrected'].items():
-        print(f"- {col}: {action}")
-
-clean_hotel_bookings(INPUT_PATH, OUTPUT_PATH)
+# Print operation summary
+print("Data Cleaning Summary:")
+print(f"- Rows before cleaning: {initial_rows}")
+print(f"- Rows after cleaning: {len(df)}")
+print(f"- Duplicates removed: {operations_log['duplicates_removed']}")
+print(f"- Missing values filled: {operations_log['missing_values_filled']}")
+print(f"- Date formats corrected: {operations_log['date_formats_corrected']}")
+print(f"- Numeric corrections applied: {operations_log['numeric_corrections']}")
+print(f"- Categorical values standardized: {operations_log['categorical_standardized']}")
+print(f"- Rows removed due to invalid data: {operations_log['rows_removed']}")
+print(f"Cleaned dataset saved to: {OUTPUT_PATH}")

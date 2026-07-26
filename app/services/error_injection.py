@@ -71,7 +71,7 @@ def inject_format_errors(df, columns=None, error_rate=0.15, random_state=42):
             new_value, err_type = reformat(original_value)
             df_noisy.at[idx, col] = new_value
             log_records.append({
-                "row_index": idx,
+                "row_id": idx,
                 "column": col,
                 "original_value": original_value,
                 "injected_value": new_value,
@@ -118,7 +118,7 @@ def inject_outliers(df, column_bounds=None, error_rate=0.02, random_state=42):
 
             df_noisy.at[idx, col] = outlier_value
             log_records.append({
-                "row_index": idx,
+                "row_id": idx,
                 "column": col,
                 "original_value": original_value,
                 "injected_value": outlier_value,
@@ -165,7 +165,7 @@ def inject_missing_values(df, columns=None, error_rate=0.10, random_state=42):
             new_value, err_type = variants[choice_idx]
             df_noisy.at[idx, col] = new_value
             log_records.append({
-                "row_index": idx,
+                "row_id": idx,
                 "column": col,
                 "original_value": original_value,
                 "injected_value": new_value,
@@ -261,7 +261,7 @@ def inject_typos(df, text_columns=None, numeric_columns=None, error_rate=0.10, r
                 new_value, err_type = corrupt_fn(original_value, rng)
                 df_noisy.at[idx, col] = new_value
                 log_records.append({
-                    "row_index": idx,
+                    "row_id": idx,
                     "column": col,
                     "original_value": original_value,
                     "injected_value": new_value,
@@ -290,6 +290,8 @@ def profile_dataset(df, top_n=5):
     n_rows = len(df)
 
     for col in df.columns:
+        if col == "row_id":
+            continue  # identifiant technique, pas une variable métier à profiler
         series = df[col]
         is_numeric = pd.api.types.is_numeric_dtype(series)
 
@@ -408,7 +410,21 @@ def main():
 
     print(f"Lecture de {args.input} ...")
     df_clean = pd.read_csv(args.input)
+
+    # row_id : identifiant de ligne stable, requis pour aligner clean / noisy / cleaned
+    # même après suppression de lignes (doublons) par un workflow de nettoyage.
+    # Ajouté ici (et non seulement dans clean.csv) pour que TOUTE régénération future
+    # (nouveaux datasets, autres niveaux de bruit) l'inclue automatiquement.
+    if "row_id" not in df_clean.columns:
+        df_clean.insert(0, "row_id", df_clean.index)
+
     print(f"Dataset chargé : {df_clean.shape[0]} lignes, {df_clean.shape[1]} colonnes.\n")
+
+    # Sauvegarde d'une version de clean.csv incluant row_id : nécessaire pour que
+    # metrics.py puisse aligner clean/noisy/cleaned sans étape manuelle de retraitement.
+    clean_with_id_path = output_dir / "clean_with_id.csv"
+    df_clean.to_csv(clean_with_id_path, index=False)
+    print(f"Version de clean.csv avec row_id sauvegardée dans {clean_with_id_path}\n")
 
     for level in ["low", "medium", "high"]:
         rates = get_rates_for_level(level)

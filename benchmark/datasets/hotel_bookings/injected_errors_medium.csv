@@ -1,4 +1,4 @@
-row_index,column,original_value,injected_value,error_type,error_family
+row_id,column,original_value,injected_value,error_type,error_family
 110654,country,SVN,unknown,missing_unknown_string,missing_values
 66713,country,PRT,,missing_empty_string,missing_values
 115315,country,BRA,NA,missing_NA_string,missing_values
