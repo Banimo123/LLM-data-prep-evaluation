@@ -69,6 +69,8 @@ def build_schema_description(df: pd.DataFrame) -> str:
     """
     lines = []
     for col in df.columns:
+        if col == "row_id":
+            continue
         dtype = "numeric" if pd.api.types.is_numeric_dtype(df[col]) else "categorical/text"
         examples = df[col].dropna().unique()[:3]
         examples_str = ", ".join(str(v) for v in examples)

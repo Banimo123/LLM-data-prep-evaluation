@@ -27,7 +27,7 @@ def clean_hotel_bookings():
 
     # 1. Suppression des doublons (conservation de la première occurrence)
     initial_rows = len(df)
-    df = df.drop_duplicates(subset=df.columns.difference(['row_id']), keep='first')
+    df.drop_duplicates(subset=df.columns.difference(['row_id']), keep='first', inplace=True)
     operations_log['duplicates_removed'] = initial_rows - len(df)
 
     # 2. Traitement des colonnes numériques avec valeurs parasites
@@ -40,7 +40,7 @@ def clean_hotel_bookings():
     # 3. Correction des valeurs aberrantes basées sur les statistiques fournies
     # stays_in_week_nights: max 999 -> valeur aberrante (moyenne 14.43)
     if 'stays_in_week_nights' in df.columns:
-        df['stays_in_week_nights'] = df['stays_in_week_nights'].clip(upper=30)
+        df['stays_in_week_nights'] = df['stays_in_week_nights'].clip(upper=30)  # 30 comme limite haute plausible
         operations_log['outliers_corrected']['stays_in_week_nights'] = "Clipped values > 30"
 
     # adr: min -493.26 -> valeur aberrante (prix ne peut pas être négatif)
@@ -50,38 +50,38 @@ def clean_hotel_bookings():
 
     # babies: max 49 -> valeur aberrante (moyenne 0.6)
     if 'babies' in df.columns:
-        df['babies'] = df['babies'].clip(upper=10)
+        df['babies'] = df['babies'].clip(upper=10)  # 10 comme limite haute plausible
         operations_log['outliers_corrected']['babies'] = "Clipped values > 10"
 
     # 4. Traitement des valeurs manquantes
     # children: 10% manquants -> imputation par mode (0.0)
     if 'children' in df.columns:
         mode_children = df['children'].mode()[0]
-        df['children'] = df['children'].fillna(mode_children)
+        df['children'].fillna(mode_children, inplace=True)
         operations_log['missing_values_imputed']['children'] = f"Imputed with mode: {mode_children}"
 
     # meal: 10% manquants -> imputation par mode (BB)
     if 'meal' in df.columns:
         mode_meal = df['meal'].mode()[0]
-        df['meal'] = df['meal'].fillna(mode_meal)
+        df['meal'].fillna(mode_meal, inplace=True)
         operations_log['missing_values_imputed']['meal'] = f"Imputed with mode: {mode_meal}"
 
     # country: 10.37% manquants -> imputation par mode (PRT)
     if 'country' in df.columns:
         mode_country = df['country'].mode()[0]
-        df['country'] = df['country'].fillna(mode_country)
+        df['country'].fillna(mode_country, inplace=True)
         operations_log['missing_values_imputed']['country'] = f"Imputed with mode: {mode_country}"
 
     # market_segment: 10% manquants -> imputation par mode (Online TA)
     if 'market_segment' in df.columns:
         mode_market = df['market_segment'].mode()[0]
-        df['market_segment'] = df['market_segment'].fillna(mode_market)
+        df['market_segment'].fillna(mode_market, inplace=True)
         operations_log['missing_values_imputed']['market_segment'] = f"Imputed with mode: {mode_market}"
 
     # agent: 22.33% manquants -> imputation par mode (9.0)
     if 'agent' in df.columns:
         mode_agent = df['agent'].mode()[0]
-        df['agent'] = df['agent'].fillna(mode_agent)
+        df['agent'].fillna(mode_agent, inplace=True)
         operations_log['missing_values_imputed']['agent'] = f"Imputed with mode: {mode_agent}"
 
     # company: 94.31% manquants -> trop élevé, on conserve les NaN
@@ -112,11 +112,14 @@ def clean_hotel_bookings():
             if pd.isna(date_str):
                 return date_str
             try:
+                # Essaye d'abord le format YYYY-MM-DD
                 return pd.to_datetime(date_str, format='%Y-%m-%d', errors='raise')
             except:
                 try:
+                    # Essaye le format YYYY/MM/DD
                     return pd.to_datetime(date_str, format='%Y/%m/%d', errors='raise')
                 except:
+                    # Conserve la valeur originale si aucun format ne fonctionne
                     return date_str
 
         df['reservation_status_date'] = df['reservation_status_date'].apply(parse_date)
@@ -133,13 +136,10 @@ def clean_hotel_bookings():
 
     for col in numeric_cols:
         if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
-            if df[col].dtype == 'float64':
-                df[col] = df[col].fillna(df[col].median())
-                operations_log['missing_values_imputed'][col] = "Imputed with median after numeric conversion"
+            df[col] = pd.to_numeric(df[col], errors='ignore')
 
     # 8. Vérification finale des types
-    df['row_id'] = df['row_id'].astype(str)
+    df['row_id'] = df['row_id'].astype(str)  # Conservation du row_id comme string
 
     # Sauvegarde du dataset nettoyé
     df.to_csv(OUTPUT_PATH, index=False)
