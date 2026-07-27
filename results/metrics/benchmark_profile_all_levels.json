@@ -9,39 +9,41 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.9698,
-    "recall": 0.3689,
-    "f1": 0.5345,
-    "tp": 24882,
-    "fp": 774,
-    "fn": 42564,
+    "precision": 0.9787,
+    "recall": 0.5317,
+    "f1": 0.689,
+    "tp": 35859,
+    "fp": 779,
+    "fn": 31587,
     "n_rows_lost_by_workflow": 18179,
     "n_error_cells_lost_with_dropped_rows": 801,
-    "columns_dropped_by_workflow": [],
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
     "per_error_family": {
       "typos": {
-        "tp": 9209,
-        "fn": 14666,
-        "recall": 0.3857,
-        "f1_sans_fp": 0.5567
+        "tp": 10553,
+        "fn": 13322,
+        "recall": 0.442,
+        "f1_sans_fp": 0.613
       },
       "outliers": {
-        "tp": 2688,
-        "fn": 2084,
-        "recall": 0.5633,
-        "f1_sans_fp": 0.7206
+        "tp": 2665,
+        "fn": 2107,
+        "recall": 0.5585,
+        "f1_sans_fp": 0.7167
       },
       "missing_values": {
-        "tp": 11491,
-        "fn": 18354,
-        "recall": 0.385,
-        "f1_sans_fp": 0.556
+        "tp": 14215,
+        "fn": 15630,
+        "recall": 0.4763,
+        "f1_sans_fp": 0.6453
       },
       "format_errors": {
-        "tp": 1494,
-        "fn": 7460,
-        "recall": 0.1669,
-        "f1_sans_fp": 0.286
+        "tp": 8426,
+        "fn": 528,
+        "recall": 0.941,
+        "f1_sans_fp": 0.9696
       }
     }
   },
@@ -55,39 +57,39 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.2828,
-    "recall": 0.2671,
-    "f1": 0.2748,
-    "tp": 36037,
-    "fp": 91372,
-    "fn": 98869,
+    "precision": 0.9992,
+    "recall": 0.5507,
+    "f1": 0.7101,
+    "tp": 74292,
+    "fp": 56,
+    "fn": 60614,
     "n_rows_lost_by_workflow": 10145,
     "n_error_cells_lost_with_dropped_rows": 1264,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 11548,
-        "fn": 36207,
-        "recall": 0.2418,
-        "f1_sans_fp": 0.3895
+        "tp": 22232,
+        "fn": 25523,
+        "recall": 0.4655,
+        "f1_sans_fp": 0.6353
       },
       "outliers": {
-        "tp": 1,
-        "fn": 9547,
-        "recall": 0.0001,
-        "f1_sans_fp": 0.0002
+        "tp": 5346,
+        "fn": 4202,
+        "recall": 0.5599,
+        "f1_sans_fp": 0.7179
       },
       "missing_values": {
-        "tp": 24488,
-        "fn": 35207,
-        "recall": 0.4102,
-        "f1_sans_fp": 0.5818
+        "tp": 29882,
+        "fn": 29813,
+        "recall": 0.5006,
+        "f1_sans_fp": 0.6672
       },
       "format_errors": {
-        "tp": 0,
-        "fn": 17908,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
+        "tp": 16832,
+        "fn": 1076,
+        "recall": 0.9399,
+        "f1_sans_fp": 0.969
       }
     }
   },
@@ -101,39 +103,41 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.9731,
-    "recall": 0.3401,
-    "f1": 0.504,
-    "tp": 91753,
-    "fp": 2541,
-    "fn": 178064,
+    "precision": 0.9986,
+    "recall": 0.5226,
+    "f1": 0.6861,
+    "tp": 140996,
+    "fp": 202,
+    "fn": 128821,
     "n_rows_lost_by_workflow": 2809,
     "n_error_cells_lost_with_dropped_rows": 812,
-    "columns_dropped_by_workflow": [],
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
     "per_error_family": {
       "typos": {
-        "tp": 23365,
-        "fn": 72145,
-        "recall": 0.2446,
-        "f1_sans_fp": 0.3931
+        "tp": 41709,
+        "fn": 53801,
+        "recall": 0.4367,
+        "f1_sans_fp": 0.6079
       },
       "outliers": {
-        "tp": 7,
-        "fn": 19093,
-        "recall": 0.0004,
-        "f1_sans_fp": 0.0007
+        "tp": 10353,
+        "fn": 8747,
+        "recall": 0.542,
+        "f1_sans_fp": 0.703
       },
       "missing_values": {
-        "tp": 52553,
-        "fn": 66837,
-        "recall": 0.4402,
-        "f1_sans_fp": 0.6113
+        "tp": 55241,
+        "fn": 64149,
+        "recall": 0.4627,
+        "f1_sans_fp": 0.6327
       },
       "format_errors": {
-        "tp": 15828,
-        "fn": 19989,
-        "recall": 0.4419,
-        "f1_sans_fp": 0.613
+        "tp": 33693,
+        "fn": 2124,
+        "recall": 0.9407,
+        "f1_sans_fp": 0.9694
       }
     }
   }

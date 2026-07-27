@@ -92,12 +92,9 @@ def clean_hotel_bookings():
     # days_in_waiting_list - max 8999 semble aberrant
     if 'days_in_waiting_list' in df.columns:
         q99 = df['days_in_waiting_list'].quantile(0.99)
-        # Convertir d'abord en float pour éviter les problèmes de type
         df['days_in_waiting_list'] = pd.to_numeric(df['days_in_waiting_list'], errors='coerce')
         df.loc[df['days_in_waiting_list'] > q99, 'days_in_waiting_list'] = q99
-        # Convertir en entier seulement si la colonne était à l'origine de type entier
-        if df['days_in_waiting_list'].dropna().apply(float.is_integer).all():
-            df['days_in_waiting_list'] = df['days_in_waiting_list'].round().astype('Int64')
+        # Conserver en float pour éviter les problèmes de conversion
         operations_log['outliers_corrected']['days_in_waiting_list'] = (df['days_in_waiting_list'] > q99).sum()
 
     # 4. Harmonisation des catégories
@@ -161,8 +158,8 @@ def clean_hotel_bookings():
     for col in numeric_cols:
         if col in df.columns:
             df[col] = pd.to_numeric(df[col], errors='ignore')
-            # Convertir en Int64 si la colonne contient des entiers
-            if df[col].dropna().apply(float.is_integer).all():
+            # Convertir en Int64 seulement si toutes les valeurs sont entières
+            if df[col].dropna().apply(lambda x: isinstance(x, (int, float)) and x.is_integer()).all():
                 df[col] = df[col].round().astype('Int64')
 
     operations_log['rows_after'] = len(df)

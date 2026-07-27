@@ -37,37 +37,37 @@ log["duplicates_removed"] = log["rows_initial"] - len(df)
 # children (5% manquants) - colonne catégorielle avec valeurs numériques -> imputation par mode
 if "children" in df.columns:
     mode_children = df["children"].mode()[0]
-    df["children"].fillna(mode_children, inplace=True)
+    df["children"] = df["children"].fillna(mode_children)
     log["missing_values_imputed"]["children"] = df["children"].isna().sum()
 
 # meal (5% manquants) - colonne catégorielle -> imputation par mode
 if "meal" in df.columns:
     mode_meal = df["meal"].mode()[0]
-    df["meal"].fillna(mode_meal, inplace=True)
+    df["meal"] = df["meal"].fillna(mode_meal)
     log["missing_values_imputed"]["meal"] = df["meal"].isna().sum()
 
 # country (5.39% manquants) - colonne catégorielle -> imputation par mode
 if "country" in df.columns:
     mode_country = df["country"].mode()[0]
-    df["country"].fillna(mode_country, inplace=True)
+    df["country"] = df["country"].fillna(mode_country)
     log["missing_values_imputed"]["country"] = df["country"].isna().sum()
 
 # market_segment (5% manquants) - colonne catégorielle -> imputation par mode
 if "market_segment" in df.columns:
     mode_market_segment = df["market_segment"].mode()[0]
-    df["market_segment"].fillna(mode_market_segment, inplace=True)
+    df["market_segment"] = df["market_segment"].fillna(mode_market_segment)
     log["missing_values_imputed"]["market_segment"] = df["market_segment"].isna().sum()
 
 # agent (17.99% manquants) - colonne catégorielle -> imputation par mode
 if "agent" in df.columns:
     mode_agent = df["agent"].mode()[0]
-    df["agent"].fillna(mode_agent, inplace=True)
+    df["agent"] = df["agent"].fillna(mode_agent)
     log["missing_values_imputed"]["agent"] = df["agent"].isna().sum()
 
 # company (94.31% manquants) - trop de manquants -> imputation par mode (valeur la plus fréquente)
 if "company" in df.columns:
     mode_company = df["company"].mode()[0]
-    df["company"].fillna(mode_company, inplace=True)
+    df["company"] = df["company"].fillna(mode_company)
     log["missing_values_imputed"]["company"] = df["company"].isna().sum()
 
 # 3. Correction des valeurs aberrantes numériques
@@ -123,6 +123,26 @@ if "deposit_type" in df.columns:
     df["deposit_type"] = df["deposit_type"].apply(lambda x: deposit_mapping.get(x, x))
     log["categories_harmonized"]["deposit_type"] = (df["deposit_type"].isin(["No Deposit  ", "No Deposit "])).sum()
 
+# hotel - harmonisation des espaces superflus et variantes
+if "hotel" in df.columns:
+    df["hotel"] = df["hotel"].str.strip()
+    hotel_mapping = {
+        "Resort Hotel": "Resort Hotel",
+        "City Hotel": "City Hotel"
+    }
+    df["hotel"] = df["hotel"].apply(lambda x: hotel_mapping.get(x, x))
+
+# customer_type - harmonisation des espaces superflus et variantes
+if "customer_type" in df.columns:
+    df["customer_type"] = df["customer_type"].str.strip()
+    customer_type_mapping = {
+        "Transient": "Transient",
+        "Contract": "Contract",
+        "Transient-Party": "Transient-Party",
+        "Group": "Group"
+    }
+    df["customer_type"] = df["customer_type"].apply(lambda x: customer_type_mapping.get(x, x))
+
 # 5. Correction des formats de date
 if "reservation_status_date" in df.columns:
     def parse_date(date_str):
@@ -130,9 +150,9 @@ if "reservation_status_date" in df.columns:
             return date_str
         try:
             # Essai de parsing avec plusieurs formats
-            for fmt in ("%Y-%m-%d", "%B %d, %Y", "%d/%m/%Y"):
+            for fmt in ("%Y-%m-%d", "%B %d, %Y", "%d/%m/%Y", "%B %d %Y"):
                 try:
-                    return datetime.strptime(str(date_str), fmt).date()
+                    return datetime.strptime(str(date_str).strip(), fmt).date()
                 except ValueError:
                     continue
             return date_str  # Retourne la valeur originale si aucun format ne correspond
@@ -140,9 +160,19 @@ if "reservation_status_date" in df.columns:
             return date_str
 
     df["reservation_status_date"] = df["reservation_status_date"].apply(parse_date)
-    # Conversion en format standard YYYY-MM-DD
-    df["reservation_status_date"] = pd.to_datetime(df["reservation_status_date"], errors="coerce").dt.strftime("%Y-%m-%d")
-    df["reservation_status_date"] = df["reservation_status_date"].replace("NaT", np.nan)
+    # Conversion en datetime avec gestion individuelle des erreurs
+    def safe_to_datetime(date_val):
+        if pd.isna(date_val) or isinstance(date_val, datetime):
+            return date_val
+        try:
+            return pd.to_datetime(date_val, errors='raise')
+        except:
+            return date_val
+
+    df["reservation_status_date"] = df["reservation_status_date"].apply(safe_to_datetime)
+    # Formatage en chaîne si c'est un datetime
+    if pd.api.types.is_datetime64_any_dtype(df["reservation_status_date"]):
+        df["reservation_status_date"] = df["reservation_status_date"].dt.strftime("%Y-%m-%d")
 
 # 6. Correction des types de données
 numeric_cols = [
@@ -154,7 +184,7 @@ numeric_cols = [
 ]
 for col in numeric_cols:
     if col in df.columns:
-        df[col] = pd.to_numeric(df[col], errors="ignore")
+        df[col] = pd.to_numeric(df[col], errors='ignore')
 
 # adults - conversion en numérique (valeurs comme "2.0" -> 2)
 if "adults" in df.columns:

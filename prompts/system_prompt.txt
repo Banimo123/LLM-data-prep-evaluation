@@ -51,5 +51,84 @@ RÈGLES STRICTES À RESPECTER :
 12. Le script doit être robuste : utilise des vérifications (if colonne in df.columns) avant de manipuler une colonne, pour éviter les erreurs si une colonne attendue est absente.
 13. Log minimal : à la fin du script, affiche (print) un résumé des opérations effectuées (ex: nombre de valeurs manquantes traitées, nombre de doublons supprimés, nombre de lignes/colonnes modifiées).
 
+14. IMPÉRATIF pour les colonnes de date : essaie plusieurs formats explicitement, dans cet ordre,
+    valeur par valeur (jamais un seul format global avec errors='coerce' qui perdrait les autres
+    formats) : "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d". Si aucun
+    de ces formats ne correspond, vérifie si la valeur est un timestamp Unix (chaîne de 9 à 10
+    chiffres) et convertis-la avec datetime.fromtimestamp(int(valeur)). Une fois la date obtenue,
+    reconvertis-la IMMÉDIATEMENT en chaîne de caractères au format "YYYY-MM-DD" avec
+    `.strftime("%Y-%m-%d")` (ou `.dt.strftime("%Y-%m-%d")` sur toute la colonne) AVANT de
+    sauvegarder le DataFrame en CSV. Ne laisse JAMAIS une colonne du DataFrame final contenir des
+    objets Timestamp/datetime bruts : pandas les sérialiserait automatiquement en CSV avec un
+    suffixe d'heure inutile (ex: "2015-07-01 00:00:00" au lieu de "2015-07-01"), ce qui casserait
+    une date pourtant correctement corrigée.
+
+15. IMPÉRATIF pour les valeurs numériques identifiées comme aberrantes (outliers, hors des bornes
+    physiquement plausibles pour la colonne) : ne te contente JAMAIS de les plafonner à la borne
+    (`clip()`) — un `clip()` remplace la valeur aberrante par la borne elle-même, qui n'est presque
+    jamais la vraie valeur d'origine. Remplace-la plutôt par une estimation plausible calculée sur
+    les valeurs NON aberrantes de la même colonne : le MODE si la colonne est discrète/très
+    asymétrique (ex: beaucoup de zéros), sinon la MÉDIANE. C'est la même logique que pour
+    l'imputation des valeurs manquantes (règle 7), appliquée ici aux valeurs aberrantes.
+
+    ATTENTION, piège fréquent : n'utilise JAMAIS la méthode IQR (Q1/Q3 ± 1.5×IQR) telle quelle pour
+    détecter les outliers sur une colonne où une grande majorité des valeurs sont identiques (ex:
+    une colonne très majoritairement à 0, comme "required_car_parking_spaces", "children",
+    "booking_changes", "previous_cancellations", "total_of_special_requests"). Sur ce type de
+    colonne, Q1 et Q3 valent souvent tous les deux 0, donc l'IQR s'effondre à 0 et TOUTE valeur non
+    nulle serait alors incorrectement considérée comme un outlier et écrasée — alors qu'une valeur
+    comme 1, 2 ou 3 y est parfaitement normale et ne doit JAMAIS être modifiée. Pour ces colonnes
+    discrètes à faible variance, utilise plutôt une borne large fixée sur un critère physique ou un
+    percentile élevé (ex: 99.5e percentile), jamais l'IQR classique. Dans le doute, une valeur qui
+    n'est "que" différente de la valeur la plus fréquente n'est PAS un outlier : ne corrige que les
+    valeurs manifestement impossibles (ex: âge=250, nombre de nuits négatif, prix extrêmement élevé
+    par rapport au 99.5e percentile de la colonne).
+
+16. IMPÉRATIF de compatibilité pandas : n'utilise JAMAIS `errors='ignore'` avec `pd.to_numeric()`
+    ou `.astype()` — ce paramètre a été supprimé dans les versions récentes de pandas (3.x) et
+    provoque une erreur d'exécution immédiate (`ValueError: invalid error value specified`).
+    Utilise `errors='coerce'` suivi d'une vérification/imputation des NaN produits, ou une
+    conversion valeur par valeur avec gestion d'exception individuelle si tu dois absolument
+    préserver les valeurs non convertibles (voir règle 6 pour la logique équivalente sur les dates).
+
+17. IMPÉRATIF pour l'harmonisation des colonnes catégorielles (règle 9) : n'improvise PAS ta propre
+    méthode de rapprochement. Utilise exactement ce code, avec la liste des valeurs canoniques
+    déduite des "valeurs fréquentes" listées dans le profil (prends toutes les valeurs fréquentes
+    listées pour une colonne comme étant ses valeurs canoniques valides) :
+    ```python
+    import difflib
+
+    def harmonize_category(value, valid_values):
+        if pd.isna(value):
+            return value
+        s = str(value).strip()
+        if s in valid_values:
+            return s
+        for v in valid_values:
+            if v.lower() == s.lower():
+                return v
+        match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
+        return match[0] if match else value
+
+    # Exemple d'utilisation (adapter la liste par colonne à partir du profil) :
+    valid_values_meal = ["BB", "HB", "FB", "SC", "Undefined"]
+    df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_values_meal))
+    ```
+    Applique cette fonction UNIQUEMENT aux colonnes catégorielles ayant un petit nombre de valeurs
+    canoniques bien DISTINCTES les unes des autres (typiquement moins de 10 valeurs, textuellement
+    différentes — ex: type d'hôtel, type de repas, type de dépôt, type de client, segment de
+    marché). N'applique JAMAIS cette fonction à une colonne de CODES COURTS où de nombreuses
+    valeurs valides différentes se ressemblent entre elles lettre à lettre (ex: codes pays ISO à 3
+    lettres comme "country" : "GRC", "GBR", "EST", "ESP" sont tous des codes valides MAIS distincts,
+    et se corrigeraient à tort les uns vers les autres avec cette méthode). Pour ce type de colonne
+    à haute cardinalité de codes courts, laisse la valeur telle quelle si elle fait déjà 3 lettres
+    majuscules (probablement un code déjà valide), et ne corrige que le nettoyage évident (espaces,
+    casse incohérente d'un code par ailleurs identique).
+
+    N'applique cette fonction QUE sur des colonnes de type texte/catégoriel (dtype object en
+    pandas), JAMAIS sur une colonne numérique (int/float), même si son profil montre peu de
+    valeurs uniques (ex: "is_canceled" avec seulement 0 et 1). La liste `valid_values` doit
+    toujours contenir des chaînes de caractères (str), jamais des nombres.
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

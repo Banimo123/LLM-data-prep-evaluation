@@ -1,5 +1,9 @@
+import re
+
 import pandas as pd
 import numpy as np
+
+_MIDNIGHT_SUFFIX_RE = re.compile(r"^(\d{4}-\d{2}-\d{2}) 00:00:00(\.0+)?$")
 
 
 def _norm_str_series(s: pd.Series) -> pd.Series:
@@ -9,7 +13,9 @@ def _norm_str_series(s: pd.Series) -> pd.Series:
     def conv(v):
         if isinstance(v, float) and v.is_integer():
             return str(int(v))
-        return str(v).strip()
+        sv = str(v).strip()
+        m = _MIDNIGHT_SUFFIX_RE.match(sv)
+        return m.group(1) if m else sv
     out = out.where(is_na, out.map(conv))
     out[is_na] = "<NA>"
     return out

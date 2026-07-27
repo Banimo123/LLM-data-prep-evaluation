@@ -83,7 +83,7 @@ def build_profile_description(df: pd.DataFrame) -> str:
     Construit une description texte du profil statistique complet du dataset,
     réutilisant la fonction profile_dataset() de error_injection.py.
     """
-    profile_df = profile_dataset(df)
+    profile_df = profile_dataset(df, top_n=10)
     lines = []
     for _, row in profile_df.iterrows():
         if row["dtype_detected"] == "numeric":
@@ -96,7 +96,7 @@ def build_profile_description(df: pd.DataFrame) -> str:
             )
         else:
             top_values = row.get("top_values", {})
-            top_str = ", ".join(f"{k} ({v})" for k, v in list(top_values.items())[:3]) if isinstance(top_values, dict) else ""
+            top_str = ", ".join(f"{k} ({v})" for k, v in list(top_values.items())) if isinstance(top_values, dict) else ""
             lines.append(
                 f"- {row['column']} (categorical/text) — "
                 f"manquants: {row['pct_missing']}%, "

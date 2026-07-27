@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import re
 from datetime import datetime
+import difflib
 
 INPUT_PATH = r"benchmark\datasets\hotel_bookings\noisy_medium.csv"
 OUTPUT_PATH = r"results\cleaned_datasets\hotel_bookings\noisy_medium__profile.csv"
@@ -14,156 +15,208 @@ def extract_numeric(value):
     match = re.search(r"-?\d+\.?\d*", s)
     return float(match.group()) if match else np.nan
 
-def clean_hotel_bookings():
-    df = pd.read_csv(INPUT_PATH)
+def harmonize_category(value, valid_values):
+    if pd.isna(value):
+        return value
+    s = str(value).strip()
+    if s in valid_values:
+        return s
+    for v in valid_values:
+        if v.lower() == s.lower():
+            return v
+    match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
+    return match[0] if match else value
 
-    operations_log = {
-        'missing_values_imputed': {},
-        'outliers_corrected': {},
-        'duplicates_removed': 0,
-        'category_harmonized': {},
-        'format_corrected': {}
-    }
+def parse_date(value):
+    if pd.isna(value):
+        return value
+    date_formats = [
+        "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y",
+        "%d-%b-%Y", "%Y/%m/%d"
+    ]
+    s = str(value).strip()
+    for fmt in date_formats:
+        try:
+            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    if s.isdigit() and len(s) in (9, 10):
+        try:
+            return datetime.fromtimestamp(int(s)).strftime("%Y-%m-%d")
+        except (ValueError, OSError):
+            pass
+    return value
 
-    # 1. Suppression des doublons (conservation de la première occurrence)
-    initial_rows = len(df)
-    df = df.drop_duplicates(subset=df.columns.difference(['row_id']), keep='first')
-    operations_log['duplicates_removed'] = initial_rows - len(df)
+# Chargement du dataset
+df = pd.read_csv(INPUT_PATH)
+original_shape = df.shape
+operations = []
 
-    # 2. Traitement des colonnes numériques avec valeurs parasites
-    numeric_cols_with_text = ['lead_time', 'stays_in_week_nights', 'adults', 'children', 'babies', 'adr']
-    for col in numeric_cols_with_text:
-        if col in df.columns:
-            df[col] = df[col].apply(extract_numeric)
-            operations_log['format_corrected'][col] = "Extracted numeric values from text"
+# Suppression des doublons (conservation du premier)
+duplicates_before = df.duplicated().sum()
+df = df.drop_duplicates(keep='first')
+duplicates_after = df.duplicated().sum()
+if duplicates_before > 0:
+    operations.append(f"Doublons supprimés: {duplicates_before}")
 
-    # 3. Correction des valeurs aberrantes basées sur les statistiques fournies
-    # stays_in_week_nights: max 999 -> valeur aberrante (moyenne 14.43)
-    if 'stays_in_week_nights' in df.columns:
-        df['stays_in_week_nights'] = df['stays_in_week_nights'].clip(upper=30)
-        operations_log['outliers_corrected']['stays_in_week_nights'] = "Clipped values > 30"
+# Nettoyage colonne par colonne
+# ------------------------------------------------------------------
+# hotel (categorical) - harmonisation des variantes
+valid_hotel = ["City Hotel", "Resort Hotel"]
+df["hotel"] = df["hotel"].apply(lambda v: harmonize_category(v, valid_hotel))
 
-    # adr: min -493.26 -> valeur aberrante (prix ne peut pas être négatif)
-    if 'adr' in df.columns:
-        df['adr'] = df['adr'].clip(lower=0)
-        operations_log['outliers_corrected']['adr'] = "Clipped negative values"
+# is_canceled (numeric) - pas de valeurs manquantes, pas de correction nécessaire
 
-    # babies: max 49 -> valeur aberrante (moyenne 0.6)
-    if 'babies' in df.columns:
-        df['babies'] = df['babies'].clip(upper=10)
-        operations_log['outliers_corrected']['babies'] = "Clipped values > 10"
+# lead_time (categorical/text) - extraction numérique et conversion en int
+df["lead_time"] = df["lead_time"].apply(extract_numeric)
+df["lead_time"] = df["lead_time"].fillna(df["lead_time"].median()).astype(int)
 
-    # 4. Traitement des valeurs manquantes
-    # children: 10% manquants -> imputation par mode (0.0)
-    if 'children' in df.columns:
-        mode_children = df['children'].mode()[0]
-        df['children'] = df['children'].fillna(mode_children)
-        operations_log['missing_values_imputed']['children'] = f"Imputed with mode: {mode_children}"
+# arrival_date_year (numeric) - pas de valeurs manquantes, pas de correction nécessaire
 
-    # meal: 10% manquants -> imputation par mode (BB)
-    if 'meal' in df.columns:
-        mode_meal = df['meal'].mode()[0]
-        df['meal'] = df['meal'].fillna(mode_meal)
-        operations_log['missing_values_imputed']['meal'] = f"Imputed with mode: {mode_meal}"
+# arrival_date_month (categorical) - harmonisation des mois
+month_map = {
+    "January": "January", "February": "February", "March": "March", "April": "April",
+    "May": "May", "June": "June", "July": "July", "August": "August",
+    "September": "September", "October": "October", "November": "November", "December": "December"
+}
+df["arrival_date_month"] = df["arrival_date_month"].apply(
+    lambda v: harmonize_category(v, list(month_map.keys()))
+)
 
-    # country: 10.37% manquants -> imputation par mode (PRT)
-    if 'country' in df.columns:
-        mode_country = df['country'].mode()[0]
-        df['country'] = df['country'].fillna(mode_country)
-        operations_log['missing_values_imputed']['country'] = f"Imputed with mode: {mode_country}"
+# arrival_date_week_number (numeric) - pas de valeurs manquantes, pas de correction nécessaire
 
-    # market_segment: 10% manquants -> imputation par mode (Online TA)
-    if 'market_segment' in df.columns:
-        mode_market = df['market_segment'].mode()[0]
-        df['market_segment'] = df['market_segment'].fillna(mode_market)
-        operations_log['missing_values_imputed']['market_segment'] = f"Imputed with mode: {mode_market}"
+# arrival_date_day_of_month (numeric) - pas de valeurs manquantes, pas de correction nécessaire
 
-    # agent: 22.33% manquants -> imputation par mode (9.0)
-    if 'agent' in df.columns:
-        mode_agent = df['agent'].mode()[0]
-        df['agent'] = df['agent'].fillna(mode_agent)
-        operations_log['missing_values_imputed']['agent'] = f"Imputed with mode: {mode_agent}"
+# stays_in_weekend_nights (numeric) - valeurs aberrantes (max=19)
+q99 = df["stays_in_weekend_nights"].quantile(0.99)
+df["stays_in_weekend_nights"] = df["stays_in_weekend_nights"].apply(
+    lambda x: df["stays_in_weekend_nights"].median() if x > q99 else x
+)
 
-    # company: 94.31% manquants -> trop élevé, on conserve les NaN
-    if 'company' in df.columns:
-        operations_log['missing_values_imputed']['company'] = "Too many missing values (94.31%), left as NaN"
+# stays_in_week_nights (numeric) - valeurs aberrantes (max=999)
+q99 = df["stays_in_week_nights"].quantile(0.995)
+df["stays_in_week_nights"] = df["stays_in_week_nights"].apply(
+    lambda x: df["stays_in_week_nights"].median() if x > q99 else x
+)
 
-    # 5. Harmonisation des catégories
-    # hotel: correction des variantes (espaces superflus)
-    if 'hotel' in df.columns:
-        df['hotel'] = df['hotel'].str.strip()
-        df['hotel'] = df['hotel'].replace({'Resoort Hotel': 'Resort Hotel', 'City Hotel  ': 'City Hotel'})
-        operations_log['category_harmonized']['hotel'] = "Corrected variants (Resoort Hotel -> Resort Hotel, stripped spaces)"
+# adults (categorical/text) - extraction numérique et correction des fautes de frappe
+df["adults"] = df["adults"].apply(extract_numeric)
+df["adults"] = df["adults"].fillna(df["adults"].mode()[0]).astype(int)
+# Correction des valeurs aberrantes (min=1, max=4 d'après le profil)
+df["adults"] = df["adults"].apply(lambda x: 2 if x < 1 or x > 4 else x)
 
-    # deposit_type: correction des variantes (espaces superflus)
-    if 'deposit_type' in df.columns:
-        df['deposit_type'] = df['deposit_type'].str.strip()
-        df['deposit_type'] = df['deposit_type'].replace({'NoD eposit': 'No Deposit', 'No Deposit  ': 'No Deposit'})
-        operations_log['category_harmonized']['deposit_type'] = "Corrected variants (NoD eposit -> No Deposit, stripped spaces)"
+# children (categorical/text) - extraction numérique et imputation des manquants
+df["children"] = df["children"].apply(extract_numeric)
+df["children"] = df["children"].fillna(df["children"].mode()[0])
+# Correction des valeurs aberrantes (max=10)
+df["children"] = df["children"].apply(lambda x: 0 if x > 10 else x)
 
-    # adults: correction de '2O' -> '2'
-    if 'adults' in df.columns:
-        df['adults'] = df['adults'].replace('2O', '2')
-        operations_log['category_harmonized']['adults'] = "Corrected '2O' to '2'"
+# babies (numeric) - valeurs aberrantes (max=49)
+q99 = df["babies"].quantile(0.995)
+df["babies"] = df["babies"].apply(lambda x: df["babies"].median() if x > q99 else x)
 
-    # 6. Correction des formats de date
-    if 'reservation_status_date' in df.columns:
-        def parse_date(date_str):
-            if pd.isna(date_str):
-                return date_str
-            try:
-                return pd.to_datetime(date_str, format='%Y-%m-%d', errors='raise')
-            except:
-                try:
-                    return pd.to_datetime(date_str, format='%Y/%m/%d', errors='raise')
-                except:
-                    return date_str
+# meal (categorical) - harmonisation et imputation des manquants
+valid_meal = ["BB", "HB", "FB", "SC", "Undefined"]
+df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_meal))
+df["meal"] = df["meal"].fillna(df["meal"].mode()[0])
 
-        df['reservation_status_date'] = df['reservation_status_date'].apply(parse_date)
-        operations_log['format_corrected']['reservation_status_date'] = "Standardized date formats"
+# country (categorical) - harmonisation et imputation des manquants
+valid_country = ["PRT", "GBR", "FRA", "ESP", "DEU", "ITA", "IRL", "BEL", "BRA"]
+df["country"] = df["country"].apply(lambda v: harmonize_category(v, valid_country))
+df["country"] = df["country"].fillna("PRT")
 
-    # 7. Conversion des colonnes numériques au bon type
-    numeric_cols = ['is_canceled', 'arrival_date_year', 'arrival_date_week_number',
-                    'arrival_date_day_of_month', 'stays_in_weekend_nights',
-                    'stays_in_week_nights', 'adults', 'children', 'babies',
-                    'is_repeated_guest', 'previous_cancellations',
-                    'previous_bookings_not_canceled', 'booking_changes',
-                    'days_in_waiting_list', 'adr', 'required_car_parking_spaces',
-                    'total_of_special_requests']
+# market_segment (categorical) - harmonisation et imputation des manquants
+valid_market = ["Online TA", "Offline TA/TO", "Groups", "Direct", "Corporate", "Complementary", "Aviation"]
+df["market_segment"] = df["market_segment"].apply(lambda v: harmonize_category(v, valid_market))
+df["market_segment"] = df["market_segment"].fillna(df["market_segment"].mode()[0])
 
-    for col in numeric_cols:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
-            if df[col].dtype == 'float64':
-                df[col] = df[col].fillna(df[col].median())
-                operations_log['missing_values_imputed'][col] = "Imputed with median after numeric conversion"
+# distribution_channel (categorical) - harmonisation
+valid_dist = ["TA/TO", "Direct", "Corporate", "GDS", "Undefined"]
+df["distribution_channel"] = df["distribution_channel"].apply(lambda v: harmonize_category(v, valid_dist))
 
-    # 8. Vérification finale des types
-    df['row_id'] = df['row_id'].astype(str)
+# is_repeated_guest (numeric) - pas de correction nécessaire
 
-    # Sauvegarde du dataset nettoyé
-    df.to_csv(OUTPUT_PATH, index=False)
+# previous_cancellations (numeric) - valeurs aberrantes (max=26)
+q99 = df["previous_cancellations"].quantile(0.995)
+df["previous_cancellations"] = df["previous_cancellations"].apply(
+    lambda x: df["previous_cancellations"].median() if x > q99 else x
+)
 
-    # Affichage du log des opérations
-    print("=== Nettoyage terminé ===")
-    print(f"Lignes supprimées (doublons): {operations_log['duplicates_removed']}")
-    print("\nValeurs manquantes imputées:")
-    for col, method in operations_log['missing_values_imputed'].items():
-        print(f"  - {col}: {method}")
+# previous_bookings_not_canceled (numeric) - valeurs aberrantes (max=72)
+q99 = df["previous_bookings_not_canceled"].quantile(0.995)
+df["previous_bookings_not_canceled"] = df["previous_bookings_not_canceled"].apply(
+    lambda x: df["previous_bookings_not_canceled"].median() if x > q99 else x
+)
 
-    print("\nValeurs aberrantes corrigées:")
-    for col, method in operations_log['outliers_corrected'].items():
-        print(f"  - {col}: {method}")
+# reserved_room_type (categorical) - harmonisation
+valid_room = ["A", "D", "E", "F", "G", "B", "C", "H", "P", "L"]
+df["reserved_room_type"] = df["reserved_room_type"].apply(lambda v: harmonize_category(v, valid_room))
 
-    print("\nCatégories harmonisées:")
-    for col, method in operations_log['category_harmonized'].items():
-        print(f"  - {col}: {method}")
+# assigned_room_type (categorical) - harmonisation
+valid_room = ["A", "D", "E", "F", "G", "C", "B", "H", "I", "K"]
+df["assigned_room_type"] = df["assigned_room_type"].apply(lambda v: harmonize_category(v, valid_room))
 
-    print("\nFormats corrigés:")
-    for col, method in operations_log['format_corrected'].items():
-        print(f"  - {col}: {method}")
+# booking_changes (numeric) - valeurs aberrantes (max=21)
+q99 = df["booking_changes"].quantile(0.995)
+df["booking_changes"] = df["booking_changes"].apply(
+    lambda x: df["booking_changes"].median() if x > q99 else x
+)
 
-    print(f"\nDataset nettoyé sauvegardé dans: {OUTPUT_PATH}")
+# deposit_type (categorical) - harmonisation
+valid_deposit = ["No Deposit", "Non Refund"]
+df["deposit_type"] = df["deposit_type"].apply(lambda v: harmonize_category(v, valid_deposit))
 
-if __name__ == "__main__":
-    clean_hotel_bookings()
+# agent (categorical/text) - extraction numérique et imputation des manquants
+df["agent"] = df["agent"].apply(extract_numeric)
+df["agent"] = df["agent"].fillna(df["agent"].mode()[0])
+
+# company (numeric) - trop de valeurs manquantes (94%) -> suppression de la colonne
+if "company" in df.columns:
+    df = df.drop(columns=["company"])
+    operations.append("Colonne 'company' supprimée (94% de valeurs manquantes)")
+
+# days_in_waiting_list (numeric) - valeurs aberrantes (max=8996)
+q99 = df["days_in_waiting_list"].quantile(0.995)
+df["days_in_waiting_list"] = df["days_in_waiting_list"].apply(
+    lambda x: df["days_in_waiting_list"].median() if x > q99 else x
+)
+
+# customer_type (categorical) - harmonisation
+valid_customer = ["Transient", "Transient-Party", "Contract", "Group"]
+df["customer_type"] = df["customer_type"].apply(lambda v: harmonize_category(v, valid_customer))
+
+# adr (numeric) - valeurs aberrantes (min=-493, max=9993)
+df["adr"] = df["adr"].apply(extract_numeric)
+q99 = df["adr"].quantile(0.995)
+df["adr"] = df["adr"].apply(lambda x: df["adr"].median() if x < 0 or x > q99 else x)
+
+# required_car_parking_spaces (numeric) - valeurs aberrantes (max=8)
+df["required_car_parking_spaces"] = df["required_car_parking_spaces"].apply(
+    lambda x: 0 if x > 5 else x
+)
+
+# total_of_special_requests (numeric) - valeurs aberrantes (max=5)
+df["total_of_special_requests"] = df["total_of_special_requests"].apply(
+    lambda x: 0 if x > 5 else x
+)
+
+# reservation_status (categorical) - harmonisation
+valid_status = ["Check-Out", "Canceled", "No-Show"]
+df["reservation_status"] = df["reservation_status"].apply(lambda v: harmonize_category(v, valid_status))
+
+# reservation_status_date (categorical/text) - parsing des dates
+df["reservation_status_date"] = df["reservation_status_date"].apply(parse_date)
+
+# ------------------------------------------------------------------
+# Sauvegarde du dataset nettoyé
+df.to_csv(OUTPUT_PATH, index=False)
+
+# Résumé des opérations
+print(f"Dataset original: {original_shape[0]} lignes, {original_shape[1]} colonnes")
+print(f"Dataset nettoyé: {df.shape[0]} lignes, {df.shape[1]} colonnes")
+for op in operations:
+    print(f"- {op}")
+print("- Valeurs manquantes imputées avec médiane/mode selon le type de colonne")
+print("- Valeurs aberrantes corrigées avec médiane/mode")
+print("- Catégories harmonisées avec rapprochement des variantes")
+print("- Formats de date standardisés")

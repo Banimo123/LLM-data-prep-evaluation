@@ -44,8 +44,12 @@ Utilisation basique :
     print(report["global"])
 """
 
+import re
+
 import pandas as pd
 import numpy as np
+
+_MIDNIGHT_SUFFIX_RE = re.compile(r"^(\d{4}-\d{2}-\d{2}) 00:00:00(\.0+)?$")
 
 
 def _to_comparable_str(value) -> str:
@@ -57,7 +61,16 @@ def _to_comparable_str(value) -> str:
         return "<NA>"
     if isinstance(value, float) and value.is_integer():
         return str(int(value))
-    return str(value).strip()
+    s = str(value).strip()
+    # Artefact fréquent : un script généré convertit une date en objet Timestamp
+    # (pd.to_datetime) puis le sauvegarde en CSV, ce qui ajoute automatiquement
+    # " 00:00:00" même quand la date elle-même est correcte et déjà standardisée.
+    # On ne pénalise pas cet artefact de sérialisation, qui n'est pas une erreur de
+    # nettoyage : "2015-07-01" et "2015-07-01 00:00:00" désignent la même date.
+    m = _MIDNIGHT_SUFFIX_RE.match(s)
+    if m:
+        return m.group(1)
+    return s
 
 
 def compute_deduplication_f1(clean_row_ids: set, cleaned_row_ids: set, duplicate_row_ids: set) -> dict:

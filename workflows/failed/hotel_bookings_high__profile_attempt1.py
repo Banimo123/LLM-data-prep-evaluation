@@ -28,158 +28,113 @@ def clean_hotel_bookings():
     }
 
     # 1. Suppression des doublons (en conservant le premier)
-    df = df.drop_duplicates(subset=df.columns.difference(['row_id']), keep='first')
+    df = df.drop_duplicates(subset=[col for col in df.columns if col != 'row_id'], keep='first')
     operations_log['duplicates_removed'] = operations_log['rows_before'] - len(df)
 
     # 2. Traitement des valeurs manquantes
-    # children: 20% manquants -> imputation par mode (0.0)
+    # children (20% manquants) - colonne catégorielle avec valeurs fréquentes 0.0, unknown, ' '
     if 'children' in df.columns:
         mode_children = df['children'].mode()[0]
+        df['children'] = df['children'].replace(['', ' ', 'unknown'], np.nan)
         df['children'] = df['children'].fillna(mode_children)
-        operations_log['missing_values_imputed']['children'] = f"mode: {mode_children}"
+        operations_log['missing_values_imputed']['children'] = df['children'].isna().sum()
 
-    # meal: 20% manquants -> imputation par mode (BB)
+    # meal (20% manquants) - colonne catégorielle
     if 'meal' in df.columns:
         mode_meal = df['meal'].mode()[0]
         df['meal'] = df['meal'].fillna(mode_meal)
-        operations_log['missing_values_imputed']['meal'] = f"mode: {mode_meal}"
+        operations_log['missing_values_imputed']['meal'] = df['meal'].isna().sum()
 
-    # country: 20.33% manquants -> imputation par mode (PRT)
+    # country (20.33% manquants) - colonne catégorielle
     if 'country' in df.columns:
         mode_country = df['country'].mode()[0]
         df['country'] = df['country'].fillna(mode_country)
-        operations_log['missing_values_imputed']['country'] = f"mode: {mode_country}"
+        operations_log['missing_values_imputed']['country'] = df['country'].isna().sum()
 
-    # market_segment: 20% manquants -> imputation par mode (Online TA)
+    # market_segment (20% manquants) - colonne catégorielle
     if 'market_segment' in df.columns:
         mode_market_segment = df['market_segment'].mode()[0]
         df['market_segment'] = df['market_segment'].fillna(mode_market_segment)
-        operations_log['missing_values_imputed']['market_segment'] = f"mode: {mode_market_segment}"
+        operations_log['missing_values_imputed']['market_segment'] = df['market_segment'].isna().sum()
 
-    # agent: 30.99% manquants -> imputation par mode (9.0)
+    # agent (30.99% manquants) - colonne catégorielle
     if 'agent' in df.columns:
         mode_agent = df['agent'].mode()[0]
         df['agent'] = df['agent'].fillna(mode_agent)
-        operations_log['missing_values_imputed']['agent'] = f"mode: {mode_agent}"
+        operations_log['missing_values_imputed']['agent'] = df['agent'].isna().sum()
 
-    # company: 94.31% manquants -> trop élevé, on laisse NaN
-    # Pas d'imputation car trop de valeurs manquantes
+    # company (94.31% manquants) - trop de manquants, on laisse NaN
+    if 'company' in df.columns:
+        operations_log['missing_values_imputed']['company'] = 0  # pas d'imputation
 
     # 3. Correction des valeurs aberrantes numériques
-    # adults: contient des valeurs comme "2O" -> extraction numérique
+    # adults - contient des valeurs comme "2O" (faute de frappe)
     if 'adults' in df.columns:
         df['adults'] = df['adults'].apply(extract_numeric)
         median_adults = df['adults'].median()
         df['adults'] = df['adults'].fillna(median_adults)
-        operations_log['outliers_corrected']['adults'] = f"extracted numeric, median: {median_adults}"
+        operations_log['outliers_corrected']['adults'] = (df['adults'] > 10).sum()  # valeurs >10 considérées aberrantes
 
-    # children: contient "unknown" -> remplacement par mode (0.0)
-    if 'children' in df.columns:
-        df['children'] = df['children'].replace('unknown', '0.0')
-        df['children'] = df['children'].apply(extract_numeric)
-        operations_log['outliers_corrected']['children'] = "replaced 'unknown' with 0.0"
-
-    # stays_in_week_nights: max 999 -> valeur aberrante (moyenne 26.64)
+    # stays_in_week_nights - max 999.0 semble aberrant
     if 'stays_in_week_nights' in df.columns:
         q99 = df['stays_in_week_nights'].quantile(0.99)
         df.loc[df['stays_in_week_nights'] > q99, 'stays_in_week_nights'] = q99
-        operations_log['outliers_corrected']['stays_in_week_nights'] = f"capped at 99th percentile: {q99}"
+        operations_log['outliers_corrected']['stays_in_week_nights'] = (df['stays_in_week_nights'] > q99).sum()
 
-    # adr: contient des valeurs négatives (-496.7) -> on les met à 0
+    # adr - contient des valeurs négatives et très élevées
     if 'adr' in df.columns:
-        df.loc[df['adr'] < 0, 'adr'] = 0
-        operations_log['outliers_corrected']['adr'] = "negative values set to 0"
+        q1 = df['adr'].quantile(0.01)
+        q99 = df['adr'].quantile(0.99)
+        df.loc[df['adr'] < q1, 'adr'] = q1
+        df.loc[df['adr'] > q99, 'adr'] = q99
+        operations_log['outliers_corrected']['adr'] = ((df['adr'] < q1) | (df['adr'] > q99)).sum()
 
-    # days_in_waiting_list: max 8999 -> valeur aberrante (moyenne 222.8)
+    # days_in_waiting_list - max 8999 semble aberrant
     if 'days_in_waiting_list' in df.columns:
         q99 = df['days_in_waiting_list'].quantile(0.99)
         df.loc[df['days_in_waiting_list'] > q99, 'days_in_waiting_list'] = q99
-        operations_log['outliers_corrected']['days_in_waiting_list'] = f"capped at 99th percentile: {q99}"
+        operations_log['outliers_corrected']['days_in_waiting_list'] = (df['days_in_waiting_list'] > q99).sum()
 
     # 4. Harmonisation des catégories
-    # hotel: espaces superflus dans "City Hotel  " -> "City Hotel"
+    # hotel - correction des espaces superflus
     if 'hotel' in df.columns:
         df['hotel'] = df['hotel'].str.strip()
-        operations_log['categories_harmonized']['hotel'] = "stripped whitespace"
+        df['hotel'] = df['hotel'].replace({'City Hotel  ': 'City Hotel', 'Resort Hotel ': 'Resort Hotel'})
+        operations_log['categories_harmonized']['hotel'] = (df['hotel'].isin(['City Hotel', 'Resort Hotel'])).sum()
 
-    # meal: harmonisation des variantes
+    # adults - correction des fautes de frappe
+    if 'adults' in df.columns:
+        df['adults'] = df['adults'].astype(float)
+        operations_log['categories_harmonized']['adults'] = (df['adults'].isin([1.0, 2.0])).sum()
+
+    # meal - correction des variantes
     if 'meal' in df.columns:
-        meal_mapping = {
-            'BB': 'BB',
-            'HB': 'HB',
-            'SC': 'SC',
-            'Undefined': 'SC',
-            'Full Board': 'FB'
-        }
-        df['meal'] = df['meal'].replace(meal_mapping)
-        operations_log['categories_harmonized']['meal'] = str(meal_mapping)
+        df['meal'] = df['meal'].replace({'HB ': 'HB', 'SC ': 'SC'})
+        operations_log['categories_harmonized']['meal'] = (df['meal'].isin(['BB', 'HB', 'SC'])).sum()
 
-    # country: harmonisation des variantes (ex: 'USA' vs 'US')
-    if 'country' in df.columns:
-        country_mapping = {
-            'USA': 'US',
-            'United States': 'US',
-            'UK': 'GB'
-        }
-        df['country'] = df['country'].replace(country_mapping)
-        operations_log['categories_harmonized']['country'] = str(country_mapping)
-
-    # market_segment: harmonisation des variantes
-    if 'market_segment' in df.columns:
-        market_segment_mapping = {
-            'Online': 'Online TA',
-            'Offline': 'Offline TA/TO',
-            'Groups': 'Groups',
-            'Direct': 'Direct',
-            'Corporate': 'Corporate',
-            'Complementary': 'Complementary',
-            'Aviation': 'Aviation'
-        }
-        df['market_segment'] = df['market_segment'].replace(market_segment_mapping)
-        operations_log['categories_harmonized']['market_segment'] = str(market_segment_mapping)
-
-    # distribution_channel: harmonisation des variantes
-    if 'distribution_channel' in df.columns:
-        distribution_channel_mapping = {
-            'TA': 'TA/TO',
-            'TO': 'TA/TO',
-            'Direct': 'Direct',
-            'Corporate': 'Corporate',
-            'GDS': 'GDS'
-        }
-        df['distribution_channel'] = df['distribution_channel'].replace(distribution_channel_mapping)
-        operations_log['categories_harmonized']['distribution_channel'] = str(distribution_channel_mapping)
-
-    # deposit_type: harmonisation des variantes
+    # deposit_type - correction des variantes
     if 'deposit_type' in df.columns:
-        deposit_type_mapping = {
-            'No Deposit': 'No Deposit',
-            'Non Refund': 'Non Refund',
-            'Refundable': 'Refundable'
-        }
-        df['deposit_type'] = df['deposit_type'].replace(deposit_type_mapping)
         df['deposit_type'] = df['deposit_type'].str.strip()
-        operations_log['categories_harmonized']['deposit_type'] = str(deposit_type_mapping) + ", stripped whitespace"
+        df['deposit_type'] = df['deposit_type'].replace({
+            'No Deposit  ': 'No Deposit',
+            'No Depossit': 'No Deposit',
+            'Non Refund ': 'Non Refund'
+        })
+        operations_log['categories_harmonized']['deposit_type'] = (df['deposit_type'].isin(['No Deposit', 'Non Refund'])).sum()
 
-    # customer_type: harmonisation des variantes
+    # customer_type - correction de "Trasnient" en "Transient"
     if 'customer_type' in df.columns:
-        customer_type_mapping = {
-            'Transient': 'Transient',
-            'Transient-Party': 'Transient-Party',
-            'Contract': 'Contract',
-            'Group': 'Group'
-        }
-        df['customer_type'] = df['customer_type'].replace(customer_type_mapping)
-        operations_log['categories_harmonized']['customer_type'] = str(customer_type_mapping)
+        df['customer_type'] = df['customer_type'].replace({'Trasnient': 'Transient'})
+        operations_log['categories_harmonized']['customer_type'] = (df['customer_type'] == 'Transient').sum()
 
     # 5. Correction des formats
-    # reservation_status_date: harmonisation des formats de date
+    # reservation_status_date - harmonisation des formats de date
     if 'reservation_status_date' in df.columns:
         def parse_date(date_str):
             if pd.isna(date_str):
                 return date_str
             date_str = str(date_str).strip()
-            for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y', '%B %d, %Y', '%b %d, %Y'):
+            for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%m/%d/%Y', '%B %d, %Y', '%Y/%m/%d'):
                 try:
                     return datetime.strptime(date_str, fmt).strftime('%Y-%m-%d')
                 except ValueError:
@@ -187,17 +142,16 @@ def clean_hotel_bookings():
             return date_str  # retourne la valeur originale si aucun format ne correspond
 
         df['reservation_status_date'] = df['reservation_status_date'].apply(parse_date)
-        operations_log['formats_corrected']['reservation_status_date'] = "standardized to YYYY-MM-DD"
+        operations_log['formats_corrected']['reservation_status_date'] = df['reservation_status_date'].notna().sum()
 
     # 6. Conversion des types
     numeric_cols = [
         'is_canceled', 'arrival_date_year', 'arrival_date_week_number',
         'arrival_date_day_of_month', 'stays_in_weekend_nights',
-        'stays_in_week_nights', 'adults', 'children', 'babies',
-        'is_repeated_guest', 'previous_cancellations',
-        'previous_bookings_not_canceled', 'booking_changes',
-        'days_in_waiting_list', 'adr', 'required_car_parking_spaces',
-        'total_of_special_requests'
+        'stays_in_week_nights', 'babies', 'is_repeated_guest',
+        'previous_cancellations', 'previous_bookings_not_canceled',
+        'booking_changes', 'days_in_waiting_list', 'adr',
+        'required_car_parking_spaces', 'total_of_special_requests'
     ]
     for col in numeric_cols:
         if col in df.columns:
@@ -208,27 +162,23 @@ def clean_hotel_bookings():
     # Sauvegarde du fichier nettoyé
     df.to_csv(OUTPUT_PATH, index=False)
 
-    # Affichage du log des opérations
+    # Affichage du log
     print("=== Nettoyage terminé ===")
-    print(f"Lignes avant nettoyage: {operations_log['rows_before']}")
-    print(f"Lignes après nettoyage: {operations_log['rows_after']}")
+    print(f"Lignes avant: {operations_log['rows_before']}")
+    print(f"Lignes après: {operations_log['rows_after']}")
     print(f"Doublons supprimés: {operations_log['duplicates_removed']}")
-
     print("\nValeurs manquantes imputées:")
-    for col, method in operations_log['missing_values_imputed'].items():
-        print(f"- {col}: {method}")
-
+    for col, count in operations_log['missing_values_imputed'].items():
+        print(f"  {col}: {count}")
     print("\nValeurs aberrantes corrigées:")
-    for col, method in operations_log['outliers_corrected'].items():
-        print(f"- {col}: {method}")
-
+    for col, count in operations_log['outliers_corrected'].items():
+        print(f"  {col}: {count}")
     print("\nCatégories harmonisées:")
-    for col, method in operations_log['categories_harmonized'].items():
-        print(f"- {col}: {method}")
-
+    for col, count in operations_log['categories_harmonized'].items():
+        print(f"  {col}: {count}")
     print("\nFormats corrigés:")
-    for col, method in operations_log['formats_corrected'].items():
-        print(f"- {col}: {method}")
+    for col, count in operations_log['formats_corrected'].items():
+        print(f"  {col}: {count}")
 
 if __name__ == "__main__":
     clean_hotel_bookings()

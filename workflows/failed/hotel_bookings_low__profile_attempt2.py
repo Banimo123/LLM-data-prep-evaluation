@@ -37,37 +37,37 @@ log["duplicates_removed"] = log["rows_initial"] - len(df)
 # children (5% manquants) - colonne catégorielle avec valeurs numériques -> imputation par mode
 if "children" in df.columns:
     mode_children = df["children"].mode()[0]
-    df["children"].fillna(mode_children, inplace=True)
+    df["children"] = df["children"].fillna(mode_children)
     log["missing_values_imputed"]["children"] = df["children"].isna().sum()
 
 # meal (5% manquants) - colonne catégorielle -> imputation par mode
 if "meal" in df.columns:
     mode_meal = df["meal"].mode()[0]
-    df["meal"].fillna(mode_meal, inplace=True)
+    df["meal"] = df["meal"].fillna(mode_meal)
     log["missing_values_imputed"]["meal"] = df["meal"].isna().sum()
 
 # country (5.39% manquants) - colonne catégorielle -> imputation par mode
 if "country" in df.columns:
     mode_country = df["country"].mode()[0]
-    df["country"].fillna(mode_country, inplace=True)
+    df["country"] = df["country"].fillna(mode_country)
     log["missing_values_imputed"]["country"] = df["country"].isna().sum()
 
 # market_segment (5% manquants) - colonne catégorielle -> imputation par mode
 if "market_segment" in df.columns:
     mode_market_segment = df["market_segment"].mode()[0]
-    df["market_segment"].fillna(mode_market_segment, inplace=True)
+    df["market_segment"] = df["market_segment"].fillna(mode_market_segment)
     log["missing_values_imputed"]["market_segment"] = df["market_segment"].isna().sum()
 
 # agent (17.99% manquants) - colonne catégorielle -> imputation par mode
 if "agent" in df.columns:
     mode_agent = df["agent"].mode()[0]
-    df["agent"].fillna(mode_agent, inplace=True)
+    df["agent"] = df["agent"].fillna(mode_agent)
     log["missing_values_imputed"]["agent"] = df["agent"].isna().sum()
 
 # company (94.31% manquants) - trop de manquants -> imputation par mode (valeur la plus fréquente)
 if "company" in df.columns:
     mode_company = df["company"].mode()[0]
-    df["company"].fillna(mode_company, inplace=True)
+    df["company"] = df["company"].fillna(mode_company)
     log["missing_values_imputed"]["company"] = df["company"].isna().sum()
 
 # 3. Correction des valeurs aberrantes numériques
@@ -141,8 +141,9 @@ if "reservation_status_date" in df.columns:
 
     df["reservation_status_date"] = df["reservation_status_date"].apply(parse_date)
     # Conversion en format standard YYYY-MM-DD
-    df["reservation_status_date"] = pd.to_datetime(df["reservation_status_date"], errors="coerce").dt.strftime("%Y-%m-%d")
-    df["reservation_status_date"] = df["reservation_status_date"].replace("NaT", np.nan)
+    df["reservation_status_date"] = pd.to_datetime(df["reservation_status_date"], errors='ignore')
+    if df["reservation_status_date"].dtype == 'datetime64[ns]':
+        df["reservation_status_date"] = df["reservation_status_date"].dt.strftime("%Y-%m-%d")
 
 # 6. Correction des types de données
 numeric_cols = [
@@ -154,7 +155,7 @@ numeric_cols = [
 ]
 for col in numeric_cols:
     if col in df.columns:
-        df[col] = pd.to_numeric(df[col], errors="ignore")
+        df[col] = pd.to_numeric(df[col], errors='ignore')
 
 # adults - conversion en numérique (valeurs comme "2.0" -> 2)
 if "adults" in df.columns:
