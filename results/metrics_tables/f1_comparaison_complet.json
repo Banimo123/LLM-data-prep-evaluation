@@ -1,5 +1,45 @@
 [
   {
+    "approche": "constrained",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__constrained.csv",
+    "precision": 0.9791,
+    "recall": 0.5424,
+    "f1": 0.6981,
+    "tp": 146351,
+    "fp": 3122,
+    "fn": 123466,
+    "n_rows_lost_by_workflow": 2809,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 75911,
+        "fn": 19599,
+        "recall": 0.7948,
+        "f1_sans_fp": 0.8857
+      },
+      "outliers": {
+        "tp": 1306,
+        "fn": 17794,
+        "recall": 0.0684,
+        "f1_sans_fp": 0.128
+      },
+      "missing_values": {
+        "tp": 35441,
+        "fn": 83949,
+        "recall": 0.2969,
+        "f1_sans_fp": 0.4578
+      },
+      "format_errors": {
+        "tp": 33693,
+        "fn": 2124,
+        "recall": 0.9407,
+        "f1_sans_fp": 0.9694
+      }
+    },
+    "erreur": null
+  },
+  {
     "approche": "manual_baseline",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__manual_baseline.csv",
@@ -43,38 +83,40 @@
     "approche": "profile",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__profile.csv",
-    "precision": 0.9818,
-    "recall": 0.1885,
-    "f1": 0.3163,
-    "tp": 50861,
-    "fp": 945,
-    "fn": 218956,
-    "n_rows_lost_by_workflow": 3540,
-    "columns_dropped_by_workflow": [],
+    "precision": 0.9788,
+    "recall": 0.6322,
+    "f1": 0.7682,
+    "tp": 170575,
+    "fp": 3692,
+    "fn": 99242,
+    "n_rows_lost_by_workflow": 2809,
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
     "per_error_family": {
       "typos": {
-        "tp": 26572,
-        "fn": 68938,
-        "recall": 0.2782,
-        "f1_sans_fp": 0.4353
+        "tp": 81926,
+        "fn": 13584,
+        "recall": 0.8578,
+        "f1_sans_fp": 0.9234
       },
       "outliers": {
-        "tp": 8,
-        "fn": 19092,
-        "recall": 0.0004,
-        "f1_sans_fp": 0.0008
+        "tp": 1314,
+        "fn": 17786,
+        "recall": 0.0688,
+        "f1_sans_fp": 0.1287
       },
       "missing_values": {
-        "tp": 2674,
-        "fn": 116716,
-        "recall": 0.0224,
-        "f1_sans_fp": 0.0438
+        "tp": 53642,
+        "fn": 65748,
+        "recall": 0.4493,
+        "f1_sans_fp": 0.62
       },
       "format_errors": {
-        "tp": 21607,
-        "fn": 14210,
-        "recall": 0.6033,
-        "f1_sans_fp": 0.7525
+        "tp": 33693,
+        "fn": 2124,
+        "recall": 0.9407,
+        "f1_sans_fp": 0.9694
       }
     },
     "erreur": null
@@ -83,38 +125,38 @@
     "approche": "constrained",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__constrained.csv",
-    "precision": 1.0,
-    "recall": 0.0623,
-    "f1": 0.1173,
-    "tp": 4201,
-    "fp": 0,
-    "fn": 63245,
-    "n_rows_lost_by_workflow": 29870,
+    "precision": 0.9796,
+    "recall": 0.6476,
+    "f1": 0.7797,
+    "tp": 43678,
+    "fp": 910,
+    "fn": 23768,
+    "n_rows_lost_by_workflow": 18179,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 2313,
-        "fn": 21562,
-        "recall": 0.0969,
-        "f1_sans_fp": 0.1766
+        "tp": 20359,
+        "fn": 3516,
+        "recall": 0.8527,
+        "f1_sans_fp": 0.9205
       },
       "outliers": {
-        "tp": 0,
-        "fn": 4772,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
+        "tp": 2322,
+        "fn": 2450,
+        "recall": 0.4866,
+        "f1_sans_fp": 0.6546
       },
       "missing_values": {
-        "tp": 640,
-        "fn": 29205,
-        "recall": 0.0214,
-        "f1_sans_fp": 0.042
+        "tp": 12571,
+        "fn": 17274,
+        "recall": 0.4212,
+        "f1_sans_fp": 0.5927
       },
       "format_errors": {
-        "tp": 1248,
-        "fn": 7706,
-        "recall": 0.1394,
-        "f1_sans_fp": 0.2447
+        "tp": 8426,
+        "fn": 528,
+        "recall": 0.941,
+        "f1_sans_fp": 0.9696
       }
     },
     "erreur": null
@@ -163,38 +205,38 @@
     "approche": "profile",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__profile.csv",
-    "precision": 0.9983,
-    "recall": 0.3572,
-    "f1": 0.5261,
-    "tp": 24091,
-    "fp": 41,
-    "fn": 43355,
+    "precision": 0.9745,
+    "recall": 0.6166,
+    "f1": 0.7553,
+    "tp": 41589,
+    "fp": 1088,
+    "fn": 25857,
     "n_rows_lost_by_workflow": 18179,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 7497,
-        "fn": 16378,
-        "recall": 0.314,
-        "f1_sans_fp": 0.4779
+        "tp": 18892,
+        "fn": 4983,
+        "recall": 0.7913,
+        "f1_sans_fp": 0.8835
       },
       "outliers": {
-        "tp": 1491,
-        "fn": 3281,
-        "recall": 0.3124,
-        "f1_sans_fp": 0.4761
+        "tp": 1149,
+        "fn": 3623,
+        "recall": 0.2408,
+        "f1_sans_fp": 0.3881
       },
       "missing_values": {
-        "tp": 13609,
-        "fn": 16236,
-        "recall": 0.456,
-        "f1_sans_fp": 0.6264
+        "tp": 13122,
+        "fn": 16723,
+        "recall": 0.4397,
+        "f1_sans_fp": 0.6108
       },
       "format_errors": {
-        "tp": 1494,
-        "fn": 7460,
-        "recall": 0.1669,
-        "f1_sans_fp": 0.286
+        "tp": 8426,
+        "fn": 528,
+        "recall": 0.941,
+        "f1_sans_fp": 0.9696
       }
     },
     "erreur": null
@@ -203,38 +245,80 @@
     "approche": "validated",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__validated.csv",
-    "precision": 0.1363,
-    "recall": 0.295,
-    "f1": 0.1864,
-    "tp": 19895,
-    "fp": 126122,
-    "fn": 47551,
-    "n_rows_lost_by_workflow": 22651,
+    "precision": 0.9544,
+    "recall": 0.6244,
+    "f1": 0.7549,
+    "tp": 42114,
+    "fp": 2011,
+    "fn": 25332,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
+    "per_error_family": {
+      "typos": {
+        "tp": 18941,
+        "fn": 4934,
+        "recall": 0.7933,
+        "f1_sans_fp": 0.8848
+      },
+      "outliers": {
+        "tp": 1350,
+        "fn": 3422,
+        "recall": 0.2829,
+        "f1_sans_fp": 0.441
+      },
+      "missing_values": {
+        "tp": 13379,
+        "fn": 16466,
+        "recall": 0.4483,
+        "f1_sans_fp": 0.6191
+      },
+      "format_errors": {
+        "tp": 8444,
+        "fn": 510,
+        "recall": 0.943,
+        "f1_sans_fp": 0.9707
+      }
+    },
+    "erreur": null
+  },
+  {
+    "approche": "constrained",
+    "niveau_de_bruit": "medium",
+    "fichier": "noisy_medium__constrained.csv",
+    "precision": 0.9896,
+    "recall": 0.6518,
+    "f1": 0.7859,
+    "tp": 87935,
+    "fp": 928,
+    "fn": 46971,
+    "n_rows_lost_by_workflow": 11886,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 11841,
-        "fn": 12034,
-        "recall": 0.496,
-        "f1_sans_fp": 0.6631
+        "tp": 40814,
+        "fn": 6941,
+        "recall": 0.8547,
+        "f1_sans_fp": 0.9216
       },
       "outliers": {
-        "tp": 0,
-        "fn": 4772,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
+        "tp": 5329,
+        "fn": 4219,
+        "recall": 0.5581,
+        "f1_sans_fp": 0.7164
       },
       "missing_values": {
-        "tp": 4100,
-        "fn": 25745,
-        "recall": 0.1374,
-        "f1_sans_fp": 0.2416
+        "tp": 24988,
+        "fn": 34707,
+        "recall": 0.4186,
+        "f1_sans_fp": 0.5902
       },
       "format_errors": {
-        "tp": 3954,
-        "fn": 5000,
-        "recall": 0.4416,
-        "f1_sans_fp": 0.6126
+        "tp": 16804,
+        "fn": 1104,
+        "recall": 0.9384,
+        "f1_sans_fp": 0.9682
       }
     },
     "erreur": null
@@ -283,38 +367,40 @@
     "approche": "profile",
     "niveau_de_bruit": "medium",
     "fichier": "noisy_medium__profile.csv",
-    "precision": 0.9998,
-    "recall": 0.3329,
-    "f1": 0.4995,
-    "tp": 44907,
-    "fp": 10,
-    "fn": 89999,
-    "n_rows_lost_by_workflow": 10145,
-    "columns_dropped_by_workflow": [],
+    "precision": 0.9982,
+    "recall": 0.6511,
+    "f1": 0.7881,
+    "tp": 87833,
+    "fp": 162,
+    "fn": 47073,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
     "per_error_family": {
       "typos": {
-        "tp": 15375,
-        "fn": 32380,
-        "recall": 0.322,
-        "f1_sans_fp": 0.4871
+        "tp": 40996,
+        "fn": 6759,
+        "recall": 0.8585,
+        "f1_sans_fp": 0.9238
       },
       "outliers": {
-        "tp": 4,
-        "fn": 9544,
-        "recall": 0.0004,
-        "f1_sans_fp": 0.0008
+        "tp": 3069,
+        "fn": 6479,
+        "recall": 0.3214,
+        "f1_sans_fp": 0.4865
       },
       "missing_values": {
-        "tp": 26538,
-        "fn": 33157,
-        "recall": 0.4446,
-        "f1_sans_fp": 0.6155
+        "tp": 26903,
+        "fn": 32792,
+        "recall": 0.4507,
+        "f1_sans_fp": 0.6213
       },
       "format_errors": {
-        "tp": 2990,
-        "fn": 14918,
-        "recall": 0.167,
-        "f1_sans_fp": 0.2862
+        "tp": 16865,
+        "fn": 1043,
+        "recall": 0.9418,
+        "f1_sans_fp": 0.97
       }
     },
     "erreur": null
