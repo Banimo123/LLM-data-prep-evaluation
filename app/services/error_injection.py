@@ -19,8 +19,8 @@ Répartition des colonnes (validée en équipe, sans conflit) :
 
 Utilisation :
     python -m app.services.error_injection \
-        --input benchmark/datasets/hotel_bookings/clean.csv \
-        --output_dir benchmark/datasets/hotel_bookings
+        --input datasets/hotel_bookings/clean.csv \
+        --output_dir datasets/hotel_bookings
 """
 
 import argparse
@@ -401,7 +401,7 @@ def get_rates_for_level(level):
 def main():
     parser = argparse.ArgumentParser(description="Injection d'erreurs contrôlées (hotel_bookings).")
     parser.add_argument("--input", required=True, help="Chemin vers clean.csv")
-    parser.add_argument("--output_dir", required=True, help="Dossier de sortie (ex: benchmark/datasets/hotel_bookings)")
+    parser.add_argument("--output_dir", required=True, help="Dossier de sortie (ex: datasets/hotel_bookings)")
     parser.add_argument("--random_state", type=int, default=42)
     args = parser.parse_args()
 

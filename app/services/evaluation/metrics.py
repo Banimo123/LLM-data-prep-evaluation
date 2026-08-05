@@ -36,9 +36,9 @@ Utilisation basique :
     from app.services.evaluation.metrics import evaluate_workflow
 
     report = evaluate_workflow(
-        clean_csv="benchmark/datasets/hotel_bookings/clean.csv",
-        noisy_csv="benchmark/datasets/hotel_bookings/noisy_low.csv",
-        injected_errors_csv="benchmark/datasets/hotel_bookings/injected_errors_low.csv",
+        clean_csv="datasets/hotel_bookings/clean.csv",
+        noisy_csv="datasets/hotel_bookings/noisy_low.csv",
+        injected_errors_csv="datasets/hotel_bookings/injected_errors_low.csv",
         cleaned_csv="results/cleaned_datasets/hotel_bookings/noisy_low__simple.csv",
     )
     print(report["global"])

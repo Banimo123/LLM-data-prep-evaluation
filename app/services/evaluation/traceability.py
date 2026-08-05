@@ -20,7 +20,7 @@ Utilisation basique :
     from app.services.evaluation.traceability import compute_traceability
 
     report = compute_traceability(
-        noisy_csv="benchmark/datasets/hotel_bookings/noisy_low.csv",
+        noisy_csv="datasets/hotel_bookings/noisy_low.csv",
         cleaned_csv="results/cleaned_datasets/hotel_bookings/noisy_low__manual_baseline.csv",
     )
     print(report["summary_global"])

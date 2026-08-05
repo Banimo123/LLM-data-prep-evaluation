@@ -28,7 +28,7 @@ from app.services.error_injection import get_rates_for_level
 
 
 DATASET_NAME = "hotel_bookings"
-DATASET_DIR = Path(f"benchmark/datasets/{DATASET_NAME}")
+DATASET_DIR = Path(f"datasets/{DATASET_NAME}")
 CLEANED_DIR = Path(f"results/cleaned_datasets/{DATASET_NAME}")
 GENERATED_DIR = Path("workflows/generated")
 FAILED_DIR = Path("workflows/failed")

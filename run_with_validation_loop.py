@@ -18,8 +18,8 @@ from app.services.safe_executor import execute_workflow
 
 MAX_ATTEMPTS = 3
 
-DATASET_CSV = "benchmark/datasets/hotel_bookings/noisy_low.csv"
-INPUT_PATH = "benchmark/datasets/hotel_bookings/noisy_low.csv"
+DATASET_CSV = "datasets/hotel_bookings/noisy_low.csv"
+INPUT_PATH = "datasets/hotel_bookings/noisy_low.csv"
 OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_low__validated.csv"
 GENERATED_SCRIPT_PATH = Path("workflows/generated/hotel_bookings_low__validated.py")
 FAILED_SCRIPT_DIR = Path("workflows/failed")

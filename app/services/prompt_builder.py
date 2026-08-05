@@ -14,8 +14,8 @@ Utilisation basique :
 
     prompt = build_prompt(
         approach="simple",
-        dataset_csv_path="benchmark/datasets/hotel_bookings/noisy_low.csv",
-        input_path="benchmark/datasets/hotel_bookings/noisy_low.csv",
+        dataset_csv_path="datasets/hotel_bookings/noisy_low.csv",
+        input_path="datasets/hotel_bookings/noisy_low.csv",
         output_path="results/cleaned_datasets/hotel_bookings/noisy_low__prompt_simple.csv",
     )
 """

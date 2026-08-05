@@ -20,9 +20,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from fast_metrics import evaluate_fast
 
-CLEAN_WITH_ID = "benchmark/datasets/hotel_bookings/clean_with_id.csv"
-NOISY_TEMPLATE = "benchmark/datasets/hotel_bookings/noisy_{level}.csv"
-ERRORS_TEMPLATE = "benchmark/datasets/hotel_bookings/injected_errors_{level}.csv"
+CLEAN_WITH_ID = "datasets/hotel_bookings/clean_with_id.csv"
+NOISY_TEMPLATE = "datasets/hotel_bookings/noisy_{level}.csv"
+ERRORS_TEMPLATE = "datasets/hotel_bookings/injected_errors_{level}.csv"
 CLEANED_DIR = "results/cleaned_datasets/hotel_bookings"
 OUTPUT_JSON = "results/metrics/f1_comparaison_complet.json"
 
