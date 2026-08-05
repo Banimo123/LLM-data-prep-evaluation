@@ -1,0 +1,1562 @@
+row_id,column,original_value,injected_value,error_type,error_family
+478.0,src,flightview,NA,missing_NA_string,missing_values
+489.0,src,flightview,N/A,missing_N/A_string,missing_values
+46.0,src,aa,unknown,missing_unknown_string,missing_values
+426.0,src,airtravelcenter, ,missing_whitespace,missing_values
+1486.0,src,sfo,,missing_nan,missing_values
+1913.0,src,quicktrip,N/A,missing_N/A_string,missing_values
+1371.0,src,orbitz,,missing_nan,missing_values
+941.0,src,flightarrival,,missing_empty_string,missing_values
+1182.0,src,usatoday,unknown,missing_unknown_string,missing_values
+245.0,src,boston,,missing_empty_string,missing_values
+1528.0,src,flytecomm,unknown,missing_unknown_string,missing_values
+1092.0,src,foxbusiness,NA,missing_NA_string,missing_values
+702.0,src,panynj,,missing_empty_string,missing_values
+96.0,src,helloflight,NA,missing_NA_string,missing_values
+2291.0,src,flightaware,N/A,missing_N/A_string,missing_values
+871.0,src,flights,unknown,missing_unknown_string,missing_values
+1812.0,src,flylouisville,N/A,missing_N/A_string,missing_values
+138.0,src,helloflight, ,missing_whitespace,missing_values
+1280.0,src,myrateplan, ,missing_whitespace,missing_values
+353.0,src,airtravelcenter,unknown,missing_unknown_string,missing_values
+995.0,src,travelocity,N/A,missing_N/A_string,missing_values
+1662.0,src,wunderground,,missing_empty_string,missing_values
+974.0,src,flightwise,NA,missing_NA_string,missing_values
+1792.0,src,flylouisville,,missing_nan,missing_values
+1497.0,src,flytecomm,NA,missing_NA_string,missing_values
+993.0,src,travelocity, ,missing_whitespace,missing_values
+1757.0,src,ua,NA,missing_NA_string,missing_values
+2176.0,src,gofox,,missing_nan,missing_values
+2300.0,src,flightaware,N/A,missing_N/A_string,missing_values
+800.0,src,dfw, ,missing_whitespace,missing_values
+1271.0,src,myrateplan, ,missing_whitespace,missing_values
+70.0,src,helloflight,,missing_empty_string,missing_values
+2368.0,src,world-flight-tracker,NA,missing_NA_string,missing_values
+386.0,src,airtravelcenter,N/A,missing_N/A_string,missing_values
+1400.0,src,orbitz,,missing_empty_string,missing_values
+1855.0,src,flylouisville,,missing_empty_string,missing_values
+1953.0,src,allegiantair,,missing_empty_string,missing_values
+1053.0,src,travelocity, ,missing_whitespace,missing_values
+1159.0,src,foxbusiness,unknown,missing_unknown_string,missing_values
+718.0,src,panynj, ,missing_whitespace,missing_values
+1795.0,src,flylouisville,unknown,missing_unknown_string,missing_values
+1758.0,src,flylouisville, ,missing_whitespace,missing_values
+1054.0,src,travelocity,,missing_nan,missing_values
+1660.0,src,ord, ,missing_whitespace,missing_values
+1799.0,src,flylouisville,,missing_nan,missing_values
+1502.0,src,flytecomm,NA,missing_NA_string,missing_values
+1097.0,src,foxbusiness,N/A,missing_N/A_string,missing_values
+447.0,src,flightview,NA,missing_NA_string,missing_values
+1066.0,src,travelocity,,missing_nan,missing_values
+1935.0,src,quicktrip,,missing_empty_string,missing_values
+1283.0,src,myrateplan,unknown,missing_unknown_string,missing_values
+1633.0,src,mytripandmore,,missing_empty_string,missing_values
+792.0,src,mia,,missing_empty_string,missing_values
+1493.0,src,flytecomm, ,missing_whitespace,missing_values
+691.0,src,panynj,,missing_nan,missing_values
+2103.0,src,businesstravellogue, ,missing_whitespace,missing_values
+184.0,src,boston, ,missing_whitespace,missing_values
+289.0,src,weather,N/A,missing_N/A_string,missing_values
+1802.0,src,flylouisville,,missing_nan,missing_values
+208.0,src,boston,,missing_nan,missing_values
+432.0,src,airtravelcenter,,missing_empty_string,missing_values
+1440.0,src,CO,N/A,missing_N/A_string,missing_values
+1257.0,src,myrateplan,,missing_nan,missing_values
+2098.0,src,businesstravellogue,NA,missing_NA_string,missing_values
+555.0,src,flightstats,,missing_nan,missing_values
+1639.0,src,ord,N/A,missing_N/A_string,missing_values
+1161.0,src,foxbusiness,,missing_nan,missing_values
+961.0,src,flightarrival,unknown,missing_unknown_string,missing_values
+932.0,src,flightarrival,,missing_nan,missing_values
+16.0,src,aa,,missing_empty_string,missing_values
+1575.0,src,flytecomm,,missing_empty_string,missing_values
+1519.0,src,flytecomm,unknown,missing_unknown_string,missing_values
+1060.0,src,travelocity,,missing_nan,missing_values
+287.0,src,weather,NA,missing_NA_string,missing_values
+771.0,src,flightexplorer,N/A,missing_N/A_string,missing_values
+2229.0,src,gofox,N/A,missing_N/A_string,missing_values
+1693.0,src,wunderground,unknown,missing_unknown_string,missing_values
+1612.0,src,mytripandmore,unknown,missing_unknown_string,missing_values
+1037.0,src,travelocity,NA,missing_NA_string,missing_values
+338.0,src,airtravelcenter,unknown,missing_unknown_string,missing_values
+1154.0,src,foxbusiness,,missing_empty_string,missing_values
+886.0,src,flights, ,missing_whitespace,missing_values
+1545.0,src,flytecomm,N/A,missing_N/A_string,missing_values
+807.0,src,mco,unknown,missing_unknown_string,missing_values
+1638.0,src,ord, ,missing_whitespace,missing_values
+731.0,src,flightexplorer,unknown,missing_unknown_string,missing_values
+1033.0,src,travelocity, ,missing_whitespace,missing_values
+1480.0,src,ifly,N/A,missing_N/A_string,missing_values
+1279.0,src,myrateplan,,missing_nan,missing_values
+1766.0,src,flylouisville,NA,missing_NA_string,missing_values
+2031.0,src,allegiantair,,missing_empty_string,missing_values
+740.0,src,flightexplorer, ,missing_whitespace,missing_values
+1151.0,src,foxbusiness,,missing_empty_string,missing_values
+190.0,src,boston,,missing_empty_string,missing_values
+1691.0,src,wunderground,,missing_empty_string,missing_values
+1072.0,src,foxbusiness,N/A,missing_N/A_string,missing_values
+1526.0,src,flytecomm,N/A,missing_N/A_string,missing_values
+301.0,src,weather, ,missing_whitespace,missing_values
+1705.0,src,wunderground,NA,missing_NA_string,missing_values
+1710.0,src,wunderground,,missing_empty_string,missing_values
+641.0,src,panynj,,missing_nan,missing_values
+1076.0,src,foxbusiness,,missing_nan,missing_values
+168.0,src,boston,NA,missing_NA_string,missing_values
+227.0,src,boston, ,missing_whitespace,missing_values
+970.0,src,flightwise,N/A,missing_N/A_string,missing_values
+1402.0,src,orbitz, ,missing_whitespace,missing_values
+1807.0,src,flylouisville,,missing_nan,missing_values
+385.0,src,airtravelcenter,,missing_nan,missing_values
+1200.0,src,usatoday, ,missing_whitespace,missing_values
+613.0,src,flightstats,,missing_nan,missing_values
+312.0,src,weather,,missing_nan,missing_values
+1393.0,src,orbitz,NA,missing_NA_string,missing_values
+2324.0,src,world-flight-tracker, ,missing_whitespace,missing_values
+535.0,src,flightview,unknown,missing_unknown_string,missing_values
+216.0,src,boston,,missing_nan,missing_values
+1131.0,src,foxbusiness, ,missing_whitespace,missing_values
+1160.0,src,foxbusiness, ,missing_whitespace,missing_values
+962.0,src,flightarrival,unknown,missing_unknown_string,missing_values
+1734.0,src,ua, ,missing_whitespace,missing_values
+84.0,src,helloflight,,missing_empty_string,missing_values
+1876.0,src,quicktrip, ,missing_whitespace,missing_values
+2351.0,src,world-flight-tracker,,missing_empty_string,missing_values
+133.0,src,helloflight,unknown,missing_unknown_string,missing_values
+1997.0,src,allegiantair,N/A,missing_N/A_string,missing_values
+2129.0,src,businesstravellogue,unknown,missing_unknown_string,missing_values
+186.0,src,boston,N/A,missing_N/A_string,missing_values
+554.0,src,flightstats,N/A,missing_N/A_string,missing_values
+2344.0,src,world-flight-tracker,N/A,missing_N/A_string,missing_values
+1205.0,src,usatoday,unknown,missing_unknown_string,missing_values
+2240.0,src,gofox,unknown,missing_unknown_string,missing_values
+817.0,src,flights,,missing_nan,missing_values
+357.0,src,airtravelcenter,unknown,missing_unknown_string,missing_values
+602.0,src,flightstats,N/A,missing_N/A_string,missing_values
+1558.0,src,flytecomm,,missing_empty_string,missing_values
+1469.0,src,ifly,N/A,missing_N/A_string,missing_values
+1782.0,src,flylouisville, ,missing_whitespace,missing_values
+773.0,src,flightexplorer, ,missing_whitespace,missing_values
+205.0,src,boston, ,missing_whitespace,missing_values
+1251.0,src,myrateplan,NA,missing_NA_string,missing_values
+905.0,src,flights,unknown,missing_unknown_string,missing_values
+315.0,src,weather,NA,missing_NA_string,missing_values
+148.0,src,helloflight,unknown,missing_unknown_string,missing_values
+844.0,src,flights,N/A,missing_N/A_string,missing_values
+1252.0,src,myrateplan,,missing_empty_string,missing_values
+2087.0,src,businesstravellogue,,missing_empty_string,missing_values
+1080.0,src,foxbusiness,,missing_nan,missing_values
+1841.0,src,flylouisville,,missing_nan,missing_values
+1617.0,src,mytripandmore,NA,missing_NA_string,missing_values
+1930.0,src,quicktrip,NA,missing_NA_string,missing_values
+2294.0,src,flightaware,,missing_nan,missing_values
+791.0,src,flightexplorer,NA,missing_NA_string,missing_values
+2317.0,src,flightaware,N/A,missing_N/A_string,missing_values
+2239.0,src,gofox,,missing_empty_string,missing_values
+1703.0,src,wunderground,NA,missing_NA_string,missing_values
+258.0,src,weather,NA,missing_NA_string,missing_values
+79.0,src,helloflight,N/A,missing_N/A_string,missing_values
+1139.0,src,foxbusiness,NA,missing_NA_string,missing_values
+1282.0,src,myrateplan,unknown,missing_unknown_string,missing_values
+1788.0,src,flylouisville,,missing_empty_string,missing_values
+1376.0,src,orbitz,NA,missing_NA_string,missing_values
+2120.0,src,businesstravellogue,NA,missing_NA_string,missing_values
+1295.0,src,myrateplan,,missing_empty_string,missing_values
+935.0,src,flightarrival,unknown,missing_unknown_string,missing_values
+1585.0,src,flytecomm,,missing_empty_string,missing_values
+276.0,src,weather,,missing_empty_string,missing_values
+797.0,src,iad,unknown,missing_unknown_string,missing_values
+1057.0,src,travelocity, ,missing_whitespace,missing_values
+1069.0,src,travelocity,unknown,missing_unknown_string,missing_values
+2004.0,src,allegiantair, ,missing_whitespace,missing_values
+275.0,src,weather, ,missing_whitespace,missing_values
+673.0,src,panynj,NA,missing_NA_string,missing_values
+1657.0,src,ord,unknown,missing_unknown_string,missing_values
+631.0,src,panynj,,missing_empty_string,missing_values
+1685.0,src,wunderground,NA,missing_NA_string,missing_values
+940.0,src,flightarrival,N/A,missing_N/A_string,missing_values
+1664.0,src,wunderground, ,missing_whitespace,missing_values
+503.0,src,flightview, ,missing_whitespace,missing_values
+2290.0,src,flightaware,NA,missing_NA_string,missing_values
+1593.0,src,mytripandmore,N/A,missing_N/A_string,missing_values
+1425.0,src,phl,,missing_empty_string,missing_values
+2342.0,src,world-flight-tracker,unknown,missing_unknown_string,missing_values
+1670.0,src,wunderground,N/A,missing_N/A_string,missing_values
+1483.0,src,sfo,N/A,missing_N/A_string,missing_values
+1879.0,src,quicktrip,unknown,missing_unknown_string,missing_values
+695.0,src,panynj,N/A,missing_N/A_string,missing_values
+1865.0,src,quicktrip,,missing_nan,missing_values
+1752.0,src,ua,,missing_empty_string,missing_values
+2126.0,src,businesstravellogue,,missing_empty_string,missing_values
+723.0,src,panynj,unknown,missing_unknown_string,missing_values
+2249.0,src,gofox,,missing_nan,missing_values
+857.0,src,flights,,missing_empty_string,missing_values
+1303.0,src,myrateplan,N/A,missing_N/A_string,missing_values
+865.0,src,flights,unknown,missing_unknown_string,missing_values
+1023.0,src,travelocity,N/A,missing_N/A_string,missing_values
+1106.0,src,foxbusiness, ,missing_whitespace,missing_values
+1583.0,src,flytecomm, ,missing_whitespace,missing_values
+996.0,src,travelocity,,missing_nan,missing_values
+1829.0,src,flylouisville, ,missing_whitespace,missing_values
+644.0,src,panynj,N/A,missing_N/A_string,missing_values
+1851.0,src,flylouisville,N/A,missing_N/A_string,missing_values
+1415.0,src,orbitz,,missing_nan,missing_values
+977.0,src,flightwise,N/A,missing_N/A_string,missing_values
+928.0,src,flightarrival,unknown,missing_unknown_string,missing_values
+2029.0,src,allegiantair,N/A,missing_N/A_string,missing_values
+618.0,src,flightstats,,missing_nan,missing_values
+2353.0,src,world-flight-tracker,N/A,missing_N/A_string,missing_values
+418.0,src,airtravelcenter, ,missing_whitespace,missing_values
+1878.0,src,quicktrip,unknown,missing_unknown_string,missing_values
+1511.0,src,flytecomm,,missing_nan,missing_values
+2274.0,src,flightaware, ,missing_whitespace,missing_values
+204.0,src,boston, ,missing_whitespace,missing_values
+2131.0,src,businesstravellogue,,missing_empty_string,missing_values
+1867.0,src,quicktrip,unknown,missing_unknown_string,missing_values
+52.0,src,helloflight,NA,missing_NA_string,missing_values
+179.0,src,boston,N/A,missing_N/A_string,missing_values
+1801.0,src,flylouisville,NA,missing_NA_string,missing_values
+394.0,src,airtravelcenter,unknown,missing_unknown_string,missing_values
+1169.0,src,foxbusiness, ,missing_whitespace,missing_values
+493.0,src,flightview,unknown,missing_unknown_string,missing_values
+1950.0,src,allegiantair, ,missing_whitespace,missing_values
+1708.0,src,wunderground, ,missing_whitespace,missing_values
+1653.0,src,ord,,missing_nan,missing_values
+623.0,src,flightstats,,missing_empty_string,missing_values
+360.0,src,airtravelcenter,unknown,missing_unknown_string,missing_values
+202.0,src,boston,N/A,missing_N/A_string,missing_values
+373.0,src,airtravelcenter,,missing_nan,missing_values
+2006.0,src,allegiantair,,missing_nan,missing_values
+1783.0,src,flylouisville,N/A,missing_N/A_string,missing_values
+972.0,src,flightwise,N/A,missing_N/A_string,missing_values
+2267.0,src,flightaware,,missing_empty_string,missing_values
+1959.0,src,allegiantair,,missing_empty_string,missing_values
+801.0,src,dfw,,missing_nan,missing_values
+1372.0,src,orbitz,N/A,missing_N/A_string,missing_values
+200.0,src,boston,,missing_nan,missing_values
+2286.0,src,flightaware,N/A,missing_N/A_string,missing_values
+1024.0,src,travelocity,NA,missing_NA_string,missing_values
+1804.0,src,flylouisville,NA,missing_NA_string,missing_values
+2330.0,flight,AA-3468-CVG-MIA,NA,missing_NA_string,missing_values
+636.0,flight,UA-2830-MCO-CLT,NA,missing_NA_string,missing_values
+130.0,flight,AA-3804-PHL-ORD,,missing_empty_string,missing_values
+1602.0,flight,AA-1664-MIA-ATL,,missing_nan,missing_values
+2164.0,flight,UA-5487-SFO-MRY,N/A,missing_N/A_string,missing_values
+1719.0,flight,AA-85-JFK-SFO,N/A,missing_N/A_string,missing_values
+2313.0,flight,AA-85-JFK-SFO,,missing_nan,missing_values
+2271.0,flight,AA-1664-MIA-ATL,NA,missing_NA_string,missing_values
+722.0,flight,UA-3099-PHX-PHL,,missing_empty_string,missing_values
+449.0,flight,CO-1614-LAX-IAH,,missing_empty_string,missing_values
+1802.0,flight,AA-4307-ORD-DTW,unknown,missing_unknown_string,missing_values
+1972.0,flight,CO-1561-PHX-IAH,N/A,missing_N/A_string,missing_values
+1966.0,flight,AA-616-DFW-DTW,N/A,missing_N/A_string,missing_values
+464.0,flight,UA-3050-PHX-CLT,unknown,missing_unknown_string,missing_values
+2251.0,flight,CO-45-EWR-MIA, ,missing_whitespace,missing_values
+252.0,flight,UA-397-JFK-SFO,unknown,missing_unknown_string,missing_values
+1162.0,flight,CO-50-CLE-EWR,N/A,missing_N/A_string,missing_values
+2284.0,flight,AA-4330-CVG-ORD, ,missing_whitespace,missing_values
+1404.0,flight,AA-2957-DFW-CVG,NA,missing_NA_string,missing_values
+299.0,flight,AA-400-DFW-JFK, ,missing_whitespace,missing_values
+275.0,flight,AA-1664-MIA-ATL,unknown,missing_unknown_string,missing_values
+2043.0,flight,UA-3099-PHX-PHL,N/A,missing_N/A_string,missing_values
+2301.0,flight,AA-2312-DFW-DTW, ,missing_whitespace,missing_values
+1712.0,flight,CO-4888-IAH-DAL,N/A,missing_N/A_string,missing_values
+1026.0,flight,UA-843-LAX-ORD,unknown,missing_unknown_string,missing_values
+1831.0,flight,UA-2704-DTW-PHX,,missing_empty_string,missing_values
+1992.0,flight,AA-1434-DFW-MCO, ,missing_whitespace,missing_values
+1535.0,flight,CO-1193-EWR-MCO,N/A,missing_N/A_string,missing_values
+1745.0,flight,UA-3373-IAD-PHL,unknown,missing_unknown_string,missing_values
+1700.0,flight,UA-2906-PHL-MCO,NA,missing_NA_string,missing_values
+1435.0,flight,CO-62-IAH-EWR, ,missing_whitespace,missing_values
+214.0,flight,AA-1165-JFK-MIA,,missing_nan,missing_values
+2171.0,flight,AA-616-DFW-DTW,,missing_nan,missing_values
+212.0,flight,AA-3823-LAX-DEN,N/A,missing_N/A_string,missing_values
+122.0,flight,UA-828-SFO-ORD,unknown,missing_unknown_string,missing_values
+511.0,flight,AA-3063-SLC-LAX,unknown,missing_unknown_string,missing_values
+1600.0,flight,AA-466-IAH-MIA,NA,missing_NA_string,missing_values
+2167.0,flight,CO-1614-LAX-IAH,N/A,missing_N/A_string,missing_values
+1053.0,flight,AA-2268-PHX-ORD,N/A,missing_N/A_string,missing_values
+239.0,flight,AA-3786-IAH-ORD, ,missing_whitespace,missing_values
+956.0,flight,UA-6273-YYC-SFO,N/A,missing_N/A_string,missing_values
+92.0,flight,AA-1434-DFW-MCO,NA,missing_NA_string,missing_values
+1434.0,flight,CO-50-CLE-EWR, ,missing_whitespace,missing_values
+827.0,flight,AA-616-DFW-DTW,,missing_nan,missing_values
+27.0,flight,AA-1007-MIA-PHX, ,missing_whitespace,missing_values
+2155.0,flight,AA-3859-IAH-ORD,,missing_nan,missing_values
+97.0,flight,UA-843-LAX-ORD,,missing_empty_string,missing_values
+283.0,flight,AA-271-MIA-LAX,unknown,missing_unknown_string,missing_values
+559.0,flight,AA-446-DFW-PHL,unknown,missing_unknown_string,missing_values
+1773.0,flight,CO-1090-BOS-IAH, ,missing_whitespace,missing_values
+355.0,flight,AA-3468-CVG-MIA,unknown,missing_unknown_string,missing_values
+1046.0,flight,UA-858-PVG-SFO,N/A,missing_N/A_string,missing_values
+791.0,flight,AA-59-JFK-SFO,NA,missing_NA_string,missing_values
+1037.0,flight,AA-3823-LAX-DEN,,missing_nan,missing_values
+373.0,flight,UA-2945-PHL-CLT,,missing_nan,missing_values
+1494.0,flight,CO-58-DEN-IAH,,missing_empty_string,missing_values
+447.0,flight,AA-204-LAX-MCO,,missing_nan,missing_values
+2277.0,flight,UA-257-JFK-SFO,N/A,missing_N/A_string,missing_values
+1597.0,flight,AA-3468-CVG-MIA,unknown,missing_unknown_string,missing_values
+385.0,flight,CO-1193-EWR-MCO, ,missing_whitespace,missing_values
+1534.0,flight,UA-843-LAX-ORD,NA,missing_NA_string,missing_values
+1075.0,flight,AA-1733-ORD-PHX, ,missing_whitespace,missing_values
+1714.0,flight,AA-3804-PHL-ORD, ,missing_whitespace,missing_values
+1453.0,flight,AA-789-ORD-DEN, ,missing_whitespace,missing_values
+1378.0,flight,UA-2515-DFW-CLT,NA,missing_NA_string,missing_values
+2050.0,flight,AA-3859-IAH-ORD,,missing_empty_string,missing_values
+343.0,flight,UA-2830-MCO-CLT, ,missing_whitespace,missing_values
+1652.0,flight,AA-4344-ORD-DTW,,missing_empty_string,missing_values
+117.0,flight,AA-431-MIA-SFO,NA,missing_NA_string,missing_values
+1009.0,flight,CO-89-IAH-EWR,,missing_nan,missing_values
+1093.0,flight,UA-2314-ATL-PHL,unknown,missing_unknown_string,missing_values
+1741.0,flight,UA-2515-DFW-CLT,N/A,missing_N/A_string,missing_values
+1213.0,flight,AA-2957-DFW-CVG,,missing_nan,missing_values
+163.0,flight,UA-2726-FLL-PHL,,missing_empty_string,missing_values
+2296.0,flight,AA-400-DFW-JFK,N/A,missing_N/A_string,missing_values
+1408.0,flight,AA-85-JFK-SFO,N/A,missing_N/A_string,missing_values
+1878.0,flight,CO-62-IAH-EWR,unknown,missing_unknown_string,missing_values
+1421.0,flight,AA-222-LAX-BOS,,missing_empty_string,missing_values
+1692.0,flight,AA-1640-MIA-MCO, ,missing_whitespace,missing_values
+450.0,flight,UA-2726-FLL-PHL,NA,missing_NA_string,missing_values
+1924.0,flight,AA-431-MIA-SFO,unknown,missing_unknown_string,missing_values
+1071.0,flight,CO-1586-IAH-MCO,,missing_empty_string,missing_values
+1387.0,flight,AA-1165-JFK-MIA,,missing_nan,missing_values
+2095.0,flight,CO-1694-LAX-IAH,,missing_nan,missing_values
+1158.0,flight,AA-1544-SAN-ORD,NA,missing_NA_string,missing_values
+1637.0,flight,AA-3859-IAH-ORD, ,missing_whitespace,missing_values
+2373.0,flight,CO-45-EWR-MIA,,missing_nan,missing_values
+269.0,flight,AA-446-DFW-PHL,NA,missing_NA_string,missing_values
+584.0,flight,CO-1193-EWR-MCO,,missing_nan,missing_values
+1948.0,flight,AA-3809-PHX-LAX, ,missing_whitespace,missing_values
+792.0,flight,AA-2050-ORD-MIA,unknown,missing_unknown_string,missing_values
+1521.0,flight,AA-4344-ORD-DTW,unknown,missing_unknown_string,missing_values
+322.0,flight,AA-2957-DFW-CVG,unknown,missing_unknown_string,missing_values
+2217.0,flight,AA-3823-LAX-DEN,N/A,missing_N/A_string,missing_values
+257.0,flight,CO-58-DEN-IAH,unknown,missing_unknown_string,missing_values
+961.0,flight,AA-85-JFK-SFO,,missing_nan,missing_values
+1218.0,flight,AA-1640-MIA-MCO, ,missing_whitespace,missing_values
+1207.0,flight,UA-2708-EWR-CLT,unknown,missing_unknown_string,missing_values
+1834.0,flight,UA-62-IAH-EWR,unknown,missing_unknown_string,missing_values
+1574.0,flight,AA-415-BOS-ORD,NA,missing_NA_string,missing_values
+1345.0,flight,CO-1561-PHX-IAH,unknown,missing_unknown_string,missing_values
+247.0,flight,AA-3809-PHX-LAX,NA,missing_NA_string,missing_values
+2282.0,flight,AA-271-MIA-LAX,,missing_nan,missing_values
+323.0,flight,UA-37-EDI-EWR, ,missing_whitespace,missing_values
+1021.0,flight,AA-2050-ORD-MIA,,missing_empty_string,missing_values
+1882.0,flight,AA-466-IAH-MIA,,missing_nan,missing_values
+1496.0,flight,UA-5487-SFO-MRY,N/A,missing_N/A_string,missing_values
+1464.0,flight,AA-1733-ORD-PHX,,missing_empty_string,missing_values
+544.0,flight,AA-1640-MIA-MCO, ,missing_whitespace,missing_values
+1941.0,flight,AA-85-JFK-SFO,NA,missing_NA_string,missing_values
+1265.0,flight,AA-1434-DFW-MCO,,missing_nan,missing_values
+881.0,flight,UA-828-SFO-ORD, ,missing_whitespace,missing_values
+627.0,flight,AA-3809-PHX-LAX,N/A,missing_N/A_string,missing_values
+71.0,flight,CO-62-IAH-EWR,,missing_empty_string,missing_values
+1118.0,flight,AA-3842-MSP-ORD,unknown,missing_unknown_string,missing_values
+1934.0,flight,AA-3804-PHL-ORD,N/A,missing_N/A_string,missing_values
+1058.0,flight,UA-854-SFO-IAH,,missing_nan,missing_values
+2246.0,flight,AA-2525-DFW-MIA,unknown,missing_unknown_string,missing_values
+359.0,flight,CO-1561-PHX-IAH,NA,missing_NA_string,missing_values
+1204.0,flight,UA-828-SFO-ORD,unknown,missing_unknown_string,missing_values
+657.0,flight,CO-89-IAH-EWR, ,missing_whitespace,missing_values
+189.0,flight,AA-2050-ORD-MIA,N/A,missing_N/A_string,missing_values
+959.0,flight,UA-37-EDI-EWR,unknown,missing_unknown_string,missing_values
+1746.0,flight,UA-6273-YYC-SFO,,missing_empty_string,missing_values
+681.0,flight,UA-938-DEN-ORD,,missing_empty_string,missing_values
+198.0,flight,AA-3842-MSP-ORD,NA,missing_NA_string,missing_values
+126.0,flight,AA-3063-SLC-LAX, ,missing_whitespace,missing_values
+2196.0,flight,AA-4330-CVG-ORD,N/A,missing_N/A_string,missing_values
+986.0,flight,AA-59-JFK-SFO,NA,missing_NA_string,missing_values
+1833.0,flight,UA-2708-EWR-CLT,unknown,missing_unknown_string,missing_values
+1759.0,flight,CO-1586-IAH-MCO, ,missing_whitespace,missing_values
+2062.0,flight,CO-1614-LAX-IAH, ,missing_whitespace,missing_values
+1656.0,flight,AA-2050-ORD-MIA,,missing_empty_string,missing_values
+1275.0,flight,AA-2525-DFW-MIA,unknown,missing_unknown_string,missing_values
+1554.0,flight,AA-431-MIA-SFO,N/A,missing_N/A_string,missing_values
+26.0,flight,AA-643-MIA-ORD,NA,missing_NA_string,missing_values
+1244.0,flight,CO-62-IAH-EWR,NA,missing_NA_string,missing_values
+587.0,flight,AA-1007-MIA-PHX,,missing_nan,missing_values
+1125.0,flight,UA-2515-DFW-CLT,,missing_empty_string,missing_values
+2232.0,flight,UA-1500-IAH-GUA,N/A,missing_N/A_string,missing_values
+2080.0,flight,AA-1664-MIA-ATL, ,missing_whitespace,missing_values
+307.0,flight,UA-257-JFK-SFO, ,missing_whitespace,missing_values
+404.0,flight,AA-431-MIA-SFO,,missing_empty_string,missing_values
+1647.0,flight,UA-664-ORD-PHL,unknown,missing_unknown_string,missing_values
+65.0,flight,CO-1090-BOS-IAH,,missing_nan,missing_values
+341.0,flight,UA-3925-IAD-ORF,unknown,missing_unknown_string,missing_values
+1558.0,flight,UA-6273-YYC-SFO,NA,missing_NA_string,missing_values
+82.0,flight,UA-854-SFO-IAH,NA,missing_NA_string,missing_values
+429.0,flight,CO-50-CLE-EWR,unknown,missing_unknown_string,missing_values
+287.0,flight,AA-4307-ORD-DTW,NA,missing_NA_string,missing_values
+2224.0,flight,UA-6273-YYC-SFO,unknown,missing_unknown_string,missing_values
+1498.0,flight,UA-414-LAX-SFO,N/A,missing_N/A_string,missing_values
+1582.0,flight,AA-404-MIA-MCO, ,missing_whitespace,missing_values
+1302.0,flight,UA-1500-IAH-GUA,N/A,missing_N/A_string,missing_values
+1211.0,flight,UA-233-LAX-JFK,,missing_empty_string,missing_values
+1454.0,flight,AA-1434-DFW-MCO,unknown,missing_unknown_string,missing_values
+1212.0,flight,AA-4277-CVG-JFK,NA,missing_NA_string,missing_values
+1818.0,flight,AA-1522-SFO-ORD,N/A,missing_N/A_string,missing_values
+506.0,flight,UA-6273-YYC-SFO,,missing_nan,missing_values
+710.0,flight,AA-4277-CVG-JFK,,missing_nan,missing_values
+2274.0,flight,AA-404-MIA-MCO,N/A,missing_N/A_string,missing_values
+2234.0,flight,AA-1917-JFK-MCO,,missing_empty_string,missing_values
+2003.0,flight,AA-1221-MCO-ORD, ,missing_whitespace,missing_values
+1288.0,flight,AA-2312-DFW-DTW, ,missing_whitespace,missing_values
+1840.0,flight,AA-2957-DFW-CVG,unknown,missing_unknown_string,missing_values
+1110.0,flight,UA-248-PHX-ORD,unknown,missing_unknown_string,missing_values
+2329.0,flight,UA-2726-FLL-PHL,N/A,missing_N/A_string,missing_values
+1865.0,flight,AA-1640-MIA-MCO,,missing_nan,missing_values
+1828.0,flight,UA-828-SFO-ORD,NA,missing_NA_string,missing_values
+702.0,flight,UA-2704-DTW-PHX,NA,missing_NA_string,missing_values
+2052.0,flight,AA-518-MIA-JFK, ,missing_whitespace,missing_values
+188.0,flight,CO-47-IAH-LAX,,missing_empty_string,missing_values
+1867.0,flight,CO-58-DEN-IAH,NA,missing_NA_string,missing_values
+1612.0,flight,AA-1007-MIA-PHX,NA,missing_NA_string,missing_values
+608.0,flight,CO-4888-IAH-DAL,,missing_nan,missing_values
+2227.0,flight,UA-858-PVG-SFO,,missing_nan,missing_values
+1050.0,flight,UA-62-IAH-EWR,NA,missing_NA_string,missing_values
+2125.0,flight,UA-2708-EWR-CLT,,missing_nan,missing_values
+1606.0,flight,AA-4344-ORD-DTW,,missing_nan,missing_values
+1674.0,flight,AA-466-IAH-MIA,NA,missing_NA_string,missing_values
+1049.0,flight,UA-2708-EWR-CLT,,missing_empty_string,missing_values
+2350.0,flight,AA-3842-MSP-ORD,N/A,missing_N/A_string,missing_values
+12.0,flight,AA-1664-MIA-ATL,,missing_nan,missing_values
+1530.0,flight,AA-1640-MIA-MCO,,missing_empty_string,missing_values
+1649.0,flight,AA-3786-IAH-ORD,NA,missing_NA_string,missing_values
+36.0,flight,AA-649-ORD-SNA, ,missing_whitespace,missing_values
+261.0,flight,UA-414-LAX-SFO,N/A,missing_N/A_string,missing_values
+2369.0,flight,AA-3786-IAH-ORD, ,missing_whitespace,missing_values
+1273.0,flight,AA-643-MIA-ORD,NA,missing_NA_string,missing_values
+2349.0,flight,CO-1193-EWR-MCO,NA,missing_NA_string,missing_values
+1605.0,flight,AA-616-DFW-DTW,NA,missing_NA_string,missing_values
+684.0,flight,UA-2515-DFW-CLT, ,missing_whitespace,missing_values
+2244.0,flight,AA-3786-IAH-ORD, ,missing_whitespace,missing_values
+934.0,flight,UA-2906-PHL-MCO, ,missing_whitespace,missing_values
+1770.0,flight,CO-1614-LAX-IAH,unknown,missing_unknown_string,missing_values
+1268.0,flight,AA-3-JFK-LAX,N/A,missing_N/A_string,missing_values
+10.0,flight,AA-1886-BOS-MIA,N/A,missing_N/A_string,missing_values
+1025.0,flight,CO-1694-LAX-IAH, ,missing_whitespace,missing_values
+2066.0,flight,AA-616-DFW-DTW,,missing_empty_string,missing_values
+2024.0,flight,AA-3063-SLC-LAX,NA,missing_NA_string,missing_values
+655.0,flight,AA-466-IAH-MIA, ,missing_whitespace,missing_values
+53.0,flight,UA-397-JFK-SFO,NA,missing_NA_string,missing_values
+957.0,flight,AA-4277-CVG-JFK,,missing_empty_string,missing_values
+555.0,flight,AA-484-DFW-MIA,N/A,missing_N/A_string,missing_values
+203.0,flight,AA-1221-MCO-ORD,,missing_empty_string,missing_values
+271.0,flight,UA-3050-PHX-CLT, ,missing_whitespace,missing_values
+1949.0,flight,AA-59-JFK-SFO, ,missing_whitespace,missing_values
+1420.0,flight,AA-59-JFK-SFO,,missing_empty_string,missing_values
+838.0,flight,UA-3050-PHX-CLT,N/A,missing_N/A_string,missing_values
+2312.0,flight,AA-789-ORD-DEN, ,missing_whitespace,missing_values
+98.0,flight,CO-1193-EWR-MCO,unknown,missing_unknown_string,missing_values
+1970.0,flight,AA-1886-BOS-MIA,,missing_empty_string,missing_values
+985.0,flight,AA-3809-PHX-LAX,N/A,missing_N/A_string,missing_values
+1581.0,flight,AA-4198-ORD-CLE,N/A,missing_N/A_string,missing_values
+1056.0,flight,UA-37-EDI-EWR,N/A,missing_N/A_string,missing_values
+867.0,flight,AA-400-DFW-JFK,,missing_nan,missing_values
+598.0,flight,UA-233-LAX-JFK,,missing_empty_string,missing_values
+1490.0,flight,UA-397-JFK-SFO, ,missing_whitespace,missing_values
+33.0,flight,AA-2312-DFW-DTW,,missing_empty_string,missing_values
+597.0,flight,AA-1522-SFO-ORD,,missing_empty_string,missing_values
+279.0,flight,AA-616-DFW-DTW,,missing_empty_string,missing_values
+1184.0,flight,AA-404-MIA-MCO,,missing_empty_string,missing_values
+351.0,flight,CO-52-IAH-LAX,,missing_nan,missing_values
+1728.0,flight,UA-3925-IAD-ORF,NA,missing_NA_string,missing_values
+1150.0,flight,AA-2268-PHX-ORD, ,missing_whitespace,missing_values
+1363.0,flight,UA-248-PHX-ORD,,missing_nan,missing_values
+2283.0,flight,AA-2050-ORD-MIA,,missing_empty_string,missing_values
+673.0,flight,AA-4307-ORD-DTW,,missing_nan,missing_values
+1380.0,flight,UA-664-ORD-PHL,N/A,missing_N/A_string,missing_values
+231.0,flight,AA-4277-CVG-JFK,,missing_empty_string,missing_values
+874.0,flight,AA-2312-DFW-DTW,unknown,missing_unknown_string,missing_values
+2197.0,flight,AA-1434-DFW-MCO,N/A,missing_N/A_string,missing_values
+1940.0,flight,AA-415-BOS-ORD,unknown,missing_unknown_string,missing_values
+904.0,flight,UA-3099-PHX-PHL,N/A,missing_N/A_string,missing_values
+2097.0,flight,CO-1193-EWR-MCO,NA,missing_NA_string,missing_values
+2362.0,flight,AA-649-ORD-SNA, ,missing_whitespace,missing_values
+1655.0,flight,UA-828-SFO-ORD,NA,missing_NA_string,missing_values
+90.0,sched_dep_time,12:57 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1083.0,sched_dep_time,4:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+887.0,sched_dep_time,2:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1130.0,sched_dep_time,11:55 p.m.,1785974100,date_format_inconsistency,format_errors
+1556.0,sched_dep_time,1:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1339.0,sched_dep_time,9:05 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1471.0,sched_dep_time,10:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2231.0,sched_dep_time,2:30 p.m.,08/05/2026,date_format_inconsistency,format_errors
+979.0,sched_dep_time,7:15 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1185.0,sched_dep_time,12:15 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1497.0,sched_dep_time,11:25 p.m.,1785972300,date_format_inconsistency,format_errors
+1234.0,sched_dep_time,6:00 a.m.,1785909600,date_format_inconsistency,format_errors
+918.0,sched_dep_time,9:45 a.m.,05/08/2026,date_format_inconsistency,format_errors
+582.0,sched_dep_time,7:15 p.m.,2026/08/05,date_format_inconsistency,format_errors
+702.0,sched_dep_time,11:15 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1982.0,sched_dep_time,7:53 a.m.,2026/08/05,date_format_inconsistency,format_errors
+252.0,sched_dep_time,8:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2342.0,sched_dep_time,12:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+285.0,sched_dep_time,7:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+190.0,sched_dep_time,12:57 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1045.0,sched_dep_time,7:35 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2149.0,sched_dep_time,7:10 a.m.,1785913800,date_format_inconsistency,format_errors
+1712.0,sched_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2374.0,sched_dep_time,6:00 a.m.,08/05/2026,date_format_inconsistency,format_errors
+476.0,sched_dep_time,10:40 a.m.,2026/08/05,date_format_inconsistency,format_errors
+87.0,sched_dep_time,5:25 p.m.,2026/08/05,date_format_inconsistency,format_errors
+757.0,sched_dep_time,3:35 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+703.0,sched_dep_time,8:20 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2206.0,sched_dep_time,3:50 p.m.,1785945000,date_format_inconsistency,format_errors
+1968.0,sched_dep_time,7:00 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1111.0,sched_dep_time,3:35 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1100.0,sched_dep_time,10:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1135.0,sched_dep_time,8:35 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1498.0,sched_dep_time,6:00 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1324.0,sched_dep_time,7:00 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+52.0,sched_dep_time,6:40 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1014.0,sched_dep_time,7:30 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2005.0,sched_dep_time,7:05 a.m.,08/05/2026,date_format_inconsistency,format_errors
+507.0,sched_dep_time,11:08 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1563.0,sched_dep_time,8:20 p.m.,1785961200,date_format_inconsistency,format_errors
+1584.0,sched_dep_time,6:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1761.0,sched_dep_time,8:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+525.0,sched_dep_time,11:25 a.m.,1785929100,date_format_inconsistency,format_errors
+2265.0,sched_dep_time,9:05 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1349.0,sched_dep_time,6:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+610.0,sched_dep_time,8:20 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1659.0,sched_dep_time,3:35 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1204.0,sched_dep_time,11:08 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1643.0,sched_dep_time,4:16 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2162.0,sched_dep_time,3:27 p.m.,08/05/2026,date_format_inconsistency,format_errors
+354.0,sched_dep_time,8:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+232.0,sched_dep_time,7:55 a.m.,1785916500,date_format_inconsistency,format_errors
+1600.0,sched_dep_time,6:00 a.m.,1785909600,date_format_inconsistency,format_errors
+2215.0,sched_dep_time,11:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+856.0,sched_dep_time,7:15 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1328.0,sched_dep_time,7:45 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2172.0,sched_dep_time,8:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2373.0,sched_dep_time,4:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1846.0,sched_dep_time,11:25 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+884.0,sched_dep_time,11:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1699.0,sched_dep_time,4:55 p.m.,1785948900,date_format_inconsistency,format_errors
+463.0,sched_dep_time,6:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+767.0,sched_dep_time,8:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2334.0,sched_dep_time,6:00 a.m.,1785909600,date_format_inconsistency,format_errors
+1107.0,sched_dep_time,5:25 p.m.,1785950700,date_format_inconsistency,format_errors
+337.0,sched_dep_time,7:10 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1438.0,sched_dep_time,9:45 a.m.,05/08/2026,date_format_inconsistency,format_errors
+692.0,sched_dep_time,8:25 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1848.0,sched_dep_time,11:35 a.m.,1785929700,date_format_inconsistency,format_errors
+94.0,sched_dep_time,6:45 p.m.,1785955500,date_format_inconsistency,format_errors
+679.0,sched_dep_time,4:55 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1736.0,sched_dep_time,8:15 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1717.0,sched_dep_time,12:10 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2123.0,sched_dep_time,11:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2198.0,sched_dep_time,6:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+261.0,sched_dep_time,6:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+214.0,sched_dep_time,6:59 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2127.0,sched_dep_time,8:55 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+424.0,sched_dep_time,8:35 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1302.0,sched_dep_time,8:55 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1092.0,sched_dep_time,8:05 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1919.0,sched_dep_time,4:25 p.m.,2026/08/05,date_format_inconsistency,format_errors
+923.0,sched_dep_time,1:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1445.0,sched_dep_time,6:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2270.0,sched_dep_time,7:55 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2337.0,sched_dep_time,10:15 a.m.,1785924900,date_format_inconsistency,format_errors
+1529.0,sched_dep_time,7:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1785.0,sched_dep_time,11:05 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1953.0,sched_dep_time,8:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+587.0,sched_dep_time,4:55 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1262.0,sched_dep_time,10:40 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2147.0,sched_dep_time,6:00 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1834.0,sched_dep_time,2:30 p.m.,1785940200,date_format_inconsistency,format_errors
+106.0,sched_dep_time,10:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+608.0,sched_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1120.0,sched_dep_time,4:55 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+763.0,sched_dep_time,7:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1214.0,sched_dep_time,9:05 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+569.0,sched_dep_time,6:45 a.m.,1785912300,date_format_inconsistency,format_errors
+390.0,sched_dep_time,3:50 p.m.,05/08/2026,date_format_inconsistency,format_errors
+921.0,sched_dep_time,6:00 a.m.,1785909600,date_format_inconsistency,format_errors
+1474.0,sched_dep_time,6:00 a.m.,2026/08/05,date_format_inconsistency,format_errors
+656.0,sched_dep_time,11:05 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1766.0,sched_dep_time,11:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2357.0,sched_dep_time,9:00 p.m.,1785963600,date_format_inconsistency,format_errors
+1424.0,sched_dep_time,2:35 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2241.0,sched_dep_time,3:05 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1213.0,sched_dep_time,7:55 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1540.0,sched_dep_time,3:50 p.m.,1785945000,date_format_inconsistency,format_errors
+1543.0,sched_dep_time,10:25 a.m.,05/08/2026,date_format_inconsistency,format_errors
+235.0,sched_dep_time,8:35 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+735.0,sched_dep_time,11:25 a.m.,05/08/2026,date_format_inconsistency,format_errors
+968.0,sched_dep_time,7:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2021.0,sched_dep_time,5:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+177.0,sched_dep_time,11:05 a.m.,05/08/2026,date_format_inconsistency,format_errors
+773.0,sched_dep_time,8:25 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1701.0,sched_dep_time,8:00 p.m.,1785960000,date_format_inconsistency,format_errors
+959.0,sched_dep_time,9:05 a.m.,1785920700,date_format_inconsistency,format_errors
+79.0,sched_dep_time,8:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1102.0,sched_dep_time,7:53 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1994.0,sched_dep_time,6:45 p.m.,08/05/2026,date_format_inconsistency,format_errors
+913.0,sched_dep_time,8:41 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1010.0,sched_dep_time,8:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1417.0,sched_dep_time,6:45 a.m.,1785912300,date_format_inconsistency,format_errors
+2167.0,sched_dep_time,12:30 a.m.,2026/08/05,date_format_inconsistency,format_errors
+204.0,sched_dep_time,10:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2339.0,sched_dep_time,1:00 p.m.,08/05/2026,date_format_inconsistency,format_errors
+793.0,sched_dep_time,6:59 a.m.,05/08/2026,date_format_inconsistency,format_errors
+750.0,sched_dep_time,1:00 p.m.,1785934800,date_format_inconsistency,format_errors
+2179.0,sched_dep_time,11:50 a.m.,08/05/2026,date_format_inconsistency,format_errors
+591.0,sched_dep_time,8:00 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2125.0,sched_dep_time,2:55 p.m.,1785941700,date_format_inconsistency,format_errors
+1548.0,sched_dep_time,1:29 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1620.0,sched_dep_time,6:59 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1663.0,sched_dep_time,7:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1212.0,sched_dep_time,12:10 p.m.,05/08/2026,date_format_inconsistency,format_errors
+403.0,sched_dep_time,6:59 a.m.,05/08/2026,date_format_inconsistency,format_errors
+180.0,sched_dep_time,10:15 a.m.,2026/08/05,date_format_inconsistency,format_errors
+975.0,sched_dep_time,8:41 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+659.0,sched_dep_time,10:15 a.m.,1785924900,date_format_inconsistency,format_errors
+366.0,sched_dep_time,8:40 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1713.0,sched_dep_time,8:20 p.m.,1785961200,date_format_inconsistency,format_errors
+611.0,sched_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2341.0,sched_dep_time,12:15 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2217.0,sched_dep_time,9:00 p.m.,1785963600,date_format_inconsistency,format_errors
+49.0,sched_dep_time,7:10 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1072.0,sched_dep_time,6:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1401.0,sched_dep_time,2:55 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1022.0,sched_dep_time,7:15 a.m.,2026/08/05,date_format_inconsistency,format_errors
+272.0,sched_dep_time,6:00 a.m.,1785909600,date_format_inconsistency,format_errors
+399.0,sched_dep_time,11:55 p.m.,1785974100,date_format_inconsistency,format_errors
+617.0,sched_dep_time,1:05 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2274.0,sched_dep_time,6:45 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2142.0,sched_dep_time,2:55 p.m.,1785941700,date_format_inconsistency,format_errors
+1093.0,sched_dep_time,2:55 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1343.0,sched_dep_time,10:45 a.m.,2026/08/05,date_format_inconsistency,format_errors
+331.0,sched_dep_time,10:40 a.m.,1785926400,date_format_inconsistency,format_errors
+527.0,sched_dep_time,11:35 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1809.0,sched_dep_time,3:50 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1000.0,sched_dep_time,12:15 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+215.0,sched_dep_time,8:35 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1216.0,sched_dep_time,7:53 a.m.,05/08/2026,date_format_inconsistency,format_errors
+590.0,sched_dep_time,4:16 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1325.0,sched_dep_time,6:40 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1303.0,sched_dep_time,2:35 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+396.0,sched_dep_time,1:33 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+408.0,sched_dep_time,7:35 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2248.0,sched_dep_time,11:55 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2346.0,sched_dep_time,7:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1139.0,sched_dep_time,7:35 a.m.,05/08/2026,date_format_inconsistency,format_errors
+191.0,sched_dep_time,3:35 p.m.,1785944100,date_format_inconsistency,format_errors
+1431.0,sched_dep_time,12:30 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+888.0,sched_dep_time,8:55 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1899.0,sched_dep_time,7:15 a.m.,2026/08/05,date_format_inconsistency,format_errors
+759.0,sched_dep_time,6:45 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1647.0,sched_dep_time,1:33 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1511.0,sched_dep_time,11:50 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1708.0,sched_dep_time,6:59 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1017.0,sched_dep_time,11:45 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1117.0,sched_dep_time,9:15 a.m.,05/08/2026,date_format_inconsistency,format_errors
+908.0,sched_dep_time,6:00 a.m.,2026/08/05,date_format_inconsistency,format_errors
+347.0,sched_dep_time,11:25 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1534.0,sched_dep_time,1:55 p.m.,1785938100,date_format_inconsistency,format_errors
+1623.0,sched_dep_time,1:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+427.0,sched_dep_time,4:00 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+454.0,sched_dep_time,8:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1545.0,sched_dep_time,10:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1420.0,sched_dep_time,7:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1709.0,sched_dep_time,8:35 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+149.0,sched_dep_time,7:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1685.0,sched_dep_time,5:25 p.m.,05/08/2026,date_format_inconsistency,format_errors
+159.0,sched_dep_time,10:39 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2361.0,sched_dep_time,2:30 p.m.,1785940200,date_format_inconsistency,format_errors
+1778.0,sched_dep_time,10:45 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1495.0,sched_dep_time,11:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1692.0,sched_dep_time,6:30 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1021.0,sched_dep_time,10:40 a.m.,08/05/2026,date_format_inconsistency,format_errors
+666.0,sched_dep_time,5:25 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+605.0,sched_dep_time,8:29 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2188.0,sched_dep_time,12:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+126.0,sched_dep_time,8:20 p.m.,08/05/2026,date_format_inconsistency,format_errors
+813.0,sched_dep_time,6:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1402.0,sched_dep_time,7:15 a.m.,1785914100,date_format_inconsistency,format_errors
+1032.0,sched_dep_time,7:05 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1573.0,sched_dep_time,1:05 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1502.0,sched_dep_time,9:45 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+819.0,sched_dep_time,11:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2082.0,sched_dep_time,7:53 a.m.,08/05/2026,date_format_inconsistency,format_errors
+335.0,sched_dep_time,7:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2302.0,sched_dep_time,6:59 a.m.,1785913140,date_format_inconsistency,format_errors
+2112.0,sched_dep_time,9:00 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1598.0,sched_dep_time,2:30 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2110.0,sched_dep_time,11:55 p.m.,05/08/2026,date_format_inconsistency,format_errors
+752.0,sched_dep_time,11:45 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1975.0,sched_dep_time,11:40 a.m.,1785930000,date_format_inconsistency,format_errors
+43.0,sched_dep_time,8:35 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1756.0,sched_dep_time,6:00 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2016.0,sched_dep_time,8:29 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+326.0,sched_dep_time,8:35 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1779.0,sched_dep_time,2:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1042.0,sched_dep_time,8:29 a.m.,2026/08/05,date_format_inconsistency,format_errors
+634.0,sched_dep_time,7:45 p.m.,08/05/2026,date_format_inconsistency,format_errors
+655.0,sched_dep_time,6:00 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+197.0,sched_dep_time,9:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+245.0,sched_dep_time,6:45 a.m.,1785912300,date_format_inconsistency,format_errors
+684.0,sched_dep_time,7:05 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1918.0,sched_dep_time,11:55 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1673.0,sched_dep_time,11:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+389.0,sched_dep_time,7:25 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1205.0,sched_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2195.0,sched_dep_time,12:57 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1889.0,sched_dep_time,1:00 p.m.,1785934800,date_format_inconsistency,format_errors
+1317.0,sched_dep_time,10:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1440.0,sched_dep_time,7:10 p.m.,05/08/2026,date_format_inconsistency,format_errors
+23.0,sched_dep_time,6:45 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2135.0,sched_dep_time,8:35 a.m.,1785918900,date_format_inconsistency,format_errors
+984.0,sched_dep_time,3:35 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1857.0,sched_dep_time,7:10 a.m.,1785913800,date_format_inconsistency,format_errors
+1664.0,sched_dep_time,8:41 a.m.,08/05/2026,date_format_inconsistency,format_errors
+15.0,sched_dep_time,9:05 a.m.,05/08/2026,date_format_inconsistency,format_errors
+801.0,sched_dep_time,10:40 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1980.0,sched_dep_time,10:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1817.0,sched_dep_time,1:29 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+140.0,sched_dep_time,4:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+75.0,sched_dep_time,11:40 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+554.0,sched_dep_time,8:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+697.0,sched_dep_time,2:53 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+872.0,sched_dep_time,4:25 p.m.,1785947100,date_format_inconsistency,format_errors
+1693.0,sched_dep_time,6:45 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+841.0,sched_dep_time,10:15 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1353.0,sched_dep_time,10:15 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1095.0,sched_dep_time,11:40 a.m.,1785930000,date_format_inconsistency,format_errors
+823.0,sched_dep_time,12:30 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2233.0,sched_dep_time,2:35 p.m.,1785940500,date_format_inconsistency,format_errors
+1449.0,sched_dep_time,3:50 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1703.0,sched_dep_time,1:33 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+598.0,sched_dep_time,4:25 p.m.,08/05/2026,date_format_inconsistency,format_errors
+944.0,sched_dep_time,8:35 a.m.,1785918900,date_format_inconsistency,format_errors
+174.0,sched_dep_time,11:50 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1364.0,sched_dep_time,3:35 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1285.0,sched_dep_time,11:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1122.0,sched_dep_time,4:16 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+997.0,sched_dep_time,11:25 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+66.0,sched_dep_time,9:05 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2273.0,sched_dep_time,1:00 p.m.,08/05/2026,date_format_inconsistency,format_errors
+747.0,sched_dep_time,7:55 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1575.0,sched_dep_time,3:05 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1300.0,sched_dep_time,2:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1191.0,sched_dep_time,6:45 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1261.0,sched_dep_time,7:10 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2101.0,sched_dep_time,3:50 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1469.0,sched_dep_time,2:53 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2141.0,sched_dep_time,7:25 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+540.0,sched_dep_time,8:00 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+328.0,sched_dep_time,4:00 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+274.0,sched_dep_time,10:45 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1824.0,sched_dep_time,8:29 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1319.0,sched_dep_time,4:00 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1765.0,sched_dep_time,3:27 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1929.0,sched_dep_time,5:30 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2159.0,sched_dep_time,8:41 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1894.0,sched_dep_time,7:10 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1866.0,sched_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1217.0,sched_dep_time,3:05 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+397.0,sched_dep_time,12:15 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1904.0,sched_dep_time,1:55 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2340.0,sched_dep_time,6:45 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+941.0,sched_dep_time,1:29 p.m.,1785936540,date_format_inconsistency,format_errors
+365.0,sched_dep_time,6:00 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1579.0,sched_dep_time,2:55 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2222.0,sched_dep_time,1:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2286.0,sched_dep_time,6:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1782.0,sched_dep_time,11:50 a.m.,1785930600,date_format_inconsistency,format_errors
+729.0,sched_dep_time,7:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+131.0,sched_dep_time,2:55 p.m.,1785941700,date_format_inconsistency,format_errors
+371.0,sched_dep_time,11:45 a.m.,1785930300,date_format_inconsistency,format_errors
+2018.0,sched_dep_time,2:53 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1739.0,sched_dep_time,3:50 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1301.0,sched_dep_time,2:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1751.0,sched_dep_time,2:30 p.m.,08/05/2026,date_format_inconsistency,format_errors
+981.0,sched_dep_time,4:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+754.0,sched_dep_time,11:35 a.m.,08/05/2026,date_format_inconsistency,format_errors
+876.0,sched_dep_time,8:35 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1016.0,sched_dep_time,9:05 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+731.0,sched_dep_time,7:00 p.m.,1785956400,date_format_inconsistency,format_errors
+194.0,sched_dep_time,6:45 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1289.0,sched_dep_time,6:59 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+638.0,sched_dep_time,10:39 a.m.,05/08/2026,date_format_inconsistency,format_errors
+844.0,sched_dep_time,12:30 p.m.,05/08/2026,date_format_inconsistency,format_errors
+296.0,sched_dep_time,8:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1321.0,sched_dep_time,7:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+428.0,sched_dep_time,11:35 a.m.,1785929700,date_format_inconsistency,format_errors
+2117.0,sched_dep_time,1:30 p.m.,1785936600,date_format_inconsistency,format_errors
+1619.0,sched_dep_time,8:25 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1550.0,sched_dep_time,4:25 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1460.0,sched_dep_time,7:30 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1798.0,sched_dep_time,12:57 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1229.0,sched_dep_time,3:27 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1394.0,sched_dep_time,1:45 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+298.0,sched_dep_time,7:05 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+320.0,sched_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+317.0,sched_dep_time,2:35 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1611.0,sched_dep_time,7:10 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1252.0,sched_dep_time,8:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+675.0,sched_dep_time,1:55 p.m.,2026/08/05,date_format_inconsistency,format_errors
+372.0,sched_dep_time,2:30 p.m.,1785940200,date_format_inconsistency,format_errors
+2216.0,sched_dep_time,4:25 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1069.0,sched_dep_time,7:10 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1406.0,sched_dep_time,1:05 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1264.0,sched_dep_time,3:35 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1552.0,sched_dep_time,8:25 p.m.,1785961500,date_format_inconsistency,format_errors
+1564.0,sched_dep_time,2:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+658.0,sched_dep_time,8:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+478.0,sched_dep_time,3:35 p.m.,2026/08/05,date_format_inconsistency,format_errors
+407.0,sched_dep_time,2:53 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2267.0,sched_dep_time,11:40 a.m.,08/05/2026,date_format_inconsistency,format_errors
+466.0,sched_dep_time,8:40 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+50.0,sched_dep_time,7:10 a.m.,2026/08/05,date_format_inconsistency,format_errors
+170.0,sched_dep_time,10:45 a.m.,05/08/2026,date_format_inconsistency,format_errors
+943.0,sched_dep_time,8:25 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+687.0,sched_dep_time,12:15 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1079.0,sched_dep_time,10:39 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+709.0,sched_dep_time,7:15 a.m.,1785914100,date_format_inconsistency,format_errors
+1414.0,sched_dep_time,2:55 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1003.0,sched_dep_time,8:15 a.m.,1785917700,date_format_inconsistency,format_errors
+893.0,sched_dep_time,7:55 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2064.0,sched_dep_time,7:35 a.m.,2026/08/05,date_format_inconsistency,format_errors
+340.0,sched_dep_time,8:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1567.0,sched_dep_time,2:35 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1184.0,sched_dep_time,6:45 a.m.,2026/08/05,date_format_inconsistency,format_errors
+277.0,sched_dep_time,1:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2317.0,sched_dep_time,10:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2261.0,sched_dep_time,4:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+189.0,sched_dep_time,10:40 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1706.0,sched_dep_time,9:00 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+967.0,sched_dep_time,7:10 a.m.,1785913800,date_format_inconsistency,format_errors
+657.0,act_dep_time,6:02 a.m.,08/05/2026,date_format_inconsistency,format_errors
+700.0,act_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1311.0,act_dep_time,3:36 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1934.0,act_dep_time,2:44 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+766.0,act_dep_time,4:15 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1327.0,act_dep_time,8:42 a.m.,1785919320,date_format_inconsistency,format_errors
+2291.0,act_dep_time,6:56 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1052.0,act_dep_time,3:27 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1387.0,act_dep_time,7:22 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1652.0,act_dep_time,12:13 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1752.0,act_dep_time,9:16 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2018.0,act_dep_time,3:01 p.m.,2026/08/05,date_format_inconsistency,format_errors
+780.0,act_dep_time,8:00 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2042.0,act_dep_time,3:31 p.m.,1785943860,date_format_inconsistency,format_errors
+2129.0,act_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1228.0,act_dep_time,7:58 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2312.0,act_dep_time,1:19 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2242.0,act_dep_time,8:04 a.m.,08/05/2026,date_format_inconsistency,format_errors
+18.0,act_dep_time,6:57 a.m.,1785913020,date_format_inconsistency,format_errors
+758.0,act_dep_time,7:21 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2011.0,act_dep_time,4:25 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1348.0,act_dep_time,11:56 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1517.0,act_dep_time,10:18 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1054.0,act_dep_time,2:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+138.0,act_dep_time,3:36 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+336.0,act_dep_time,7:31 a.m.,08/05/2026,date_format_inconsistency,format_errors
+427.0,act_dep_time,4:12 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2234.0,act_dep_time,3:27 p.m.,05/08/2026,date_format_inconsistency,format_errors
+672.0,act_dep_time,6:30 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2167.0,act_dep_time,12:41 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1423.0,act_dep_time,8:26 a.m.,05/08/2026,date_format_inconsistency,format_errors
+984.0,act_dep_time,3:36 p.m.,1785944160,date_format_inconsistency,format_errors
+2283.0,act_dep_time,11:05 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2362.0,act_dep_time,1:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1186.0,act_dep_time,12:35 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2195.0,act_dep_time,1:32 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+480.0,act_dep_time,6:30 p.m.,1785954600,date_format_inconsistency,format_errors
+2246.0,act_dep_time,7:39 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1589.0,act_dep_time,8:42 a.m.,08/05/2026,date_format_inconsistency,format_errors
+760.0,act_dep_time,12:11 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2177.0,act_dep_time,8:00 a.m.,05/08/2026,date_format_inconsistency,format_errors
+423.0,act_dep_time,1:19 p.m.,08/05/2026,date_format_inconsistency,format_errors
+904.0,act_dep_time,11:55 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2288.0,act_dep_time,12:11 p.m.,2026/08/05,date_format_inconsistency,format_errors
+898.0,act_dep_time,8:04 a.m.,08/05/2026,date_format_inconsistency,format_errors
+719.0,act_dep_time,11:52 a.m.,1785930720,date_format_inconsistency,format_errors
+310.0,act_dep_time,3:01 p.m.,2026/08/05,date_format_inconsistency,format_errors
+629.0,act_dep_time,7:16 a.m.,1785914160,date_format_inconsistency,format_errors
+2117.0,act_dep_time,1:30 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1225.0,act_dep_time,6:54 a.m.,1785912840,date_format_inconsistency,format_errors
+1536.0,act_dep_time,6:56 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+905.0,act_dep_time,10:54 a.m.,1785927240,date_format_inconsistency,format_errors
+1214.0,act_dep_time,8:52 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2154.0,act_dep_time,1:19 p.m.,1785935940,date_format_inconsistency,format_errors
+832.0,act_dep_time,2:48 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1352.0,act_dep_time,8:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2323.0,act_dep_time,8:29 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1304.0,act_dep_time,3:27 p.m.,05/08/2026,date_format_inconsistency,format_errors
+490.0,act_dep_time,8:23 p.m.,1785961380,date_format_inconsistency,format_errors
+1281.0,act_dep_time,11:01 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2307.0,act_dep_time,8:39 p.m.,08/05/2026,date_format_inconsistency,format_errors
+709.0,act_dep_time,7:22 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1399.0,act_dep_time,9:16 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+506.0,act_dep_time,7:27 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1939.0,act_dep_time,7:49 a.m.,2026/08/05,date_format_inconsistency,format_errors
+222.0,act_dep_time,1:32 p.m.,1785936720,date_format_inconsistency,format_errors
+1590.0,act_dep_time,6:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+84.0,act_dep_time,12:13 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2083.0,act_dep_time,12:35 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1726.0,act_dep_time,7:39 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1968.0,act_dep_time,7:25 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1434.0,act_dep_time,3:31 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1751.0,act_dep_time,2:48 p.m.,05/08/2026,date_format_inconsistency,format_errors
+109.0,act_dep_time,1:31 p.m.,08/05/2026,date_format_inconsistency,format_errors
+615.0,act_dep_time,7:22 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1926.0,act_dep_time,8:26 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1022.0,act_dep_time,7:21 a.m.,05/08/2026,date_format_inconsistency,format_errors
+52.0,act_dep_time,6:54 a.m.,1785912840,date_format_inconsistency,format_errors
+2021.0,act_dep_time,5:30 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1143.0,act_dep_time,11:15 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1712.0,act_dep_time,5:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+190.0,act_dep_time,1:32 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1691.0,act_dep_time,7:21 a.m.,2026/08/05,date_format_inconsistency,format_errors
+467.0,act_dep_time,10:18 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1075.0,act_dep_time,7:58 p.m.,1785959880,date_format_inconsistency,format_errors
+812.0,act_dep_time,7:14 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1130.0,act_dep_time,11:55 p.m.,1785974100,date_format_inconsistency,format_errors
+1012.0,act_dep_time,8:04 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+121.0,act_dep_time,7:27 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2306.0,act_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+575.0,act_dep_time,11:05 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1929.0,act_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1893.0,act_dep_time,3:11 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1014.0,act_dep_time,8:04 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1020.0,act_dep_time,11:52 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1770.0,act_dep_time,12:41 a.m.,1785890460,date_format_inconsistency,format_errors
+818.0,act_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+935.0,act_dep_time,4:15 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2290.0,act_dep_time,9:14 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1498.0,act_dep_time,5:56 a.m.,1785909360,date_format_inconsistency,format_errors
+1039.0,act_dep_time,7:22 a.m.,2026/08/05,date_format_inconsistency,format_errors
+233.0,act_dep_time,8:52 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2096.0,act_dep_time,2:10 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+228.0,act_dep_time,2:44 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1640.0,act_dep_time,2:44 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2123.0,act_dep_time,11:15 a.m.,1785928500,date_format_inconsistency,format_errors
+2139.0,act_dep_time,4:12 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1642.0,act_dep_time,8:23 p.m.,08/05/2026,date_format_inconsistency,format_errors
+778.0,act_dep_time,11:08 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2255.0,act_dep_time,7:16 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1874.0,act_dep_time,7:25 a.m.,05/08/2026,date_format_inconsistency,format_errors
+365.0,act_dep_time,6:02 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+761.0,act_dep_time,9:14 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2293.0,act_dep_time,5:08 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1693.0,act_dep_time,6:55 p.m.,1785956100,date_format_inconsistency,format_errors
+820.0,act_dep_time,10:33 a.m.,2026/08/05,date_format_inconsistency,format_errors
+10.0,act_dep_time,10:55 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2233.0,act_dep_time,2:44 p.m.,1785941040,date_format_inconsistency,format_errors
+1845.0,act_dep_time,8:04 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1973.0,act_dep_time,2:55 p.m.,1785941700,date_format_inconsistency,format_errors
+1823.0,act_dep_time,8:51 a.m.,2026/08/05,date_format_inconsistency,format_errors
+377.0,act_dep_time,1:32 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1340.0,act_dep_time,8:12 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2183.0,act_dep_time,6:02 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1100.0,act_dep_time,10:18 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1699.0,act_dep_time,5:08 p.m.,08/05/2026,date_format_inconsistency,format_errors
+978.0,act_dep_time,8:25 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1370.0,act_dep_time,9:14 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2073.0,act_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2064.0,act_dep_time,7:29 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1891.0,act_dep_time,12:41 p.m.,05/08/2026,date_format_inconsistency,format_errors
+971.0,act_dep_time,7:30 a.m.,1785915000,date_format_inconsistency,format_errors
+798.0,act_dep_time,2:04 p.m.,05/08/2026,date_format_inconsistency,format_errors
+502.0,act_dep_time,8:51 a.m.,1785919860,date_format_inconsistency,format_errors
+408.0,act_dep_time,7:27 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2342.0,act_dep_time,3:11 a.m.,2026/08/05,date_format_inconsistency,format_errors
+589.0,act_dep_time,4:28 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1064.0,act_dep_time,10:54 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+845.0,act_dep_time,12:13 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1251.0,act_dep_time,6:02 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+89.0,act_dep_time,11:05 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1465.0,act_dep_time,8:26 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1027.0,act_dep_time,9:14 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+694.0,act_dep_time,8:51 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1326.0,act_dep_time,8:29 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1361.0,act_dep_time,8:25 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2347.0,act_dep_time,6:55 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2152.0,act_dep_time,9:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+418.0,act_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+66.0,act_dep_time,10:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2065.0,act_dep_time,10:19 a.m.,08/05/2026,date_format_inconsistency,format_errors
+625.0,act_dep_time,10:54 a.m.,1785927240,date_format_inconsistency,format_errors
+1238.0,act_dep_time,10:19 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1023.0,act_dep_time,8:00 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+907.0,act_dep_time,3:58 p.m.,1785945480,date_format_inconsistency,format_errors
+2046.0,act_dep_time,3:58 p.m.,1785945480,date_format_inconsistency,format_errors
+706.0,act_dep_time,9:16 a.m.,05/08/2026,date_format_inconsistency,format_errors
+238.0,act_dep_time,11:40 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1194.0,act_dep_time,9:14 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1774.0,act_dep_time,10:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1635.0,act_dep_time,3:31 p.m.,1785943860,date_format_inconsistency,format_errors
+1791.0,act_dep_time,12:35 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1461.0,act_dep_time,9:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+164.0,act_dep_time,7:29 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1444.0,act_dep_time,8:00 a.m.,1785916800,date_format_inconsistency,format_errors
+1475.0,act_dep_time,7:39 a.m.,05/08/2026,date_format_inconsistency,format_errors
+108.0,act_dep_time,11:01 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+916.0,act_dep_time,12:41 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1923.0,act_dep_time,7:22 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1706.0,act_dep_time,9:00 p.m.,1785963600,date_format_inconsistency,format_errors
+1869.0,act_dep_time,5:56 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1947.0,act_dep_time,3:58 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1724.0,act_dep_time,3:58 p.m.,1785945480,date_format_inconsistency,format_errors
+1203.0,act_dep_time,7:27 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2256.0,act_dep_time,6:54 a.m.,05/08/2026,date_format_inconsistency,format_errors
+854.0,act_dep_time,6:30 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2086.0,act_dep_time,3:11 a.m.,1785899460,date_format_inconsistency,format_errors
+716.0,act_dep_time,8:04 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2236.0,act_dep_time,12:10 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2231.0,act_dep_time,2:48 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+956.0,act_dep_time,7:27 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1612.0,act_dep_time,5:08 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1394.0,act_dep_time,1:32 p.m.,1785936720,date_format_inconsistency,format_errors
+243.0,act_dep_time,11:55 a.m.,1785930900,date_format_inconsistency,format_errors
+193.0,act_dep_time,6:30 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1366.0,act_dep_time,6:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1555.0,act_dep_time,8:26 a.m.,2026/08/05,date_format_inconsistency,format_errors
+366.0,act_dep_time,8:40 a.m.,2026/08/05,date_format_inconsistency,format_errors
+996.0,act_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2270.0,act_dep_time,8:04 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+314.0,act_dep_time,8:39 p.m.,1785962340,date_format_inconsistency,format_errors
+2012.0,act_dep_time,9:00 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2113.0,act_dep_time,8:25 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1220.0,act_dep_time,4:12 p.m.,1785946320,date_format_inconsistency,format_errors
+2143.0,act_dep_time,11:55 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1448.0,act_dep_time,3:27 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2118.0,act_dep_time,3:01 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+92.0,act_dep_time,7:21 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1753.0,act_dep_time,2:55 p.m.,1785941700,date_format_inconsistency,format_errors
+2140.0,act_dep_time,11:52 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+678.0,act_dep_time,7:30 a.m.,05/08/2026,date_format_inconsistency,format_errors
+2181.0,act_dep_time,6:08 a.m.,2026/08/05,date_format_inconsistency,format_errors
+552.0,act_dep_time,10:19 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2248.0,act_dep_time,11:55 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1549.0,act_dep_time,11:55 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1393.0,act_dep_time,5:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1757.0,act_dep_time,2:26 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1952.0,act_dep_time,6:54 a.m.,2026/08/05,date_format_inconsistency,format_errors
+809.0,act_dep_time,7:21 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1932.0,act_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1195.0,act_dep_time,8:23 p.m.,08/05/2026,date_format_inconsistency,format_errors
+2147.0,act_dep_time,6:10 a.m.,1785910200,date_format_inconsistency,format_errors
+1503.0,act_dep_time,10:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1094.0,act_dep_time,12:12 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1548.0,act_dep_time,1:48 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1846.0,act_dep_time,11:40 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+28.0,act_dep_time,8:23 p.m.,2026/08/05,date_format_inconsistency,format_errors
+558.0,act_dep_time,5:22 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1320.0,act_dep_time,6:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+187.0,act_dep_time,5:22 p.m.,1785950520,date_format_inconsistency,format_errors
+2033.0,act_dep_time,8:52 a.m.,08/05/2026,date_format_inconsistency,format_errors
+652.0,act_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+122.0,act_dep_time,11:08 p.m.,1785971280,date_format_inconsistency,format_errors
+309.0,act_dep_time,1:30 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1335.0,act_dep_time,12:41 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1112.0,act_dep_time,7:21 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1213.0,act_dep_time,8:04 a.m.,2026/08/05,date_format_inconsistency,format_errors
+592.0,act_dep_time,10:20 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1385.0,act_dep_time,9:00 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+674.0,act_dep_time,7:15 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1980.0,act_dep_time,10:18 a.m.,2026/08/05,date_format_inconsistency,format_errors
+528.0,act_dep_time,7:39 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2180.0,act_dep_time,11:56 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2158.0,act_dep_time,8:29 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+174.0,act_dep_time,12:12 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1029.0,act_dep_time,7:30 a.m.,1785915000,date_format_inconsistency,format_errors
+717.0,act_dep_time,11:40 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1746.0,act_dep_time,7:27 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1297.0,act_dep_time,1:32 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1474.0,act_dep_time,6:10 a.m.,2026/08/05,date_format_inconsistency,format_errors
+271.0,act_dep_time,11:30 a.m.,2026/08/05,date_format_inconsistency,format_errors
+803.0,act_dep_time,7:14 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+630.0,act_dep_time,7:14 p.m.,08/05/2026,date_format_inconsistency,format_errors
+946.0,act_dep_time,8:26 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+827.0,act_dep_time,10:10 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+568.0,act_dep_time,2:04 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1524.0,act_dep_time,5:22 p.m.,05/08/2026,date_format_inconsistency,format_errors
+21.0,act_dep_time,3:36 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+289.0,act_dep_time,7:15 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+591.0,act_dep_time,8:23 p.m.,1785961380,date_format_inconsistency,format_errors
+1532.0,act_dep_time,12:11 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+964.0,act_dep_time,8:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2308.0,act_dep_time,2:44 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1540.0,act_dep_time,4:28 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1412.0,act_dep_time,11:52 a.m.,05/08/2026,date_format_inconsistency,format_errors
+372.0,act_dep_time,2:26 p.m.,2026/08/05,date_format_inconsistency,format_errors
+2060.0,act_dep_time,11:25 p.m.,1785972300,date_format_inconsistency,format_errors
+533.0,act_dep_time,3:58 p.m.,1785945480,date_format_inconsistency,format_errors
+3.0,act_dep_time,6:54 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2321.0,act_dep_time,7:16 a.m.,05/08/2026,date_format_inconsistency,format_errors
+1533.0,act_dep_time,7:15 p.m.,1785957300,date_format_inconsistency,format_errors
+1700.0,act_dep_time,4:28 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1509.0,act_dep_time,8:00 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1766.0,act_dep_time,11:32 a.m.,1785929520,date_format_inconsistency,format_errors
+1657.0,act_dep_time,1:32 p.m.,2026/08/05,date_format_inconsistency,format_errors
+642.0,act_dep_time,4:00 p.m.,2026/08/05,date_format_inconsistency,format_errors
+704.0,act_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1157.0,act_dep_time,8:04 a.m.,1785917040,date_format_inconsistency,format_errors
+1504.0,act_dep_time,8:12 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2204.0,act_dep_time,7:30 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2253.0,act_dep_time,7:39 a.m.,2026/08/05,date_format_inconsistency,format_errors
+2111.0,act_dep_time,4:25 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1610.0,act_dep_time,6:56 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1592.0,act_dep_time,10:33 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1856.0,act_dep_time,7:39 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+253.0,act_dep_time,8:42 a.m.,1785919320,date_format_inconsistency,format_errors
+1046.0,act_dep_time,1:32 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1129.0,act_dep_time,1:48 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+794.0,act_dep_time,4:29 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1578.0,act_dep_time,11:52 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1727.0,act_dep_time,8:29 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+525.0,act_dep_time,11:40 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+2092.0,act_dep_time,7:21 a.m.,1785914460,date_format_inconsistency,format_errors
+155.0,act_dep_time,7:58 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+957.0,act_dep_time,12:10 p.m.,05/08/2026,date_format_inconsistency,format_errors
+2115.0,act_dep_time,8:51 a.m.,2026/08/05,date_format_inconsistency,format_errors
+332.0,act_dep_time,6:57 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1557.0,act_dep_time,3:01 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1115.0,act_dep_time,7:15 p.m.,2026/08/05,date_format_inconsistency,format_errors
+160.0,act_dep_time,11:25 p.m.,1785972300,date_format_inconsistency,format_errors
+890.0,act_dep_time,3:27 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1286.0,act_dep_time,4:25 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+401.0,act_dep_time,9:00 p.m.,08/05/2026,date_format_inconsistency,format_errors
+260.0,act_dep_time,11:25 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+15.0,act_dep_time,10:10 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1456.0,act_dep_time,12:41 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1916.0,act_dep_time,1:31 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1295.0,act_dep_time,11:08 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+397.0,act_dep_time,12:41 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+596.0,act_dep_time,1:48 p.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1515.0,act_dep_time,6:02 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1173.0,act_dep_time,8:42 a.m.,05/08/2026,date_format_inconsistency,format_errors
+247.0,act_dep_time,6:10 a.m.,2026/08/05,date_format_inconsistency,format_errors
+811.0,act_dep_time,7:16 a.m.,05/08/2026,date_format_inconsistency,format_errors
+40.0,act_dep_time,7:22 a.m.,08/05/2026,date_format_inconsistency,format_errors
+847.0,act_dep_time,3:11 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1404.0,act_dep_time,8:04 a.m.,05/08/2026,date_format_inconsistency,format_errors
+879.0,act_dep_time,3:01 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+429.0,act_dep_time,3:31 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1710.0,act_dep_time,1:30 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+938.0,act_dep_time,7:05 a.m.,08/05/2026,date_format_inconsistency,format_errors
+304.0,act_dep_time,8:25 p.m.,05/08/2026,date_format_inconsistency,format_errors
+82.0,act_dep_time,7:49 a.m.,1785916140,date_format_inconsistency,format_errors
+143.0,act_dep_time,11:55 a.m.,08/05/2026,date_format_inconsistency,format_errors
+2286.0,act_dep_time,6:30 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1742.0,act_dep_time,1:31 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1950.0,act_dep_time,7:16 a.m.,05/08/2026,date_format_inconsistency,format_errors
+46.0,act_dep_time,4:12 p.m.,2026/08/05,date_format_inconsistency,format_errors
+902.0,act_dep_time,7:39 a.m.,1785915540,date_format_inconsistency,format_errors
+2121.0,act_dep_time,5:30 p.m.,1785951000,date_format_inconsistency,format_errors
+1062.0,act_dep_time,3:31 p.m.,2026/08/05,date_format_inconsistency,format_errors
+669.0,act_dep_time,1:32 p.m.,08/05/2026,date_format_inconsistency,format_errors
+58.0,act_dep_time,11:40 a.m.,1785930000,date_format_inconsistency,format_errors
+1329.0,act_dep_time,12:11 p.m.,2026/08/05,date_format_inconsistency,format_errors
+163.0,act_dep_time,4:00 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1614.0,act_dep_time,8:23 p.m.,05/08/2026,date_format_inconsistency,format_errors
+1132.0,act_dep_time,9:00 p.m.,1785963600,date_format_inconsistency,format_errors
+1872.0,act_dep_time,7:29 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1124.0,act_dep_time,10:20 a.m.,2026/08/05,date_format_inconsistency,format_errors
+985.0,act_dep_time,6:10 a.m.,05/08/2026,date_format_inconsistency,format_errors
+788.0,act_dep_time,10:54 a.m.,08/05/2026,date_format_inconsistency,format_errors
+549.0,act_dep_time,12:41 a.m.,08/05/2026,date_format_inconsistency,format_errors
+1261.0,act_dep_time,8:25 p.m.,08/05/2026,date_format_inconsistency,format_errors
+848.0,act_dep_time,5:22 p.m.,2026/08/05,date_format_inconsistency,format_errors
+603.0,act_dep_time,8:51 a.m.,1785919860,date_format_inconsistency,format_errors
+997.0,act_dep_time,11:40 a.m.,1785930000,date_format_inconsistency,format_errors
+664.0,act_dep_time,2:26 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1114.0,act_dep_time,6:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1639.0,act_dep_time,7:30 a.m.,1785915000,date_format_inconsistency,format_errors
+1241.0,act_dep_time,7:25 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+721.0,act_dep_time,3:31 p.m.,05-Aug-2026,date_format_inconsistency,format_errors
+524.0,act_dep_time,8:04 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1878.0,act_dep_time,2:48 p.m.,2026/08/05,date_format_inconsistency,format_errors
+1889.0,act_dep_time,2:04 p.m.,1785938640,date_format_inconsistency,format_errors
+2130.0,act_dep_time,7:22 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+2048.0,act_dep_time,7:39 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1776.0,act_dep_time,7:25 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1397.0,act_dep_time,2:55 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1603.0,act_dep_time,8:04 a.m.,08/05/2026,date_format_inconsistency,format_errors
+274.0,act_dep_time,10:55 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+1232.0,act_dep_time,10:33 a.m.,05/08/2026,date_format_inconsistency,format_errors
+903.0,act_dep_time,3:31 p.m.,08/05/2026,date_format_inconsistency,format_errors
+1378.0,act_dep_time,7:05 a.m.,2026/08/05,date_format_inconsistency,format_errors
+1147.0,act_dep_time,9:16 a.m.,1785921360,date_format_inconsistency,format_errors
+1794.0,act_dep_time,3:11 a.m.,05-Aug-2026,date_format_inconsistency,format_errors
+537.0,act_dep_time,7:16 a.m.,"August 05, 2026",date_format_inconsistency,format_errors
+1455.0,src,ifly,iifly,typo_duplicated_letter,typos
+1918.0,src,quicktrip,  quicktrip ,typo_extra_whitespace,typos
+546.0,src,flightstats,fflightstats,typo_duplicated_letter,typos
+990.0,src,travelocity,ravelocity,typo_missing_letter,typos
+1999.0,src,allegiantair,  allegiantair ,typo_extra_whitespace,typos
+1552.0,src,flytecomm,flyteomm,typo_missing_letter,typos
+824.0,src,flights,flghts,typo_missing_letter,typos
+206.0,src,boston,bosotn,typo_swapped_letters,typos
+346.0,src,airtravelcenter,  airtravelcenter ,typo_extra_whitespace,typos
+1840.0,src,flylouisville,flyouisville,typo_missing_letter,typos
+1833.0,src,flylouisville,flylouisvillle,typo_duplicated_letter,typos
+513.0,src,flightview,FLIGHTVIEw,typo_random_case,typos
+282.0,src,weather,weahter,typo_swapped_letters,typos
+644.0,src,N/A,/NA,typo_swapped_letters,typos
+435.0,src,airtravelcenter,  airtravelcenter ,typo_extra_whitespace,typos
+2313.0,src,flightaware,flghtaware,typo_missing_letter,typos
+710.0,src,panynj,ppanynj,typo_duplicated_letter,typos
+948.0,src,flightarrival,flightarival,typo_missing_letter,typos
+1694.0,src,wunderground,  wunderground ,typo_extra_whitespace,typos
+1278.0,src,myrateplan,myratteplan,typo_duplicated_letter,typos
+1517.0,src,flytecomm,  flytecomm ,typo_extra_whitespace,typos
+85.0,src,helloflight,HELLOflight,typo_random_case,typos
+565.0,src,flightstats,flightstts,typo_missing_letter,typos
+961.0,src,unknown,  unknown ,typo_extra_whitespace,typos
+2334.0,src,world-flight-tracker,WORLD-FLIGHT-TRacker,typo_random_case,typos
+2280.0,src,flightaware,  flightaware ,typo_extra_whitespace,typos
+615.0,src,flightstats,filghtstats,typo_swapped_letters,typos
+1972.0,src,allegiantair,allegiantari,typo_swapped_letters,typos
+1225.0,src,myrateplan,myrteplan,typo_missing_letter,typos
+883.0,src,flights,  flights ,typo_extra_whitespace,typos
+295.0,src,weather,wether,typo_missing_letter,typos
+2316.0,src,flightaware,flightwaare,typo_swapped_letters,typos
+998.0,src,travelocity,travelocitty,typo_duplicated_letter,typos
+1231.0,src,myrateplan,myarteplan,typo_swapped_letters,typos
+755.0,src,flightexplorer,  flightexplorer ,typo_extra_whitespace,typos
+1619.0,src,mytripandmore,ymtripandmore,typo_swapped_letters,typos
+1534.0,src,flytecomm,flytceomm,typo_swapped_letters,typos
+807.0,src,unknown,unkown,typo_missing_letter,typos
+1844.0,src,flylouisville,  flylouisville ,typo_extra_whitespace,typos
+1424.0,src,phl,PHl,typo_random_case,typos
+2072.0,src,businesstravellogue,ubsinesstravellogue,typo_swapped_letters,typos
+394.0,src,unknown,  unknown ,typo_extra_whitespace,typos
+71.0,src,helloflight,hleloflight,typo_swapped_letters,typos
+924.0,src,flightarrival,  flightarrival ,typo_extra_whitespace,typos
+364.0,src,airtravelcenter,  airtravelcenter ,typo_extra_whitespace,typos
+787.0,src,flightexplorer,flightexlporer,typo_swapped_letters,typos
+1550.0,src,flytecomm,Flytecomm,typo_random_case,typos
+1579.0,src,flytecomm,FLYtecomm,typo_random_case,typos
+1309.0,src,myrateplan,  myrateplan ,typo_extra_whitespace,typos
+319.0,src,weather,WEather,typo_random_case,typos
+220.0,src,boston,bosston,typo_duplicated_letter,typos
+1795.0,src,unknown,UNKNOWn,typo_random_case,typos
+1789.0,src,flylouisville,  flylouisville ,typo_extra_whitespace,typos
+1820.0,src,flylouisville,FLYLOuisville,typo_random_case,typos
+1914.0,src,quicktrip,qucktrip,typo_missing_letter,typos
+1115.0,src,foxbusiness,  foxbusiness ,typo_extra_whitespace,typos
+814.0,src,flights,flihts,typo_missing_letter,typos
+322.0,src,weather,  weather ,typo_extra_whitespace,typos
+250.0,src,weather,weaather,typo_duplicated_letter,typos
+1015.0,src,travelocity,trvaelocity,typo_swapped_letters,typos
+1330.0,src,orbitz,orrbitz,typo_duplicated_letter,typos
+1668.0,src,wunderground,  wunderground ,typo_extra_whitespace,typos
+212.0,src,boston,  boston ,typo_extra_whitespace,typos
+80.0,src,helloflight,  helloflight ,typo_extra_whitespace,typos
+567.0,src,flightstats,  flightstats ,typo_extra_whitespace,typos
+1525.0,src,flytecomm,flytceomm,typo_swapped_letters,typos
+687.0,src,panynj,ppanynj,typo_duplicated_letter,typos
+1904.0,src,quicktrip,quicktip,typo_missing_letter,typos
+747.0,src,flightexplorer,flighhtexplorer,typo_duplicated_letter,typos
+705.0,src,panynj,  panynj ,typo_extra_whitespace,typos
+1530.0,src,flytecomm,  flytecomm ,typo_extra_whitespace,typos
+293.0,src,weather,ewather,typo_swapped_letters,typos
+367.0,src,airtravelcenter,airravelcenter,typo_missing_letter,typos
+403.0,src,airtravelcenter,aitrravelcenter,typo_swapped_letters,typos
+1156.0,src,foxbusiness,fxobusiness,typo_swapped_letters,typos
+183.0,src,boston,obston,typo_swapped_letters,typos
+136.0,src,helloflight,HElloflight,typo_random_case,typos
+195.0,src,boston,bostn,typo_missing_letter,typos
+1558.0,src,,,typo_too_short_unchanged,typos
+982.0,src,flightwise,flihtwise,typo_missing_letter,typos
+1693.0,src,unknown,unkonwn,typo_swapped_letters,typos
+2286.0,src,N/A,N/a,typo_random_case,typos
+1907.0,src,quicktrip,  quicktrip ,typo_extra_whitespace,typos
+1014.0,src,travelocity,  travelocity ,typo_extra_whitespace,typos
+1803.0,src,flylouisville,FLYLOUISVIlle,typo_random_case,typos
+2220.0,src,gofox,  gofox ,typo_extra_whitespace,typos
+1208.0,src,usatoday,usaoday,typo_missing_letter,typos
+1306.0,src,myrateplan,myratepln,typo_missing_letter,typos
+716.0,src,panynj,paanynj,typo_duplicated_letter,typos
+1184.0,src,usatoday,usatooday,typo_duplicated_letter,typos
+499.0,src,flightview,flightviwe,typo_swapped_letters,typos
+1740.0,src,ua,au,typo_swapped_letters,typos
+1045.0,src,travelocity,ttravelocity,typo_duplicated_letter,typos
+1058.0,src,travelocity,traelocity,typo_missing_letter,typos
+1400.0,src,,,typo_too_short_unchanged,typos
+1561.0,src,flytecomm,  flytecomm ,typo_extra_whitespace,typos
+1016.0,src,travelocity,  travelocity ,typo_extra_whitespace,typos
+636.0,src,panynj,panyj,typo_missing_letter,typos
+1283.0,src,unknown,nknown,typo_missing_letter,typos
+1821.0,src,flylouisville,flylouisvilel,typo_swapped_letters,typos
+442.0,src,flightview,FLIGHTVIew,typo_random_case,typos
+188.0,src,boston,  boston ,typo_extra_whitespace,typos
+1090.0,src,foxbusiness,  foxbusiness ,typo_extra_whitespace,typos
+1515.0,src,flytecomm,  flytecomm ,typo_extra_whitespace,typos
+1055.0,src,travelocity,  travelocity ,typo_extra_whitespace,typos
+2350.0,src,world-flight-tracker,WORLD-FLIGHT-tracker,typo_random_case,typos
+1842.0,src,flylouisville,FLYLOUISVille,typo_random_case,typos
+1175.0,src,usatoday,usatoay,typo_missing_letter,typos
+2333.0,src,world-flight-tracker,world-lfight-tracker,typo_swapped_letters,typos
+204.0,src, , ,typo_too_short_unchanged,typos
+1185.0,src,usatoday,usatodya,typo_swapped_letters,typos
+172.0,src,boston,  boston ,typo_extra_whitespace,typos
+1406.0,src,orbitz,orbtiz,typo_swapped_letters,typos
+1699.0,src,wunderground,wundergrround,typo_duplicated_letter,typos
+2040.0,src,allegiantair,ALLegiantair,typo_random_case,typos
+904.0,src,flights,lights,typo_missing_letter,typos
+1082.0,src,foxbusiness,foxbsuiness,typo_swapped_letters,typos
+141.0,src,helloflight,hellflight,typo_missing_letter,typos
+1839.0,src,flylouisville,FLYLOuisville,typo_random_case,typos
+951.0,src,flightarrival,flightaarrival,typo_duplicated_letter,typos
+2346.0,src,world-flight-tracker,world-flight-trracker,typo_duplicated_letter,typos
+1178.0,src,usatoday,usattoday,typo_duplicated_letter,typos
+955.0,src,flightarrival,fliightarrival,typo_duplicated_letter,typos
+1430.0,src,CO,Co,typo_random_case,typos
+1851.0,src,N/A,NN/A,typo_duplicated_letter,typos
+2337.0,src,world-flight-tracker,WORLD-FLIGHT-tracker,typo_random_case,typos
+1689.0,src,wunderground,  wunderground ,typo_extra_whitespace,typos
+1728.0,src,ua,au,typo_swapped_letters,typos
+1650.0,src,ord,Ord,typo_random_case,typos
+2048.0,src,allegiantair,allegiantari,typo_swapped_letters,typos
+1882.0,src,quicktrip,  quicktrip ,typo_extra_whitespace,typos
+16.0,src,,,typo_too_short_unchanged,typos
+98.0,src,helloflight,HELLOFLIGht,typo_random_case,typos
+457.0,src,flightview,fligthview,typo_swapped_letters,typos
+2144.0,src,businesstravellogue,BUsinesstravellogue,typo_random_case,typos
+1591.0,src,mytripandmore,myttripandmore,typo_duplicated_letter,typos
+1894.0,src,quicktrip,QUicktrip,typo_random_case,typos
+1674.0,src,wunderground,wundergorund,typo_swapped_letters,typos
+991.0,src,travelocity,traveloctiy,typo_swapped_letters,typos
+993.0,src, , ,typo_too_short_unchanged,typos
+2146.0,src,businesstravellogue,  businesstravellogue ,typo_extra_whitespace,typos
+790.0,src,flightexplorer,  flightexplorer ,typo_extra_whitespace,typos
+360.0,src,unknown,UNKNown,typo_random_case,typos
+657.0,src,panynj,Panynj,typo_random_case,typos
+1825.0,src,flylouisville,flylouisvilel,typo_swapped_letters,typos
+427.0,src,airtravelcenter,AIRTRAVELCENTEr,typo_random_case,typos
+1305.0,src,myrateplan,  myrateplan ,typo_extra_whitespace,typos
+1432.0,src,CO,  CO ,typo_extra_whitespace,typos
+1770.0,src,flylouisville,flylouivsille,typo_swapped_letters,typos
+1059.0,src,travelocity,traveloicty,typo_swapped_letters,typos
+890.0,src,flights,  flights ,typo_extra_whitespace,typos
+1890.0,src,quicktrip,  quicktrip ,typo_extra_whitespace,typos
+381.0,src,airtravelcenter,airravelcenter,typo_missing_letter,typos
+1976.0,src,allegiantair,Allegiantair,typo_random_case,typos
+1995.0,src,allegiantair,allegantair,typo_missing_letter,typos
+1277.0,src,myrateplan,MYrateplan,typo_random_case,typos
+504.0,src,flightview,flighview,typo_missing_letter,typos
+1794.0,src,flylouisville,flylousville,typo_missing_letter,typos
+1559.0,src,flytecomm,flyetcomm,typo_swapped_letters,typos
+1104.0,src,foxbusiness,FOXBUSINess,typo_random_case,typos
+1990.0,src,allegiantair,ALLEGIANTair,typo_random_case,typos
+2258.0,src,flightaware,fligthaware,typo_swapped_letters,typos
+1730.0,src,ua,uua,typo_duplicated_letter,typos
+1617.0,src,NA,AN,typo_swapped_letters,typos
+53.0,src,helloflight,hellofligt,typo_missing_letter,typos
+1704.0,src,wunderground,  wunderground ,typo_extra_whitespace,typos
+1542.0,src,flytecomm,FLYTEComm,typo_random_case,typos
+151.0,src,boston,boton,typo_missing_letter,typos
+1297.0,src,myrateplan,MYRAteplan,typo_random_case,typos
+2166.0,src,gofox,  gofox ,typo_extra_whitespace,typos
+393.0,src,airtravelcenter,airtravelccenter,typo_duplicated_letter,typos
+210.0,src,boston,BOSTon,typo_random_case,typos
+995.0,src,N/A,  N/A ,typo_extra_whitespace,typos
+2131.0,src,,,typo_too_short_unchanged,typos
+1088.0,src,foxbusiness,FOXbusiness,typo_random_case,typos
+1746.0,src,ua,Ua,typo_random_case,typos
+2348.0,src,world-flight-tracker,world-flighht-tracker,typo_duplicated_letter,typos
+733.0,src,flightexplorer,flighhtexplorer,typo_duplicated_letter,typos
+1645.0,src,ord,od,typo_missing_letter,typos
+2247.0,src,gofox,ofox,typo_missing_letter,typos
+818.0,src,flights,  flights ,typo_extra_whitespace,typos
+1130.0,src,foxbusiness,foxbusienss,typo_swapped_letters,typos
+2129.0,src,unknown,uunknown,typo_duplicated_letter,typos
+835.0,src,flights,FLIGhts,typo_random_case,typos
+1163.0,src,foxbusiness,  foxbusiness ,typo_extra_whitespace,typos
+264.0,src,weather,weathher,typo_duplicated_letter,typos
+1470.0,src,ifly,Ifly,typo_random_case,typos
+1648.0,flight,AA-3756-ORD-SLC,AA-3756-ord-slc,typo_random_case,typos
+286.0,flight,CO-1561-PHX-IAH,CO-156-1PHX-IAH,typo_swapped_letters,typos
+10.0,flight,N/A,  N/A ,typo_extra_whitespace,typos
+202.0,flight,UA-938-DEN-ORD,U-A938-DEN-ORD,typo_swapped_letters,typos
+863.0,flight,UA-938-DEN-ORD,  UA-938-DEN-ORD ,typo_extra_whitespace,typos
+213.0,flight,AA-2312-DFW-DTW,AA-2312-DDFW-DTW,typo_duplicated_letter,typos
+221.0,flight,CO-4888-IAH-DAL,CO-4888-IAHD-AL,typo_swapped_letters,typos
+1338.0,flight,CO-1090-BOS-IAH,CO-1090B-OS-IAH,typo_swapped_letters,typos
+26.0,flight,NA,A,typo_missing_letter,typos
+1427.0,flight,CO-52-IAH-LAX,CO-5-IAH-LAX,typo_missing_letter,typos
+402.0,flight,AA-2312-DFW-DTW,  AA-2312-DFW-DTW ,typo_extra_whitespace,typos
+130.0,flight,,,typo_too_short_unchanged,typos
+36.0,flight, , ,typo_too_short_unchanged,typos
+1015.0,flight,AA-1279-DFW-PHX,AA-1279-dfw-phx,typo_random_case,typos
+1639.0,flight,AA-643-MIA-ORD,A-643-MIA-ORD,typo_missing_letter,typos
+71.0,flight,,,typo_too_short_unchanged,typos
+2222.0,flight,AA-649-ORD-SNA,AA-6449-ORD-SNA,typo_duplicated_letter,typos
+2216.0,flight,UA-233-LAX-JFK,UA-33-LAX-JFK,typo_missing_letter,typos
+653.0,flight,AA-446-DFW-PHL,AA-446-FW-PHL,typo_missing_letter,typos
+2259.0,flight,AA-1733-ORD-PHX,  AA-1733-ORD-PHX ,typo_extra_whitespace,typos
+658.0,flight,CO-1088-CLE-IAH,CO-1088-CLE-IAH,typo_swapped_letters,typos
+32.0,flight,AA-3823-LAX-DEN,AAA-3823-LAX-DEN,typo_duplicated_letter,typos
+1201.0,flight,UA-3373-IAD-PHL,UA-3373I-AD-PHL,typo_swapped_letters,typos
+371.0,flight,AA-4344-ORD-DTW,AA-434-ORD-DTW,typo_missing_letter,typos
+1488.0,flight,CO-1586-IAH-MCO,CO--1586-IAH-MCO,typo_duplicated_letter,typos
+427.0,flight,AA-3786-IAH-ORD,AA-3786-Iah-ord,typo_random_case,typos
+2317.0,flight,AA-4198-ORD-CLE,AA-4198-ORD-cle,typo_random_case,typos
+541.0,flight,UA-3925-IAD-ORF,UA-3925-iad-orf,typo_random_case,typos
+1858.0,flight,AA-3859-IAH-ORD,  AA-3859-IAH-ORD ,typo_extra_whitespace,typos
+268.0,flight,CO-62-IAH-EWR,CO-62-Iah-ewr,typo_random_case,typos
+96.0,flight,CO-1694-LAX-IAH,CO-1694-LAX-IAh,typo_random_case,typos
+2040.0,flight,AA-271-MIA-LAX,AA-271-mia-lax,typo_random_case,typos
+1014.0,flight,AA-3979-CVG-ORD,  AA-3979-CVG-ORD ,typo_extra_whitespace,typos
+353.0,flight,AA-616-DFW-DTW,AA-616DFW-DTW,typo_missing_letter,typos
+2231.0,flight,UA-62-IAH-EWR,UA-62-iah-ewr,typo_random_case,typos
+1065.0,flight,AA-222-LAX-BOS,AA-222-LAX-BOs,typo_random_case,typos
+2232.0,flight,N/A,N/a,typo_random_case,typos
+1198.0,flight,UA-664-ORD-PHL,UA-664-ORD-PL,typo_missing_letter,typos
+508.0,flight,CO-4888-IAH-DAL,CO-488-IAH-DAL,typo_missing_letter,typos
+197.0,flight,CO-1193-EWR-MCO,  CO-1193-EWR-MCO ,typo_extra_whitespace,typos
+2281.0,flight,CO-47-IAH-LAX,  CO-47-IAH-LAX ,typo_extra_whitespace,typos
+1267.0,flight,AA-4307-ORD-DTW,Aa-4307-ord-dtw,typo_random_case,typos
+1868.0,flight,AA-204-LAX-MCO,AA-04-LAX-MCO,typo_missing_letter,typos
+1761.0,flight,UA-397-JFK-SFO,UA-397JFK-SFO,typo_missing_letter,typos
+1750.0,flight,UA-2708-EWR-CLT,UA-2708-ewr-clt,typo_random_case,typos
+1207.0,flight,unknown,  unknown ,typo_extra_whitespace,typos
+1526.0,flight,AA-2050-ORD-MIA,  AA-2050-ORD-MIA ,typo_extra_whitespace,typos
+1003.0,flight,UA-3515-IAD-MSP,UA-3515-IAD-MSSP,typo_duplicated_letter,typos
+1596.0,flight,CO-1090-BOS-IAH,CO-10990-BOS-IAH,typo_duplicated_letter,typos
+1397.0,flight,UA-2708-EWR-CLT,UA-2708-EWRCLT,typo_missing_letter,typos
+2159.0,flight,UA-3925-IAD-ORF,UA-3925-iad-orf,typo_random_case,typos
+1691.0,flight,AA-1434-DFW-MCO,AA-1434D-FW-MCO,typo_swapped_letters,typos
+981.0,flight,AA-3786-IAH-ORD,  AA-3786-IAH-ORD ,typo_extra_whitespace,typos
+1572.0,flight,UA-37-EDI-EWR,  UA-37-EDI-EWR ,typo_extra_whitespace,typos
+2284.0,flight, , ,typo_too_short_unchanged,typos
+211.0,flight,UA-233-LAX-JFK,  UA-233-LAX-JFK ,typo_extra_whitespace,typos
+1044.0,flight,CO-1250-MIA-IAH,O-1250-MIA-IAH,typo_missing_letter,typos
+1119.0,flight,AA-643-MIA-ORD,AA-643-MIA-ORRD,typo_duplicated_letter,typos
+2052.0,flight, , ,typo_too_short_unchanged,typos
+260.0,flight,AA-204-LAX-MCO,AA-24-LAX-MCO,typo_missing_letter,typos
+1043.0,flight,AA-649-ORD-SNA,AA-649-ORD-SA,typo_missing_letter,typos
+1629.0,flight,AA-4277-CVG-JFK,AA-4277-CVg-jfk,typo_random_case,typos
+2308.0,flight,AA-3804-PHL-ORD,Aa-3804-phl-ord,typo_random_case,typos
+270.0,flight,AA-466-IAH-MIA,  AA-466-IAH-MIA ,typo_extra_whitespace,typos
+2301.0,flight, , ,typo_too_short_unchanged,typos
+1032.0,flight,UA-2515-DFW-CLT,UA-2515-DFW-clt,typo_random_case,typos
+1643.0,flight,UA-938-DEN-ORD,UUA-938-DEN-ORD,typo_duplicated_letter,typos
+1019.0,flight,AA-2525-DFW-MIA,  AA-2525-DFW-MIA ,typo_extra_whitespace,typos
+1069.0,flight,AA-59-JFK-SFO,AA-59-JK-SFO,typo_missing_letter,typos
+1507.0,flight,AA-1886-BOS-MIA,AA-1886-BOS-MMIA,typo_duplicated_letter,typos
+349.0,flight,CO-1614-LAX-IAH,OC-1614-LAX-IAH,typo_swapped_letters,typos
+876.0,flight,AA-431-MIA-SFO,  AA-431-MIA-SFO ,typo_extra_whitespace,typos
+1449.0,flight,UA-2906-PHL-MCO,UA-2906-PHHL-MCO,typo_duplicated_letter,typos
+1872.0,flight,CO-52-IAH-LAX,OC-52-IAH-LAX,typo_swapped_letters,typos
+1598.0,flight,CO-62-IAH-EWR,CO-62-IAH-ewr,typo_random_case,typos
+444.0,flight,UA-2830-MCO-CLT,  UA-2830-MCO-CLT ,typo_extra_whitespace,typos
+953.0,flight,CO-1561-PHX-IAH,CO-1561-phx-iah,typo_random_case,typos
+317.0,flight,AA-3804-PHL-ORD,AA-3804-PHLO-RD,typo_swapped_letters,typos
+823.0,flight,CO-1614-LAX-IAH,CO-1164-LAX-IAH,typo_swapped_letters,typos
+1522.0,flight,UA-257-JFK-SFO,UA-257-JFK-Sfo,typo_random_case,typos
+1490.0,flight, , ,typo_too_short_unchanged,typos
+2369.0,flight, , ,typo_too_short_unchanged,typos
+669.0,flight,UA-248-PHX-ORD,UA-248-PHXX-ORD,typo_duplicated_letter,typos
+321.0,flight,AA-4277-CVG-JFK,AA-427-7CVG-JFK,typo_swapped_letters,typos
+556.0,flight,AA-616-DFW-DTW,AAA-616-DFW-DTW,typo_duplicated_letter,typos
+1400.0,flight,AA-3804-PHL-ORD,AA-3804--PHL-ORD,typo_duplicated_letter,typos
+1830.0,flight,UA-858-PVG-SFO,  UA-858-PVG-SFO ,typo_extra_whitespace,typos
+2143.0,flight,UA-3099-PHX-PHL,UA-3099-PX-PHL,typo_missing_letter,typos
+246.0,flight,CO-45-EWR-MIA,CO-45-EW-MIA,typo_missing_letter,typos
+1793.0,flight,UA-257-JFK-SFO,UA-2577-JFK-SFO,typo_duplicated_letter,typos
+98.0,flight,unknown,UNKNOwn,typo_random_case,typos
+274.0,flight,AA-1886-BOS-MIA,AA-1886-BOS-MAI,typo_swapped_letters,typos
+357.0,flight,AA-1886-BOS-MIA,AA-1886-BOS-mia,typo_random_case,typos
+1041.0,flight,UA-257-JFK-SFO,UA-257J-FK-SFO,typo_swapped_letters,typos
+1414.0,flight,CO-50-CLE-EWR,C-50-CLE-EWR,typo_missing_letter,typos
+1640.0,flight,AA-3804-PHL-ORD,AA3-804-PHL-ORD,typo_swapped_letters,typos
+2234.0,flight,,,typo_too_short_unchanged,typos
+1929.0,flight,CO-4888-IAH-DAL,  CO-4888-IAH-DAL ,typo_extra_whitespace,typos
+581.0,flight,AA-3-JFK-LAX,AA-3-JFk-lax,typo_random_case,typos
+552.0,flight,CO-1090-BOS-IAH,CO-100-BOS-IAH,typo_missing_letter,typos
+1824.0,flight,UA-3373-IAD-PHL,UA-3373-IAD-HPL,typo_swapped_letters,typos
+1487.0,flight,AA-3859-IAH-ORD,AA-38599-IAH-ORD,typo_duplicated_letter,typos
+2363.0,flight,AA-3804-PHL-ORD,AAA-3804-PHL-ORD,typo_duplicated_letter,typos
+1356.0,flight,UA-382-IAD-LAX,UA-32-IAD-LAX,typo_missing_letter,typos
+633.0,flight,UA-3925-IAD-ORF,A-3925-IAD-ORF,typo_missing_letter,typos
+2114.0,flight,AA-1165-JFK-MIA,AA--1165-JFK-MIA,typo_duplicated_letter,typos
+594.0,flight,AA-400-DFW-JFK,AA-400-DFW-JFK,typo_swapped_letters,typos
+1823.0,flight,AA-431-MIA-SFO,AA-4311-MIA-SFO,typo_duplicated_letter,typos
+237.0,flight,AA-3979-CVG-ORD,  AA-3979-CVG-ORD ,typo_extra_whitespace,typos
+1426.0,flight,CO-1586-IAH-MCO,  CO-1586-IAH-MCO ,typo_extra_whitespace,typos
+2265.0,flight,AA-616-DFW-DTW,AA-61-6DFW-DTW,typo_swapped_letters,typos
+281.0,flight,UA-2945-PHL-CLT,  UA-2945-PHL-CLT ,typo_extra_whitespace,typos
+126.0,flight, , ,typo_too_short_unchanged,typos
+1736.0,flight,UA-3515-IAD-MSP,  UA-3515-IAD-MSP ,typo_extra_whitespace,typos
+2271.0,flight,NA,AN,typo_swapped_letters,typos
+27.0,flight, , ,typo_too_short_unchanged,typos
+2013.0,flight,AA-2312-DFW-DTW,AA-2312-DFW-DWT,typo_swapped_letters,typos
+1863.0,flight,AA-1733-ORD-PHX,AA-17733-ORD-PHX,typo_duplicated_letter,typos
+446.0,flight,UA-5487-SFO-MRY,  UA-5487-SFO-MRY ,typo_extra_whitespace,typos
+2039.0,flight,AA-3786-IAH-ORD,AA-3786--IAH-ORD,typo_duplicated_letter,typos
+1178.0,flight,AA-484-DFW-MIA,AA-484-DFW-MMIA,typo_duplicated_letter,typos
+2242.0,flight,AA-3979-CVG-ORD,  AA-3979-CVG-ORD ,typo_extra_whitespace,typos
+461.0,flight,AA-446-DFW-PHL,AA-446-DFW-PLH,typo_swapped_letters,typos
+605.0,flight,UA-3373-IAD-PHL,UA-3373-Iad-phl,typo_random_case,typos
+956.0,flight,N/A,N/a,typo_random_case,typos
+595.0,flight,UA-664-ORD-PHL,UA-664-ORD-PPHL,typo_duplicated_letter,typos
+929.0,flight,AA-2050-ORD-MIA,AA-20050-ORD-MIA,typo_duplicated_letter,typos
+1052.0,flight,AA-1917-JFK-MCO,AA--1917-JFK-MCO,typo_duplicated_letter,typos
+1855.0,flight,AA-3809-PHX-LAX,AA-309-PHX-LAX,typo_missing_letter,typos
+1923.0,flight,AA-1165-JFK-MIA,  AA-1165-JFK-MIA ,typo_extra_whitespace,typos
+1262.0,flight,AA-2050-ORD-MIA,AAA-2050-ORD-MIA,typo_duplicated_letter,typos
+1956.0,flight,AA-3-JFK-LAX,AA3--JFK-LAX,typo_swapped_letters,typos
+2055.0,flight,AA-1733-ORD-PHX,AA-1733-ORD-phx,typo_random_case,typos
+1959.0,flight,UA-5487-SFO-MRY,UA-5487-SFO-Mry,typo_random_case,typos
+1144.0,flight,AA-3063-SLC-LAX,AA-3063-SLC-LXA,typo_swapped_letters,typos
+721.0,flight,CO-50-CLE-EWR,  CO-50-CLE-EWR ,typo_extra_whitespace,typos
+1211.0,flight,,,typo_too_short_unchanged,typos
+1482.0,flight,AA-85-JFK-SFO,AA-85-JFK-sfo,typo_random_case,typos
+2289.0,flight,CO-1694-LAX-IAH,CO-1694-lax-iah,typo_random_case,typos
+652.0,flight,UA-2314-ATL-PHL,UA-2314-atl-phl,typo_random_case,typos
+230.0,flight,AA-2268-PHX-ORD,AA-2268PHX-ORD,typo_missing_letter,typos
+2318.0,flight,CO-45-EWR-MIA,COO-45-EWR-MIA,typo_duplicated_letter,typos
+1512.0,flight,CO-1023-IAH-DEN,CO-1023-IHA-DEN,typo_swapped_letters,typos
+162.0,flight,CO-1614-LAX-IAH,CO-1614-LAX-IAAH,typo_duplicated_letter,typos
+339.0,flight,AA-518-MIA-JFK,AA-518-MIA-JFk,typo_random_case,typos
+1258.0,flight,UA-257-JFK-SFO,U-A257-JFK-SFO,typo_swapped_letters,typos
+624.0,flight,UA-3099-PHX-PHL,UA-3099-PHX-PL,typo_missing_letter,typos
+951.0,flight,AA-3063-SLC-LAX,  AA-3063-SLC-LAX ,typo_extra_whitespace,typos
+1380.0,flight,N/A,/A,typo_missing_letter,typos
+706.0,flight,UA-1500-IAH-GUA,A-1500-IAH-GUA,typo_missing_letter,typos
+1373.0,flight,AA-1007-MIA-PHX,AA-1007-MMIA-PHX,typo_duplicated_letter,typos
+2350.0,flight,N/A,NA,typo_missing_letter,typos
+1818.0,flight,N/A,/NA,typo_swapped_letters,typos
+1822.0,flight,AA-1165-JFK-MIA,AA-1165-JFKM-IA,typo_swapped_letters,typos
+980.0,flight,CO-63-EWR-IAH,CCO-63-EWR-IAH,typo_duplicated_letter,typos
+1930.0,flight,UA-2704-DTW-PHX,UA-2704-DTWPHX,typo_missing_letter,typos
+1456.0,flight,AA-3756-ORD-SLC,AA-3756-RD-SLC,typo_missing_letter,typos
+1732.0,flight,UA-3050-PHX-CLT,UA-3050-PHXX-CLT,typo_duplicated_letter,typos
+2156.0,flight,CO-1586-IAH-MCO,CO-1586-IAH-CO,typo_missing_letter,typos
+53.0,flight,NA,Na,typo_random_case,typos
+91.0,flight,AA-4330-CVG-ORD,AA4-330-CVG-ORD,typo_swapped_letters,typos
+1156.0,flight,AA-85-JFK-SFO,  AA-85-JFK-SFO ,typo_extra_whitespace,typos
+1087.0,flight,UA-3515-IAD-MSP,UA-3551-IAD-MSP,typo_swapped_letters,typos
+1238.0,flight,CO-1090-BOS-IAH,CO-10990-BOS-IAH,typo_duplicated_letter,typos
+2205.0,flight,AA-1007-MIA-PHX,A-1007-MIA-PHX,typo_missing_letter,typos
+122.0,flight,unknown,uunknown,typo_duplicated_letter,typos
+1020.0,flight,AA-271-MIA-LAX,AA-271-MIA-ALX,typo_swapped_letters,typos
+1593.0,flight,AA-204-LAX-MCO,A-204-LAX-MCO,typo_missing_letter,typos
+1939.0,flight,UA-854-SFO-IAH,UA-854SFO-IAH,typo_missing_letter,typos
+1914.0,flight,UA-2515-DFW-CLT,UA-25155-DFW-CLT,typo_duplicated_letter,typos
+1295.0,flight,UA-828-SFO-ORD,UA-88-SFO-ORD,typo_missing_letter,typos
+870.0,flight,UA-37-EWR-MCO,UA-37E-WR-MCO,typo_swapped_letters,typos
+954.0,flight,AA-2268-PHX-ORD,AA-2268-PH-XORD,typo_swapped_letters,typos
+2186.0,flight,AA-1279-DFW-PHX,AA-1279-DFWP-HX,typo_swapped_letters,typos
+2270.0,flight,AA-2957-DFW-CVG,AA-9257-DFW-CVG,typo_swapped_letters,typos
+81.0,flight,AA-1279-DFW-PHX,AA-12279-DFW-PHX,typo_duplicated_letter,typos
+305.0,flight,AA-1165-JFK-MIA,AA-1165-JFK-MIA,typo_swapped_letters,typos
+2085.0,flight,UA-257-JFK-SFO,  UA-257-JFK-SFO ,typo_extra_whitespace,typos
+2213.0,flight,AA-3756-ORD-SLC,  AA-3756-ORD-SLC ,typo_extra_whitespace,typos
+1527.0,flight,UA-248-PHX-ORD,UA--248-PHX-ORD,typo_duplicated_letter,typos
+1447.0,flight,CO-1090-BOS-IAH,CO-1090-bos-iah,typo_random_case,typos
+1710.0,flight,AA-649-ORD-SNA,  AA-649-ORD-SNA ,typo_extra_whitespace,typos
+2361.0,flight,UA-257-JFK-SFO,UA-257JFK-SFO,typo_missing_letter,typos
+2220.0,flight,AA-431-MIA-SFO,AA-431-MIA-FSO,typo_swapped_letters,typos
+1268.0,flight,N/A,N/a,typo_random_case,typos
+2262.0,flight,CO-52-IAH-LAX,CO-52-iah-lax,typo_random_case,typos
+698.0,flight,UA-6273-YYC-SFO,A-6273-YYC-SFO,typo_missing_letter,typos
+117.0,flight,NA,  NA ,typo_extra_whitespace,typos

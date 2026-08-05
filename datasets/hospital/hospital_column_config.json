@@ -1,0 +1,9 @@
+{
+  "missing_columns": ["City", "State", "EmergencyService", "HospitalOwner"],
+  "format_columns": [],
+  "outlier_bounds": {
+    "ZipCode": [100000, 999999]
+  },
+  "typo_text_columns": ["HospitalName", "City", "State"],
+  "typo_numeric_columns": ["ZipCode"]
+}

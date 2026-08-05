@@ -1,0 +1,8 @@
+column,dtype_detected,pct_missing,n_unique,min,max,mean,std,top_values
+tuple_id,numeric,0.0,2376,1.0,2376.0,1188.5,686.04,
+src,categorical/text,0.0,38,,,,,"{'helloflight': 100, 'boston': 100, 'flightview': 100, 'airtravelcenter': 100, 'flights': 100}"
+flight,categorical/text,0.0,100,,,,,"{'UA-664-ORD-PHL': 29, 'AA-59-JFK-SFO': 29, 'AA-1640-MIA-MCO': 28, 'AA-2050-ORD-MIA': 28, 'AA-789-ORD-DEN': 28}"
+sched_dep_time,categorical/text,0.0,79,,,,,"{'6:00 a.m.': 124, '7:10 a.m.': 106, '2:55 p.m.': 87, '10:40 a.m.': 77, '4:00 p.m.': 73}"
+act_dep_time,categorical/text,0.0,91,,,,,"{'7:39 a.m.': 55, '8:04 a.m.': 51, '7:22 a.m.': 51, '3:36 p.m.': 49, '8:25 p.m.': 48}"
+sched_arr_time,categorical/text,0.0,94,,,,,"{'2:45 p.m.': 54, '2:35 p.m.': 53, '6:40 p.m.': 50, '3:50 p.m.': 48, '11:35 a.m.': 47}"
+act_arr_time,categorical/text,0.0,96,,,,,"{'11:06 a.m.': 52, '12:09 p.m.': 46, '11:56 a.m.': 43, '7:10 p.m.': 41, '11:12 a.m.': 29}"

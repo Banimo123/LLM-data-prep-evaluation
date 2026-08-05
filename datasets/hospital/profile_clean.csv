@@ -1,0 +1,21 @@
+column,dtype_detected,pct_missing,n_unique,min,max,mean,std,top_values
+index,numeric,0.0,1000,1.0,1000.0,500.5,288.82,
+ProviderNumber,numeric,0.0,45,10001.0,20018.0,10233.44,1398.65,
+HospitalName,categorical/text,0.0,45,,,,,"{'stringfellow memorial hospital': 28, 'huntsville hospital': 28, 'riverview regional medical center': 28, 'helen keller memorial hospital': 25, 'callahan eye foundation hospital': 25}"
+Address1,categorical/text,0.0,45,,,,,"{'301 east 18th st': 28, '101 sivley rd': 28, '600 south third street': 28, '1300 south montgomery avenue': 25, '1720 university blvd': 25}"
+Address2,categorical/text,0.0,1,,,,,{'empty': 1000}
+Address3,categorical/text,0.0,1,,,,,{'empty': 1000}
+City,categorical/text,0.0,39,,,,,"{'birmingham': 80, 'gadsden': 53, 'montgomery': 50, 'dothan': 42, 'anniston': 28}"
+State,categorical/text,0.0,2,,,,,"{'al': 980, 'ak': 20}"
+ZipCode,numeric,0.0,44,35007.0,99559.0,37182.3,8922.53,
+CountyName,categorical/text,0.0,33,,,,,"{'jefferson': 105, 'etowah': 53, 'marshall': 50, 'marion': 50, 'covington': 50}"
+PhoneNumber,numeric,0.0,45,2052743000.0,9075436300.0,2882318541.4,1020364022.84,
+HospitalType,categorical/text,0.0,1,,,,,{'acute care hospitals': 1000}
+HospitalOwner,categorical/text,0.0,8,,,,,"{'voluntary non-profit - private': 265, 'proprietary': 218, 'government - hospital district or authority': 204, 'voluntary non-profit - other': 123, 'voluntary non-profit - church': 75}"
+EmergencyService,categorical/text,0.0,2,,,,,"{'yes': 855, 'no': 145}"
+Condition,categorical/text,0.0,5,,,,,"{'surgical infection prevention': 307, 'heart attack': 279, 'pneumonia': 242, 'heart failure': 163, 'children s asthma care': 9}"
+MeasureCode,categorical/text,0.0,28,,,,,"{'ami-2': 41, 'hf-3': 41, 'hf-4': 41, 'pn-2': 41, 'hf-2': 41}"
+MeasureName,categorical/text,0.0,28,,,,,"{'heart attack patients given aspirin at discharge': 41, 'heart failure patients given ace inhibitor or arb for left ventricular systolic dysfunction (lvsd)': 41, 'heart failure patients given smoking cessation advice/counseling': 41, 'pneumonia patients assessed and given pneumococcal vaccination': 41, 'heart failure patients given an evaluation of left ventricular systolic (lvs) function': 41}"
+Score,categorical/text,0.0,57,,,,,"{'100%': 249, 'empty': 167, '97%': 51, '98%': 45, '99%': 44}"
+Sample,categorical/text,0.0,309,,,,,"{'0 patients': 107, 'empty': 60, '1 patients': 25, '4 patients': 23, '2 patients': 21}"
+Stateavg,categorical/text,0.0,48,,,,,"{'al_ami-5': 40, 'al_ami-4': 40, 'al_ami-3': 40, 'al_ami-2': 40, 'al_pn-2': 40}"

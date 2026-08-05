@@ -1,0 +1,370 @@
+row_id,column,original_value,injected_value,error_type,error_family
+393.0,City,prattville,,missing_nan,missing_values
+496.0,City,centre,unknown,missing_unknown_string,missing_values
+436.0,City,anchorage,,missing_empty_string,missing_values
+84.0,City,florence,unknown,missing_unknown_string,missing_values
+778.0,City,huntsville,,missing_nan,missing_values
+966.0,City,enterprise,unknown,missing_unknown_string,missing_values
+628.0,City,opelika,unknown,missing_unknown_string,missing_values
+695.0,City,tallassee,unknown,missing_unknown_string,missing_values
+273.0,City,alabaster,N/A,missing_N/A_string,missing_values
+444.0,City,anchorage,NA,missing_NA_string,missing_values
+352.0,City,birmingham,unknown,missing_unknown_string,missing_values
+677.0,City,birmingham,,missing_empty_string,missing_values
+413.0,City,russellville,unknown,missing_unknown_string,missing_values
+67.0,City,boaz,N/A,missing_N/A_string,missing_values
+759.0,City,andalusia,NA,missing_NA_string,missing_values
+505.0,City,centre,N/A,missing_N/A_string,missing_values
+485.0,City,ozark,N/A,missing_N/A_string,missing_values
+752.0,City,andalusia,,missing_nan,missing_values
+193.0,City,guntersville,,missing_nan,missing_values
+813.0,City,gadsden,,missing_empty_string,missing_values
+545.0,City,montgomery,,missing_nan,missing_values
+804.0,City,gadsden,NA,missing_NA_string,missing_values
+163.0,City,hartselle,unknown,missing_unknown_string,missing_values
+668.0,City,birmingham,N/A,missing_N/A_string,missing_values
+874.0,City,hamilton,NA,missing_NA_string,missing_values
+891.0,City,fayette, ,missing_whitespace,missing_values
+418.0,City,sylacauga,N/A,missing_N/A_string,missing_values
+982.0,City,oneonta,,missing_nan,missing_values
+820.0,City,gadsden,unknown,missing_unknown_string,missing_values
+902.0,City,gadsden,N/A,missing_N/A_string,missing_values
+625.0,City,opelika,N/A,missing_N/A_string,missing_values
+623.0,City,opelika,N/A,missing_N/A_string,missing_values
+708.0,City,tallassee,N/A,missing_N/A_string,missing_values
+441.0,City,anchorage,,missing_nan,missing_values
+938.0,City,georgiana,N/A,missing_N/A_string,missing_values
+692.0,City,tallassee,unknown,missing_unknown_string,missing_values
+62.0,City,boaz,,missing_empty_string,missing_values
+733.0,City,cullman,N/A,missing_N/A_string,missing_values
+434.0,City,anchorage,,missing_nan,missing_values
+847.0,City,clanton,NA,missing_NA_string,missing_values
+533.0,City,montgomery,NA,missing_NA_string,missing_values
+223.0,City,fort payne, ,missing_whitespace,missing_values
+82.0,City,florence,,missing_empty_string,missing_values
+762.0,City,andalusia,,missing_empty_string,missing_values
+736.0,City,cullman,NA,missing_NA_string,missing_values
+177.0,City,guntersville, ,missing_whitespace,missing_values
+360.0,City,winfield, ,missing_whitespace,missing_values
+124.0,City,luverne,,missing_nan,missing_values
+90.0,City,florence,,missing_empty_string,missing_values
+817.0,City,gadsden,unknown,missing_unknown_string,missing_values
+338.0,State,al,unknown,missing_unknown_string,missing_values
+392.0,State,al,,missing_nan,missing_values
+625.0,State,al,,missing_empty_string,missing_values
+489.0,State,al,NA,missing_NA_string,missing_values
+360.0,State,al,,missing_empty_string,missing_values
+491.0,State,al,,missing_empty_string,missing_values
+488.0,State,al,N/A,missing_N/A_string,missing_values
+280.0,State,al,,missing_nan,missing_values
+814.0,State,al,unknown,missing_unknown_string,missing_values
+633.0,State,al,,missing_nan,missing_values
+451.0,State,ak,,missing_empty_string,missing_values
+685.0,State,al,N/A,missing_N/A_string,missing_values
+87.0,State,al,unknown,missing_unknown_string,missing_values
+376.0,State,al,,missing_empty_string,missing_values
+996.0,State,al,,missing_empty_string,missing_values
+103.0,State,al, ,missing_whitespace,missing_values
+55.0,State,al, ,missing_whitespace,missing_values
+403.0,State,al,N/A,missing_N/A_string,missing_values
+534.0,State,al,NA,missing_NA_string,missing_values
+157.0,State,al,NA,missing_NA_string,missing_values
+341.0,State,al,N/A,missing_N/A_string,missing_values
+440.0,State,ak,N/A,missing_N/A_string,missing_values
+704.0,State,al,,missing_empty_string,missing_values
+120.0,State,al,,missing_nan,missing_values
+161.0,State,al,,missing_nan,missing_values
+415.0,State,al, ,missing_whitespace,missing_values
+324.0,State,al,NA,missing_NA_string,missing_values
+639.0,State,al,NA,missing_NA_string,missing_values
+236.0,State,al,NA,missing_NA_string,missing_values
+164.0,State,al,unknown,missing_unknown_string,missing_values
+394.0,State,al,,missing_nan,missing_values
+875.0,State,al,,missing_nan,missing_values
+268.0,State,al,,missing_empty_string,missing_values
+484.0,State,al,NA,missing_NA_string,missing_values
+680.0,State,al,unknown,missing_unknown_string,missing_values
+787.0,State,al,NA,missing_NA_string,missing_values
+882.0,State,al,NA,missing_NA_string,missing_values
+701.0,State,al, ,missing_whitespace,missing_values
+678.0,State,al,,missing_nan,missing_values
+921.0,State,al,N/A,missing_N/A_string,missing_values
+753.0,State,al,N/A,missing_N/A_string,missing_values
+298.0,State,al,NA,missing_NA_string,missing_values
+955.0,State,al,unknown,missing_unknown_string,missing_values
+958.0,State,al,,missing_empty_string,missing_values
+22.0,State,al, ,missing_whitespace,missing_values
+149.0,State,al,,missing_empty_string,missing_values
+751.0,State,al,N/A,missing_N/A_string,missing_values
+603.0,State,al,N/A,missing_N/A_string,missing_values
+310.0,State,al, ,missing_whitespace,missing_values
+117.0,State,al,NA,missing_NA_string,missing_values
+945.0,EmergencyService,no,,missing_empty_string,missing_values
+104.0,EmergencyService,no,,missing_empty_string,missing_values
+114.0,EmergencyService,no,,missing_empty_string,missing_values
+707.0,EmergencyService,no, ,missing_whitespace,missing_values
+618.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+231.0,EmergencyService,yes,,missing_empty_string,missing_values
+255.0,EmergencyService,yes, ,missing_whitespace,missing_values
+856.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+641.0,EmergencyService,no,N/A,missing_N/A_string,missing_values
+818.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+599.0,EmergencyService,yes,,missing_nan,missing_values
+512.0,EmergencyService,yes, ,missing_whitespace,missing_values
+20.0,EmergencyService,yes,,missing_nan,missing_values
+952.0,EmergencyService,no,,missing_empty_string,missing_values
+364.0,EmergencyService,yes,,missing_empty_string,missing_values
+973.0,EmergencyService,yes,,missing_empty_string,missing_values
+911.0,EmergencyService,yes,,missing_nan,missing_values
+988.0,EmergencyService,yes,,missing_nan,missing_values
+9.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+134.0,EmergencyService,yes, ,missing_whitespace,missing_values
+305.0,EmergencyService,yes,,missing_nan,missing_values
+235.0,EmergencyService,yes,,missing_empty_string,missing_values
+902.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
+747.0,EmergencyService,no, ,missing_whitespace,missing_values
+225.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+303.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+200.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
+138.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+312.0,EmergencyService,yes,,missing_empty_string,missing_values
+270.0,EmergencyService,yes, ,missing_whitespace,missing_values
+936.0,EmergencyService,no,unknown,missing_unknown_string,missing_values
+271.0,EmergencyService,yes,,missing_nan,missing_values
+638.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+313.0,EmergencyService,yes,,missing_nan,missing_values
+544.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+990.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
+798.0,EmergencyService,yes,,missing_nan,missing_values
+537.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+36.0,EmergencyService,yes,,missing_nan,missing_values
+788.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
+454.0,EmergencyService,yes, ,missing_whitespace,missing_values
+519.0,EmergencyService,yes,,missing_nan,missing_values
+993.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+630.0,EmergencyService,yes, ,missing_whitespace,missing_values
+705.0,EmergencyService,no,,missing_empty_string,missing_values
+648.0,EmergencyService,no,,missing_nan,missing_values
+346.0,EmergencyService,yes,NA,missing_NA_string,missing_values
+894.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
+289.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
+531.0,EmergencyService,yes,,missing_empty_string,missing_values
+247.0,HospitalOwner,government - federal,NA,missing_NA_string,missing_values
+768.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
+135.0,HospitalOwner,government - federal,N/A,missing_N/A_string,missing_values
+525.0,HospitalOwner,voluntary non-profit - church,unknown,missing_unknown_string,missing_values
+118.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
+101.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
+457.0,HospitalOwner,government - hospital district or authority,unknown,missing_unknown_string,missing_values
+908.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
+784.0,HospitalOwner,government - hospital district or authority, ,missing_whitespace,missing_values
+601.0,HospitalOwner,voluntary non-profit - other,N/A,missing_N/A_string,missing_values
+996.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
+816.0,HospitalOwner,proprietary, ,missing_whitespace,missing_values
+907.0,HospitalOwner,proprietary,unknown,missing_unknown_string,missing_values
+421.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
+723.0,HospitalOwner,government - hospital district or authority,N/A,missing_N/A_string,missing_values
+289.0,HospitalOwner,voluntary non-profit - church,,missing_nan,missing_values
+863.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
+17.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
+6.0,HospitalOwner,voluntary non-profit - private, ,missing_whitespace,missing_values
+272.0,HospitalOwner,voluntary non-profit - church,,missing_empty_string,missing_values
+719.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
+23.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
+571.0,HospitalOwner,voluntary non-profit - other,N/A,missing_N/A_string,missing_values
+759.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
+883.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
+107.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
+330.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
+405.0,HospitalOwner,voluntary non-profit - private,,missing_nan,missing_values
+697.0,HospitalOwner,voluntary non-profit - private,,missing_nan,missing_values
+496.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
+283.0,HospitalOwner,voluntary non-profit - church, ,missing_whitespace,missing_values
+916.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
+651.0,HospitalOwner,government - local, ,missing_whitespace,missing_values
+620.0,HospitalOwner,government - hospital district or authority,,missing_nan,missing_values
+412.0,HospitalOwner,proprietary,,missing_nan,missing_values
+456.0,HospitalOwner,government - hospital district or authority, ,missing_whitespace,missing_values
+786.0,HospitalOwner,government - hospital district or authority,,missing_nan,missing_values
+532.0,HospitalOwner,voluntary non-profit - church,,missing_nan,missing_values
+609.0,HospitalOwner,voluntary non-profit - other,NA,missing_NA_string,missing_values
+142.0,HospitalOwner,government - federal, ,missing_whitespace,missing_values
+176.0,HospitalOwner,government - hospital district or authority,unknown,missing_unknown_string,missing_values
+160.0,HospitalOwner,proprietary,,missing_nan,missing_values
+808.0,HospitalOwner,proprietary, ,missing_whitespace,missing_values
+230.0,HospitalOwner,voluntary non-profit - church, ,missing_whitespace,missing_values
+927.0,HospitalOwner,proprietary,unknown,missing_unknown_string,missing_values
+830.0,HospitalOwner,voluntary non-profit - private, ,missing_whitespace,missing_values
+477.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
+578.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
+750.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
+936.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
+85.0,ZipCode,35631,433717,outlier_value,outliers
+767.0,ZipCode,36201,934087,outlier_value,outliers
+88.0,ZipCode,35631,679477,outlier_value,outliers
+649.0,ZipCode,36278,840484,outlier_value,outliers
+436.0,ZipCode,99508,499072,outlier_value,outliers
+430.0,ZipCode,35150,304514,outlier_value,outliers
+695.0,ZipCode,36078,599125,outlier_value,outliers
+94.0,ZipCode,36467,157435,outlier_value,outliers
+201.0,ZipCode,35235,844867,outlier_value,outliers
+855.0,ZipCode,35570,668497,outlier_value,outliers
+812.0,HospitalName,gadsden regional medical center,GADSDEN REGIONal medical center,typo_random_case,typos
+91.0,HospitalName,eliza coffee memorial hospital,eliza coffee memorial hopital,typo_missing_letter,typos
+883.0,HospitalName,fayette medical center,FAYette medical center,typo_random_case,typos
+195.0,HospitalName,st vincents east,st vincents  east,typo_duplicated_letter,typos
+63.0,HospitalName,marshall medical center south,  marshall medical center south ,typo_extra_whitespace,typos
+911.0,HospitalName,riverview regional medical center,  riverview regional medical center ,typo_extra_whitespace,typos
+948.0,HospitalName,georgiana hospital,georgiana hospittal,typo_duplicated_letter,typos
+992.0,HospitalName,st vincents blount,st viincents blount,typo_duplicated_letter,typos
+446.0,HospitalName,alaska regional hospital,ALASka regional hospital,typo_random_case,typos
+675.0,HospitalName,university of alabama hospital,  university of alabama hospital ,typo_extra_whitespace,typos
+539.0,HospitalName,baptist medical center south,  baptist medical center south ,typo_extra_whitespace,typos
+85.0,HospitalName,eliza coffee memorial hospital,ELIZA COFFEE MEMORIAL Hospital,typo_random_case,typos
+441.0,HospitalName,alaska regional hospital,ALASKA REGIONAL Hospital,typo_random_case,typos
+634.0,HospitalName,east alabama medical center and snf,east alabama medical centerr and snf,typo_duplicated_letter,typos
+417.0,HospitalName,coosa valley medical center,coosa valle ymedical center,typo_swapped_letters,typos
+125.0,HospitalName,crenshaw community hospital,crenshaw commuinty hospital,typo_swapped_letters,typos
+225.0,HospitalName,dekalb regional medical center,dekab regional medical center,typo_missing_letter,typos
+631.0,HospitalName,east alabama medical center and snf,eastt alabama medical center and snf,typo_duplicated_letter,typos
+490.0,HospitalName,dale medical center,dale medicalc enter,typo_swapped_letters,typos
+822.0,HospitalName,gadsden regional medical center,GADSDEN REGIONAL MEDICAL Center,typo_random_case,typos
+699.0,HospitalName,community hospital inc,cmomunity hospital inc,typo_swapped_letters,typos
+501.0,HospitalName,cherokee medical center,CHEROKEE MEDICal center,typo_random_case,typos
+423.0,HospitalName,coosa valley medical center,coosa valley mdeical center,typo_swapped_letters,typos
+855.0,HospitalName,marion regional medical center,marion regional edical center,typo_missing_letter,typos
+744.0,HospitalName,andalusia regional hospital,ANDALUSIA REGIONal hospital,typo_random_case,typos
+825.0,HospitalName,gadsden regional medical center,gadsden reional medical center,typo_missing_letter,typos
+715.0,HospitalName,community hospital inc,community hospital icn,typo_swapped_letters,typos
+511.0,HospitalName,cherokee medical center,cherokeee medical center,typo_duplicated_letter,typos
+829.0,HospitalName,chilton medical center,chilton medical centre,typo_swapped_letters,typos
+179.0,HospitalName,marshall medical center north,  marshall medical center north ,typo_extra_whitespace,typos
+769.0,HospitalName,stringfellow memorial hospital,stringfellow memorial hoospital,typo_duplicated_letter,typos
+364.0,HospitalName,northwest medical center,northwest medical cnter,typo_missing_letter,typos
+276.0,HospitalName,shelby baptist medical center,shelby baptist medical cennter,typo_duplicated_letter,typos
+767.0,HospitalName,stringfellow memorial hospital,stringfellow  memorial hospital,typo_duplicated_letter,typos
+551.0,HospitalName,jackson hospital & clinic inc,JACKSON HOSPITAL & clinic inc,typo_random_case,typos
+630.0,HospitalName,east alabama medical center and snf,east alabama medical cente rand snf,typo_swapped_letters,typos
+741.0,HospitalName,andalusia regional hospital,  andalusia regional hospital ,typo_extra_whitespace,typos
+397.0,HospitalName,prattville baptist hospital,prattvilleb aptist hospital,typo_swapped_letters,typos
+438.0,HospitalName,alaska regional hospital,alaska regional hopsital,typo_swapped_letters,typos
+83.0,HospitalName,eliza coffee memorial hospital,elizaa coffee memorial hospital,typo_duplicated_letter,typos
+116.0,City,opp,opp,typo_swapped_letters,typos
+976.0,City,enterprise,eterprise,typo_missing_letter,typos
+296.0,City,birmingham,brimingham,typo_swapped_letters,typos
+763.0,City,andalusia,andaluusia,typo_duplicated_letter,typos
+234.0,City,fort payne,fort pyne,typo_missing_letter,typos
+492.0,City,centre,entre,typo_missing_letter,typos
+373.0,City,winfield,winfiled,typo_swapped_letters,typos
+21.0,City,dothan,dthan,typo_missing_letter,typos
+598.0,City,elba,  elba ,typo_extra_whitespace,typos
+903.0,City,gadsden,gasdden,typo_swapped_letters,typos
+744.0,City,andalusia,andallusia,typo_duplicated_letter,typos
+672.0,City,birmingham,bimringham,typo_swapped_letters,typos
+265.0,City,thomasville,tomasville,typo_missing_letter,typos
+673.0,City,birmingham,  birmingham ,typo_extra_whitespace,typos
+487.0,City,ozark,oazrk,typo_swapped_letters,typos
+321.0,City,anniston,Anniston,typo_random_case,typos
+484.0,City,ozark,ozzark,typo_duplicated_letter,typos
+363.0,City,winfield,WINField,typo_random_case,typos
+987.0,City,oneonta,  oneonta ,typo_extra_whitespace,typos
+969.0,City,enterprise,enteprrise,typo_swapped_letters,typos
+696.0,City,tallassee,tallasese,typo_swapped_letters,typos
+620.0,City,opelika,opelikka,typo_duplicated_letter,typos
+447.0,City,anchorage,anchoorage,typo_duplicated_letter,typos
+436.0,City,,,typo_too_short_unchanged,typos
+697.0,City,tallassee,tallasese,typo_swapped_letters,typos
+162.0,City,hartselle,hatrselle,typo_swapped_letters,typos
+912.0,City,gadsden,gasden,typo_missing_letter,typos
+86.0,City,florence,  florence ,typo_extra_whitespace,typos
+456.0,City,sheffield,  sheffield ,typo_extra_whitespace,typos
+148.0,City,hartselle,hatselle,typo_missing_letter,typos
+954.0,City,georgiana,gerogiana,typo_swapped_letters,typos
+102.0,City,opp,op,typo_missing_letter,typos
+694.0,City,tallassee,TALlassee,typo_random_case,typos
+356.0,City,winfield,winfiield,typo_duplicated_letter,typos
+679.0,City,birmingham,BIRMINGHAm,typo_random_case,typos
+338.0,City,dothan,Dothan,typo_random_case,typos
+947.0,City,georgiana,GEORGIANa,typo_random_case,typos
+156.0,City,hartselle,haartselle,typo_duplicated_letter,typos
+335.0,City,dothan,othan,typo_missing_letter,typos
+874.0,City,NA,AN,typo_swapped_letters,typos
+443.0,State,ak,k,typo_missing_letter,typos
+968.0,State,al,l,typo_missing_letter,typos
+44.0,State,al,aal,typo_duplicated_letter,typos
+428.0,State,al,aal,typo_duplicated_letter,typos
+780.0,State,al,l,typo_missing_letter,typos
+306.0,State,al,l,typo_missing_letter,typos
+838.0,State,al,Al,typo_random_case,typos
+516.0,State,al,  al ,typo_extra_whitespace,typos
+915.0,State,al,l,typo_missing_letter,typos
+924.0,State,al,aal,typo_duplicated_letter,typos
+315.0,State,al,la,typo_swapped_letters,typos
+176.0,State,al,  al ,typo_extra_whitespace,typos
+298.0,State,NA,Na,typo_random_case,typos
+888.0,State,al,Al,typo_random_case,typos
+468.0,State,al,la,typo_swapped_letters,typos
+282.0,State,al,la,typo_swapped_letters,typos
+616.0,State,al,l,typo_missing_letter,typos
+89.0,State,al,  al ,typo_extra_whitespace,typos
+523.0,State,al,  al ,typo_extra_whitespace,typos
+882.0,State,NA,A,typo_missing_letter,typos
+221.0,State,al,Al,typo_random_case,typos
+293.0,State,al,l,typo_missing_letter,typos
+356.0,State,al,Al,typo_random_case,typos
+115.0,State,al,  al ,typo_extra_whitespace,typos
+741.0,State,al,l,typo_missing_letter,typos
+931.0,State,al,la,typo_swapped_letters,typos
+149.0,State,,,typo_too_short_unchanged,typos
+880.0,State,al,l,typo_missing_letter,typos
+525.0,State,al,la,typo_swapped_letters,typos
+196.0,State,al,  al ,typo_extra_whitespace,typos
+605.0,State,al,l,typo_missing_letter,typos
+954.0,State,al,aal,typo_duplicated_letter,typos
+22.0,State, , ,typo_too_short_unchanged,typos
+799.0,State,al,  al ,typo_extra_whitespace,typos
+883.0,State,al,aal,typo_duplicated_letter,typos
+772.0,State,al,l,typo_missing_letter,typos
+249.0,State,al,la,typo_swapped_letters,typos
+978.0,State,al,la,typo_swapped_letters,typos
+501.0,State,al,Al,typo_random_case,typos
+286.0,ZipCode,35007,3S5007,typo_letter_inside_number,typos
+24.0,ZipCode,36302,363j02,typo_letter_inside_number,typos
+893.0,ZipCode,35555,35555O,typo_zero_as_letter_O,typos
+585.0,ZipCode,36854,36854l,typo_unit_suffix_injected,typos
+462.0,ZipCode,35660,35660l,typo_unit_suffix_injected,typos
+461.0,ZipCode,35660,35660O,typo_unit_suffix_injected,typos
+727.0,ZipCode,35058,3O5058,typo_letter_inside_number,typos
+795.0,ZipCode,35801,358O1,typo_zero_as_letter_O,typos
+301.0,ZipCode,35233,35233O,typo_zero_as_letter_O,typos
+578.0,ZipCode,36854,36854B,typo_unit_suffix_injected,typos
+919.0,ZipCode,35901,3590B1,typo_letter_inside_number,typos
+232.0,ZipCode,35968,35S968,typo_letter_inside_number,typos
+249.0,ZipCode,36784,36784j,typo_unit_suffix_injected,typos
+705.0,ZipCode,36078,3607kg8,typo_letter_inside_number,typos
+426.0,ZipCode,35150,35150kg,typo_unit_suffix_injected,typos
+136.0,ZipCode,36049,36049O,typo_unit_suffix_injected,typos
+409.0,ZipCode,36067,3l6067,typo_letter_inside_number,typos
+6.0,ZipCode,35233,35233O,typo_zero_as_letter_O,typos
+926.0,ZipCode,35901,35901€,typo_unit_suffix_injected,typos
+627.0,ZipCode,36801,36801j,typo_unit_suffix_injected,typos
+17.0,ZipCode,35660,3566O,typo_zero_as_letter_O,typos
+482.0,ZipCode,36360,36360O,typo_unit_suffix_injected,typos
+658.0,ZipCode,36278,36278j,typo_unit_suffix_injected,typos
+918.0,ZipCode,35901,359O1,typo_zero_as_letter_O,typos
+731.0,ZipCode,35058,3O5058,typo_letter_inside_number,typos
+501.0,ZipCode,35960,35960O,typo_unit_suffix_injected,typos
+616.0,ZipCode,36801,3j6801,typo_letter_inside_number,typos
+826.0,ZipCode,35903,3590kg3,typo_letter_inside_number,typos
+143.0,ZipCode,36049,36O49,typo_zero_as_letter_O,typos
+276.0,ZipCode,35007,35O07,typo_zero_as_letter_O,typos
+818.0,ZipCode,35903,35903kg,typo_unit_suffix_injected,typos
+538.0,ZipCode,36116,36116kg,typo_unit_suffix_injected,typos
+946.0,ZipCode,36033,36033€,typo_unit_suffix_injected,typos
+793.0,ZipCode,35801,3kg5801,typo_letter_inside_number,typos
+839.0,ZipCode,35045,35045kg,typo_unit_suffix_injected,typos
+108.0,ZipCode,36467,36467S,typo_unit_suffix_injected,typos
+178.0,ZipCode,35976,3597j6,typo_letter_inside_number,typos
+776.0,ZipCode,35801,35B801,typo_letter_inside_number,typos
+162.0,ZipCode,35640,35640€,typo_unit_suffix_injected,typos
+103.0,ZipCode,36467,36467O,typo_zero_as_letter_O,typos
