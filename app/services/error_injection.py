@@ -328,50 +328,78 @@ def profile_dataset(df, top_n=5):
 # ---------------------------------------------------------------------------
 # 6. inject_all — application séquentielle sur le même dataset
 # ---------------------------------------------------------------------------
-def inject_all(df_clean, random_state=42, rates=None):
+def inject_all(df_clean, random_state=42, rates=None, column_config=None):
     """
     Applique les 4 types d'erreurs sur une seule copie du dataset clean.
+
+    column_config : dict optionnel pour cibler d'autres colonnes que celles de
+    hotel_bookings (par défaut si non fourni). Format attendu :
+        {
+            "missing_columns": [...],
+            "format_columns": [...],          # colonnes de date
+            "outlier_bounds": {col: (low, high), ...},
+            "typo_text_columns": [...],
+            "typo_numeric_columns": [...],
+        }
     """
     rates = rates or {"missing": 0.10, "format": 0.15, "outliers": 0.02, "typos": 0.08}
+
+    default_config = {
+        "missing_columns": ["country", "agent", "children", "market_segment", "meal"],
+        "format_columns": ["reservation_status_date"],
+        "outlier_bounds": {
+            "adr": (-500, 10000),
+            "babies": (10, 50),
+            "stays_in_week_nights": (200, 1000),
+            "days_in_waiting_list": (2000, 9000),
+        },
+        "typo_text_columns": ["hotel", "deposit_type", "customer_type"],
+        "typo_numeric_columns": ["lead_time", "adults"],
+    }
+    cfg = {**default_config, **(column_config or {})}
 
     df_current = df_clean.copy()
     all_logs = []
 
     df_current, log_missing = inject_missing_values(
         df_current,
-        columns=["country", "agent", "children", "market_segment", "meal"],
+        columns=cfg["missing_columns"],
         error_rate=rates["missing"], random_state=random_state)
     log_missing["error_family"] = "missing_values"
     all_logs.append(log_missing)
 
     df_current, log_format = inject_format_errors(
         df_current,
-        columns=["reservation_status_date"],
+        columns=cfg["format_columns"],
         error_rate=rates["format"], random_state=random_state)
     log_format["error_family"] = "format_errors"
     all_logs.append(log_format)
 
     df_current, log_outliers = inject_outliers(
         df_current,
-        column_bounds={
-            "adr": (-500, 10000),
-            "babies": (10, 50),
-            "stays_in_week_nights": (200, 1000),
-            "days_in_waiting_list": (2000, 9000),
-        },
+        column_bounds=cfg["outlier_bounds"],
         error_rate=rates["outliers"], random_state=random_state)
     log_outliers["error_family"] = "outliers"
     all_logs.append(log_outliers)
 
     df_current, log_typos = inject_typos(
         df_current,
-        text_columns=["hotel", "deposit_type", "customer_type"],
-        numeric_columns=["lead_time", "adults"],
+        text_columns=cfg["typo_text_columns"],
+        numeric_columns=cfg["typo_numeric_columns"],
         error_rate=rates["typos"], random_state=random_state)
     log_typos["error_family"] = "typos"
     all_logs.append(log_typos)
 
     full_log = pd.concat(all_logs, ignore_index=True)
+
+    # Garde-fou : si rien n'a été injecté, le dataset ne correspond probablement pas
+    # à la configuration de colonnes utilisée (silencieux sinon, donc dangereux).
+    if len(full_log) == 0:
+        raise ValueError(
+            "Aucune erreur injectée : vérifiez que column_config correspond bien aux "
+            "colonnes réelles de ce dataset (aucune des colonnes ciblées n'a été trouvée)."
+        )
+
     return df_current, full_log
 
 
@@ -399,14 +427,35 @@ def get_rates_for_level(level):
 # 8. Script principal
 # ---------------------------------------------------------------------------
 def main():
-    parser = argparse.ArgumentParser(description="Injection d'erreurs contrôlées (hotel_bookings).")
+    parser = argparse.ArgumentParser(description="Injection d'erreurs contrôlées.")
     parser.add_argument("--input", required=True, help="Chemin vers clean.csv")
     parser.add_argument("--output_dir", required=True, help="Dossier de sortie (ex: datasets/hotel_bookings)")
     parser.add_argument("--random_state", type=int, default=42)
+    parser.add_argument(
+        "--column_config", default=None,
+        help="Chemin vers un JSON décrivant les colonnes à cibler pour ce dataset "
+             "(missing_columns, format_columns, outlier_bounds, typo_text_columns, "
+             "typo_numeric_columns). Si absent, utilise la config hotel_bookings par défaut "
+             "-- à fournir obligatoirement pour tout autre dataset.")
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+
+    column_config = None
+    if args.column_config:
+        import json
+        with open(args.column_config, "r", encoding="utf-8") as f:
+            column_config = json.load(f)
+        # JSON n'a pas de tuples : reconvertir les bornes d'outliers en tuples
+        if "outlier_bounds" in column_config:
+            column_config["outlier_bounds"] = {
+                k: tuple(v) for k, v in column_config["outlier_bounds"].items()
+            }
+        print(f"Configuration de colonnes chargée depuis {args.column_config}\n")
+    else:
+        print("Aucun --column_config fourni : utilisation de la config hotel_bookings par défaut. "
+              "Si ce n'est pas le dataset hotel_bookings, fournissez --column_config !\n")
 
     print(f"Lecture de {args.input} ...")
     df_clean = pd.read_csv(args.input)
@@ -430,7 +479,8 @@ def main():
         rates = get_rates_for_level(level)
         print(f"--- Niveau de bruit : {level} (rates={rates}) ---")
 
-        df_final, full_log = inject_all(df_clean, random_state=args.random_state, rates=rates)
+        df_final, full_log = inject_all(
+            df_clean, random_state=args.random_state, rates=rates, column_config=column_config)
 
         out_csv = output_dir / f"noisy_{level}.csv"
         df_final.to_csv(out_csv, index=False)

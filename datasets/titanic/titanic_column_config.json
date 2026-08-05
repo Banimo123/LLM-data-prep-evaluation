@@ -1,0 +1,11 @@
+{
+  "missing_columns": ["Age", "Cabin", "Embarked"],
+  "format_columns": [],
+  "outlier_bounds": {
+    "Age": [80, 300],
+    "Fare": [600, 10000],
+    "SibSp": [10, 50]
+  },
+  "typo_text_columns": ["Sex", "Embarked"],
+  "typo_numeric_columns": ["Age", "Fare"]
+}
