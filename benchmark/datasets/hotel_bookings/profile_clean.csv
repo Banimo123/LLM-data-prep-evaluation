@@ -1,3 +1,4 @@
+
 column,dtype_detected,pct_missing,n_unique,top_values,min,max,mean,std
 hotel,categorical/text,0.0,2,"{'City Hotel': 79330, 'Resort Hotel': 40060}",,,,
 is_canceled,numeric,0.0,2,,0.0,1.0,0.37,0.48
