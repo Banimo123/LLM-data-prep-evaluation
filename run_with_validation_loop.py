@@ -18,16 +18,21 @@ from app.services.safe_executor import execute_workflow
 
 MAX_ATTEMPTS = 3
 
-DATASET_CSV = "datasets/hotel_bookings/noisy_low.csv"
-INPUT_PATH = "datasets/hotel_bookings/noisy_low.csv"
-OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_low__validated.csv"
-GENERATED_SCRIPT_PATH = Path("workflows/generated/hotel_bookings_low__validated.py")
+# --- Paramètres à changer selon le dataset / niveau de bruit testé ---
+DATASET_NAME = "hotel_bookings"   # "hotel_bookings", "titanic", "flights", "hospital"
+NOISE_LEVEL = "low"               # "low", "medium", "high"
+# -----------------------------------------------------------------
+
+DATASET_CSV = f"datasets/{DATASET_NAME}/noisy_{NOISE_LEVEL}.csv"
+INPUT_PATH = f"datasets/{DATASET_NAME}/noisy_{NOISE_LEVEL}.csv"
+OUTPUT_PATH = f"results/cleaned_datasets/{DATASET_NAME}/noisy_{NOISE_LEVEL}__validated.csv"
+GENERATED_SCRIPT_PATH = Path(f"workflows/generated/{DATASET_NAME}_{NOISE_LEVEL}__validated.py")
 FAILED_SCRIPT_DIR = Path("workflows/failed")
 
 # S'assurer que les dossiers existent
 GENERATED_SCRIPT_PATH.parent.mkdir(parents=True, exist_ok=True)
 FAILED_SCRIPT_DIR.mkdir(parents=True, exist_ok=True)
-Path("results/cleaned_datasets/hotel_bookings").mkdir(parents=True, exist_ok=True)
+Path(f"results/cleaned_datasets/{DATASET_NAME}").mkdir(parents=True, exist_ok=True)
 
 
 def build_validation_prompt(previous_script: str, execution_feedback: str) -> str:
@@ -78,7 +83,7 @@ def main():
         print(f"❌ Échec : {result['error_message']}")
 
         # Sauvegarde du script en échec pour analyse (Phase 6)
-        failed_path = FAILED_SCRIPT_DIR / f"hotel_bookings__attempt{attempt}.py"
+        failed_path = FAILED_SCRIPT_DIR / f"{DATASET_NAME}_{NOISE_LEVEL}__validated_attempt{attempt}.py"
         failed_path.write_text(script, encoding="utf-8")
 
         if attempt == MAX_ATTEMPTS:
