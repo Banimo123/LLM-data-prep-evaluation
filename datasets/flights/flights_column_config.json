@@ -1,7 +1,7 @@
 {
   "missing_columns": ["src", "flight"],
-  "format_columns": ["sched_dep_time", "act_dep_time"],
+  "format_columns": [],
   "outlier_bounds": {},
-  "typo_text_columns": ["src", "flight"],
+  "typo_text_columns": ["src", "flight", "sched_dep_time", "act_dep_time", "sched_arr_time", "act_arr_time"],
   "typo_numeric_columns": []
 }

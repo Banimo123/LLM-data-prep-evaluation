@@ -32,14 +32,23 @@ import numpy as np
 
 DISGUISED_MISSING = {"", "na", "n/a", "unknown", " ", "nan", "none", "null"}
 DATE_FORMATS = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d"]
-MAX_CATEGORY_CARDINALITY = 15   # au-dela, on ne tente pas l'harmonisation par similarite
+MAX_CATEGORY_CARDINALITY = 150  # au-dela, on ne tente pas l'harmonisation par similarite
 MIN_CATEGORY_FREQ_SHARE = 0.02  # une valeur doit representer >=2% des lignes non-nulles
                                   # pour etre consideree "canonique" (sinon = variante bruitee)
 MODE_IMPUTE_SHARE_THRESHOLD = 0.5  # si le mode couvre >50% des valeurs -> imputer par mode
 
 
 def _harmonize_category(value, valid_values):
-    """Rapproche une valeur bruitee de la categorie valide la plus proche (par similarite)."""
+    """Rapproche une valeur bruitee de la categorie valide la plus proche (par similarite).
+
+    Matching volontairement STRICT : un seuil de similarite bas (comme 0.6) confond trop
+    facilement deux valeurs valides mais structurellement proches quand il y a beaucoup de
+    candidats similaires (ex: horaires "9:40 a.m." vs "6:40 p.m.", noms d'hopitaux
+    partageant le mot "hospital", codes pays a 1 lettre d'ecart comme GRC/GBR). On exige
+    donc un score eleve (0.85) ET que le meilleur candidat batte clairement le second
+    (marge >= 0.15) -- sinon on prefere ne rien corriger plutot que de risquer une
+    confusion entre deux valeurs valides differentes.
+    """
     if pd.isna(value):
         return value
     s = str(value).strip()
@@ -49,7 +58,16 @@ def _harmonize_category(value, valid_values):
     for v in valid_values:
         if v.lower() == normalized:
             return v
-    match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
+
+    scored = sorted(
+        ((difflib.SequenceMatcher(None, s, v).ratio(), v) for v in valid_values),
+        key=lambda x: -x[0],
+    )
+    if not scored or scored[0][0] < 0.85:
+        return value
+    if len(scored) > 1 and (scored[0][0] - scored[1][0]) < 0.15:
+        return value  # ambigu : plusieurs candidats plausibles, on ne tranche pas
+    return scored[0][1]
     return match[0] if match else value
 
 
@@ -85,15 +103,82 @@ def _looks_like_date_column(series: pd.Series, col_name: str) -> bool:
     return hit_ratio >= threshold
 
 
+_TIME_PATTERN = re.compile(r"(\d{1,2})\s*:+\s*(\d{1,2})\s*([ap])\s*\.*\s*m\.?", re.IGNORECASE)
+
+
+def _parse_time_robust(value):
+    """Parse un horaire au format 'H:MM a.m./p.m.', tolerant aux fautes de frappe sur les
+    chiffres (ex: 'O' pour '0'). Si la valeur a ete corrompue en date complete ou en
+    timestamp Unix (erreur de type 'format_errors' mal ciblee sur une colonne d'horaire),
+    tente d'en extraire la composante heure. Retourne None si rien n'est recuperable."""
+    if pd.isna(value):
+        return None
+    s = str(value).strip().replace("O", "0").replace("o", "0")
+    m = _TIME_PATTERN.search(s)
+    if m:
+        hour, minute, period = m.groups()
+        try:
+            hour, minute = int(hour), int(minute)
+        except ValueError:
+            return None
+        if 1 <= hour <= 12 and 0 <= minute <= 59:
+            return f"{hour}:{minute:02d} {period.lower()}.m."
+        return None
+
+    # Repli : la valeur ressemble a une date/timestamp (corruption hors-cible) plutot
+    # qu'a un horaire -- on tente d'en extraire l'heure si elle contient une heure non nulle.
+    ts = _parse_date_robust(value)
+    if ts is not pd.NaT and not (ts.hour == 0 and ts.minute == 0):
+        hour12 = ts.hour % 12 or 12
+        period = "a" if ts.hour < 12 else "p"
+        return f"{hour12}:{ts.minute:02d} {period}.m."
+    return None
+
+
+def _looks_like_time_column(series: pd.Series) -> bool:
+    sample = series.dropna().astype(str).head(50)
+    if sample.empty:
+        return False
+    hits = sum(1 for v in sample if _TIME_PATTERN.search(v.replace("O", "0").replace("o", "0")))
+    return hits / len(sample) >= 0.6
+
+
+def _numeric_char_ratio(s: str) -> float:
+    """Fraction de caractères d'une chaîne qui appartiennent à un nombre plausible
+    (chiffre, point, virgule, signe moins, ou 'O'/'o' pouvant être une faute de frappe
+    pour '0'). Une vraie valeur numérique corrompue (ex: '342O') a un ratio proche de 1 ;
+    un horaire ('9:40 a.m.'), un code ('AA-3859-IAH-ORD') ou une adresse
+    ('1720 university blvd') ont un ratio bas car dominés par des lettres/espaces/deux-points."""
+    if len(s) == 0:
+        return 0.0
+    numeric_chars = sum(1 for c in s if c.isdigit() or c in ".-,Oo")
+    return numeric_chars / len(s)
+
+
 def _looks_like_corrupted_numeric(series: pd.Series) -> bool:
     """Detecte une colonne numerique dont certaines valeurs ont ete corrompues en texte
-    (ex: '342O' au lieu de '3420'), en verifiant qu'une majorite des valeurs non-nulles
-    contiennent au moins un chiffre."""
+    (ex: '342O' au lieu de '3420'). Contrairement a une simple presence de chiffre
+    (trop permissif : matchait aussi les horaires, codes de vol, adresses...), exige que
+    la VALEUR ENTIERE ressemble a un nombre (ratio de caracteres numeriques eleve)."""
     sample = series.dropna().astype(str).head(100)
     if sample.empty:
         return False
-    numeric_like = sample.str.contains(r"\d", regex=True)
-    return numeric_like.mean() >= 0.8
+    ratios = sample.apply(_numeric_char_ratio)
+    is_numeric_like = ratios >= 0.85
+    if is_numeric_like.mean() < 0.8:
+        return False
+
+    # Garde-fou : si les valeurs NON numeriques restantes sont dominees par UNE seule
+    # valeur repetee (ex: "empty" present identiquement sur des centaines de lignes),
+    # c'est tres probablement un placeholder categoriel legitime du dataset (deja present
+    # tel quel dans clean.csv), pas du bruit a corriger -> ne pas extraire, laisser tel quel.
+    non_numeric = sample[~is_numeric_like]
+    if len(non_numeric) > 0:
+        top_share = non_numeric.value_counts(normalize=True).iloc[0]
+        if top_share >= 0.3:
+            return False
+
+    return True
 
 
 def _extract_numeric(value):
@@ -106,10 +191,20 @@ def _extract_numeric(value):
 
 def _build_canonical_categories(series: pd.Series) -> list:
     """Deduit la liste des valeurs canoniques d'une colonne categorielle a partir des
-    valeurs les plus frequentes (une variante rare et textuellement proche d'une valeur
-    frequente est presumee etre une erreur/typo, pas une vraie categorie)."""
-    counts = series.dropna().astype(str).str.strip().value_counts(normalize=True)
-    canonical = counts[counts >= MIN_CATEGORY_FREQ_SHARE].index.tolist()
+    valeurs qui se repetent suffisamment (une variante de typo, elle, n'apparait
+    generalement qu'une seule fois -- alors qu'une vraie valeur canonique, meme rare en
+    proportion sur une colonne a forte cardinalite (ex: 100 codes de vol distincts), se
+    repete plusieurs fois). Seuil ABSOLU (nombre d'occurrences), pas relatif : un
+    pourcentage fixe (ex: >=2%) echoue des qu'il y a beaucoup de valeurs distinctes
+    egalement frequentes (chacune < 2% individuellement, ex: 100 codes sur 2376 lignes)."""
+    counts = series.dropna().astype(str).str.strip().value_counts()
+    if len(counts) == 0:
+        return []
+    avg_repeats = counts.sum() / len(counts)
+    # Une vraie valeur canonique doit apparaitre au moins 2 fois, et idealement au moins
+    # ~40% de la repetition moyenne de la colonne (les typos, elles, sont quasi-uniques).
+    min_count = max(2, int(0.4 * avg_repeats))
+    canonical = counts[counts >= min_count].index.tolist()
     return canonical if canonical else counts.index.tolist()[:10]
 
 
@@ -225,6 +320,15 @@ def _clean_dataset_generic(df: pd.DataFrame) -> pd.DataFrame:
 
     remaining_text_cols = [c for c in text_cols if c not in date_cols]
 
+    time_cols = [c for c in remaining_text_cols if _looks_like_time_column(df[c])]
+    for col in time_cols:
+        parsed = df[col].apply(_parse_time_robust)
+        # Si le parsing echoue pour une valeur (None), on garde l'originale plutot que de
+        # la vider -- une valeur non reconnue n'est pas forcement fausse (peut etre une
+        # variante deja correcte que le regex ne couvre pas).
+        df[col] = parsed.where(parsed.notna(), df[col])
+    remaining_text_cols = [c for c in remaining_text_cols if c not in time_cols]
+
     numeric_like_text_cols = [c for c in remaining_text_cols if _looks_like_corrupted_numeric(df[c])]
     for col in numeric_like_text_cols:
         df[col] = df[col].apply(_extract_numeric)
@@ -247,6 +351,19 @@ def _clean_dataset_generic(df: pd.DataFrame) -> pd.DataFrame:
         valid = series.dropna()
         if len(valid) < 10:
             continue
+        # Colonne d'identifiant quasi-unique (ex: tuple_id, index) : chaque valeur est
+        # differente par construction -> pas de notion d'aberrant.
+        if valid.nunique() / len(valid) >= 0.9:
+            continue
+        # Colonne de CODE numerique repete (ex: ProviderNumber, ZipCode, PhoneNumber) :
+        # peu de valeurs distinctes, chacune repetee sur plusieurs lignes (groupement).
+        # Une detection d'outlier par percentile n'a pas de sens ici (ce n'est pas une
+        # mesure continue) et risquerait de "corriger" un code valide mais rare vers un
+        # code totalement different -> on laisse cette colonne intacte (plus sur que de
+        # la corrompre ; une vraie correction demanderait un matching vers les codes
+        # valides connus, hors perimetre de cette baseline generique).
+        if valid.nunique() <= 200 and (valid.nunique() / len(valid)) < 0.5:
+            continue
         low, high = valid.quantile(0.005), valid.quantile(0.995)
         if low == high:
             continue
@@ -256,6 +373,8 @@ def _clean_dataset_generic(df: pd.DataFrame) -> pd.DataFrame:
             mode_counts = non_outlier_valid.value_counts(normalize=True)
             use_mode = (not mode_counts.empty) and (mode_counts.iloc[0] >= MODE_IMPUTE_SHARE_THRESHOLD)
             replacement = mode_counts.index[0] if use_mode else non_outlier_valid.median()
+            if pd.api.types.is_integer_dtype(df[col]) and not float(replacement).is_integer():
+                df[col] = df[col].astype("float64")
             df.loc[is_outlier, col] = replacement
         df[col] = series.where(~is_outlier, df[col])
 

@@ -1,5 +1,70 @@
 [
   {
+    "dataset": "flights",
+    "approche": "manual_baseline",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__manual_baseline.csv",
+    "precision": 1.0,
+    "recall": 0.4104,
+    "f1": 0.5819,
+    "tp": 325,
+    "fp": 0,
+    "fn": 467,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "missing_values": {
+        "tp": 1,
+        "fn": 222,
+        "recall": 0.0045,
+        "f1_sans_fp": 0.0089
+      },
+      "typos": {
+        "tp": 324,
+        "fn": 245,
+        "recall": 0.5694,
+        "f1_sans_fp": 0.7256
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hospital",
+    "approche": "manual_baseline",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__manual_baseline.csv",
+    "precision": 0.9862,
+    "recall": 0.5895,
+    "f1": 0.7379,
+    "tp": 214,
+    "fp": 3,
+    "fn": 149,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 116,
+        "fn": 43,
+        "recall": 0.7296,
+        "f1_sans_fp": 0.8436
+      },
+      "missing_values": {
+        "tp": 98,
+        "fn": 96,
+        "recall": 0.5052,
+        "f1_sans_fp": 0.6712
+      },
+      "outliers": {
+        "tp": 0,
+        "fn": 10,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hotel_bookings",
     "approche": "constrained",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__constrained.csv",
@@ -40,6 +105,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "manual_baseline",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__manual_baseline.csv",
@@ -80,6 +146,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "profile",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__profile.csv",
@@ -122,6 +189,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "constrained",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__constrained.csv",
@@ -162,23 +230,24 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
     "precision": 0.9984,
     "recall": 0.5645,
     "f1": 0.7212,
-    "tp": 38073,
+    "tp": 38071,
     "fp": 62,
-    "fn": 29373,
+    "fn": 29375,
     "n_rows_lost_by_workflow": 27302,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 16026,
-        "fn": 7849,
+        "tp": 16024,
+        "fn": 7851,
         "recall": 0.6712,
-        "f1_sans_fp": 0.8033
+        "f1_sans_fp": 0.8032
       },
       "outliers": {
         "tp": 2056,
@@ -202,6 +271,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "profile",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__profile.csv",
@@ -242,6 +312,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "validated",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__validated.csv",
@@ -284,6 +355,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "constrained",
     "niveau_de_bruit": "medium",
     "fichier": "noisy_medium__constrained.csv",
@@ -324,6 +396,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "manual_baseline",
     "niveau_de_bruit": "medium",
     "fichier": "noisy_medium__manual_baseline.csv",
@@ -364,6 +437,7 @@
     "erreur": null
   },
   {
+    "dataset": "hotel_bookings",
     "approche": "profile",
     "niveau_de_bruit": "medium",
     "fichier": "noisy_medium__profile.csv",
@@ -401,6 +475,41 @@
         "fn": 1043,
         "recall": 0.9418,
         "f1_sans_fp": 0.97
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "manual_baseline",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__manual_baseline.csv",
+    "precision": 1.0,
+    "recall": 0.7172,
+    "f1": 0.8353,
+    "tp": 104,
+    "fp": 0,
+    "fn": 41,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 62,
+        "fn": 31,
+        "recall": 0.6667,
+        "f1_sans_fp": 0.8
+      },
+      "missing_values": {
+        "tp": 38,
+        "fn": 0,
+        "recall": 1.0,
+        "f1_sans_fp": 1.0
+      },
+      "outliers": {
+        "tp": 4,
+        "fn": 10,
+        "recall": 0.2857,
+        "f1_sans_fp": 0.4444
       }
     },
     "erreur": null
