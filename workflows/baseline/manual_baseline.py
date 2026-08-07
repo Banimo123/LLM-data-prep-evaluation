@@ -103,7 +103,20 @@ def _looks_like_date_column(series: pd.Series, col_name: str) -> bool:
     return hit_ratio >= threshold
 
 
-_TIME_PATTERN = re.compile(r"(\d{1,2})\s*:+\s*(\d{1,2})\s*([ap])\s*\.*\s*m\.?", re.IGNORECASE)
+_TIME_PATTERN = re.compile(r"(\d{1,2})\s*:+\s*(\d{1,3})\s*([ap])\s*\.*\s*m?\.?", re.IGNORECASE)
+
+
+def _dedupe_extra_digit(minute_str: str) -> str:
+    """Corrige un groupe de 3 chiffres de minutes issu de l'insertion d'un chiffre en
+    trop (faute de frappe frequente : un chiffre adjacent est duplique, ex: '58' -> '558'
+    ou '35' -> '355'). Heuristique : si deux chiffres adjacents sont identiques, on retire
+    l'un des deux (c'est presque toujours le chiffre insere en trop) ; sinon, on suppose
+    que l'insertion s'est faite au debut (repli sur les 2 derniers chiffres)."""
+    if minute_str[0] == minute_str[1]:
+        return minute_str[1:]
+    if minute_str[1] == minute_str[2]:
+        return minute_str[:2]
+    return minute_str[-2:]
 
 
 def _parse_time_robust(value):
@@ -117,6 +130,8 @@ def _parse_time_robust(value):
     m = _TIME_PATTERN.search(s)
     if m:
         hour, minute, period = m.groups()
+        if len(minute) == 3:
+            minute = _dedupe_extra_digit(minute)
         try:
             hour, minute = int(hour), int(minute)
         except ValueError:
@@ -339,7 +354,7 @@ def _clean_dataset_generic(df: pd.DataFrame) -> pd.DataFrame:
 
     for col in remaining_text_cols:
         n_unique = df[col].dropna().nunique()
-        if 1 < n_unique <= MAX_CATEGORY_CARDINALITY:
+        if n_unique > 1:
             canonical = _build_canonical_categories(df[col])
             df[col] = df[col].apply(lambda v: _harmonize_category(v, canonical))
         else:

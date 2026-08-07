@@ -5,11 +5,11 @@
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
     "precision": 1.0,
-    "recall": 0.4104,
-    "f1": 0.5819,
-    "tp": 325,
+    "recall": 0.5391,
+    "f1": 0.7006,
+    "tp": 427,
     "fp": 0,
-    "fn": 467,
+    "fn": 365,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
@@ -20,10 +20,10 @@
         "f1_sans_fp": 0.0089
       },
       "typos": {
-        "tp": 324,
-        "fn": 245,
-        "recall": 0.5694,
-        "f1_sans_fp": 0.7256
+        "tp": 426,
+        "fn": 143,
+        "recall": 0.7487,
+        "f1_sans_fp": 0.8563
       }
     },
     "erreur": null
