@@ -65,47 +65,6 @@
   },
   {
     "dataset": "hotel_bookings",
-    "approche": "constrained",
-    "niveau_de_bruit": "high",
-    "fichier": "noisy_high__constrained.csv",
-    "precision": 0.9791,
-    "recall": 0.5424,
-    "f1": 0.6981,
-    "tp": 146351,
-    "fp": 3122,
-    "fn": 123466,
-    "n_rows_lost_by_workflow": 2809,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 75911,
-        "fn": 19599,
-        "recall": 0.7948,
-        "f1_sans_fp": 0.8857
-      },
-      "outliers": {
-        "tp": 1306,
-        "fn": 17794,
-        "recall": 0.0684,
-        "f1_sans_fp": 0.128
-      },
-      "missing_values": {
-        "tp": 35441,
-        "fn": 83949,
-        "recall": 0.2969,
-        "f1_sans_fp": 0.4578
-      },
-      "format_errors": {
-        "tp": 33693,
-        "fn": 2124,
-        "recall": 0.9407,
-        "f1_sans_fp": 0.9694
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
     "approche": "manual_baseline",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__manual_baseline.csv",
@@ -184,47 +143,6 @@
         "fn": 2124,
         "recall": 0.9407,
         "f1_sans_fp": 0.9694
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "constrained",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__constrained.csv",
-    "precision": 0.9796,
-    "recall": 0.6476,
-    "f1": 0.7797,
-    "tp": 43678,
-    "fp": 910,
-    "fn": 23768,
-    "n_rows_lost_by_workflow": 18179,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 20359,
-        "fn": 3516,
-        "recall": 0.8527,
-        "f1_sans_fp": 0.9205
-      },
-      "outliers": {
-        "tp": 2322,
-        "fn": 2450,
-        "recall": 0.4866,
-        "f1_sans_fp": 0.6546
-      },
-      "missing_values": {
-        "tp": 12571,
-        "fn": 17274,
-        "recall": 0.4212,
-        "f1_sans_fp": 0.5927
-      },
-      "format_errors": {
-        "tp": 8426,
-        "fn": 528,
-        "recall": 0.941,
-        "f1_sans_fp": 0.9696
       }
     },
     "erreur": null
@@ -350,47 +268,6 @@
         "fn": 510,
         "recall": 0.943,
         "f1_sans_fp": 0.9707
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "constrained",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__constrained.csv",
-    "precision": 0.9896,
-    "recall": 0.6518,
-    "f1": 0.7859,
-    "tp": 87935,
-    "fp": 928,
-    "fn": 46971,
-    "n_rows_lost_by_workflow": 11886,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 40814,
-        "fn": 6941,
-        "recall": 0.8547,
-        "f1_sans_fp": 0.9216
-      },
-      "outliers": {
-        "tp": 5329,
-        "fn": 4219,
-        "recall": 0.5581,
-        "f1_sans_fp": 0.7164
-      },
-      "missing_values": {
-        "tp": 24988,
-        "fn": 34707,
-        "recall": 0.4186,
-        "f1_sans_fp": 0.5902
-      },
-      "format_errors": {
-        "tp": 16804,
-        "fn": 1104,
-        "recall": 0.9384,
-        "f1_sans_fp": 0.9682
       }
     },
     "erreur": null
