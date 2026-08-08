@@ -1,4 +1,4 @@
 noise_level,noise_rates,execution_success,execution_error,precision,recall,f1,tp,fp,fn,n_rows_lost_by_workflow,n_error_cells_lost_with_dropped_rows,columns_dropped_by_workflow
-low,"{'missing': 0.05, 'format': 0.075, 'outliers': 0.01, 'typos': 0.04}",True,,0.9745,0.6166,0.7553,41589,1088,25857,18179,801,[]
-medium,"{'missing': 0.1, 'format': 0.15, 'outliers': 0.02, 'typos': 0.08}",True,,0.9982,0.6511,0.7881,87833,162,47073,0,0,['company']
-high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,0.9788,0.6322,0.7682,170575,3692,99242,2809,812,['company']
+low,"{'missing': 0.05, 'format': 0.075, 'outliers': 0.01, 'typos': 0.04}",True,,0.9659,0.6347,0.7661,42809,1510,24637,18179,801,[]
+medium,"{'missing': 0.1, 'format': 0.15, 'outliers': 0.02, 'typos': 0.08}",True,,0.9828,0.6696,0.7965,90334,1584,44572,10145,1264,['company']
+high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,0.9373,0.6525,0.7694,176059,11777,93758,0,0,['company']

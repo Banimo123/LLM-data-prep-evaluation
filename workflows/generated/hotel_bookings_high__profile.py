@@ -4,8 +4,8 @@ import re
 from datetime import datetime
 import difflib
 
-INPUT_PATH = r"benchmark\datasets\hotel_bookings\noisy_high.csv"
-OUTPUT_PATH = r"results\cleaned_datasets\hotel_bookings\noisy_high__profile.csv"
+INPUT_PATH = "datasets/hotel_bookings/noisy_high.csv"
+OUTPUT_PATH = "results/cleaned_datasets/hotel_bookings/noisy_high__profile.csv"
 
 def extract_numeric(value):
     if pd.isna(value):
@@ -34,277 +34,343 @@ def parse_date(value):
         "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y",
         "%d-%b-%Y", "%Y/%m/%d", "%d.%m.%Y", "%m.%d.%Y"
     ]
+    s = str(value).strip()
     for fmt in date_formats:
         try:
-            return datetime.strptime(str(value), fmt).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
+            dt = datetime.strptime(s, fmt)
+            return dt.strftime("%Y-%m-%d")
+        except ValueError:
             continue
-    try:
-        if str(value).isdigit() and len(str(value)) in (9, 10):
-            return datetime.fromtimestamp(int(value)).strftime("%Y-%m-%d")
-    except (ValueError, OSError):
-        pass
-    return str(value)
+    if s.isdigit() and len(s) in (9, 10):
+        try:
+            dt = datetime.fromtimestamp(int(s))
+            return dt.strftime("%Y-%m-%d")
+        except (ValueError, OSError):
+            pass
+    return value
 
-def clean_hotel_bookings():
+def find_best_grouping_column(df, target_col, is_numeric):
+    target = df[target_col]
+    observed = df[target.notna()]
+    if len(observed) < 30:
+        return None
+    candidates = [c for c in df.columns if c not in (target_col, "row_id")
+                  and not df[c].isna().any() and 1 < df[c].nunique() <= 50]
+    best_col, best_gain = None, 0.0
+    if is_numeric:
+        t = pd.to_numeric(observed[target_col], errors="coerce").dropna()
+        if len(t) < 30:
+            return None
+        global_mad = (t - t.median()).abs().median()
+        if global_mad == 0:
+            return None
+        for cand in candidates:
+            sub = observed.loc[t.index, [cand]].copy(); sub["_t"] = t
+            w_mad, total = 0.0, len(sub)
+            for _, grp in sub.groupby(cand)["_t"]:
+                w_mad += (grp - grp.median()).abs().median() * (len(grp) / total) if len(grp) >= 5 else global_mad * (len(grp) / total)
+            reduction = 1 - (w_mad / global_mad)
+            if reduction > best_gain and reduction >= 0.20:
+                best_gain, best_col = reduction, cand
+    else:
+        t = observed[target_col].astype(str)
+        global_share = t.value_counts(normalize=True).iloc[0]
+        for cand in candidates:
+            sub = pd.DataFrame({"_g": observed[cand], "_t": t})
+            w_share, total = 0.0, len(sub)
+            for _, grp in sub.groupby("_g")["_t"]:
+                w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
+            if (w_share - global_share) > best_gain and (w_share - global_share) >= 0.05:
+                best_gain, best_col = w_share - global_share, cand
+    return best_col
+
+def clean_dataset():
     df = pd.read_csv(INPUT_PATH)
 
+    # Log initial
+    initial_rows, initial_cols = df.shape
+    print(f"Dataset initial: {initial_rows} lignes, {initial_cols} colonnes")
+
+    # Suppression des doublons (conservation de la première occurrence)
+    duplicates_before = df.duplicated().sum()
+    df = df.drop_duplicates().reset_index(drop=True)
+    duplicates_after = df.duplicated().sum()
+    print(f"Doublons supprimés: {duplicates_before - duplicates_after}")
+
+    # Nettoyage colonne par colonne
     operations_log = []
 
-    # 1. Suppression des doublons (en conservant row_id)
-    initial_rows = len(df)
-    df = df.drop_duplicates(subset=df.columns.difference(['row_id']))
-    duplicates_removed = initial_rows - len(df)
-    if duplicates_removed > 0:
-        operations_log.append(f"Doublons supprimés: {duplicates_removed}")
-
-    # 2. Nettoyage colonne par colonne
     # hotel (categorical) - harmonisation des variantes
-    if 'hotel' in df.columns:
-        valid_hotels = ["City Hotel", "Resort Hotel"]
-        df["hotel"] = df["hotel"].apply(lambda v: harmonize_category(v, valid_hotels))
+    if "hotel" in df.columns:
+        valid_values_hotel = ["City Hotel", "Resort Hotel"]
+        df["hotel"] = df["hotel"].apply(lambda v: harmonize_category(v, valid_values_hotel))
+        operations_log.append("hotel: harmonisation des variantes")
 
-    # is_canceled (numeric) - déjà propre (0/1)
-    if 'is_canceled' in df.columns:
+    # is_canceled (numeric) - pas de traitement nécessaire (0/1 complets)
+    if "is_canceled" in df.columns:
         pass
 
-    # lead_time (categorical mais devrait être numeric) - extraction numérique
-    if 'lead_time' in df.columns:
+    # lead_time (categorical -> numeric) - extraction des valeurs numériques
+    if "lead_time" in df.columns:
         df["lead_time"] = df["lead_time"].apply(extract_numeric)
-        # Imputation des valeurs manquantes (0% dans le profil mais au cas où)
-        if df["lead_time"].isna().any():
-            median_lead = df["lead_time"].median()
-            df["lead_time"] = df["lead_time"].fillna(median_lead)
-            operations_log.append(f"lead_time: {df['lead_time'].isna().sum()} valeurs manquantes imputées par médiane")
+        df["lead_time"] = pd.to_numeric(df["lead_time"], errors="coerce")
+        operations_log.append("lead_time: extraction des valeurs numériques")
 
-    # arrival_date_year (numeric) - déjà propre
-    if 'arrival_date_year' in df.columns:
+    # arrival_date_year (numeric) - pas de traitement nécessaire
+    if "arrival_date_year" in df.columns:
         pass
 
-    # arrival_date_month (categorical) - harmonisation
-    if 'arrival_date_month' in df.columns:
+    # arrival_date_month (categorical) - harmonisation des mois
+    if "arrival_date_month" in df.columns:
         valid_months = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ]
         df["arrival_date_month"] = df["arrival_date_month"].apply(
-            lambda v: harmonize_category(v, valid_months))
+            lambda v: harmonize_category(v, valid_months)
+        )
+        operations_log.append("arrival_date_month: harmonisation des mois")
 
-    # arrival_date_week_number (numeric) - déjà propre
-    if 'arrival_date_week_number' in df.columns:
+    # arrival_date_week_number (numeric) - pas de traitement nécessaire
+    if "arrival_date_week_number" in df.columns:
         pass
 
-    # arrival_date_day_of_month (numeric) - déjà propre
-    if 'arrival_date_day_of_month' in df.columns:
+    # arrival_date_day_of_month (numeric) - pas de traitement nécessaire
+    if "arrival_date_day_of_month" in df.columns:
         pass
 
-    # stays_in_weekend_nights (numeric) - valeurs aberrantes (max 19 dans profil)
-    if 'stays_in_weekend_nights' in df.columns:
-        # Bornes physiques: 0-7 (weekend = 2 jours max)
-        median_weekend = df["stays_in_weekend_nights"].median()
-        df.loc[df["stays_in_weekend_nights"] > 7, "stays_in_weekend_nights"] = median_weekend
-        operations_log.append(f"stays_in_weekend_nights: {len(df[df['stays_in_weekend_nights'] > 7])} valeurs aberrantes corrigées")
+    # stays_in_weekend_nights (numeric) - traitement des valeurs aberrantes
+    if "stays_in_weekend_nights" in df.columns:
+        q99 = df["stays_in_weekend_nights"].quantile(0.99)
+        outliers = df["stays_in_weekend_nights"] > q99
+        df.loc[outliers, "stays_in_weekend_nights"] = df["stays_in_weekend_nights"].median()
+        operations_log.append("stays_in_weekend_nights: correction des outliers")
 
-    # stays_in_week_nights (numeric) - valeurs aberrantes (max 999 dans profil)
-    if 'stays_in_week_nights' in df.columns:
-        # 99.5e percentile pour éviter de supprimer des séjours longs valides
-        p995 = np.percentile(df["stays_in_week_nights"].dropna(), 99.5)
-        median_week = df["stays_in_week_nights"].median()
-        df.loc[df["stays_in_week_nights"] > p995, "stays_in_week_nights"] = median_week
-        operations_log.append(f"stays_in_week_nights: {len(df[df['stays_in_week_nights'] > p995])} valeurs aberrantes corrigées")
+    # stays_in_week_nights (numeric) - traitement des valeurs aberrantes
+    if "stays_in_week_nights" in df.columns:
+        q99 = df["stays_in_week_nights"].quantile(0.99)
+        outliers = df["stays_in_week_nights"] > q99
+        df.loc[outliers, "stays_in_week_nights"] = df["stays_in_week_nights"].median()
+        operations_log.append("stays_in_week_nights: correction des outliers")
 
-    # adults (categorical mais devrait être numeric) - extraction numérique
-    if 'adults' in df.columns:
+    # adults (categorical -> numeric) - extraction des valeurs numériques
+    if "adults" in df.columns:
         df["adults"] = df["adults"].apply(extract_numeric)
-        # Bornes physiques: 1-4 (max observé 26 dans profil mais probablement erreur)
-        median_adults = df["adults"].median()
-        df.loc[(df["adults"] < 1) | (df["adults"] > 4), "adults"] = median_adults
-        operations_log.append(f"adults: {len(df[(df['adults'] < 1) | (df['adults'] > 4)])} valeurs aberrantes corrigées")
+        df["adults"] = pd.to_numeric(df["adults"], errors="coerce")
+        # Correction des valeurs aberrantes (physiquement impossible)
+        df.loc[df["adults"] > 20, "adults"] = df["adults"].median()
+        operations_log.append("adults: extraction et correction des valeurs numériques")
 
-    # children (categorical mais devrait être numeric) - extraction numérique + imputation
-    if 'children' in df.columns:
+    # children (categorical -> numeric) - traitement des valeurs manquantes et aberrantes
+    if "children" in df.columns:
+        df["children"] = df["children"].replace("unknown", np.nan)
         df["children"] = df["children"].apply(extract_numeric)
-        # Imputation des valeurs manquantes (33.29%)
-        mode_children = df["children"].mode()[0]
-        df["children"] = df["children"].fillna(mode_children)
-        operations_log.append(f"children: {df['children'].isna().sum()} valeurs manquantes imputées par mode")
-        # Bornes physiques: 0-10 (max observé 10 dans profil)
-        df.loc[df["children"] > 10, "children"] = mode_children
-        operations_log.append(f"children: {len(df[df['children'] > 10])} valeurs aberrantes corrigées")
+        df["children"] = pd.to_numeric(df["children"], errors="coerce")
+        # Imputation conditionnelle
+        group_col = find_best_grouping_column(df, "children", True)
+        if group_col:
+            df["children"] = df.groupby(group_col)["children"].transform(
+                lambda s: s.fillna(s.median())
+            )
+        df["children"] = df["children"].fillna(df["children"].median())
+        # Correction des valeurs aberrantes
+        df.loc[df["children"] > 10, "children"] = df["children"].median()
+        operations_log.append("children: imputation et correction des valeurs")
 
-    # babies (numeric) - valeurs aberrantes (max 49 dans profil)
-    if 'babies' in df.columns:
-        # 99.5e percentile
-        p995 = np.percentile(df["babies"].dropna(), 99.5)
-        median_babies = df["babies"].median()
-        df.loc[df["babies"] > p995, "babies"] = median_babies
-        operations_log.append(f"babies: {len(df[df['babies'] > p995])} valeurs aberrantes corrigées")
+    # babies (numeric) - traitement des valeurs aberrantes
+    if "babies" in df.columns:
+        q99 = df["babies"].quantile(0.99)
+        outliers = df["babies"] > q99
+        df.loc[outliers, "babies"] = df["babies"].median()
+        operations_log.append("babies: correction des outliers")
 
-    # meal (categorical) - harmonisation + imputation
-    if 'meal' in df.columns:
-        valid_meals = ["BB", "HB", "FB", "SC", "Undefined"]
-        df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_meals))
-        # Imputation des valeurs manquantes (33.43%)
-        mode_meal = df["meal"].mode()[0]
-        df["meal"] = df["meal"].fillna(mode_meal)
-        operations_log.append(f"meal: {df['meal'].isna().sum()} valeurs manquantes imputées par mode")
+    # meal (categorical) - harmonisation et imputation
+    if "meal" in df.columns:
+        valid_values_meal = ["BB", "HB", "FB", "SC", "Undefined"]
+        df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_values_meal))
+        # Imputation conditionnelle
+        group_col = find_best_grouping_column(df, "meal", False)
+        if group_col:
+            df["meal"] = df.groupby(group_col)["meal"].transform(
+                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "BB")
+            )
+        df["meal"] = df["meal"].fillna(df["meal"].mode().iloc[0])
+        operations_log.append("meal: harmonisation et imputation")
 
-    # country (categorical) - harmonisation (codes ISO 3 lettres)
-    if 'country' in df.columns:
-        # Pas de liste exhaustive, mais nettoyage des espaces et casse
-        df["country"] = df["country"].str.strip().str.upper()
-        # Imputation des valeurs manquantes (33.94%)
-        mode_country = df["country"].mode()[0]
-        df["country"] = df["country"].fillna(mode_country)
-        operations_log.append(f"country: {df['country'].isna().sum()} valeurs manquantes imputées par mode")
+    # country (categorical) - harmonisation et imputation
+    if "country" in df.columns:
+        # Liste des codes pays ISO valides (3 lettres majuscules)
+        valid_countries = [
+            "PRT", "GBR", "FRA", "ESP", "DEU", "ITA", "IRL", "BEL", "NLD",
+            "USA", "BRA", "CHN", "RUS", "JPN", "AUS", "CAN", "CHE", "SWE"
+        ]
+        df["country"] = df["country"].astype(str).str.strip().str.upper()
+        df["country"] = df["country"].apply(
+            lambda v: v if len(v) == 3 and v.isalpha() and v in valid_countries else np.nan
+        )
+        # Imputation conditionnelle
+        group_col = find_best_grouping_column(df, "country", False)
+        if group_col:
+            df["country"] = df.groupby(group_col)["country"].transform(
+                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "PRT")
+            )
+        df["country"] = df["country"].fillna(df["country"].mode().iloc[0])
+        operations_log.append("country: harmonisation et imputation")
 
-    # market_segment (categorical) - harmonisation + imputation
-    if 'market_segment' in df.columns:
-        valid_segments = [
+    # market_segment (categorical) - harmonisation et imputation
+    if "market_segment" in df.columns:
+        valid_values_segment = [
             "Online TA", "Offline TA/TO", "Groups", "Direct",
             "Corporate", "Complementary", "Aviation", "Undefined"
         ]
         df["market_segment"] = df["market_segment"].apply(
-            lambda v: harmonize_category(v, valid_segments))
-        # Imputation des valeurs manquantes (33.35%)
-        mode_segment = df["market_segment"].mode()[0]
-        df["market_segment"] = df["market_segment"].fillna(mode_segment)
-        operations_log.append(f"market_segment: {df['market_segment'].isna().sum()} valeurs manquantes imputées par mode")
+            lambda v: harmonize_category(v, valid_values_segment)
+        )
+        # Imputation conditionnelle
+        group_col = find_best_grouping_column(df, "market_segment", False)
+        if group_col:
+            df["market_segment"] = df.groupby(group_col)["market_segment"].transform(
+                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "Online TA")
+            )
+        df["market_segment"] = df["market_segment"].fillna(df["market_segment"].mode().iloc[0])
+        operations_log.append("market_segment: harmonisation et imputation")
 
     # distribution_channel (categorical) - harmonisation
-    if 'distribution_channel' in df.columns:
-        valid_channels = ["TA/TO", "Direct", "Corporate", "GDS", "Undefined"]
+    if "distribution_channel" in df.columns:
+        valid_values_channel = ["TA/TO", "Direct", "Corporate", "GDS", "Undefined"]
         df["distribution_channel"] = df["distribution_channel"].apply(
-            lambda v: harmonize_category(v, valid_channels))
+            lambda v: harmonize_category(v, valid_values_channel)
+        )
+        operations_log.append("distribution_channel: harmonisation")
 
-    # is_repeated_guest (numeric) - déjà propre
-    if 'is_repeated_guest' in df.columns:
+    # is_repeated_guest (numeric) - pas de traitement nécessaire
+    if "is_repeated_guest" in df.columns:
         pass
 
-    # previous_cancellations (numeric) - valeurs aberrantes (max 26 dans profil)
-    if 'previous_cancellations' in df.columns:
-        # 99.5e percentile
-        p995 = np.percentile(df["previous_cancellations"].dropna(), 99.5)
-        median_prev_canc = df["previous_cancellations"].median()
-        df.loc[df["previous_cancellations"] > p995, "previous_cancellations"] = median_prev_canc
-        operations_log.append(f"previous_cancellations: {len(df[df['previous_cancellations'] > p995])} valeurs aberrantes corrigées")
+    # previous_cancellations (numeric) - traitement des valeurs aberrantes
+    if "previous_cancellations" in df.columns:
+        q99 = df["previous_cancellations"].quantile(0.99)
+        outliers = df["previous_cancellations"] > q99
+        df.loc[outliers, "previous_cancellations"] = df["previous_cancellations"].median()
+        operations_log.append("previous_cancellations: correction des outliers")
 
-    # previous_bookings_not_canceled (numeric) - valeurs aberrantes (max 72 dans profil)
-    if 'previous_bookings_not_canceled' in df.columns:
-        # 99.5e percentile
-        p995 = np.percentile(df["previous_bookings_not_canceled"].dropna(), 99.5)
-        median_prev_book = df["previous_bookings_not_canceled"].median()
-        df.loc[df["previous_bookings_not_canceled"] > p995, "previous_bookings_not_canceled"] = median_prev_book
-        operations_log.append(f"previous_bookings_not_canceled: {len(df[df['previous_bookings_not_canceled'] > p995])} valeurs aberrantes corrigées")
+    # previous_bookings_not_canceled (numeric) - traitement des valeurs aberrantes
+    if "previous_bookings_not_canceled" in df.columns:
+        q99 = df["previous_bookings_not_canceled"].quantile(0.99)
+        outliers = df["previous_bookings_not_canceled"] > q99
+        df.loc[outliers, "previous_bookings_not_canceled"] = df["previous_bookings_not_canceled"].median()
+        operations_log.append("previous_bookings_not_canceled: correction des outliers")
 
     # reserved_room_type (categorical) - harmonisation
-    if 'reserved_room_type' in df.columns:
-        valid_rooms = ["A", "B", "C", "D", "E", "F", "G", "H", "L", "P"]
+    if "reserved_room_type" in df.columns:
+        valid_values_room = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "P"]
         df["reserved_room_type"] = df["reserved_room_type"].apply(
-            lambda v: harmonize_category(v, valid_rooms))
+            lambda v: harmonize_category(v, valid_values_room)
+        )
+        operations_log.append("reserved_room_type: harmonisation")
 
     # assigned_room_type (categorical) - harmonisation
-    if 'assigned_room_type' in df.columns:
-        valid_rooms = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "P"]
+    if "assigned_room_type" in df.columns:
+        valid_values_room = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "P"]
         df["assigned_room_type"] = df["assigned_room_type"].apply(
-            lambda v: harmonize_category(v, valid_rooms))
+            lambda v: harmonize_category(v, valid_values_room)
+        )
+        operations_log.append("assigned_room_type: harmonisation")
 
-    # booking_changes (numeric) - valeurs aberrantes (max 21 dans profil)
-    if 'booking_changes' in df.columns:
-        # 99.5e percentile
-        p995 = np.percentile(df["booking_changes"].dropna(), 99.5)
-        median_changes = df["booking_changes"].median()
-        df.loc[df["booking_changes"] > p995, "booking_changes"] = median_changes
-        operations_log.append(f"booking_changes: {len(df[df['booking_changes'] > p995])} valeurs aberrantes corrigées")
+    # booking_changes (numeric) - traitement des valeurs aberrantes
+    if "booking_changes" in df.columns:
+        q99 = df["booking_changes"].quantile(0.99)
+        outliers = df["booking_changes"] > q99
+        df.loc[outliers, "booking_changes"] = df["booking_changes"].median()
+        operations_log.append("booking_changes: correction des outliers")
 
-    # deposit_type (categorical) - harmonisation + imputation
-    if 'deposit_type' in df.columns:
-        valid_deposits = ["No Deposit", "Non Refund"]
+    # deposit_type (categorical) - harmonisation
+    if "deposit_type" in df.columns:
+        valid_values_deposit = ["No Deposit", "Non Refund", "Refundable"]
         df["deposit_type"] = df["deposit_type"].apply(
-            lambda v: harmonize_category(v, valid_deposits))
+            lambda v: harmonize_category(v, valid_values_deposit)
+        )
+        operations_log.append("deposit_type: harmonisation")
 
-    # agent (categorical mais devrait être numeric) - extraction numérique + imputation
-    if 'agent' in df.columns:
+    # agent (categorical -> numeric) - extraction et imputation
+    if "agent" in df.columns:
+        df["agent"] = df["agent"].replace("unknown", np.nan)
         df["agent"] = df["agent"].apply(extract_numeric)
-        # Imputation des valeurs manquantes (55.24%)
-        mode_agent = df["agent"].mode()[0]
-        df["agent"] = df["agent"].fillna(mode_agent)
-        operations_log.append(f"agent: {df['agent'].isna().sum()} valeurs manquantes imputées par mode")
+        df["agent"] = pd.to_numeric(df["agent"], errors="coerce")
+        # Imputation conditionnelle
+        group_col = find_best_grouping_column(df, "agent", True)
+        if group_col:
+            df["agent"] = df.groupby(group_col)["agent"].transform(
+                lambda s: s.fillna(s.median())
+            )
+        df["agent"] = df["agent"].fillna(df["agent"].median())
+        operations_log.append("agent: extraction et imputation")
 
-    # company (numeric) - trop de manquants (94.31%) -> suppression de la colonne
-    if 'company' in df.columns:
-        df = df.drop(columns=['company'])
-        operations_log.append("company: colonne supprimée (94.31% de valeurs manquantes)")
+    # company (numeric) - trop de valeurs manquantes (94%) -> suppression de la colonne
+    if "company" in df.columns:
+        df = df.drop(columns=["company"])
+        operations_log.append("company: suppression (94% de valeurs manquantes)")
 
-    # days_in_waiting_list (numeric) - valeurs aberrantes (max 8999 dans profil)
-    if 'days_in_waiting_list' in df.columns:
-        # 99.5e percentile
-        p995 = np.percentile(df["days_in_waiting_list"].dropna(), 99.5)
-        median_wait = df["days_in_waiting_list"].median()
-        df.loc[df["days_in_waiting_list"] > p995, "days_in_waiting_list"] = median_wait
-        operations_log.append(f"days_in_waiting_list: {len(df[df['days_in_waiting_list'] > p995])} valeurs aberrantes corrigées")
+    # days_in_waiting_list (numeric) - traitement des valeurs aberrantes
+    if "days_in_waiting_list" in df.columns:
+        q99 = df["days_in_waiting_list"].quantile(0.99)
+        outliers = df["days_in_waiting_list"] > q99
+        df.loc[outliers, "days_in_waiting_list"] = df["days_in_waiting_list"].median()
+        operations_log.append("days_in_waiting_list: correction des outliers")
 
     # customer_type (categorical) - harmonisation
-    if 'customer_type' in df.columns:
-        valid_customers = ["Transient", "Transient-Party", "Contract", "Group"]
+    if "customer_type" in df.columns:
+        valid_values_customer = ["Transient", "Transient-Party", "Contract", "Group"]
         df["customer_type"] = df["customer_type"].apply(
-            lambda v: harmonize_category(v, valid_customers))
+            lambda v: harmonize_category(v, valid_values_customer)
+        )
+        operations_log.append("customer_type: harmonisation")
 
-    # adr (numeric) - valeurs aberrantes (min -496.7, max 9997.01 dans profil)
-    if 'adr' in df.columns:
-        # Bornes physiques: prix positif, 99.5e percentile
-        p995 = np.percentile(df[df["adr"] > 0]["adr"].dropna(), 99.5)
-        median_adr = df[df["adr"] > 0]["adr"].median()
-        df.loc[(df["adr"] <= 0) | (df["adr"] > p995), "adr"] = median_adr
-        operations_log.append(f"adr: {len(df[(df['adr'] <= 0) | (df['adr'] > p995)])} valeurs aberrantes corrigées")
+    # adr (numeric) - traitement des valeurs aberrantes
+    if "adr" in df.columns:
+        q99 = df["adr"].quantile(0.99)
+        outliers = (df["adr"] > q99) | (df["adr"] < 0)
+        df.loc[outliers, "adr"] = df["adr"].median()
+        operations_log.append("adr: correction des outliers")
 
-    # required_car_parking_spaces (numeric) - valeurs aberrantes (max 8 dans profil)
-    if 'required_car_parking_spaces' in df.columns:
-        # Bornes physiques: 0-5 (max observé 8 mais probablement erreur)
-        mode_parking = df["required_car_parking_spaces"].mode()[0]
-        df.loc[df["required_car_parking_spaces"] > 5, "required_car_parking_spaces"] = mode_parking
-        operations_log.append(f"required_car_parking_spaces: {len(df[df['required_car_parking_spaces'] > 5])} valeurs aberrantes corrigées")
+    # required_car_parking_spaces (numeric) - traitement des valeurs aberrantes
+    if "required_car_parking_spaces" in df.columns:
+        q99 = df["required_car_parking_spaces"].quantile(0.99)
+        outliers = df["required_car_parking_spaces"] > q99
+        df.loc[outliers, "required_car_parking_spaces"] = df["required_car_parking_spaces"].median()
+        operations_log.append("required_car_parking_spaces: correction des outliers")
 
-    # total_of_special_requests (numeric) - valeurs aberrantes (max 5 dans profil)
-    if 'total_of_special_requests' in df.columns:
-        # Bornes physiques: 0-5
-        mode_requests = df["total_of_special_requests"].mode()[0]
-        df.loc[df["total_of_special_requests"] > 5, "total_of_special_requests"] = mode_requests
-        operations_log.append(f"total_of_special_requests: {len(df[df['total_of_special_requests'] > 5])} valeurs aberrantes corrigées")
+    # total_of_special_requests (numeric) - traitement des valeurs aberrantes
+    if "total_of_special_requests" in df.columns:
+        q99 = df["total_of_special_requests"].quantile(0.99)
+        outliers = df["total_of_special_requests"] > q99
+        df.loc[outliers, "total_of_special_requests"] = df["total_of_special_requests"].median()
+        operations_log.append("total_of_special_requests: correction des outliers")
 
     # reservation_status (categorical) - harmonisation
-    if 'reservation_status' in df.columns:
-        valid_status = ["Check-Out", "Canceled", "No-Show"]
+    if "reservation_status" in df.columns:
+        valid_values_status = ["Check-Out", "Canceled", "No-Show"]
         df["reservation_status"] = df["reservation_status"].apply(
-            lambda v: harmonize_category(v, valid_status))
+            lambda v: harmonize_category(v, valid_values_status)
+        )
+        operations_log.append("reservation_status: harmonisation")
 
-    # reservation_status_date (date) - parsing + reformatage
-    if 'reservation_status_date' in df.columns:
+    # reservation_status_date (date) - parsing et standardisation
+    if "reservation_status_date" in df.columns:
         df["reservation_status_date"] = df["reservation_status_date"].apply(parse_date)
+        operations_log.append("reservation_status_date: parsing et standardisation")
 
-    # 3. Conversion des types
-    numeric_cols = [
-        'is_canceled', 'lead_time', 'arrival_date_year', 'arrival_date_week_number',
-        'arrival_date_day_of_month', 'stays_in_weekend_nights', 'stays_in_week_nights',
-        'adults', 'children', 'babies', 'is_repeated_guest', 'previous_cancellations',
-        'previous_bookings_not_canceled', 'booking_changes', 'days_in_waiting_list',
-        'adr', 'required_car_parking_spaces', 'total_of_special_requests'
-    ]
-    for col in numeric_cols:
-        if col in df.columns:
-            df[col] = pd.to_numeric(df[col], errors='coerce')
-            if df[col].isna().any():
-                median_val = df[col].median()
-                df[col] = df[col].fillna(median_val)
-                operations_log.append(f"{col}: {df[col].isna().sum()} valeurs manquantes imputées par médiane")
-
-    # 4. Sauvegarde
-    df.to_csv(OUTPUT_PATH, index=False)
-
-    # 5. Log des opérations
-    print(f"Nettoyage terminé. Lignes initiales: {initial_rows}, lignes finales: {len(df)}")
+    # Log final
+    final_rows, final_cols = df.shape
+    print(f"Dataset final: {final_rows} lignes, {final_cols} colonnes")
+    print("\nOpérations effectuées:")
     for op in operations_log:
         print(f"- {op}")
+    print(f"\nLignes supprimées: {initial_rows - final_rows}")
+    print(f"Colonnes supprimées: {initial_cols - final_cols}")
+
+    # Sauvegarde
+    df.to_csv(OUTPUT_PATH, index=False)
 
 if __name__ == "__main__":
-    clean_hotel_bookings()
+    clean_dataset()

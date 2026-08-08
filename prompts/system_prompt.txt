@@ -130,5 +130,59 @@ RÈGLES STRICTES À RESPECTER :
     valeurs uniques (ex: "is_canceled" avec seulement 0 et 1). La liste `valid_values` doit
     toujours contenir des chaînes de caractères (str), jamais des nombres.
 
+18. IMPÉRATIF pour l'imputation des valeurs manquantes (complète la règle 7) : n'impute JAMAIS
+    directement par le mode/la médiane GLOBAL(E) de la colonne sans vérifier d'abord si une
+    imputation CONDITIONNELLE (par groupe) fait mieux. Une valeur manquante est souvent bien
+    mieux prédite en la conditionnant à une autre colonne corrélée (ex: le pays le plus probable
+    dépend du segment de marché ; le score d'un hôpital dépend de son propriétaire). Utilise
+    exactement cette méthode, pour CHAQUE colonne à imputer :
+    ```python
+    def find_best_grouping_column(df, target_col, is_numeric):
+        target = df[target_col]
+        observed = df[target.notna()]
+        if len(observed) < 30:
+            return None
+        candidates = [c for c in df.columns if c not in (target_col, "row_id")
+                      and not df[c].isna().any() and 1 < df[c].nunique() <= 50]
+        best_col, best_gain = None, 0.0
+        if is_numeric:
+            t = pd.to_numeric(observed[target_col], errors="coerce").dropna()
+            if len(t) < 30:
+                return None
+            global_mad = (t - t.median()).abs().median()
+            if global_mad == 0:
+                return None
+            for cand in candidates:
+                sub = observed.loc[t.index, [cand]].copy(); sub["_t"] = t
+                w_mad, total = 0.0, len(sub)
+                for _, grp in sub.groupby(cand)["_t"]:
+                    w_mad += (grp - grp.median()).abs().median() * (len(grp) / total) if len(grp) >= 5 else global_mad * (len(grp) / total)
+                reduction = 1 - (w_mad / global_mad)
+                if reduction > best_gain and reduction >= 0.20:
+                    best_gain, best_col = reduction, cand
+        else:
+            t = observed[target_col].astype(str)
+            global_share = t.value_counts(normalize=True).iloc[0]
+            for cand in candidates:
+                sub = pd.DataFrame({"_g": observed[cand], "_t": t})
+                w_share, total = 0.0, len(sub)
+                for _, grp in sub.groupby("_g")["_t"]:
+                    w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
+                if (w_share - global_share) > best_gain and (w_share - global_share) >= 0.05:
+                    best_gain, best_col = w_share - global_share, cand
+        return best_col
+
+    group_col = find_best_grouping_column(df, col, is_numeric)
+    if group_col:
+        df[col] = df.groupby(group_col)[col].transform(
+            lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else s.median() if is_numeric else "Unknown")
+        )
+    df[col] = df[col].fillna(df[col].mode().iloc[0] if not is_numeric else df[col].median())  # repli si groupe vide
+    ```
+    Le seuil de gain minimal (20% de réduction de dispersion pour le numérique, 5 points de
+    couverture en plus pour le catégoriel) évite d'utiliser un regroupement qui n'apporte rien de
+    réel. Si aucune colonne candidate ne dépasse ce seuil, retombe simplement sur le mode/la
+    médiane global(e) (comportement de la règle 7).
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.
