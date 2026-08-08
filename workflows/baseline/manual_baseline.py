@@ -204,6 +204,113 @@ def _extract_numeric(value):
     return float(match.group()) if match else np.nan
 
 
+def _find_best_grouping_column(df: pd.DataFrame, target_col: str, is_numeric: bool):
+    """Cherche, parmi les autres colonnes du dataset, la meilleure colonne de regroupement
+    pour affiner l'imputation de target_col (au lieu d'un mode/mediane global, un mode/
+    mediane CONDITIONNEL par groupe, ex: le pays le plus probable depend souvent du segment
+    de marche). Retourne None si aucune colonne candidate n'apporte de gain suffisant
+    (evite la complexite/le risque de sur-ajustement quand ca n'aide pas).
+
+    Criteres d'une bonne colonne de regroupement :
+      - categorielle ou a faible cardinalite (2 a 50 valeurs), sans valeur manquante
+        elle-meme (sinon ca complique la logique sans bien aider)
+      - pour une cible categorielle : le mode CONDITIONNEL (par groupe) doit couvrir une
+        part nettement plus grande des valeurs observees que le mode global (+5 points)
+      - pour une cible numerique : la dispersion (MAD) A L'INTERIEUR des groupes doit etre
+        nettement plus faible que la dispersion globale (reduction d'au moins 20%)
+    """
+    target = df[target_col]
+    observed_mask = target.notna()
+    if observed_mask.sum() < 30:
+        return None
+
+    candidates = [c for c in df.columns if c not in (target_col, "row_id")
+                  and not df[c].isna().any()
+                  and 1 < df[c].nunique() <= 50]
+    if not candidates:
+        return None
+
+    observed = df.loc[observed_mask]
+    best_col, best_gain = None, 0.0
+
+    if is_numeric:
+        target_num = pd.to_numeric(observed[target_col], errors="coerce").dropna()
+        if len(target_num) < 30:
+            return None
+        global_mad = (target_num - target_num.median()).abs().median()
+        if global_mad == 0:
+            return None
+        for cand in candidates:
+            sub = observed.loc[target_num.index, [cand]].copy()
+            sub["_t"] = target_num
+            grouped = sub.groupby(cand)["_t"]
+            weighted_mad = 0.0
+            total = len(sub)
+            for _, grp in grouped:
+                if len(grp) < 5:
+                    weighted_mad += global_mad * (len(grp) / total)  # trop petit, pas fiable
+                    continue
+                weighted_mad += (grp - grp.median()).abs().median() * (len(grp) / total)
+            reduction = 1 - (weighted_mad / global_mad)
+            if reduction > best_gain and reduction >= 0.20:
+                best_gain, best_col = reduction, cand
+    else:
+        target_str = observed[target_col].astype(str)
+        global_mode_share = target_str.value_counts(normalize=True).iloc[0]
+        for cand in candidates:
+            sub = pd.DataFrame({"_g": observed[cand], "_t": target_str})
+            grouped = sub.groupby("_g")["_t"]
+            weighted_share = 0.0
+            total = len(sub)
+            for _, grp in grouped:
+                weighted_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
+            gain = weighted_share - global_mode_share
+            if gain > best_gain and gain >= 0.05:
+                best_gain, best_col = gain, cand
+
+    return best_col
+
+
+def _conditional_impute(df: pd.DataFrame, col: str, is_numeric: bool, fallback_cols: set = None):
+    """Impute les valeurs manquantes de `col` par mode/mediane CONDITIONNEL (par groupe)
+    si une bonne colonne de regroupement existe, sinon retombe sur le mode/mediane global
+    (comportement identique a avant si aucun regroupement n'aide)."""
+    fallback_cols = fallback_cols or set()
+    use_mode_globally = col in fallback_cols
+
+    if is_numeric:
+        valid = df[col].dropna()
+        global_repl = (valid.mode().iloc[0] if (use_mode_globally and not valid.mode().empty)
+                       else valid.median())
+    else:
+        mode = df[col].mode(dropna=True)
+        global_repl = mode.iloc[0] if not mode.empty else "Unknown"
+
+    group_col = _find_best_grouping_column(df, col, is_numeric)
+    if group_col is None:
+        df[col] = df[col].fillna(global_repl)
+        return df
+
+    def _group_fill(s: pd.Series):
+        if is_numeric:
+            valid_s = s.dropna()
+            if len(valid_s) == 0:
+                return s.fillna(global_repl)
+            if use_mode_globally:
+                mode_s = valid_s.mode()
+                repl = mode_s.iloc[0] if not mode_s.empty else valid_s.median()
+            else:
+                repl = valid_s.median()
+        else:
+            mode_s = s.dropna().mode()
+            repl = mode_s.iloc[0] if not mode_s.empty else global_repl
+        return s.fillna(repl)
+
+    df[col] = df.groupby(group_col)[col].transform(_group_fill)
+    df[col] = df[col].fillna(global_repl)  # au cas ou un groupe entier serait vide
+    return df
+
+
 def _build_canonical_categories(series: pd.Series) -> list:
     """Deduit la liste des valeurs canoniques d'une colonne categorielle a partir des
     valeurs qui se repetent suffisamment (une variante de typo, elle, n'apparait
@@ -284,15 +391,8 @@ def _clean_hotel_bookings_specific(df: pd.DataFrame) -> pd.DataFrame:
     for col in df.columns:
         if col == "row_id" or not df[col].isna().any():
             continue
-        if pd.api.types.is_numeric_dtype(df[col]):
-            if col in HOTEL_BOOKINGS_MODE_IMPUTED_COLS:
-                mode = df[col].mode(dropna=True)
-                df[col] = df[col].fillna(mode.iloc[0] if not mode.empty else df[col].median())
-            else:
-                df[col] = df[col].fillna(df[col].median())
-        else:
-            mode = df[col].mode(dropna=True)
-            df[col] = df[col].fillna(mode.iloc[0] if not mode.empty else "Unknown")
+        is_numeric = pd.api.types.is_numeric_dtype(df[col])
+        df = _conditional_impute(df, col, is_numeric, fallback_cols=HOTEL_BOOKINGS_MODE_IMPUTED_COLS)
 
     return df
 
@@ -396,14 +496,15 @@ def _clean_dataset_generic(df: pd.DataFrame) -> pd.DataFrame:
     for col in [c for c in df.columns if c != "row_id"]:
         if not df[col].isna().any():
             continue
-        if pd.api.types.is_numeric_dtype(df[col]):
+        is_numeric = pd.api.types.is_numeric_dtype(df[col])
+        if is_numeric:
             valid = df[col].dropna()
             mode_counts = valid.value_counts(normalize=True)
             use_mode = (not mode_counts.empty) and (mode_counts.iloc[0] >= MODE_IMPUTE_SHARE_THRESHOLD)
-            df[col] = df[col].fillna(mode_counts.index[0] if use_mode else valid.median())
+            fallback_cols = {col} if use_mode else set()
         else:
-            mode = df[col].mode(dropna=True)
-            df[col] = df[col].fillna(mode.iloc[0] if not mode.empty else "Unknown")
+            fallback_cols = set()
+        df = _conditional_impute(df, col, is_numeric, fallback_cols=fallback_cols)
 
     return df
 

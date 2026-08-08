@@ -33,26 +33,26 @@
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
-    "precision": 0.9862,
-    "recall": 0.5895,
-    "f1": 0.7379,
-    "tp": 214,
+    "precision": 0.9904,
+    "recall": 0.8512,
+    "f1": 0.9156,
+    "tp": 309,
     "fp": 3,
-    "fn": 149,
+    "fn": 54,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 116,
-        "fn": 43,
-        "recall": 0.7296,
-        "f1_sans_fp": 0.8436
+        "tp": 117,
+        "fn": 42,
+        "recall": 0.7358,
+        "f1_sans_fp": 0.8478
       },
       "missing_values": {
-        "tp": 98,
-        "fn": 96,
-        "recall": 0.5052,
-        "f1_sans_fp": 0.6712
+        "tp": 192,
+        "fn": 2,
+        "recall": 0.9897,
+        "f1_sans_fp": 0.9948
       },
       "outliers": {
         "tp": 0,
@@ -153,37 +153,37 @@
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
     "precision": 0.9984,
-    "recall": 0.5645,
-    "f1": 0.7212,
-    "tp": 38071,
+    "recall": 0.5865,
+    "f1": 0.739,
+    "tp": 39559,
     "fp": 62,
-    "fn": 29375,
-    "n_rows_lost_by_workflow": 27302,
+    "fn": 27887,
+    "n_rows_lost_by_workflow": 27471,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 16024,
-        "fn": 7851,
-        "recall": 0.6712,
-        "f1_sans_fp": 0.8032
+        "tp": 16002,
+        "fn": 7873,
+        "recall": 0.6702,
+        "f1_sans_fp": 0.8026
       },
       "outliers": {
-        "tp": 2056,
-        "fn": 2716,
-        "recall": 0.4308,
-        "f1_sans_fp": 0.6022
+        "tp": 2054,
+        "fn": 2718,
+        "recall": 0.4304,
+        "f1_sans_fp": 0.6018
       },
       "missing_values": {
-        "tp": 13259,
-        "fn": 16586,
-        "recall": 0.4443,
-        "f1_sans_fp": 0.6152
+        "tp": 14780,
+        "fn": 15065,
+        "recall": 0.4952,
+        "f1_sans_fp": 0.6624
       },
       "format_errors": {
-        "tp": 6732,
-        "fn": 2222,
-        "recall": 0.7518,
-        "f1_sans_fp": 0.8583
+        "tp": 6723,
+        "fn": 2231,
+        "recall": 0.7508,
+        "f1_sans_fp": 0.8577
       }
     },
     "erreur": null
