@@ -184,5 +184,27 @@ RÈGLES STRICTES À RESPECTER :
     réel. Si aucune colonne candidate ne dépasse ce seuil, retombe simplement sur le mode/la
     médiane global(e) (comportement de la règle 7).
 
+19. IMPÉRATIF pour toute colonne ayant un FORMAT ÉTABLI dans les données elles-mêmes — heures
+    ("7:10 a.m."), dates, pourcentages ("97%"), valeurs avec unité textuelle ("33 patients",
+    "12 kg") — ne le remplace JAMAIS par une représentation différente de ton choix (ex: nombre
+    pur sans le "%", format 24h au lieu de 12h, suppression du mot d'unité). Observe le format
+    dominant présent dans l'échantillon/le profil fourni et REPRODUIS-LE EXACTEMENT après
+    correction : si la colonne utilise "97%", ta valeur corrigée doit aussi ressembler à "XX%"
+    (chaîne de caractères), pas à un flottant 97.0. Si elle utilise "33 patients", ta valeur
+    corrigée doit rester "XX patients", pas juste 33. Réduire une colonne à sa seule valeur
+    numérique peut sembler "plus propre", mais ça change la représentation de TOUTES les lignes
+    (corrompues ou non) et fait que plus aucune ne correspond à la vérité terrain — c'est une
+    des causes d'échec les plus fréquentes et les plus coûteuses en precision.
+
+20. IMPÉRATIF pour une colonne majoritairement numérique contenant occasionnellement une valeur
+    textuelle : avant de la traiter comme valeur manquante à imputer, vérifie si cette valeur
+    textuelle SE RÉPÈTE de façon dominante à travers de nombreuses lignes (regarde le profil
+    fourni). Si oui (ex: "empty" présent sur des dizaines/centaines de lignes, pas une seule),
+    c'est très probablement une valeur catégorielle légitime du dataset (ex: "donnée non
+    collectée pour ce cas"), à préserver TELLE QUELLE — ne la convertis pas en NaN puis en une
+    valeur numérique imputée, ce qui la remplacerait par une fausse précision inventée. Ne
+    traite comme "manquante à imputer" que les valeurs textuelles rares/isolées (probable typo
+    ou erreur ponctuelle), pas un placeholder répété systématiquement.
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

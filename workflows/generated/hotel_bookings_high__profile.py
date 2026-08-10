@@ -30,12 +30,12 @@ def harmonize_category(value, valid_values):
 def parse_date(value):
     if pd.isna(value):
         return value
-    date_formats = [
+    formats = [
         "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y",
         "%d-%b-%Y", "%Y/%m/%d", "%d.%m.%Y", "%m.%d.%Y"
     ]
     s = str(value).strip()
-    for fmt in date_formats:
+    for fmt in formats:
         try:
             dt = datetime.strptime(s, fmt)
             return dt.strftime("%Y-%m-%d")
@@ -87,290 +87,258 @@ def find_best_grouping_column(df, target_col, is_numeric):
 def clean_dataset():
     df = pd.read_csv(INPUT_PATH)
 
-    # Log initial
-    initial_rows, initial_cols = df.shape
-    print(f"Dataset initial: {initial_rows} lignes, {initial_cols} colonnes")
-
-    # Suppression des doublons (conservation de la première occurrence)
-    duplicates_before = df.duplicated().sum()
-    df = df.drop_duplicates().reset_index(drop=True)
-    duplicates_after = df.duplicated().sum()
-    print(f"Doublons supprimés: {duplicates_before - duplicates_after}")
+    # Suppression des doublons (conservation du premier)
+    initial_rows = len(df)
+    df = df.drop_duplicates(subset=[c for c in df.columns if c != "row_id"], keep="first")
+    duplicates_removed = initial_rows - len(df)
+    print(f"Doublons supprimés: {duplicates_removed}")
 
     # Nettoyage colonne par colonne
-    operations_log = []
+    operations = []
 
     # hotel (categorical) - harmonisation des variantes
     if "hotel" in df.columns:
         valid_values_hotel = ["City Hotel", "Resort Hotel"]
         df["hotel"] = df["hotel"].apply(lambda v: harmonize_category(v, valid_values_hotel))
-        operations_log.append("hotel: harmonisation des variantes")
+        operations.append("hotel: harmonisation des variantes")
 
-    # is_canceled (numeric) - pas de traitement nécessaire (0/1 complets)
+    # is_canceled (numeric) - pas de correction nécessaire (0/1)
     if "is_canceled" in df.columns:
-        pass
+        df["is_canceled"] = pd.to_numeric(df["is_canceled"], errors="coerce")
+        operations.append("is_canceled: conversion en numérique")
 
     # lead_time (categorical -> numeric) - extraction des valeurs numériques
     if "lead_time" in df.columns:
         df["lead_time"] = df["lead_time"].apply(extract_numeric)
         df["lead_time"] = pd.to_numeric(df["lead_time"], errors="coerce")
-        operations_log.append("lead_time: extraction des valeurs numériques")
+        operations.append("lead_time: extraction des valeurs numériques")
 
-    # arrival_date_year (numeric) - pas de traitement nécessaire
+    # arrival_date_year (numeric) - pas de correction nécessaire
     if "arrival_date_year" in df.columns:
-        pass
+        df["arrival_date_year"] = pd.to_numeric(df["arrival_date_year"], errors="coerce")
 
     # arrival_date_month (categorical) - harmonisation des mois
     if "arrival_date_month" in df.columns:
-        valid_months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ]
+        month_map = {
+            "January": "January", "February": "February", "March": "March",
+            "April": "April", "May": "May", "June": "June",
+            "July": "July", "August": "August", "September": "September",
+            "October": "October", "November": "November", "December": "December"
+        }
         df["arrival_date_month"] = df["arrival_date_month"].apply(
-            lambda v: harmonize_category(v, valid_months)
+            lambda v: month_map.get(str(v).strip().capitalize(), v)
         )
-        operations_log.append("arrival_date_month: harmonisation des mois")
+        operations.append("arrival_date_month: harmonisation des mois")
 
-    # arrival_date_week_number (numeric) - pas de traitement nécessaire
+    # arrival_date_week_number (numeric) - pas de correction nécessaire
     if "arrival_date_week_number" in df.columns:
-        pass
+        df["arrival_date_week_number"] = pd.to_numeric(df["arrival_date_week_number"], errors="coerce")
 
-    # arrival_date_day_of_month (numeric) - pas de traitement nécessaire
+    # arrival_date_day_of_month (numeric) - pas de correction nécessaire
     if "arrival_date_day_of_month" in df.columns:
-        pass
+        df["arrival_date_day_of_month"] = pd.to_numeric(df["arrival_date_day_of_month"], errors="coerce")
 
-    # stays_in_weekend_nights (numeric) - traitement des valeurs aberrantes
+    # stays_in_weekend_nights (numeric) - correction des valeurs aberrantes
     if "stays_in_weekend_nights" in df.columns:
-        q99 = df["stays_in_weekend_nights"].quantile(0.99)
-        outliers = df["stays_in_weekend_nights"] > q99
-        df.loc[outliers, "stays_in_weekend_nights"] = df["stays_in_weekend_nights"].median()
-        operations_log.append("stays_in_weekend_nights: correction des outliers")
+        df["stays_in_weekend_nights"] = df["stays_in_weekend_nights"].apply(extract_numeric)
+        df["stays_in_weekend_nights"] = pd.to_numeric(df["stays_in_weekend_nights"], errors="coerce")
+        median_val = df["stays_in_weekend_nights"].median()
+        df["stays_in_weekend_nights"] = df["stays_in_weekend_nights"].clip(0, 19)
+        operations.append("stays_in_weekend_nights: correction des valeurs aberrantes")
 
-    # stays_in_week_nights (numeric) - traitement des valeurs aberrantes
+    # stays_in_week_nights (numeric) - correction des valeurs aberrantes
     if "stays_in_week_nights" in df.columns:
-        q99 = df["stays_in_week_nights"].quantile(0.99)
-        outliers = df["stays_in_week_nights"] > q99
-        df.loc[outliers, "stays_in_week_nights"] = df["stays_in_week_nights"].median()
-        operations_log.append("stays_in_week_nights: correction des outliers")
+        df["stays_in_week_nights"] = df["stays_in_week_nights"].apply(extract_numeric)
+        df["stays_in_week_nights"] = pd.to_numeric(df["stays_in_week_nights"], errors="coerce")
+        p99 = df["stays_in_week_nights"].quantile(0.99)
+        df["stays_in_week_nights"] = df["stays_in_week_nights"].clip(0, p99)
+        operations.append("stays_in_week_nights: correction des valeurs aberrantes")
 
     # adults (categorical -> numeric) - extraction des valeurs numériques
     if "adults" in df.columns:
         df["adults"] = df["adults"].apply(extract_numeric)
         df["adults"] = pd.to_numeric(df["adults"], errors="coerce")
-        # Correction des valeurs aberrantes (physiquement impossible)
-        df.loc[df["adults"] > 20, "adults"] = df["adults"].median()
-        operations_log.append("adults: extraction et correction des valeurs numériques")
+        median_val = df["adults"].median()
+        df["adults"] = df["adults"].clip(1, 4)  # bornes plausibles
+        operations.append("adults: extraction et correction des valeurs numériques")
 
-    # children (categorical -> numeric) - traitement des valeurs manquantes et aberrantes
+    # children (categorical -> numeric) - imputation des valeurs manquantes
     if "children" in df.columns:
-        df["children"] = df["children"].replace("unknown", np.nan)
         df["children"] = df["children"].apply(extract_numeric)
         df["children"] = pd.to_numeric(df["children"], errors="coerce")
-        # Imputation conditionnelle
         group_col = find_best_grouping_column(df, "children", True)
         if group_col:
             df["children"] = df.groupby(group_col)["children"].transform(
                 lambda s: s.fillna(s.median())
             )
         df["children"] = df["children"].fillna(df["children"].median())
-        # Correction des valeurs aberrantes
-        df.loc[df["children"] > 10, "children"] = df["children"].median()
-        operations_log.append("children: imputation et correction des valeurs")
+        operations.append("children: imputation des valeurs manquantes")
 
-    # babies (numeric) - traitement des valeurs aberrantes
+    # babies (numeric) - correction des valeurs aberrantes
     if "babies" in df.columns:
-        q99 = df["babies"].quantile(0.99)
-        outliers = df["babies"] > q99
-        df.loc[outliers, "babies"] = df["babies"].median()
-        operations_log.append("babies: correction des outliers")
+        df["babies"] = pd.to_numeric(df["babies"], errors="coerce")
+        p99 = df["babies"].quantile(0.99)
+        df["babies"] = df["babies"].clip(0, p99)
+        operations.append("babies: correction des valeurs aberrantes")
 
     # meal (categorical) - harmonisation et imputation
     if "meal" in df.columns:
         valid_values_meal = ["BB", "HB", "FB", "SC", "Undefined"]
         df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_values_meal))
-        # Imputation conditionnelle
         group_col = find_best_grouping_column(df, "meal", False)
         if group_col:
             df["meal"] = df.groupby(group_col)["meal"].transform(
                 lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "BB")
             )
         df["meal"] = df["meal"].fillna(df["meal"].mode().iloc[0])
-        operations_log.append("meal: harmonisation et imputation")
+        operations.append("meal: harmonisation et imputation")
 
     # country (categorical) - harmonisation et imputation
     if "country" in df.columns:
-        # Liste des codes pays ISO valides (3 lettres majuscules)
-        valid_countries = [
-            "PRT", "GBR", "FRA", "ESP", "DEU", "ITA", "IRL", "BEL", "NLD",
-            "USA", "BRA", "CHN", "RUS", "JPN", "AUS", "CAN", "CHE", "SWE"
-        ]
-        df["country"] = df["country"].astype(str).str.strip().str.upper()
+        valid_values_country = ["PRT", "GBR", "FRA", "ESP", "DEU", "ITA", "IRL", "BEL"]
         df["country"] = df["country"].apply(
-            lambda v: v if len(v) == 3 and v.isalpha() and v in valid_countries else np.nan
+            lambda v: harmonize_category(v, valid_values_country) if pd.notna(v) else v
         )
-        # Imputation conditionnelle
         group_col = find_best_grouping_column(df, "country", False)
         if group_col:
             df["country"] = df.groupby(group_col)["country"].transform(
                 lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "PRT")
             )
         df["country"] = df["country"].fillna(df["country"].mode().iloc[0])
-        operations_log.append("country: harmonisation et imputation")
+        operations.append("country: harmonisation et imputation")
 
     # market_segment (categorical) - harmonisation et imputation
     if "market_segment" in df.columns:
-        valid_values_segment = [
-            "Online TA", "Offline TA/TO", "Groups", "Direct",
-            "Corporate", "Complementary", "Aviation", "Undefined"
-        ]
-        df["market_segment"] = df["market_segment"].apply(
-            lambda v: harmonize_category(v, valid_values_segment)
-        )
-        # Imputation conditionnelle
+        valid_values_segment = ["Online TA", "Offline TA/TO", "Groups", "Direct", "Corporate", "Complementary", "Aviation"]
+        df["market_segment"] = df["market_segment"].apply(lambda v: harmonize_category(v, valid_values_segment))
         group_col = find_best_grouping_column(df, "market_segment", False)
         if group_col:
             df["market_segment"] = df.groupby(group_col)["market_segment"].transform(
                 lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "Online TA")
             )
         df["market_segment"] = df["market_segment"].fillna(df["market_segment"].mode().iloc[0])
-        operations_log.append("market_segment: harmonisation et imputation")
+        operations.append("market_segment: harmonisation et imputation")
 
     # distribution_channel (categorical) - harmonisation
     if "distribution_channel" in df.columns:
         valid_values_channel = ["TA/TO", "Direct", "Corporate", "GDS", "Undefined"]
-        df["distribution_channel"] = df["distribution_channel"].apply(
-            lambda v: harmonize_category(v, valid_values_channel)
-        )
-        operations_log.append("distribution_channel: harmonisation")
+        df["distribution_channel"] = df["distribution_channel"].apply(lambda v: harmonize_category(v, valid_values_channel))
+        operations.append("distribution_channel: harmonisation")
 
-    # is_repeated_guest (numeric) - pas de traitement nécessaire
+    # is_repeated_guest (numeric) - pas de correction nécessaire
     if "is_repeated_guest" in df.columns:
-        pass
+        df["is_repeated_guest"] = pd.to_numeric(df["is_repeated_guest"], errors="coerce")
 
-    # previous_cancellations (numeric) - traitement des valeurs aberrantes
+    # previous_cancellations (numeric) - correction des valeurs aberrantes
     if "previous_cancellations" in df.columns:
-        q99 = df["previous_cancellations"].quantile(0.99)
-        outliers = df["previous_cancellations"] > q99
-        df.loc[outliers, "previous_cancellations"] = df["previous_cancellations"].median()
-        operations_log.append("previous_cancellations: correction des outliers")
+        df["previous_cancellations"] = pd.to_numeric(df["previous_cancellations"], errors="coerce")
+        p99 = df["previous_cancellations"].quantile(0.99)
+        df["previous_cancellations"] = df["previous_cancellations"].clip(0, p99)
+        operations.append("previous_cancellations: correction des valeurs aberrantes")
 
-    # previous_bookings_not_canceled (numeric) - traitement des valeurs aberrantes
+    # previous_bookings_not_canceled (numeric) - correction des valeurs aberrantes
     if "previous_bookings_not_canceled" in df.columns:
-        q99 = df["previous_bookings_not_canceled"].quantile(0.99)
-        outliers = df["previous_bookings_not_canceled"] > q99
-        df.loc[outliers, "previous_bookings_not_canceled"] = df["previous_bookings_not_canceled"].median()
-        operations_log.append("previous_bookings_not_canceled: correction des outliers")
+        df["previous_bookings_not_canceled"] = pd.to_numeric(df["previous_bookings_not_canceled"], errors="coerce")
+        p99 = df["previous_bookings_not_canceled"].quantile(0.99)
+        df["previous_bookings_not_canceled"] = df["previous_bookings_not_canceled"].clip(0, p99)
+        operations.append("previous_bookings_not_canceled: correction des valeurs aberrantes")
 
     # reserved_room_type (categorical) - harmonisation
     if "reserved_room_type" in df.columns:
-        valid_values_room = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "P"]
-        df["reserved_room_type"] = df["reserved_room_type"].apply(
-            lambda v: harmonize_category(v, valid_values_room)
-        )
-        operations_log.append("reserved_room_type: harmonisation")
+        valid_values_room = ["A", "D", "E", "F", "G", "B", "C", "H", "P", "L"]
+        df["reserved_room_type"] = df["reserved_room_type"].apply(lambda v: harmonize_category(v, valid_values_room))
+        operations.append("reserved_room_type: harmonisation")
 
     # assigned_room_type (categorical) - harmonisation
     if "assigned_room_type" in df.columns:
-        valid_values_room = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "P"]
-        df["assigned_room_type"] = df["assigned_room_type"].apply(
-            lambda v: harmonize_category(v, valid_values_room)
-        )
-        operations_log.append("assigned_room_type: harmonisation")
+        valid_values_room = ["A", "D", "E", "F", "G", "B", "C", "H", "I", "K"]
+        df["assigned_room_type"] = df["assigned_room_type"].apply(lambda v: harmonize_category(v, valid_values_room))
+        operations.append("assigned_room_type: harmonisation")
 
-    # booking_changes (numeric) - traitement des valeurs aberrantes
+    # booking_changes (numeric) - correction des valeurs aberrantes
     if "booking_changes" in df.columns:
-        q99 = df["booking_changes"].quantile(0.99)
-        outliers = df["booking_changes"] > q99
-        df.loc[outliers, "booking_changes"] = df["booking_changes"].median()
-        operations_log.append("booking_changes: correction des outliers")
+        df["booking_changes"] = pd.to_numeric(df["booking_changes"], errors="coerce")
+        p99 = df["booking_changes"].quantile(0.99)
+        df["booking_changes"] = df["booking_changes"].clip(0, p99)
+        operations.append("booking_changes: correction des valeurs aberrantes")
 
     # deposit_type (categorical) - harmonisation
     if "deposit_type" in df.columns:
-        valid_values_deposit = ["No Deposit", "Non Refund", "Refundable"]
-        df["deposit_type"] = df["deposit_type"].apply(
-            lambda v: harmonize_category(v, valid_values_deposit)
-        )
-        operations_log.append("deposit_type: harmonisation")
+        valid_values_deposit = ["No Deposit", "Non Refund"]
+        df["deposit_type"] = df["deposit_type"].apply(lambda v: harmonize_category(v, valid_values_deposit))
+        operations.append("deposit_type: harmonisation")
 
-    # agent (categorical -> numeric) - extraction et imputation
+    # agent (categorical -> numeric) - imputation
     if "agent" in df.columns:
-        df["agent"] = df["agent"].replace("unknown", np.nan)
         df["agent"] = df["agent"].apply(extract_numeric)
         df["agent"] = pd.to_numeric(df["agent"], errors="coerce")
-        # Imputation conditionnelle
         group_col = find_best_grouping_column(df, "agent", True)
         if group_col:
             df["agent"] = df.groupby(group_col)["agent"].transform(
                 lambda s: s.fillna(s.median())
             )
         df["agent"] = df["agent"].fillna(df["agent"].median())
-        operations_log.append("agent: extraction et imputation")
+        operations.append("agent: imputation des valeurs manquantes")
 
     # company (numeric) - trop de valeurs manquantes (94%) -> suppression de la colonne
     if "company" in df.columns:
         df = df.drop(columns=["company"])
-        operations_log.append("company: suppression (94% de valeurs manquantes)")
+        operations.append("company: suppression (94% de valeurs manquantes)")
 
-    # days_in_waiting_list (numeric) - traitement des valeurs aberrantes
+    # days_in_waiting_list (numeric) - correction des valeurs aberrantes
     if "days_in_waiting_list" in df.columns:
-        q99 = df["days_in_waiting_list"].quantile(0.99)
-        outliers = df["days_in_waiting_list"] > q99
-        df.loc[outliers, "days_in_waiting_list"] = df["days_in_waiting_list"].median()
-        operations_log.append("days_in_waiting_list: correction des outliers")
+        df["days_in_waiting_list"] = pd.to_numeric(df["days_in_waiting_list"], errors="coerce")
+        p99 = df["days_in_waiting_list"].quantile(0.99)
+        df["days_in_waiting_list"] = df["days_in_waiting_list"].clip(0, p99)
+        operations.append("days_in_waiting_list: correction des valeurs aberrantes")
 
     # customer_type (categorical) - harmonisation
     if "customer_type" in df.columns:
         valid_values_customer = ["Transient", "Transient-Party", "Contract", "Group"]
-        df["customer_type"] = df["customer_type"].apply(
-            lambda v: harmonize_category(v, valid_values_customer)
-        )
-        operations_log.append("customer_type: harmonisation")
+        df["customer_type"] = df["customer_type"].apply(lambda v: harmonize_category(v, valid_values_customer))
+        operations.append("customer_type: harmonisation")
 
-    # adr (numeric) - traitement des valeurs aberrantes
+    # adr (numeric) - correction des valeurs aberrantes
     if "adr" in df.columns:
-        q99 = df["adr"].quantile(0.99)
-        outliers = (df["adr"] > q99) | (df["adr"] < 0)
-        df.loc[outliers, "adr"] = df["adr"].median()
-        operations_log.append("adr: correction des outliers")
+        df["adr"] = df["adr"].apply(extract_numeric)
+        df["adr"] = pd.to_numeric(df["adr"], errors="coerce")
+        p99 = df["adr"].quantile(0.99)
+        df["adr"] = df["adr"].clip(0, p99)
+        operations.append("adr: correction des valeurs aberrantes")
 
-    # required_car_parking_spaces (numeric) - traitement des valeurs aberrantes
+    # required_car_parking_spaces (numeric) - correction des valeurs aberrantes
     if "required_car_parking_spaces" in df.columns:
-        q99 = df["required_car_parking_spaces"].quantile(0.99)
-        outliers = df["required_car_parking_spaces"] > q99
-        df.loc[outliers, "required_car_parking_spaces"] = df["required_car_parking_spaces"].median()
-        operations_log.append("required_car_parking_spaces: correction des outliers")
+        df["required_car_parking_spaces"] = pd.to_numeric(df["required_car_parking_spaces"], errors="coerce")
+        df["required_car_parking_spaces"] = df["required_car_parking_spaces"].clip(0, 8)
+        operations.append("required_car_parking_spaces: correction des valeurs aberrantes")
 
-    # total_of_special_requests (numeric) - traitement des valeurs aberrantes
+    # total_of_special_requests (numeric) - correction des valeurs aberrantes
     if "total_of_special_requests" in df.columns:
-        q99 = df["total_of_special_requests"].quantile(0.99)
-        outliers = df["total_of_special_requests"] > q99
-        df.loc[outliers, "total_of_special_requests"] = df["total_of_special_requests"].median()
-        operations_log.append("total_of_special_requests: correction des outliers")
+        df["total_of_special_requests"] = pd.to_numeric(df["total_of_special_requests"], errors="coerce")
+        df["total_of_special_requests"] = df["total_of_special_requests"].clip(0, 5)
+        operations.append("total_of_special_requests: correction des valeurs aberrantes")
 
     # reservation_status (categorical) - harmonisation
     if "reservation_status" in df.columns:
         valid_values_status = ["Check-Out", "Canceled", "No-Show"]
-        df["reservation_status"] = df["reservation_status"].apply(
-            lambda v: harmonize_category(v, valid_values_status)
-        )
-        operations_log.append("reservation_status: harmonisation")
+        df["reservation_status"] = df["reservation_status"].apply(lambda v: harmonize_category(v, valid_values_status))
+        operations.append("reservation_status: harmonisation")
 
-    # reservation_status_date (date) - parsing et standardisation
+    # reservation_status_date (date) - parsing et reformatage
     if "reservation_status_date" in df.columns:
         df["reservation_status_date"] = df["reservation_status_date"].apply(parse_date)
-        operations_log.append("reservation_status_date: parsing et standardisation")
+        operations.append("reservation_status_date: parsing et reformatage")
 
-    # Log final
-    final_rows, final_cols = df.shape
-    print(f"Dataset final: {final_rows} lignes, {final_cols} colonnes")
-    print("\nOpérations effectuées:")
-    for op in operations_log:
-        print(f"- {op}")
-    print(f"\nLignes supprimées: {initial_rows - final_rows}")
-    print(f"Colonnes supprimées: {initial_cols - final_cols}")
-
-    # Sauvegarde
+    # Sauvegarde du dataset nettoyé
     df.to_csv(OUTPUT_PATH, index=False)
+
+    # Résumé des opérations
+    print("\nRésumé des opérations de nettoyage:")
+    for op in operations:
+        print(f"- {op}")
+    print(f"\nDataset nettoyé sauvegardé dans: {OUTPUT_PATH}")
+    print(f"Nombre de lignes initial: {initial_rows}")
+    print(f"Nombre de lignes final: {len(df)}")
 
 if __name__ == "__main__":
     clean_dataset()

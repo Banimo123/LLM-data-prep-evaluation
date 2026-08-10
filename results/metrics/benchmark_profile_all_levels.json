@@ -9,39 +9,33 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.9659,
-    "recall": 0.6347,
-    "f1": 0.7661,
-    "tp": 42809,
-    "fp": 1510,
-    "fn": 24637,
-    "n_rows_lost_by_workflow": 18179,
-    "n_error_cells_lost_with_dropped_rows": 801,
+    "precision": 0.0139,
+    "recall": 0.1047,
+    "f1": 0.0245,
+    "tp": 38,
+    "fp": 2696,
+    "fn": 325,
+    "n_rows_lost_by_workflow": 0,
+    "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 18893,
-        "fn": 4982,
-        "recall": 0.7913,
-        "f1_sans_fp": 0.8835
-      },
-      "outliers": {
-        "tp": 1149,
-        "fn": 3623,
-        "recall": 0.2408,
-        "f1_sans_fp": 0.3881
+        "tp": 38,
+        "fn": 121,
+        "recall": 0.239,
+        "f1_sans_fp": 0.3858
       },
       "missing_values": {
-        "tp": 14341,
-        "fn": 15504,
-        "recall": 0.4805,
-        "f1_sans_fp": 0.6491
+        "tp": 0,
+        "fn": 194,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       },
-      "format_errors": {
-        "tp": 8426,
-        "fn": 528,
-        "recall": 0.941,
-        "f1_sans_fp": 0.9696
+      "outliers": {
+        "tp": 0,
+        "fn": 10,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       }
     }
   },
@@ -55,41 +49,33 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.9828,
-    "recall": 0.6696,
-    "f1": 0.7965,
-    "tp": 90334,
-    "fp": 1584,
-    "fn": 44572,
-    "n_rows_lost_by_workflow": 10145,
-    "n_error_cells_lost_with_dropped_rows": 1264,
-    "columns_dropped_by_workflow": [
-      "company"
-    ],
+    "precision": 0.6303,
+    "recall": 0.536,
+    "f1": 0.5793,
+    "tp": 387,
+    "fp": 227,
+    "fn": 335,
+    "n_rows_lost_by_workflow": 0,
+    "n_error_cells_lost_with_dropped_rows": 0,
+    "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 40866,
-        "fn": 6889,
-        "recall": 0.8557,
-        "f1_sans_fp": 0.9223
-      },
-      "outliers": {
-        "tp": 3690,
-        "fn": 5858,
-        "recall": 0.3865,
-        "f1_sans_fp": 0.5575
+        "tp": 128,
+        "fn": 188,
+        "recall": 0.4051,
+        "f1_sans_fp": 0.5766
       },
       "missing_values": {
-        "tp": 28946,
-        "fn": 30749,
-        "recall": 0.4849,
-        "f1_sans_fp": 0.6531
+        "tp": 259,
+        "fn": 127,
+        "recall": 0.671,
+        "f1_sans_fp": 0.8031
       },
-      "format_errors": {
-        "tp": 16832,
-        "fn": 1076,
-        "recall": 0.9399,
-        "f1_sans_fp": 0.969
+      "outliers": {
+        "tp": 0,
+        "fn": 20,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       }
     }
   },
@@ -103,41 +89,33 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.9373,
-    "recall": 0.6525,
-    "f1": 0.7694,
-    "tp": 176059,
-    "fp": 11777,
-    "fn": 93758,
+    "precision": 0.1557,
+    "recall": 0.627,
+    "f1": 0.2495,
+    "tp": 884,
+    "fp": 4793,
+    "fn": 526,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
-    "columns_dropped_by_workflow": [
-      "company"
-    ],
+    "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 75970,
-        "fn": 19540,
-        "recall": 0.7954,
-        "f1_sans_fp": 0.8861
-      },
-      "outliers": {
-        "tp": 2658,
-        "fn": 16442,
-        "recall": 0.1392,
-        "f1_sans_fp": 0.2443
+        "tp": 251,
+        "fn": 378,
+        "recall": 0.399,
+        "f1_sans_fp": 0.5705
       },
       "missing_values": {
-        "tp": 63706,
-        "fn": 55684,
-        "recall": 0.5336,
-        "f1_sans_fp": 0.6959
+        "tp": 633,
+        "fn": 113,
+        "recall": 0.8485,
+        "f1_sans_fp": 0.9181
       },
-      "format_errors": {
-        "tp": 33725,
-        "fn": 2092,
-        "recall": 0.9416,
-        "f1_sans_fp": 0.9699
+      "outliers": {
+        "tp": 0,
+        "fn": 35,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       }
     }
   }
