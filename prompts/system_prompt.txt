@@ -206,5 +206,16 @@ RÈGLES STRICTES À RESPECTER :
     traite comme "manquante à imputer" que les valeurs textuelles rares/isolées (probable typo
     ou erreur ponctuelle), pas un placeholder répété systématiquement.
 
+21. IMPÉRATIF pour détecter si une colonne est numérique : n'utilise JAMAIS un test du type
+    `df[col].apply(lambda x: isinstance(x, (int, float))).any()` sans exclure les valeurs
+    manquantes au préalable. En Python/pandas, une valeur manquante (`NaN`) est TOUJOURS de type
+    `float`, donc ce test renverra `True` pour N'IMPORTE QUELLE colonne texte dès qu'elle contient
+    ne serait-ce qu'UNE SEULE valeur manquante — la colonne serait alors classée à tort comme
+    numérique, puis détruite par une extraction/imputation numérique (ex: "birmingham" ou "yes"
+    n'ont aucun chiffre, deviennent NaN, puis sont remplacés par une fausse médiane comme "0.0").
+    Utilise plutôt `pd.api.types.is_numeric_dtype(df[col])` seul pour détecter le type réel de la
+    colonne, ou si tu dois absolument tester des valeurs individuelles, exclue explicitement les
+    valeurs manquantes d'abord : `df[col].dropna().apply(lambda x: isinstance(x, (int, float))).any()`.
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

@@ -1,6 +1,35 @@
 [
   {
     "dataset": "flights",
+    "approche": "profile",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__profile.csv",
+    "precision": 0.0253,
+    "recall": 0.0684,
+    "f1": 0.0369,
+    "tp": 211,
+    "fp": 8139,
+    "fn": 2876,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "missing_values": {
+        "tp": 6,
+        "fn": 827,
+        "recall": 0.0072,
+        "f1_sans_fp": 0.0143
+      },
+      "typos": {
+        "tp": 205,
+        "fn": 2049,
+        "recall": 0.0909,
+        "f1_sans_fp": 0.1667
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "flights",
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
@@ -24,6 +53,99 @@
         "fn": 143,
         "recall": 0.7487,
         "f1_sans_fp": 0.8563
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "flights",
+    "approche": "profile",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__profile.csv",
+    "precision": 0.0059,
+    "recall": 0.0707,
+    "f1": 0.0109,
+    "tp": 56,
+    "fp": 9416,
+    "fn": 736,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "missing_values": {
+        "tp": 3,
+        "fn": 220,
+        "recall": 0.0135,
+        "f1_sans_fp": 0.0265
+      },
+      "typos": {
+        "tp": 53,
+        "fn": 516,
+        "recall": 0.0931,
+        "f1_sans_fp": 0.1704
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "flights",
+    "approche": "profile",
+    "niveau_de_bruit": "medium",
+    "fichier": "noisy_medium__profile.csv",
+    "precision": 0.784,
+    "recall": 0.2692,
+    "f1": 0.4008,
+    "tp": 421,
+    "fp": 116,
+    "fn": 1143,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 418,
+        "fn": 717,
+        "recall": 0.3683,
+        "f1_sans_fp": 0.5383
+      },
+      "missing_values": {
+        "tp": 3,
+        "fn": 426,
+        "recall": 0.007,
+        "f1_sans_fp": 0.0139
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hospital",
+    "approche": "profile",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__profile.csv",
+    "precision": 0.321,
+    "recall": 0.5184,
+    "f1": 0.3965,
+    "tp": 731,
+    "fp": 1546,
+    "fn": 679,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 248,
+        "fn": 381,
+        "recall": 0.3943,
+        "f1_sans_fp": 0.5656
+      },
+      "missing_values": {
+        "tp": 482,
+        "fn": 264,
+        "recall": 0.6461,
+        "f1_sans_fp": 0.785
+      },
+      "outliers": {
+        "tp": 1,
+        "fn": 34,
+        "recall": 0.0286,
+        "f1_sans_fp": 0.0556
       }
     },
     "erreur": null
@@ -57,6 +179,76 @@
       "outliers": {
         "tp": 0,
         "fn": 10,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hospital",
+    "approche": "profile",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__profile.csv",
+    "precision": 0.1825,
+    "recall": 0.4711,
+    "f1": 0.2631,
+    "tp": 171,
+    "fp": 766,
+    "fn": 192,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 39,
+        "fn": 120,
+        "recall": 0.2453,
+        "f1_sans_fp": 0.3939
+      },
+      "missing_values": {
+        "tp": 129,
+        "fn": 65,
+        "recall": 0.6649,
+        "f1_sans_fp": 0.7988
+      },
+      "outliers": {
+        "tp": 3,
+        "fn": 7,
+        "recall": 0.3,
+        "f1_sans_fp": 0.4615
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hospital",
+    "approche": "profile",
+    "niveau_de_bruit": "medium",
+    "fichier": "noisy_medium__profile.csv",
+    "precision": 0.2023,
+    "recall": 0.4709,
+    "f1": 0.283,
+    "tp": 340,
+    "fp": 1341,
+    "fn": 382,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 86,
+        "fn": 230,
+        "recall": 0.2722,
+        "f1_sans_fp": 0.4279
+      },
+      "missing_values": {
+        "tp": 254,
+        "fn": 132,
+        "recall": 0.658,
+        "f1_sans_fp": 0.7937
+      },
+      "outliers": {
+        "tp": 0,
+        "fn": 20,
         "recall": 0.0,
         "f1_sans_fp": 0.0
       }
@@ -109,40 +301,40 @@
     "approche": "profile",
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__profile.csv",
-    "precision": 0.9373,
-    "recall": 0.6525,
-    "f1": 0.7694,
-    "tp": 176059,
-    "fp": 11777,
-    "fn": 93758,
-    "n_rows_lost_by_workflow": 0,
+    "precision": 0.9679,
+    "recall": 0.6231,
+    "f1": 0.7581,
+    "tp": 168115,
+    "fp": 5582,
+    "fn": 101702,
+    "n_rows_lost_by_workflow": 2809,
     "columns_dropped_by_workflow": [
       "company"
     ],
     "per_error_family": {
       "typos": {
-        "tp": 75970,
-        "fn": 19540,
-        "recall": 0.7954,
-        "f1_sans_fp": 0.8861
+        "tp": 75833,
+        "fn": 19677,
+        "recall": 0.794,
+        "f1_sans_fp": 0.8852
       },
       "outliers": {
-        "tp": 2658,
-        "fn": 16442,
-        "recall": 0.1392,
-        "f1_sans_fp": 0.2443
+        "tp": 7,
+        "fn": 19093,
+        "recall": 0.0004,
+        "f1_sans_fp": 0.0007
       },
       "missing_values": {
-        "tp": 63706,
-        "fn": 55684,
-        "recall": 0.5336,
-        "f1_sans_fp": 0.6959
+        "tp": 58582,
+        "fn": 60808,
+        "recall": 0.4907,
+        "f1_sans_fp": 0.6583
       },
       "format_errors": {
-        "tp": 33725,
-        "fn": 2092,
-        "recall": 0.9416,
-        "f1_sans_fp": 0.9699
+        "tp": 33693,
+        "fn": 2124,
+        "recall": 0.9407,
+        "f1_sans_fp": 0.9694
       }
     },
     "erreur": null
@@ -193,26 +385,28 @@
     "approche": "profile",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__profile.csv",
-    "precision": 0.9659,
-    "recall": 0.6347,
-    "f1": 0.7661,
-    "tp": 42809,
-    "fp": 1510,
-    "fn": 24637,
+    "precision": 0.9134,
+    "recall": 0.6792,
+    "f1": 0.7791,
+    "tp": 45809,
+    "fp": 4341,
+    "fn": 21637,
     "n_rows_lost_by_workflow": 18179,
-    "columns_dropped_by_workflow": [],
+    "columns_dropped_by_workflow": [
+      "company"
+    ],
     "per_error_family": {
       "typos": {
-        "tp": 18893,
-        "fn": 4982,
-        "recall": 0.7913,
-        "f1_sans_fp": 0.8835
+        "tp": 20380,
+        "fn": 3495,
+        "recall": 0.8536,
+        "f1_sans_fp": 0.921
       },
       "outliers": {
-        "tp": 1149,
-        "fn": 3623,
-        "recall": 0.2408,
-        "f1_sans_fp": 0.3881
+        "tp": 2662,
+        "fn": 2110,
+        "recall": 0.5578,
+        "f1_sans_fp": 0.7162
       },
       "missing_values": {
         "tp": 14341,
@@ -318,40 +512,75 @@
     "approche": "profile",
     "niveau_de_bruit": "medium",
     "fichier": "noisy_medium__profile.csv",
-    "precision": 0.9828,
-    "recall": 0.6696,
-    "f1": 0.7965,
-    "tp": 90334,
-    "fp": 1584,
-    "fn": 44572,
-    "n_rows_lost_by_workflow": 10145,
+    "precision": 0.9799,
+    "recall": 0.6356,
+    "f1": 0.7711,
+    "tp": 85750,
+    "fp": 1755,
+    "fn": 49156,
+    "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [
       "company"
     ],
     "per_error_family": {
       "typos": {
-        "tp": 40866,
-        "fn": 6889,
-        "recall": 0.8557,
-        "f1_sans_fp": 0.9223
+        "tp": 37910,
+        "fn": 9845,
+        "recall": 0.7938,
+        "f1_sans_fp": 0.8851
       },
       "outliers": {
-        "tp": 3690,
-        "fn": 5858,
-        "recall": 0.3865,
-        "f1_sans_fp": 0.5575
+        "tp": 4,
+        "fn": 9544,
+        "recall": 0.0004,
+        "f1_sans_fp": 0.0008
       },
       "missing_values": {
-        "tp": 28946,
-        "fn": 30749,
-        "recall": 0.4849,
-        "f1_sans_fp": 0.6531
+        "tp": 30971,
+        "fn": 28724,
+        "recall": 0.5188,
+        "f1_sans_fp": 0.6832
       },
       "format_errors": {
-        "tp": 16832,
-        "fn": 1076,
-        "recall": 0.9399,
-        "f1_sans_fp": 0.969
+        "tp": 16865,
+        "fn": 1043,
+        "recall": 0.9418,
+        "f1_sans_fp": 0.97
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "profile",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__profile.csv",
+    "precision": 1.0,
+    "recall": 0.8845,
+    "f1": 0.9387,
+    "tp": 498,
+    "fp": 0,
+    "fn": 65,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 364,
+        "fn": 8,
+        "recall": 0.9785,
+        "f1_sans_fp": 0.9891
+      },
+      "missing_values": {
+        "tp": 130,
+        "fn": 5,
+        "recall": 0.963,
+        "f1_sans_fp": 0.9811
+      },
+      "outliers": {
+        "tp": 4,
+        "fn": 52,
+        "recall": 0.0714,
+        "f1_sans_fp": 0.1333
       }
     },
     "erreur": null
@@ -387,6 +616,76 @@
         "fn": 10,
         "recall": 0.2857,
         "f1_sans_fp": 0.4444
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "profile",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__profile.csv",
+    "precision": 0.9931,
+    "recall": 0.9931,
+    "f1": 0.9931,
+    "tp": 144,
+    "fp": 1,
+    "fn": 1,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 93,
+        "fn": 0,
+        "recall": 1.0,
+        "f1_sans_fp": 1.0
+      },
+      "missing_values": {
+        "tp": 37,
+        "fn": 1,
+        "recall": 0.9737,
+        "f1_sans_fp": 0.9867
+      },
+      "outliers": {
+        "tp": 14,
+        "fn": 0,
+        "recall": 1.0,
+        "f1_sans_fp": 1.0
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "profile",
+    "niveau_de_bruit": "medium",
+    "fichier": "noisy_medium__profile.csv",
+    "precision": 0.9704,
+    "recall": 0.9003,
+    "f1": 0.934,
+    "tp": 262,
+    "fp": 8,
+    "fn": 29,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 185,
+        "fn": 4,
+        "recall": 0.9788,
+        "f1_sans_fp": 0.9893
+      },
+      "missing_values": {
+        "tp": 70,
+        "fn": 5,
+        "recall": 0.9333,
+        "f1_sans_fp": 0.9655
+      },
+      "outliers": {
+        "tp": 7,
+        "fn": 20,
+        "recall": 0.2593,
+        "f1_sans_fp": 0.4118
       }
     },
     "erreur": null

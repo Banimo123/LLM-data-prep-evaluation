@@ -9,33 +9,33 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.1825,
-    "recall": 0.4711,
-    "f1": 0.2631,
-    "tp": 171,
-    "fp": 766,
-    "fn": 192,
+    "precision": 0.0086,
+    "recall": 0.1129,
+    "f1": 0.016,
+    "tp": 41,
+    "fp": 4727,
+    "fn": 322,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 39,
-        "fn": 120,
-        "recall": 0.2453,
-        "f1_sans_fp": 0.3939
+        "tp": 41,
+        "fn": 118,
+        "recall": 0.2579,
+        "f1_sans_fp": 0.41
       },
       "missing_values": {
-        "tp": 129,
-        "fn": 65,
-        "recall": 0.6649,
-        "f1_sans_fp": 0.7988
+        "tp": 0,
+        "fn": 194,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       },
       "outliers": {
-        "tp": 3,
-        "fn": 7,
-        "recall": 0.3,
-        "f1_sans_fp": 0.4615
+        "tp": 0,
+        "fn": 10,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       }
     }
   },
@@ -49,27 +49,27 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.2023,
-    "recall": 0.4709,
-    "f1": 0.283,
-    "tp": 340,
-    "fp": 1341,
-    "fn": 382,
+    "precision": 0.0078,
+    "recall": 0.0706,
+    "f1": 0.0141,
+    "tp": 51,
+    "fp": 6458,
+    "fn": 671,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 86,
-        "fn": 230,
-        "recall": 0.2722,
-        "f1_sans_fp": 0.4279
+        "tp": 51,
+        "fn": 265,
+        "recall": 0.1614,
+        "f1_sans_fp": 0.2779
       },
       "missing_values": {
-        "tp": 254,
-        "fn": 132,
-        "recall": 0.658,
-        "f1_sans_fp": 0.7937
+        "tp": 0,
+        "fn": 386,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       },
       "outliers": {
         "tp": 0,
@@ -89,27 +89,27 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.321,
-    "recall": 0.5184,
-    "f1": 0.3965,
-    "tp": 731,
-    "fp": 1546,
-    "fn": 679,
+    "precision": 0.0901,
+    "recall": 0.3794,
+    "f1": 0.1456,
+    "tp": 535,
+    "fp": 5405,
+    "fn": 875,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 248,
-        "fn": 381,
-        "recall": 0.3943,
-        "f1_sans_fp": 0.5656
+        "tp": 200,
+        "fn": 429,
+        "recall": 0.318,
+        "f1_sans_fp": 0.4825
       },
       "missing_values": {
-        "tp": 482,
-        "fn": 264,
-        "recall": 0.6461,
-        "f1_sans_fp": 0.785
+        "tp": 334,
+        "fn": 412,
+        "recall": 0.4477,
+        "f1_sans_fp": 0.6185
       },
       "outliers": {
         "tp": 1,

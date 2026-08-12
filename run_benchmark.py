@@ -35,7 +35,7 @@ FAILED_DIR = Path("workflows/failed")
 METRICS_DIR = Path("results/metrics")
 
 MAX_ATTEMPTS = 3
-APPROACH = "profile"
+APPROACH = "simple"
 NOISE_LEVELS = ["low", "medium", "high"]
 
 for d in [CLEANED_DIR, GENERATED_DIR, FAILED_DIR, METRICS_DIR]:
