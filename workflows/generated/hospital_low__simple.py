@@ -4,8 +4,8 @@ import re
 from datetime import datetime
 import difflib
 
-INPUT_PATH = r'datasets\hospital\noisy_low.csv'
-OUTPUT_PATH = r'results\cleaned_datasets\hospital\noisy_low__simple.csv'
+INPUT_PATH = r"datasets\hospital\noisy_low.csv"
+OUTPUT_PATH = r"results\cleaned_datasets\hospital\noisy_low__simple.csv"
 
 def extract_numeric(value):
     if pd.isna(value):
@@ -14,18 +14,6 @@ def extract_numeric(value):
     s = s.replace("O", "0").replace("o", "0")
     match = re.search(r"-?\d+\.?\d*", s)
     return float(match.group()) if match else np.nan
-
-def harmonize_category(value, valid_values):
-    if pd.isna(value):
-        return value
-    s = str(value).strip()
-    if s in valid_values:
-        return s
-    for v in valid_values:
-        if v.lower() == s.lower():
-            return v
-    match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
-    return match[0] if match else value
 
 def parse_date(value):
     if pd.isna(value):
@@ -49,6 +37,18 @@ def parse_date(value):
             pass
     return value
 
+def harmonize_category(value, valid_values):
+    if pd.isna(value):
+        return value
+    s = str(value).strip()
+    if s in valid_values:
+        return s
+    for v in valid_values:
+        if v.lower() == s.lower():
+            return v
+    match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
+    return match[0] if match else value
+
 def find_best_grouping_column(df, target_col, is_numeric):
     target = df[target_col]
     observed = df[target.notna()]
@@ -68,10 +68,7 @@ def find_best_grouping_column(df, target_col, is_numeric):
             sub = observed.loc[t.index, [cand]].copy(); sub["_t"] = t
             w_mad, total = 0.0, len(sub)
             for _, grp in sub.groupby(cand)["_t"]:
-                if len(grp) >= 5:
-                    w_mad += (grp - grp.median()).abs().median() * (len(grp) / total)
-                else:
-                    w_mad += global_mad * (len(grp) / total)
+                w_mad += (grp - grp.median()).abs().median() * (len(grp) / total) if len(grp) >= 5 else global_mad * (len(grp) / total)
             reduction = 1 - (w_mad / global_mad)
             if reduction > best_gain and reduction >= 0.20:
                 best_gain, best_col = reduction, cand
@@ -82,10 +79,7 @@ def find_best_grouping_column(df, target_col, is_numeric):
             sub = pd.DataFrame({"_g": observed[cand], "_t": t})
             w_share, total = 0.0, len(sub)
             for _, grp in sub.groupby("_g")["_t"]:
-                if len(grp) >= 5:
-                    w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
-                else:
-                    w_share += global_share * (len(grp) / total)
+                w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
             if (w_share - global_share) > best_gain and (w_share - global_share) >= 0.05:
                 best_gain, best_col = w_share - global_share, cand
     return best_col
@@ -93,146 +87,137 @@ def find_best_grouping_column(df, target_col, is_numeric):
 def clean_dataset():
     df = pd.read_csv(INPUT_PATH)
 
-    log = {
-        'missing_values_imputed': 0,
-        'duplicates_removed': 0,
-        'numeric_values_extracted': 0,
-        'dates_parsed': 0,
-        'categories_harmonized': 0,
-        'outliers_corrected': 0
+    operations = {
+        "missing_values": {},
+        "duplicates": 0,
+        "numeric_corrections": {},
+        "date_corrections": {},
+        "category_harmonizations": {},
+        "outliers": {}
     }
 
     # Remove duplicates based on all columns except row_id
     initial_rows = len(df)
     df = df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep="first")
-    log['duplicates_removed'] = initial_rows - len(df)
+    operations["duplicates"] = initial_rows - len(df)
 
-    # Handle missing values
+    # Handle missing values and corrections
     for col in df.columns:
         if col == "row_id":
             continue
-        if df[col].isna().any():
-            is_numeric = pd.api.types.is_numeric_dtype(df[col]) or df[col].apply(lambda x: isinstance(x, (int, float))).any()
-            if is_numeric:
-                # Check if column has text that should be extracted
-                if df[col].apply(lambda x: isinstance(x, str) and re.search(r"[^\d\.\-]", str(x))).any():
-                    initial_missing = df[col].isna().sum()
-                    df[col] = df[col].apply(extract_numeric)
-                    log['numeric_values_extracted'] += (initial_missing - df[col].isna().sum())
-                    is_numeric = True
 
-                # Find best grouping column for imputation
-                group_col = find_best_grouping_column(df, col, is_numeric=True)
+        # Check if column is numeric
+        is_numeric = pd.api.types.is_numeric_dtype(df[col]) or (
+            df[col].dropna().apply(lambda x: isinstance(x, (int, float))).any()
+        )
+
+        # Handle numeric columns with text parasites
+        if is_numeric:
+            initial_missing = df[col].isna().sum()
+            df[col] = df[col].apply(extract_numeric)
+            numeric_corrections = initial_missing - df[col].isna().sum()
+            if numeric_corrections > 0:
+                operations["numeric_corrections"][col] = numeric_corrections
+
+            # Impute missing values
+            missing_before = df[col].isna().sum()
+            if missing_before > 0:
+                group_col = find_best_grouping_column(df, col, True)
                 if group_col:
                     df[col] = df.groupby(group_col)[col].transform(
                         lambda s: s.fillna(s.median())
                     )
                 df[col] = df[col].fillna(df[col].median())
-                log['missing_values_imputed'] += df[col].isna().sum()
-            else:
-                # Categorical column
-                group_col = find_best_grouping_column(df, col, is_numeric=False)
+                operations["missing_values"][col] = missing_before - df[col].isna().sum()
+
+            # Handle outliers for numeric columns
+            if df[col].nunique() > 10:  # Only for continuous-like columns
+                q1 = df[col].quantile(0.01)
+                q99 = df[col].quantile(0.99)
+                median = df[col].median()
+                outliers = df[(df[col] < q1) | (df[col] > q99)]
+                if not outliers.empty:
+                    df.loc[outliers.index, col] = median
+                    operations["outliers"][col] = len(outliers)
+
+        # Handle categorical columns
+        elif df[col].dtype == "object":
+            # Check for date columns
+            if df[col].str.match(r"\d{4}-\d{2}-\d{2}|\d{2}/\d{2}/\d{4}").any():
+                initial_missing = df[col].isna().sum()
+                df[col] = df[col].apply(parse_date)
+                date_corrections = initial_missing - df[col].isna().sum()
+                if date_corrections > 0:
+                    operations["date_corrections"][col] = date_corrections
+
+            # Handle specific categorical columns with known values
+            if col == "HospitalType":
+                valid_values = [
+                    "acute care hospitals", "critical access hospitals",
+                    "children's hospitals", "psychiatric hospitals"
+                ]
+                df[col] = df[col].apply(lambda v: harmonize_category(v, valid_values))
+                operations["category_harmonizations"][col] = "HospitalType"
+
+            elif col == "HospitalOwner":
+                valid_values = [
+                    "voluntary non-profit - private", "proprietary",
+                    "voluntary non-profit - other", "government - hospital district or authority",
+                    "government - federal", "government - state", "government - local"
+                ]
+                df[col] = df[col].apply(lambda v: harmonize_category(v, valid_values))
+                operations["category_harmonizations"][col] = "HospitalOwner"
+
+            elif col == "EmergencyService":
+                valid_values = ["yes", "no"]
+                df[col] = df[col].apply(lambda v: harmonize_category(v, valid_values))
+                operations["category_harmonizations"][col] = "EmergencyService"
+
+            # Impute missing values for categorical columns
+            missing_before = df[col].isna().sum()
+            if missing_before > 0:
+                group_col = find_best_grouping_column(df, col, False)
                 if group_col:
                     df[col] = df.groupby(group_col)[col].transform(
                         lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "Unknown")
                     )
-                mode_val = df[col].mode().iloc[0] if not df[col].mode().empty else "Unknown"
-                df[col] = df[col].fillna(mode_val)
-                log['missing_values_imputed'] += df[col].isna().sum()
-
-    # Harmonize categorical columns
-    valid_values_hospital_type = [
-        "acute care hospitals", "critical access hospitals",
-        "children's hospitals", "psychiatric hospitals"
-    ]
-    if "HospitalType" in df.columns:
-        df["HospitalType"] = df["HospitalType"].apply(
-            lambda v: harmonize_category(v, valid_values_hospital_type)
-        )
-        log['categories_harmonized'] += 1
-
-    valid_values_owner = [
-        "voluntary non-profit - private", "proprietary",
-        "government - hospital district or authority",
-        "voluntary non-profit - other", "government - federal",
-        "government - state", "government - local", "church operated"
-    ]
-    if "HospitalOwner" in df.columns:
-        df["HospitalOwner"] = df["HospitalOwner"].apply(
-            lambda v: harmonize_category(v, valid_values_owner)
-        )
-        log['categories_harmonized'] += 1
-
-    valid_values_emergency = ["yes", "no"]
-    if "EmergencyService" in df.columns:
-        df["EmergencyService"] = df["EmergencyService"].apply(
-            lambda v: harmonize_category(v, valid_values_emergency)
-        )
-        log['categories_harmonized'] += 1
-
-    # Clean Score column (numeric with possible text)
-    if "Score" in df.columns:
-        initial_missing = df["Score"].isna().sum()
-        df["Score"] = df["Score"].apply(extract_numeric)
-        log['numeric_values_extracted'] += (initial_missing - df["Score"].isna().sum())
-
-        # Handle outliers in Score (assuming it's a percentage 0-100)
-        if df["Score"].notna().any():
-            q1 = df["Score"].quantile(0.01)
-            q99 = df["Score"].quantile(0.99)
-            median = df["Score"].median()
-            outliers = (df["Score"] < q1) | (df["Score"] > q99)
-            df.loc[outliers, "Score"] = median
-            log['outliers_corrected'] += outliers.sum()
-
-    # Clean PhoneNumber (should be 10 digits)
-    if "PhoneNumber" in df.columns:
-        def clean_phone(value):
-            if pd.isna(value):
-                return value
-            s = str(value)
-            digits = re.sub(r"[^\d]", "", s)
-            if len(digits) == 10:
-                return digits
-            return value
-        df["PhoneNumber"] = df["PhoneNumber"].apply(clean_phone)
-
-    # Clean ZipCode (should be 5 digits)
-    if "ZipCode" in df.columns:
-        def clean_zip(value):
-            if pd.isna(value):
-                return value
-            s = str(value)
-            digits = re.sub(r"[^\d]", "", s)
-            if len(digits) == 5:
-                return digits
-            return value
-        df["ZipCode"] = df["ZipCode"].apply(clean_zip)
-
-    # Clean State (should be 2 uppercase letters)
-    if "State" in df.columns:
-        def clean_state(value):
-            if pd.isna(value):
-                return value
-            s = str(value).strip().upper()
-            if len(s) == 2 and s.isalpha():
-                return s
-            return value
-        df["State"] = df["State"].apply(clean_state)
+                df[col] = df[col].fillna(df[col].mode().iloc[0])
+                operations["missing_values"][col] = missing_before - df[col].isna().sum()
 
     # Save cleaned dataset
     df.to_csv(OUTPUT_PATH, index=False)
 
-    # Print log
-    print("Data Cleaning Summary:")
-    print(f"- Rows before cleaning: {initial_rows}")
-    print(f"- Rows after cleaning: {len(df)}")
-    print(f"- Duplicates removed: {log['duplicates_removed']}")
-    print(f"- Missing values imputed: {log['missing_values_imputed']}")
-    print(f"- Numeric values extracted from text: {log['numeric_values_extracted']}")
-    print(f"- Categories harmonized: {log['categories_harmonized']}")
-    print(f"- Outliers corrected: {log['outliers_corrected']}")
-    print(f"Cleaned dataset saved to: {OUTPUT_PATH}")
+    # Print summary
+    print("=== Data Cleaning Summary ===")
+    print(f"Initial rows: {initial_rows}")
+    print(f"Rows after duplicate removal: {len(df)} (removed {operations['duplicates']})")
+
+    if operations["missing_values"]:
+        print("\nMissing values imputed:")
+        for col, count in operations["missing_values"].items():
+            print(f"  - {col}: {count} values")
+
+    if operations["numeric_corrections"]:
+        print("\nNumeric values extracted from text:")
+        for col, count in operations["numeric_corrections"].items():
+            print(f"  - {col}: {count} values")
+
+    if operations["date_corrections"]:
+        print("\nDate values corrected:")
+        for col, count in operations["date_corrections"].items():
+            print(f"  - {col}: {count} values")
+
+    if operations["category_harmonizations"]:
+        print("\nCategory harmonizations applied:")
+        for col, _ in operations["category_harmonizations"].items():
+            print(f"  - {col}")
+
+    if operations["outliers"]:
+        print("\nOutliers corrected:")
+        for col, count in operations["outliers"].items():
+            print(f"  - {col}: {count} values")
+
+    print(f"\nCleaned dataset saved to: {OUTPUT_PATH}")
 
 if __name__ == "__main__":
     clean_dataset()

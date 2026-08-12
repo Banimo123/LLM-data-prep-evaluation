@@ -150,7 +150,7 @@ def clean_dataset():
 
     # Clean City
     if "City" in df.columns:
-        df["City"] = df["City"].astype(str).str.strip().str.title()
+        df["City"] = df["City"].str.strip().str.title()
         df["City"] = df["City"].replace({"Birmiingham": "Birmingham"})
 
     # Impute missing values
@@ -205,18 +205,15 @@ def clean_dataset():
     for addr_col in ["Address1", "Address2", "Address3"]:
         if addr_col in df.columns:
             df[addr_col] = df[addr_col].replace({"empty": np.nan, "": np.nan})
-            if pd.api.types.is_string_dtype(df[addr_col]):
-                df[addr_col] = df[addr_col].str.strip().str.title()
+            df[addr_col] = df[addr_col].str.strip().str.title()
 
     # Clean CountyName
     if "CountyName" in df.columns:
-        if pd.api.types.is_string_dtype(df["CountyName"]):
-            df["CountyName"] = df["CountyName"].str.strip().str.title()
+        df["CountyName"] = df["CountyName"].str.strip().str.title()
 
     # Clean MeasureCode
     if "MeasureCode" in df.columns:
-        if pd.api.types.is_string_dtype(df["MeasureCode"]):
-            df["MeasureCode"] = df["MeasureCode"].str.strip().str.upper()
+        df["MeasureCode"] = df["MeasureCode"].str.strip().str.upper()
 
     # Clean Score column
     if "Score" in df.columns:

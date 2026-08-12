@@ -27,7 +27,7 @@ from app.services.evaluation.metrics import evaluate_workflow
 from app.services.error_injection import get_rates_for_level
 
 
-DATASET_NAME = "hospital"
+DATASET_NAME = "flights"
 DATASET_DIR = Path(f"datasets/{DATASET_NAME}")
 CLEANED_DIR = Path(f"results/cleaned_datasets/{DATASET_NAME}")
 GENERATED_DIR = Path("workflows/generated")
@@ -35,7 +35,7 @@ FAILED_DIR = Path("workflows/failed")
 METRICS_DIR = Path("results/metrics")
 
 MAX_ATTEMPTS = 3
-APPROACH = "simple"
+APPROACH = "profile"
 NOISE_LEVELS = ["low", "medium", "high"]
 
 for d in [CLEANED_DIR, GENERATED_DIR, FAILED_DIR, METRICS_DIR]:

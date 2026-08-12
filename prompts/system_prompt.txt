@@ -201,10 +201,15 @@ RÈGLES STRICTES À RESPECTER :
     textuelle SE RÉPÈTE de façon dominante à travers de nombreuses lignes (regarde le profil
     fourni). Si oui (ex: "empty" présent sur des dizaines/centaines de lignes, pas une seule),
     c'est très probablement une valeur catégorielle légitime du dataset (ex: "donnée non
-    collectée pour ce cas"), à préserver TELLE QUELLE — ne la convertis pas en NaN puis en une
-    valeur numérique imputée, ce qui la remplacerait par une fausse précision inventée. Ne
-    traite comme "manquante à imputer" que les valeurs textuelles rares/isolées (probable typo
-    ou erreur ponctuelle), pas un placeholder répété systématiquement.
+    collectée pour ce cas"), à préserver TELLE QUELLE, MOT POUR MOT, CARACTÈRE PAR CARACTÈRE.
+    "Préserver telle quelle" signifie : ne la modifie JAMAIS, sous AUCUNE forme — ni en NaN, ni
+    en une valeur numérique imputée, ni en une AUTRE chaîne de caractères de ton choix (ex:
+    remplacer "empty" par "0%" ou "0 patients" est TOUT AUSSI INTERDIT que la convertir en NaN :
+    c'est encore une modification d'une valeur qui doit rester strictement identique à l'original).
+    La seule action autorisée sur ces cellules est : ne rien faire, `if value == "empty": return
+    value` (ou équivalent), sans aucune substitution. Ne traite comme "manquante à imputer" que
+    les valeurs textuelles rares/isolées (probable typo ou erreur ponctuelle), pas un placeholder
+    répété systématiquement.
 
 21. IMPÉRATIF pour détecter si une colonne est numérique : n'utilise JAMAIS un test du type
     `df[col].apply(lambda x: isinstance(x, (int, float))).any()` sans exclure les valeurs

@@ -4,8 +4,8 @@ import re
 from datetime import datetime
 import difflib
 
-INPUT_PATH = r'datasets\titanic\noisy_high.csv'
-OUTPUT_PATH = r'results\cleaned_datasets\titanic\noisy_high__profile.csv'
+INPUT_PATH = "datasets/titanic/noisy_high.csv"
+OUTPUT_PATH = "results/cleaned_datasets/titanic/noisy_high__profile.csv"
 
 def extract_numeric(value):
     if pd.isna(value):
@@ -30,21 +30,16 @@ def harmonize_category(value, valid_values):
 def parse_date(value):
     if pd.isna(value):
         return value
-    date_formats = [
-        "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y",
-        "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d"
-    ]
-    for fmt in date_formats:
+    formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d"]
+    for fmt in formats:
         try:
-            dt = datetime.strptime(str(value), fmt)
-            return dt.strftime("%Y-%m-%d")
-        except ValueError:
+            return datetime.strptime(str(value), fmt).strftime("%Y-%m-%d")
+        except (ValueError, TypeError):
             continue
     try:
         if str(value).isdigit() and len(str(value)) in (9, 10):
-            dt = datetime.fromtimestamp(int(value))
-            return dt.strftime("%Y-%m-%d")
-    except (ValueError, OSError):
+            return datetime.fromtimestamp(int(value)).strftime("%Y-%m-%d")
+    except (ValueError, TypeError):
         pass
     return str(value)
 
@@ -83,99 +78,85 @@ def find_best_grouping_column(df, target_col, is_numeric):
                 best_gain, best_col = w_share - global_share, cand
     return best_col
 
-def clean_dataset():
-    df = pd.read_csv(INPUT_PATH)
+# Chargement des données
+df = pd.read_csv(INPUT_PATH)
 
-    # Suppression des doublons (conservation du premier)
-    initial_rows = len(df)
-    df = df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep="first")
-    duplicates_removed = initial_rows - len(df)
-    print(f"Doublons supprimés: {duplicates_removed}")
+# Suppression des doublons (conservation de la première occurrence)
+initial_rows = len(df)
+df = df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep="first")
+duplicates_removed = initial_rows - len(df)
 
-    # Nettoyage colonne par colonne
-    operations = []
+# Nettoyage colonne par colonne
+operations = []
 
-    # Unnamed: 0 - colonne technique à conserver telle quelle (pas de nettoyage)
-    if "Unnamed: 0" in df.columns:
-        operations.append("Unnamed: 0 conservée (colonne technique)")
+# Unnamed: 0 - colonne technique à conserver telle quelle (pas de nettoyage)
+if "Unnamed: 0" in df.columns:
+    operations.append("Unnamed: 0 conservée (colonne technique)")
 
-    # PassengerId - identifiant unique, pas de nettoyage
-    if "PassengerId" in df.columns:
-        operations.append("PassengerId conservée (identifiant unique)")
+# PassengerId - colonne technique à conserver telle quelle
+if "PassengerId" in df.columns:
+    operations.append("PassengerId conservée (colonne technique)")
 
-    # Survived - binaire, pas de valeurs manquantes, pas de nettoyage
-    if "Survived" in df.columns:
-        operations.append("Survived conservée (binaire, pas de valeurs manquantes)")
+# Survived - colonne binaire (0/1) sans valeurs manquantes
+if "Survived" in df.columns:
+    operations.append("Survived: colonne binaire valide (0/1)")
 
-    # Sex - binaire, pas de valeurs manquantes, pas de nettoyage
-    if "Sex" in df.columns:
-        operations.append("Sex conservée (binaire, pas de valeurs manquantes)")
+# Sex - colonne binaire (0/1) sans valeurs manquantes
+if "Sex" in df.columns:
+    operations.append("Sex: colonne binaire valide (0/1)")
 
-    # Age - 28.16% de valeurs manquantes, valeurs textuelles avec nombres décimaux
-    if "Age" in df.columns:
-        # Extraction des valeurs numériques
-        df["Age"] = df["Age"].apply(extract_numeric)
-        # Imputation des valeurs manquantes
-        group_col = find_best_grouping_column(df, "Age", is_numeric=True)
-        if group_col:
-            df["Age"] = df.groupby(group_col)["Age"].transform(
-                lambda s: s.fillna(s.median())
-            )
-        df["Age"] = df["Age"].fillna(df["Age"].median())
-        operations.append(f"Age: {df['Age'].isna().sum()} valeurs manquantes imputées par médiane (après extraction numérique)")
+# Age - colonne catégorielle avec 28% de valeurs manquantes et valeurs numériques sous forme texte
+if "Age" in df.columns:
+    # Extraction des valeurs numériques
+    df["Age"] = df["Age"].apply(extract_numeric)
+    # Imputation des valeurs manquantes
+    group_col = find_best_grouping_column(df, "Age", True)
+    if group_col:
+        df["Age"] = df.groupby(group_col)["Age"].transform(
+            lambda s: s.fillna(s.median())
+        )
+    df["Age"] = df["Age"].fillna(df["Age"].median())
+    operations.append(f"Age: {df['Age'].isna().sum()} valeurs manquantes imputées par médiane")
 
-    # Fare - valeurs textuelles avec nombres décimaux et caractères parasites
-    if "Fare" in df.columns:
-        # Correction de la valeur aberrante dans l'extrait (O.1036442974556203)
-        df["Fare"] = df["Fare"].apply(extract_numeric)
-        # Détection des outliers (valeurs > 99.5e percentile)
-        q995 = df["Fare"].quantile(0.995)
-        outliers = df["Fare"] > q995
-        if outliers.any():
-            median_fare = df.loc[~outliers, "Fare"].median()
-            df.loc[outliers, "Fare"] = median_fare
-            operations.append(f"Fare: {outliers.sum()} outliers remplacés par la médiane")
-        operations.append("Fare: valeurs numériques extraites et outliers corrigés")
+# Fare - colonne avec valeurs numériques sous forme texte et fautes de frappe (O au lieu de 0)
+if "Fare" in df.columns:
+    # Extraction des valeurs numériques
+    df["Fare"] = df["Fare"].apply(extract_numeric)
+    # Détection des outliers (bornes basées sur le profil: min=0, max=0.139)
+    q99 = df["Fare"].quantile(0.99)
+    outliers = df["Fare"] > q99
+    if outliers.any():
+        df.loc[outliers, "Fare"] = df["Fare"].median()
+        operations.append(f"Fare: {outliers.sum()} outliers corrigés par médiane")
+    operations.append("Fare: valeurs numériques extraites et formatées")
 
-    # Pclass_1, Pclass_2, Pclass_3 - binaires, pas de valeurs manquantes
-    for col in ["Pclass_1", "Pclass_2", "Pclass_3"]:
-        if col in df.columns:
-            operations.append(f"{col} conservée (binaire, pas de valeurs manquantes)")
+# Pclass_1, Pclass_2, Pclass_3 - colonnes binaires (0/1) sans valeurs manquantes
+for col in ["Pclass_1", "Pclass_2", "Pclass_3"]:
+    if col in df.columns:
+        operations.append(f"{col}: colonne binaire valide (0/1)")
 
-    # Family_size - valeurs entre 0 et 1, pas de nettoyage nécessaire
-    if "Family_size" in df.columns:
-        operations.append("Family_size conservée (valeurs dans [0,1])")
+# Family_size - colonne numérique discrète (0.0 à 1.0) sans valeurs manquantes
+if "Family_size" in df.columns:
+    operations.append("Family_size: colonne numérique valide (0.0-1.0)")
 
-    # Title_1 à Title_4 - binaires, pas de valeurs manquantes
-    for col in ["Title_1", "Title_2", "Title_3", "Title_4"]:
-        if col in df.columns:
-            operations.append(f"{col} conservée (binaire, pas de valeurs manquantes)")
+# Title_1 à Title_4 - colonnes binaires (0/1) sans valeurs manquantes
+for col in ["Title_1", "Title_2", "Title_3", "Title_4"]:
+    if col in df.columns:
+        operations.append(f"{col}: colonne binaire valide (0/1)")
 
-    # Emb_1, Emb_2, Emb_3 - binaires, pas de valeurs manquantes
-    for col in ["Emb_1", "Emb_2", "Emb_3"]:
-        if col in df.columns:
-            operations.append(f"{col} conservée (binaire, pas de valeurs manquantes)")
+# Emb_1 à Emb_3 - colonnes binaires (0/1) sans valeurs manquantes
+for col in ["Emb_1", "Emb_2", "Emb_3"]:
+    if col in df.columns:
+        operations.append(f"{col}: colonne binaire valide (0/1)")
 
-    # Vérification finale des valeurs manquantes
-    missing_before = df.isna().sum().sum()
-    df = df.fillna({
-        col: df[col].mode()[0] if df[col].dtype == 'object' else df[col].median()
-        for col in df.columns if col != "row_id"
-    })
-    missing_after = df.isna().sum().sum()
-    if missing_after < missing_before:
-        operations.append(f"Valeurs manquantes résiduelles imputées: {missing_before - missing_after}")
+# Sauvegarde du dataset nettoyé
+df.to_csv(OUTPUT_PATH, index=False)
 
-    # Sauvegarde du dataset nettoyé
-    df.to_csv(OUTPUT_PATH, index=False)
-
-    # Résumé des opérations
-    print("\nRésumé des opérations de nettoyage:")
-    for op in operations:
-        print(f"- {op}")
-    print(f"\nDataset nettoyé sauvegardé dans: {OUTPUT_PATH}")
-    print(f"Nombre de lignes initial: {initial_rows}")
-    print(f"Nombre de lignes final: {len(df)}")
-
-if __name__ == "__main__":
-    clean_dataset()
+# Résumé des opérations
+print("=== Résumé du nettoyage ===")
+print(f"Lignes initiales: {initial_rows}")
+print(f"Doublons supprimés: {duplicates_removed}")
+print(f"Lignes finales: {len(df)}")
+print("\nOpérations effectuées:")
+for op in operations:
+    print(f"- {op}")
