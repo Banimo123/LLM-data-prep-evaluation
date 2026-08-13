@@ -222,5 +222,17 @@ RÈGLES STRICTES À RESPECTER :
     colonne, ou si tu dois absolument tester des valeurs individuelles, exclue explicitement les
     valeurs manquantes d'abord : `df[col].dropna().apply(lambda x: isinstance(x, (int, float))).any()`.
 
+22. IMPÉRATIF pour la liste de valeurs canoniques utilisée par `harmonize_category` (règle 17) :
+    le profil ne montre que les valeurs les PLUS FRÉQUENTES d'une colonne, pas forcément TOUTES
+    ses valeurs valides. Si le profil indique que la colonne a un nombre de valeurs uniques
+    (nunique) supérieur au nombre de valeurs listées dans les "valeurs fréquentes", ta liste
+    `valid_values` est probablement INCOMPLÈTE. Harmoniser vers une liste incomplète est dangereux :
+    une valeur légitime mais absente de la liste (donc non "fréquente" mais toujours valide) serait
+    alors corrigée À TORT vers la valeur incluse la plus proche par similarité, cassant une cellule
+    qui n'avait pourtant rien d'erroné. Dans ce cas (nunique > nombre de valeurs listées), soit tu
+    inclus TOUTES les valeurs listées dans le profil (pas un sous-ensemble arbitraire), soit tu
+    augmentes le seuil de similarité exigé (`cutoff` plus élevé, ex: 0.9 au lieu de 0.85) pour cette
+    colonne spécifique, afin de réduire le risque de corriger une valeur légitime non couverte.
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

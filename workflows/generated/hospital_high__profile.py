@@ -4,8 +4,8 @@ import re
 from datetime import datetime
 import difflib
 
-INPUT_PATH = "datasets/hospital/noisy_high.csv"
-OUTPUT_PATH = "results/cleaned_datasets/hospital/noisy_high__profile.csv"
+INPUT_PATH = r'datasets\hospital\noisy_high.csv'
+OUTPUT_PATH = r'results\cleaned_datasets\hospital\noisy_high__profile.csv'
 
 def extract_numeric(value):
     if pd.isna(value):
@@ -55,7 +55,6 @@ def find_best_grouping_column(df, target_col, is_numeric):
     candidates = [c for c in df.columns if c not in (target_col, "row_id")
                   and not df[c].isna().any() and 1 < df[c].nunique() <= 50]
     best_col, best_gain = None, 0.0
-
     if is_numeric:
         t = pd.to_numeric(observed[target_col], errors="coerce").dropna()
         if len(t) < 30:
@@ -64,14 +63,10 @@ def find_best_grouping_column(df, target_col, is_numeric):
         if global_mad == 0:
             return None
         for cand in candidates:
-            sub = observed.loc[t.index, [cand]].copy()
-            sub["_t"] = t
+            sub = observed.loc[t.index, [cand]].copy(); sub["_t"] = t
             w_mad, total = 0.0, len(sub)
             for _, grp in sub.groupby(cand)["_t"]:
-                if len(grp) >= 5:
-                    w_mad += (grp - grp.median()).abs().median() * (len(grp) / total)
-                else:
-                    w_mad += global_mad * (len(grp) / total)
+                w_mad += (grp - grp.median()).abs().median() * (len(grp) / total) if len(grp) >= 5 else global_mad * (len(grp) / total)
             reduction = 1 - (w_mad / global_mad)
             if reduction > best_gain and reduction >= 0.20:
                 best_gain, best_col = reduction, cand
@@ -82,8 +77,7 @@ def find_best_grouping_column(df, target_col, is_numeric):
             sub = pd.DataFrame({"_g": observed[cand], "_t": t})
             w_share, total = 0.0, len(sub)
             for _, grp in sub.groupby("_g")["_t"]:
-                if len(grp) > 0:
-                    w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
+                w_share += grp.value_counts(normalize=True).iloc[0] * (len(grp) / total)
             if (w_share - global_share) > best_gain and (w_share - global_share) >= 0.05:
                 best_gain, best_col = w_share - global_share, cand
     return best_col
@@ -91,218 +85,212 @@ def find_best_grouping_column(df, target_col, is_numeric):
 def clean_hospital_data():
     df = pd.read_csv(INPUT_PATH)
 
-    # Suppression des doublons basés sur row_id (conservation du premier)
+    # Suppression des doublons (conservation de la première occurrence)
     initial_rows = len(df)
-    df = df.drop_duplicates(subset=["row_id"], keep="first")
+    df = df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep='first')
     duplicates_removed = initial_rows - len(df)
     print(f"Doublons supprimés: {duplicates_removed}")
 
     # Nettoyage colonne par colonne
-    operations = []
+    operations_log = []
 
-    # ProviderNumber: colonne numérique, 0% manquants, pas d'aberrations détectées
-    if "ProviderNumber" in df.columns:
-        df["ProviderNumber"] = df["ProviderNumber"].apply(extract_numeric)
-        operations.append("ProviderNumber: valeurs numériques extraites")
+    # ProviderNumber - numérique, pas de manquants, pas d'aberrations apparentes
+    if 'ProviderNumber' in df.columns:
+        df['ProviderNumber'] = pd.to_numeric(df['ProviderNumber'], errors='coerce')
+        # Vérification des bornes (min/max du profil)
+        min_val, max_val = 10001.0, 20018.0
+        outliers = df[(df['ProviderNumber'] < min_val) | (df['ProviderNumber'] > max_val)]
+        if not outliers.empty:
+            median_val = df['ProviderNumber'].median()
+            df.loc[(df['ProviderNumber'] < min_val) | (df['ProviderNumber'] > max_val), 'ProviderNumber'] = median_val
+            operations_log.append(f"ProviderNumber: {len(outliers)} valeurs aberrantes corrigées par médiane")
 
-    # HospitalName: texte, 0% manquants, harmonisation des casse/espaces
-    if "HospitalName" in df.columns:
+    # HospitalName - catégoriel, pas de manquants, harmonisation des casse/espaces
+    if 'HospitalName' in df.columns:
         valid_hospitals = [
-            "riverview regional medical center", "georgiana hospital",
-            "stringfellow memorial hospital", "cherokee medical center",
-            "helen keller memorial hospital", "southwest alabama medical center",
-            "g h lanier memorial hospital", "mizell memorial hospital",
-            "hartselle medical center", "marshall medical center south"
+            "riverview regional medical center", "georgiana hospital", "stringfellow memorial hospital",
+            "cherokee medical center", "helen keller memorial hospital", "southwest alabama medical center",
+            "g h lanier memorial hospital", "mizell memorial hospital", "hartselle medical center",
+            "marshall medical center south"
         ]
-        df["HospitalName"] = df["HospitalName"].str.strip().str.lower()
-        df["HospitalName"] = df["HospitalName"].apply(
-            lambda v: harmonize_category(v, valid_hospitals)
+        df['HospitalName'] = df['HospitalName'].apply(
+            lambda v: harmonize_category(v, valid_hospitals) if pd.notna(v) else v
         )
-        operations.append("HospitalName: harmonisation des noms")
+        operations_log.append("HospitalName: harmonisation des variantes de nom")
 
-    # Address1: texte, 0% manquants, nettoyage des espaces
-    if "Address1" in df.columns:
-        df["Address1"] = df["Address1"].str.strip()
-        operations.append("Address1: nettoyage des espaces")
+    # Address1 - catégoriel, pas de manquants, nettoyage des espaces
+    if 'Address1' in df.columns:
+        df['Address1'] = df['Address1'].str.strip()
+        operations_log.append("Address1: nettoyage des espaces superflus")
 
-    # Address2/Address3: 100% "empty", pas de traitement
-    for col in ["Address2", "Address3"]:
+    # Address2 et Address3 - toutes les valeurs sont "empty", conservation telle quelle
+    for col in ['Address2', 'Address3']:
         if col in df.columns:
-            df[col] = df[col].replace("empty", np.nan)
+            df[col] = df[col].apply(lambda x: "empty" if str(x).strip().lower() == "empty" else x)
 
-    # City: 31% manquants, valeurs fréquentes avec espaces/typos
-    if "City" in df.columns:
-        valid_cities = [
-            "birmingham", "montgomery", "gadsden", "dothan",
-            "guntersville", "anniston", "ozark", "boaz"
-        ]
-        df["City"] = df["City"].str.strip().str.lower()
-        df["City"] = df["City"].replace("", np.nan)
-        df["City"] = df["City"].apply(lambda v: harmonize_category(v, valid_cities))
-
-        # Imputation conditionnelle
-        group_col = find_best_grouping_column(df, "City", False)
+    # City - 31% de manquants, imputation conditionnelle si possible
+    if 'City' in df.columns:
+        missing_before = df['City'].isna().sum()
+        group_col = find_best_grouping_column(df, 'City', False)
         if group_col:
-            df["City"] = df.groupby(group_col)["City"].transform(
+            df['City'] = df.groupby(group_col)['City'].transform(
                 lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "unknown")
             )
-        df["City"] = df["City"].fillna("unknown")
-        operations.append("City: harmonisation et imputation des valeurs manquantes")
+        df['City'] = df['City'].fillna("unknown")
+        missing_after = df['City'].isna().sum()
+        operations_log.append(f"City: {missing_before - missing_after} valeurs manquantes imputées")
 
-    # State: 31.4% manquants, nombreuses variantes de "al"
-    if "State" in df.columns:
-        valid_states = ["al", "la", "ak"]
-        df["State"] = df["State"].str.strip().str.lower()
-        df["State"] = df["State"].replace("", np.nan)
-        df["State"] = df["State"].apply(lambda v: harmonize_category(v, valid_states))
+        # Harmonisation des valeurs fréquentes
+        valid_cities = ["birmingham", "montgomery", "gadsden", "dothan", "guntersville",
+                       "anniston", "ozark", "boaz", "unknown"]
+        df['City'] = df['City'].apply(lambda v: harmonize_category(v, valid_cities) if pd.notna(v) else v)
 
-        # Imputation conditionnelle
-        group_col = find_best_grouping_column(df, "State", False)
+    # State - 31.4% de manquants, imputation conditionnelle
+    if 'State' in df.columns:
+        missing_before = df['State'].isna().sum()
+        group_col = find_best_grouping_column(df, 'State', False)
         if group_col:
-            df["State"] = df.groupby(group_col)["State"].transform(
+            df['State'] = df.groupby(group_col)['State'].transform(
                 lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "al")
             )
-        df["State"] = df["State"].fillna("al")
-        operations.append("State: harmonisation et imputation des valeurs manquantes")
+        df['State'] = df['State'].fillna("al")
 
-    # ZipCode: texte, 0% manquants, nettoyage des caractères non numériques
-    if "ZipCode" in df.columns:
-        df["ZipCode"] = df["ZipCode"].astype(str).str.extract(r'(\d{5})')[0]
-        df["ZipCode"] = df["ZipCode"].fillna("00000")
-        operations.append("ZipCode: nettoyage des codes postaux")
+        # Harmonisation des variantes de "al"
+        valid_states = ["al", "la", "ak"]
+        df['State'] = df['State'].apply(
+            lambda v: harmonize_category(v, valid_states) if pd.notna(v) else v
+        )
+        operations_log.append(f"State: {missing_before - df['State'].isna().sum()} valeurs manquantes imputées")
 
-    # CountyName: texte, 0% manquants, harmonisation
-    if "CountyName" in df.columns:
+    # ZipCode - catégoriel, pas de manquants, nettoyage des formats
+    if 'ZipCode' in df.columns:
+        df['ZipCode'] = df['ZipCode'].astype(str).str.strip()
+        df['ZipCode'] = df['ZipCode'].apply(
+            lambda x: x if re.match(r'^\d{5}(-\d{4})?$', x) else np.nan
+        )
+        df['ZipCode'] = df['ZipCode'].fillna("unknown")
+        operations_log.append("ZipCode: nettoyage des formats invalides")
+
+    # CountyName - catégoriel, pas de manquants, harmonisation
+    if 'CountyName' in df.columns:
         valid_counties = [
             "jefferson", "etowah", "marshall", "marion", "covington",
             "montgomery", "coffee", "houston", "calhoun", "madison"
         ]
-        df["CountyName"] = df["CountyName"].str.strip().str.lower()
-        df["CountyName"] = df["CountyName"].apply(
-            lambda v: harmonize_category(v, valid_counties)
+        df['CountyName'] = df['CountyName'].apply(
+            lambda v: harmonize_category(v, valid_counties) if pd.notna(v) else v
         )
-        operations.append("CountyName: harmonisation des noms de comtés")
 
-    # PhoneNumber: numérique, 0% manquants, extraction des chiffres
-    if "PhoneNumber" in df.columns:
-        df["PhoneNumber"] = df["PhoneNumber"].apply(extract_numeric)
-        # Vérification des bornes plausibles (numéros US)
-        min_phone = 2000000000
-        max_phone = 9999999999
-        median_phone = df["PhoneNumber"].median()
-        df["PhoneNumber"] = df["PhoneNumber"].where(
-            (df["PhoneNumber"] >= min_phone) & (df["PhoneNumber"] <= max_phone),
-            median_phone
-        )
-        operations.append("PhoneNumber: extraction numérique et correction des aberrations")
+    # PhoneNumber - numérique, pas de manquants, extraction des chiffres
+    if 'PhoneNumber' in df.columns:
+        df['PhoneNumber'] = df['PhoneNumber'].apply(extract_numeric)
+        # Vérification des bornes (min/max du profil)
+        min_val, max_val = 2052743000.0, 9075436300.0
+        outliers = df[(df['PhoneNumber'] < min_val) | (df['PhoneNumber'] > max_val)]
+        if not outliers.empty:
+            median_val = df['PhoneNumber'].median()
+            df.loc[(df['PhoneNumber'] < min_val) | (df['PhoneNumber'] > max_val), 'PhoneNumber'] = median_val
+            operations_log.append(f"PhoneNumber: {len(outliers)} valeurs aberrantes corrigées par médiane")
 
-    # HospitalOwner: 33.9% manquants, variantes textuelles
-    if "HospitalOwner" in df.columns:
+    # HospitalOwner - 33.9% de manquants, imputation conditionnelle
+    if 'HospitalOwner' in df.columns:
+        missing_before = df['HospitalOwner'].isna().sum()
+        group_col = find_best_grouping_column(df, 'HospitalOwner', False)
+        if group_col:
+            df['HospitalOwner'] = df.groupby(group_col)['HospitalOwner'].transform(
+                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "unknown")
+            )
+        df['HospitalOwner'] = df['HospitalOwner'].fillna("unknown")
+
         valid_owners = [
-            "voluntary non-profit - private", "proprietary",
-            "government - hospital district or authority",
-            "voluntary non-profit - other", "voluntary non-profit - church",
-            "government - federal", "government - state", "government - local"
+            "voluntary non-profit - private", "proprietary", "government - hospital district or authority",
+            "voluntary non-profit - other", "voluntary non-profit - church", "government - federal",
+            "government - state", "government - local", "unknown"
         ]
-        df["HospitalOwner"] = df["HospitalOwner"].str.strip().str.lower()
-        df["HospitalOwner"] = df["HospitalOwner"].apply(
-            lambda v: harmonize_category(v, valid_owners)
+        df['HospitalOwner'] = df['HospitalOwner'].apply(
+            lambda v: harmonize_category(v, valid_owners) if pd.notna(v) else v
         )
+        operations_log.append(f"HospitalOwner: {missing_before - df['HospitalOwner'].isna().sum()} valeurs manquantes imputées")
 
-        # Imputation conditionnelle
-        group_col = find_best_grouping_column(df, "HospitalOwner", False)
+    # EmergencyService - 33.1% de manquants, imputation conditionnelle
+    if 'EmergencyService' in df.columns:
+        missing_before = df['EmergencyService'].isna().sum()
+        group_col = find_best_grouping_column(df, 'EmergencyService', False)
         if group_col:
-            df["HospitalOwner"] = df.groupby(group_col)["HospitalOwner"].transform(
-                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "unknown")
+            df['EmergencyService'] = df.groupby(group_col)['EmergencyService'].transform(
+                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "yes")
             )
-        df["HospitalOwner"] = df["HospitalOwner"].fillna("unknown")
-        operations.append("HospitalOwner: harmonisation et imputation")
+        df['EmergencyService'] = df['EmergencyService'].fillna("yes")
 
-    # EmergencyService: 33.1% manquants, variantes de "yes"/"no"
-    if "EmergencyService" in df.columns:
-        valid_emergency = ["yes", "no"]
-        df["EmergencyService"] = df["EmergencyService"].str.strip().str.lower()
-        df["EmergencyService"] = df["EmergencyService"].apply(
-            lambda v: harmonize_category(v, valid_emergency)
+        valid_emergency = ["yes", "no", "unknown"]
+        df['EmergencyService'] = df['EmergencyService'].apply(
+            lambda v: harmonize_category(v, valid_emergency) if pd.notna(v) else v
         )
+        operations_log.append(f"EmergencyService: {missing_before - df['EmergencyService'].isna().sum()} valeurs manquantes imputées")
 
-        # Imputation conditionnelle
-        group_col = find_best_grouping_column(df, "EmergencyService", False)
-        if group_col:
-            df["EmergencyService"] = df.groupby(group_col)["EmergencyService"].transform(
-                lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "unknown")
-            )
-        df["EmergencyService"] = df["EmergencyService"].fillna("unknown")
-        operations.append("EmergencyService: harmonisation et imputation")
-
-    # Condition: texte, 0% manquants, harmonisation
-    if "Condition" in df.columns:
+    # Condition - catégoriel, pas de manquants, harmonisation
+    if 'Condition' in df.columns:
         valid_conditions = [
-            "surgical infection prevention", "heart attack",
-            "pneumonia", "heart failure", "children s asthma care"
+            "surgical infection prevention", "heart attack", "pneumonia",
+            "heart failure", "children s asthma care"
         ]
-        df["Condition"] = df["Condition"].str.strip().str.lower()
-        df["Condition"] = df["Condition"].apply(
-            lambda v: harmonize_category(v, valid_conditions)
+        df['Condition'] = df['Condition'].apply(
+            lambda v: harmonize_category(v, valid_conditions) if pd.notna(v) else v
         )
-        operations.append("Condition: harmonisation des conditions")
 
-    # MeasureCode: texte, 0% manquants, nettoyage
-    if "MeasureCode" in df.columns:
-        df["MeasureCode"] = df["MeasureCode"].str.strip().str.upper()
-        operations.append("MeasureCode: nettoyage des codes")
+    # MeasureName - catégoriel, pas de manquants, nettoyage des espaces
+    if 'MeasureName' in df.columns:
+        df['MeasureName'] = df['MeasureName'].str.strip()
 
-    # MeasureName: texte, 0% manquants, pas de traitement spécifique
-
-    # Score: texte avec pourcentages, 0% manquants mais valeurs "empty"
-    if "Score" in df.columns:
-        df["Score"] = df["Score"].str.strip()
-        df["Score"] = df["Score"].replace("empty", np.nan)
-
-        # Extraction des pourcentages
-        def extract_score(value):
-            if pd.isna(value):
-                return np.nan
-            s = str(value)
-            match = re.search(r"(\d+)%", s)
-            if match:
-                return f"{match.group(1)}%"
+    # Score - catégoriel avec format "%", conservation du format
+    if 'Score' in df.columns:
+        # Extraction des valeurs numériques pour les valeurs avec "%"
+        def clean_score(value):
+            if pd.isna(value) or str(value).strip().lower() == "empty":
+                return value
+            s = str(value).strip()
+            if "%" in s:
+                num = extract_numeric(s)
+                return f"{int(num)}%" if not pd.isna(num) else s
             return value
 
-        df["Score"] = df["Score"].apply(extract_score)
-        df["Score"] = df["Score"].fillna("unknown")
-        operations.append("Score: extraction des pourcentages et imputation")
+        df['Score'] = df['Score'].apply(clean_score)
+        # Imputation des valeurs manquantes (conservation de "empty" comme valeur valide)
+        missing_scores = df[df['Score'].isin(["empty", np.nan])]
+        if not missing_scores.empty:
+            mode_score = df[~df['Score'].isin(["empty", np.nan])]['Score'].mode()[0]
+            df.loc[df['Score'].isin(["empty", np.nan]), 'Score'] = mode_score
+            operations_log.append(f"Score: {len(missing_scores)} valeurs manquantes imputées par mode")
 
-    # Sample: texte avec "patients", 0% manquants mais valeurs "empty"
-    if "Sample" in df.columns:
-        df["Sample"] = df["Sample"].str.strip()
-        df["Sample"] = df["Sample"].replace("empty", np.nan)
-
-        # Extraction du nombre de patients
-        def extract_sample(value):
-            if pd.isna(value):
-                return np.nan
-            s = str(value)
-            match = re.search(r"(\d+)\s*patients?", s)
-            if match:
-                return f"{match.group(1)} patients"
+    # Sample - catégoriel avec format "X patients", conservation du format
+    if 'Sample' in df.columns:
+        def clean_sample(value):
+            if pd.isna(value) or str(value).strip().lower() == "empty":
+                return value
+            s = str(value).strip()
+            if "patients" in s:
+                num = extract_numeric(s)
+                return f"{int(num)} patients" if not pd.isna(num) else s
             return value
 
-        df["Sample"] = df["Sample"].apply(extract_sample)
-        df["Sample"] = df["Sample"].fillna("0 patients")
-        operations.append("Sample: extraction des nombres de patients")
+        df['Sample'] = df['Sample'].apply(clean_sample)
+        # Imputation des valeurs manquantes (conservation de "empty" comme valeur valide)
+        missing_samples = df[df['Sample'].isin(["empty", np.nan])]
+        if not missing_samples.empty:
+            mode_sample = df[~df['Sample'].isin(["empty", np.nan])]['Sample'].mode()[0]
+            df.loc[df['Sample'].isin(["empty", np.nan]), 'Sample'] = mode_sample
+            operations_log.append(f"Sample: {len(missing_samples)} valeurs manquantes imputées par mode")
 
-    # Stateavg: texte, 0% manquants, nettoyage
-    if "Stateavg" in df.columns:
-        df["Stateavg"] = df["Stateavg"].str.strip().str.lower()
-        operations.append("Stateavg: nettoyage des valeurs")
+    # Stateavg - catégoriel, pas de manquants, nettoyage des espaces
+    if 'Stateavg' in df.columns:
+        df['Stateavg'] = df['Stateavg'].str.strip()
 
     # Sauvegarde du dataset nettoyé
     df.to_csv(OUTPUT_PATH, index=False)
 
-    # Résumé des opérations
+    # Log des opérations
     print("\nRésumé des opérations de nettoyage:")
-    for op in operations:
+    for op in operations_log:
         print(f"- {op}")
     print(f"\nDataset nettoyé sauvegardé dans: {OUTPUT_PATH}")
     print(f"Nombre final de lignes: {len(df)}")

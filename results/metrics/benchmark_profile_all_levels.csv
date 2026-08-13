@@ -1,4 +1,4 @@
 noise_level,noise_rates,execution_success,execution_error,precision,recall,f1,tp,fp,fn,n_rows_lost_by_workflow,n_error_cells_lost_with_dropped_rows,columns_dropped_by_workflow
-low,"{'missing': 0.05, 'format': 0.075, 'outliers': 0.01, 'typos': 0.04}",True,,1.0,0.9448,0.9716,137,0,8,0,0,['Unnamed: 0']
-medium,"{'missing': 0.1, 'format': 0.15, 'outliers': 0.02, 'typos': 0.08}",True,,1.0,0.89,0.9418,259,0,32,0,0,['Unnamed: 0']
-high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,1.0,0.8917,0.9427,502,0,61,0,0,[]
+low,"{'missing': 0.05, 'format': 0.075, 'outliers': 0.01, 'typos': 0.04}",True,,0.1069,0.5096,0.1767,185,1546,178,0,0,[]
+medium,"{'missing': 0.1, 'format': 0.15, 'outliers': 0.02, 'typos': 0.08}",True,,1.0,0.5609,0.7187,405,0,317,0,0,[]
+high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,0.4616,0.4652,0.4634,656,765,754,0,0,[]
