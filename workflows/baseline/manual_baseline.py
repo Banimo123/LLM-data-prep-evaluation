@@ -38,16 +38,32 @@ MIN_CATEGORY_FREQ_SHARE = 0.02  # une valeur doit representer >=2% des lignes no
 MODE_IMPUTE_SHARE_THRESHOLD = 0.5  # si le mode couvre >50% des valeurs -> imputer par mode
 
 
-def _harmonize_category(value, valid_values):
-    """Rapproche une valeur bruitee de la categorie valide la plus proche (par similarite).
+def _levenshtein(a: str, b: str) -> int:
+    """Distance d'edition (nombre minimal de substitutions/insertions/suppressions)."""
+    if a == b:
+        return 0
+    if len(a) < len(b):
+        a, b = b, a
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        curr = [i] + [0] * len(b)
+        for j, cb in enumerate(b, 1):
+            curr[j] = min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + (ca != cb))
+        prev = curr
+    return prev[-1]
 
-    Matching volontairement STRICT : un seuil de similarite bas (comme 0.6) confond trop
-    facilement deux valeurs valides mais structurellement proches quand il y a beaucoup de
-    candidats similaires (ex: horaires "9:40 a.m." vs "6:40 p.m.", noms d'hopitaux
-    partageant le mot "hospital", codes pays a 1 lettre d'ecart comme GRC/GBR). On exige
-    donc un score eleve (0.85) ET que le meilleur candidat batte clairement le second
-    (marge >= 0.15) -- sinon on prefere ne rien corriger plutot que de risquer une
-    confusion entre deux valeurs valides differentes.
+
+def _harmonize_category(value, valid_values):
+    """Rapproche une valeur bruitee de la categorie valide la plus proche.
+
+    Utilise une distance d'edition (Levenshtein), adaptee a la LONGUEUR de la chaine :
+    un seul caractere different sur "al" (2 lettres, ex: "xl") doit etre accepte, alors
+    qu'un ratio de similarite type difflib penalise trop les chaines courtes (0.5 pour un
+    seul caractere sur 2, sous n'importe quel seuil raisonnable). On exige aussi que le
+    meilleur candidat batte clairement le second (distance strictement inferieure) --
+    sinon on prefere ne rien corriger plutot que de risquer une confusion entre deux
+    valeurs valides differentes (ex: codes pays a 1 lettre d'ecart comme GRC/GBR, ou
+    horaires structurellement proches).
     """
     if pd.isna(value):
         return value
@@ -60,15 +76,19 @@ def _harmonize_category(value, valid_values):
             return v
 
     scored = sorted(
-        ((difflib.SequenceMatcher(None, s, v).ratio(), v) for v in valid_values),
-        key=lambda x: -x[0],
+        ((_levenshtein(s, v), v) for v in valid_values),
+        key=lambda x: x[0],
     )
-    if not scored or scored[0][0] < 0.85:
+    if not scored:
         return value
-    if len(scored) > 1 and (scored[0][0] - scored[1][0]) < 0.15:
-        return value  # ambigu : plusieurs candidats plausibles, on ne tranche pas
-    return scored[0][1]
-    return match[0] if match else value
+    best_dist, best_val = scored[0]
+    # Tolerance adaptative : jusqu'a ~25% des caracteres de la valeur canonique, au moins 1
+    max_allowed = max(1, len(best_val) // 4)
+    if best_dist > max_allowed:
+        return value
+    if len(scored) > 1 and scored[1][0] == best_dist:
+        return value  # ambigu : au moins 2 candidats a egale distance, on ne tranche pas
+    return best_val
 
 
 def _parse_date_robust(value):
@@ -90,10 +110,27 @@ def _parse_date_robust(value):
 
 
 def _looks_like_date_column(series: pd.Series, col_name: str) -> bool:
+    """Classification STRICTE (formats calendaires explicites uniquement, pas le repli
+    timestamp Unix) : sinon n'importe quelle colonne de nombres a 9-10 chiffres (ex: un
+    numero de telephone) serait a tort classee comme colonne de date, puisque presque
+    toute chaine de 9-10 chiffres est un timestamp Unix "valide" au sens strict. Le repli
+    timestamp reste disponible dans _parse_date_robust, mais seulement pour REPARER une
+    colonne deja confirmee date par ce test (une minorite de valeurs corrompues en
+    timestamp au sein d'une colonne par ailleurs clairement composee de dates classiques)."""
     sample = series.dropna().astype(str).head(50)
     if sample.empty:
         return False
-    hits = sum(1 for v in sample if _parse_date_robust(v) is not pd.NaT)
+
+    def _matches_explicit_date_format(v: str) -> bool:
+        for fmt in DATE_FORMATS:
+            try:
+                datetime.strptime(v, fmt)
+                return True
+            except ValueError:
+                continue
+        return False
+
+    hits = sum(1 for v in sample if _matches_explicit_date_format(v))
     hit_ratio = hits / len(sample)
     # Le nom de colonne (ex: "reservation_status_date") abaisse le seuil requis, mais ne
     # dispense JAMAIS de vérifier les valeurs elles-mêmes : une colonne comme
@@ -226,7 +263,7 @@ def _find_best_grouping_column(df: pd.DataFrame, target_col: str, is_numeric: bo
 
     candidates = [c for c in df.columns if c not in (target_col, "row_id")
                   and not df[c].isna().any()
-                  and 1 < df[c].nunique() <= 50]
+                  and 1 < df[c].nunique() <= 300]
     if not candidates:
         return None
 

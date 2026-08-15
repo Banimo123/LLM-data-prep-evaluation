@@ -195,78 +195,35 @@ def clean_hospital_data():
 
     # Score - extraction du pourcentage et imputation des valeurs manquantes
     if "Score" in df.columns:
-        # Conserver les valeurs "empty" telles quelles
         df["Score"] = df["Score"].apply(lambda x: x if str(x).strip().lower() == "empty" else x)
-
-        # Extraire les valeurs numériques des pourcentages
-        def extract_score(value):
-            if pd.isna(value) or str(value).strip().lower() == "empty":
-                return np.nan
-            num = extract_numeric(value)
-            if pd.notna(num):
-                return num / 100 if num > 1 else num
-            return np.nan
-
-        score_numeric = df["Score"].apply(extract_score)
-
-        # Imputer les valeurs manquantes avec la médiane des valeurs valides
-        valid_scores = score_numeric.dropna()
-        if not valid_scores.empty:
-            median_score = valid_scores.median()
-            df["Score"] = df["Score"].apply(
-                lambda x: f"{int(median_score * 100)}%" if str(x).strip().lower() == "empty" or pd.isna(x) else x
-            )
-
-        # Corriger les valeurs aberrantes (ex: "x00%", "9x%")
-        def clean_score(value):
-            if pd.isna(value) or str(value).strip().lower() == "empty":
-                return value
-            if isinstance(value, str) and '%' in value:
-                num = extract_numeric(value)
-                if pd.notna(num):
-                    if num > 1:
-                        num = num / 100
-                    if num < 0 or num > 1:
-                        num = median_score if 'median_score' in locals() else 0.95
-                    return f"{int(num * 100)}%"
-            return value
-
-        df["Score"] = df["Score"].apply(clean_score)
+        score_numeric = df["Score"].apply(extract_numeric)
+        score_numeric = score_numeric / 100 if score_numeric.max() > 1 else score_numeric
+        missing_mask = (df["Score"] == "empty") | df["Score"].isna()
+        if missing_mask.any():
+            group_col = find_best_grouping_column(df, "Score", True)
+            if group_col:
+                df["Score"] = df.groupby(group_col)["Score"].transform(
+                    lambda s: s.fillna(s.median() if not s.mode().empty else 1.0)
+                )
+            df.loc[missing_mask, "Score"] = df["Score"].median()
+        df["Score"] = df["Score"].apply(lambda x: f"{int(float(x)*100)}%" if isinstance(x, (int, float)) else x)
         operations.append("Score: extraction des pourcentages et imputation des valeurs manquantes")
 
     # Sample - extraction du nombre de patients et imputation des valeurs manquantes
     if "Sample" in df.columns:
         df["Sample"] = df["Sample"].apply(lambda x: x if str(x).strip().lower() == "empty" else x)
-
-        def extract_sample(value):
-            if pd.isna(value) or str(value).strip().lower() == "empty":
-                return np.nan
-            num = extract_numeric(value)
-            return num if pd.notna(num) else np.nan
-
-        sample_numeric = df["Sample"].apply(extract_sample)
-
-        # Imputer les valeurs manquantes avec le mode des valeurs valides
-        valid_samples = sample_numeric.dropna()
-        if not valid_samples.empty:
-            mode_sample = valid_samples.mode()[0]
-            df["Sample"] = df["Sample"].apply(
-                lambda x: f"{int(mode_sample)} patients" if str(x).strip().lower() == "empty" or pd.isna(x) else x
-            )
-
-        # Corriger les valeurs aberrantes
-        def clean_sample(value):
-            if pd.isna(value) or str(value).strip().lower() == "empty":
-                return value
-            if isinstance(value, str) and 'patients' in value:
-                num = extract_numeric(value)
-                if pd.notna(num):
-                    if num < 0:
-                        num = mode_sample if 'mode_sample' in locals() else 10
-                    return f"{int(num)} patients"
-            return value
-
-        df["Sample"] = df["Sample"].apply(clean_sample)
+        sample_numeric = df["Sample"].apply(extract_numeric)
+        missing_mask = (df["Sample"] == "empty") | df["Sample"].isna()
+        if missing_mask.any():
+            group_col = find_best_grouping_column(df, "Sample", True)
+            if group_col:
+                df["Sample"] = df.groupby(group_col)["Sample"].transform(
+                    lambda s: s.fillna(s.mode().iloc[0] if not s.mode().empty else "0 patients")
+                )
+            df.loc[missing_mask, "Sample"] = df["Sample"].mode().iloc[0]
+        df["Sample"] = df["Sample"].apply(
+            lambda x: f"{int(float(x))} patients" if isinstance(x, (int, float)) and float(x).is_integer() else x
+        )
         operations.append("Sample: extraction des nombres de patients et imputation des valeurs manquantes")
 
     # Stateavg - pas de valeurs manquantes, format texte à conserver

@@ -1,370 +1,510 @@
 row_id,column,original_value,injected_value,error_type,error_family
-393.0,City,prattville,,missing_nan,missing_values
-496.0,City,centre,unknown,missing_unknown_string,missing_values
-436.0,City,anchorage,,missing_empty_string,missing_values
-84.0,City,florence,unknown,missing_unknown_string,missing_values
-778.0,City,huntsville,,missing_nan,missing_values
-966.0,City,enterprise,unknown,missing_unknown_string,missing_values
-628.0,City,opelika,unknown,missing_unknown_string,missing_values
-695.0,City,tallassee,unknown,missing_unknown_string,missing_values
-273.0,City,alabaster,N/A,missing_N/A_string,missing_values
-444.0,City,anchorage,NA,missing_NA_string,missing_values
-352.0,City,birmingham,unknown,missing_unknown_string,missing_values
-677.0,City,birmingham,,missing_empty_string,missing_values
-413.0,City,russellville,unknown,missing_unknown_string,missing_values
-67.0,City,boaz,N/A,missing_N/A_string,missing_values
-759.0,City,andalusia,NA,missing_NA_string,missing_values
-505.0,City,centre,N/A,missing_N/A_string,missing_values
-485.0,City,ozark,N/A,missing_N/A_string,missing_values
-752.0,City,andalusia,,missing_nan,missing_values
-193.0,City,guntersville,,missing_nan,missing_values
-813.0,City,gadsden,,missing_empty_string,missing_values
-545.0,City,montgomery,,missing_nan,missing_values
-804.0,City,gadsden,NA,missing_NA_string,missing_values
-163.0,City,hartselle,unknown,missing_unknown_string,missing_values
-668.0,City,birmingham,N/A,missing_N/A_string,missing_values
-874.0,City,hamilton,NA,missing_NA_string,missing_values
-891.0,City,fayette, ,missing_whitespace,missing_values
-418.0,City,sylacauga,N/A,missing_N/A_string,missing_values
-982.0,City,oneonta,,missing_nan,missing_values
-820.0,City,gadsden,unknown,missing_unknown_string,missing_values
-902.0,City,gadsden,N/A,missing_N/A_string,missing_values
-625.0,City,opelika,N/A,missing_N/A_string,missing_values
-623.0,City,opelika,N/A,missing_N/A_string,missing_values
-708.0,City,tallassee,N/A,missing_N/A_string,missing_values
-441.0,City,anchorage,,missing_nan,missing_values
-938.0,City,georgiana,N/A,missing_N/A_string,missing_values
-692.0,City,tallassee,unknown,missing_unknown_string,missing_values
-62.0,City,boaz,,missing_empty_string,missing_values
-733.0,City,cullman,N/A,missing_N/A_string,missing_values
-434.0,City,anchorage,,missing_nan,missing_values
-847.0,City,clanton,NA,missing_NA_string,missing_values
-533.0,City,montgomery,NA,missing_NA_string,missing_values
-223.0,City,fort payne, ,missing_whitespace,missing_values
-82.0,City,florence,,missing_empty_string,missing_values
-762.0,City,andalusia,,missing_empty_string,missing_values
-736.0,City,cullman,NA,missing_NA_string,missing_values
-177.0,City,guntersville, ,missing_whitespace,missing_values
-360.0,City,winfield, ,missing_whitespace,missing_values
-124.0,City,luverne,,missing_nan,missing_values
-90.0,City,florence,,missing_empty_string,missing_values
-817.0,City,gadsden,unknown,missing_unknown_string,missing_values
-338.0,State,al,unknown,missing_unknown_string,missing_values
-392.0,State,al,,missing_nan,missing_values
-625.0,State,al,,missing_empty_string,missing_values
-489.0,State,al,NA,missing_NA_string,missing_values
-360.0,State,al,,missing_empty_string,missing_values
-491.0,State,al,,missing_empty_string,missing_values
-488.0,State,al,N/A,missing_N/A_string,missing_values
-280.0,State,al,,missing_nan,missing_values
-814.0,State,al,unknown,missing_unknown_string,missing_values
-633.0,State,al,,missing_nan,missing_values
-451.0,State,ak,,missing_empty_string,missing_values
-685.0,State,al,N/A,missing_N/A_string,missing_values
-87.0,State,al,unknown,missing_unknown_string,missing_values
-376.0,State,al,,missing_empty_string,missing_values
-996.0,State,al,,missing_empty_string,missing_values
-103.0,State,al, ,missing_whitespace,missing_values
-55.0,State,al, ,missing_whitespace,missing_values
-403.0,State,al,N/A,missing_N/A_string,missing_values
-534.0,State,al,NA,missing_NA_string,missing_values
-157.0,State,al,NA,missing_NA_string,missing_values
-341.0,State,al,N/A,missing_N/A_string,missing_values
-440.0,State,ak,N/A,missing_N/A_string,missing_values
-704.0,State,al,,missing_empty_string,missing_values
-120.0,State,al,,missing_nan,missing_values
-161.0,State,al,,missing_nan,missing_values
-415.0,State,al, ,missing_whitespace,missing_values
-324.0,State,al,NA,missing_NA_string,missing_values
-639.0,State,al,NA,missing_NA_string,missing_values
-236.0,State,al,NA,missing_NA_string,missing_values
-164.0,State,al,unknown,missing_unknown_string,missing_values
-394.0,State,al,,missing_nan,missing_values
-875.0,State,al,,missing_nan,missing_values
-268.0,State,al,,missing_empty_string,missing_values
-484.0,State,al,NA,missing_NA_string,missing_values
-680.0,State,al,unknown,missing_unknown_string,missing_values
-787.0,State,al,NA,missing_NA_string,missing_values
-882.0,State,al,NA,missing_NA_string,missing_values
-701.0,State,al, ,missing_whitespace,missing_values
-678.0,State,al,,missing_nan,missing_values
-921.0,State,al,N/A,missing_N/A_string,missing_values
-753.0,State,al,N/A,missing_N/A_string,missing_values
-298.0,State,al,NA,missing_NA_string,missing_values
-955.0,State,al,unknown,missing_unknown_string,missing_values
-958.0,State,al,,missing_empty_string,missing_values
-22.0,State,al, ,missing_whitespace,missing_values
-149.0,State,al,,missing_empty_string,missing_values
-751.0,State,al,N/A,missing_N/A_string,missing_values
-603.0,State,al,N/A,missing_N/A_string,missing_values
-310.0,State,al, ,missing_whitespace,missing_values
-117.0,State,al,NA,missing_NA_string,missing_values
-945.0,EmergencyService,no,,missing_empty_string,missing_values
-104.0,EmergencyService,no,,missing_empty_string,missing_values
-114.0,EmergencyService,no,,missing_empty_string,missing_values
-707.0,EmergencyService,no, ,missing_whitespace,missing_values
-618.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-231.0,EmergencyService,yes,,missing_empty_string,missing_values
-255.0,EmergencyService,yes, ,missing_whitespace,missing_values
-856.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-641.0,EmergencyService,no,N/A,missing_N/A_string,missing_values
-818.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-599.0,EmergencyService,yes,,missing_nan,missing_values
-512.0,EmergencyService,yes, ,missing_whitespace,missing_values
-20.0,EmergencyService,yes,,missing_nan,missing_values
-952.0,EmergencyService,no,,missing_empty_string,missing_values
-364.0,EmergencyService,yes,,missing_empty_string,missing_values
-973.0,EmergencyService,yes,,missing_empty_string,missing_values
-911.0,EmergencyService,yes,,missing_nan,missing_values
-988.0,EmergencyService,yes,,missing_nan,missing_values
-9.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-134.0,EmergencyService,yes, ,missing_whitespace,missing_values
-305.0,EmergencyService,yes,,missing_nan,missing_values
-235.0,EmergencyService,yes,,missing_empty_string,missing_values
-902.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
-747.0,EmergencyService,no, ,missing_whitespace,missing_values
-225.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-303.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-200.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
-138.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-312.0,EmergencyService,yes,,missing_empty_string,missing_values
-270.0,EmergencyService,yes, ,missing_whitespace,missing_values
-936.0,EmergencyService,no,unknown,missing_unknown_string,missing_values
-271.0,EmergencyService,yes,,missing_nan,missing_values
-638.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-313.0,EmergencyService,yes,,missing_nan,missing_values
-544.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-990.0,EmergencyService,yes,unknown,missing_unknown_string,missing_values
-798.0,EmergencyService,yes,,missing_nan,missing_values
-537.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-36.0,EmergencyService,yes,,missing_nan,missing_values
-788.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
-454.0,EmergencyService,yes, ,missing_whitespace,missing_values
-519.0,EmergencyService,yes,,missing_nan,missing_values
-993.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-630.0,EmergencyService,yes, ,missing_whitespace,missing_values
-705.0,EmergencyService,no,,missing_empty_string,missing_values
-648.0,EmergencyService,no,,missing_nan,missing_values
-346.0,EmergencyService,yes,NA,missing_NA_string,missing_values
-894.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
-289.0,EmergencyService,yes,N/A,missing_N/A_string,missing_values
-531.0,EmergencyService,yes,,missing_empty_string,missing_values
-247.0,HospitalOwner,government - federal,NA,missing_NA_string,missing_values
-768.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
-135.0,HospitalOwner,government - federal,N/A,missing_N/A_string,missing_values
-525.0,HospitalOwner,voluntary non-profit - church,unknown,missing_unknown_string,missing_values
-118.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
-101.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
-457.0,HospitalOwner,government - hospital district or authority,unknown,missing_unknown_string,missing_values
-908.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
-784.0,HospitalOwner,government - hospital district or authority, ,missing_whitespace,missing_values
-601.0,HospitalOwner,voluntary non-profit - other,N/A,missing_N/A_string,missing_values
-996.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
-816.0,HospitalOwner,proprietary, ,missing_whitespace,missing_values
-907.0,HospitalOwner,proprietary,unknown,missing_unknown_string,missing_values
-421.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
-723.0,HospitalOwner,government - hospital district or authority,N/A,missing_N/A_string,missing_values
-289.0,HospitalOwner,voluntary non-profit - church,,missing_nan,missing_values
-863.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
-17.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
-6.0,HospitalOwner,voluntary non-profit - private, ,missing_whitespace,missing_values
-272.0,HospitalOwner,voluntary non-profit - church,,missing_empty_string,missing_values
-719.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
-23.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
-571.0,HospitalOwner,voluntary non-profit - other,N/A,missing_N/A_string,missing_values
-759.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
-883.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
-107.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
-330.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
-405.0,HospitalOwner,voluntary non-profit - private,,missing_nan,missing_values
-697.0,HospitalOwner,voluntary non-profit - private,,missing_nan,missing_values
-496.0,HospitalOwner,voluntary non-profit - private,NA,missing_NA_string,missing_values
-283.0,HospitalOwner,voluntary non-profit - church, ,missing_whitespace,missing_values
-916.0,HospitalOwner,proprietary,N/A,missing_N/A_string,missing_values
-651.0,HospitalOwner,government - local, ,missing_whitespace,missing_values
-620.0,HospitalOwner,government - hospital district or authority,,missing_nan,missing_values
-412.0,HospitalOwner,proprietary,,missing_nan,missing_values
-456.0,HospitalOwner,government - hospital district or authority, ,missing_whitespace,missing_values
-786.0,HospitalOwner,government - hospital district or authority,,missing_nan,missing_values
-532.0,HospitalOwner,voluntary non-profit - church,,missing_nan,missing_values
-609.0,HospitalOwner,voluntary non-profit - other,NA,missing_NA_string,missing_values
-142.0,HospitalOwner,government - federal, ,missing_whitespace,missing_values
-176.0,HospitalOwner,government - hospital district or authority,unknown,missing_unknown_string,missing_values
-160.0,HospitalOwner,proprietary,,missing_nan,missing_values
-808.0,HospitalOwner,proprietary, ,missing_whitespace,missing_values
-230.0,HospitalOwner,voluntary non-profit - church, ,missing_whitespace,missing_values
-927.0,HospitalOwner,proprietary,unknown,missing_unknown_string,missing_values
-830.0,HospitalOwner,voluntary non-profit - private, ,missing_whitespace,missing_values
-477.0,HospitalOwner,government - hospital district or authority,,missing_empty_string,missing_values
-578.0,HospitalOwner,voluntary non-profit - other, ,missing_whitespace,missing_values
-750.0,HospitalOwner,proprietary,,missing_empty_string,missing_values
-936.0,HospitalOwner,voluntary non-profit - private,unknown,missing_unknown_string,missing_values
-85.0,ZipCode,35631,433717,outlier_value,outliers
-767.0,ZipCode,36201,934087,outlier_value,outliers
-88.0,ZipCode,35631,679477,outlier_value,outliers
-649.0,ZipCode,36278,840484,outlier_value,outliers
-436.0,ZipCode,99508,499072,outlier_value,outliers
-430.0,ZipCode,35150,304514,outlier_value,outliers
-695.0,ZipCode,36078,599125,outlier_value,outliers
-94.0,ZipCode,36467,157435,outlier_value,outliers
-201.0,ZipCode,35235,844867,outlier_value,outliers
-855.0,ZipCode,35570,668497,outlier_value,outliers
-812.0,HospitalName,gadsden regional medical center,GADSDEN REGIONal medical center,typo_random_case,typos
-91.0,HospitalName,eliza coffee memorial hospital,eliza coffee memorial hopital,typo_missing_letter,typos
-883.0,HospitalName,fayette medical center,FAYette medical center,typo_random_case,typos
-195.0,HospitalName,st vincents east,st vincents  east,typo_duplicated_letter,typos
-63.0,HospitalName,marshall medical center south,  marshall medical center south ,typo_extra_whitespace,typos
-911.0,HospitalName,riverview regional medical center,  riverview regional medical center ,typo_extra_whitespace,typos
-948.0,HospitalName,georgiana hospital,georgiana hospittal,typo_duplicated_letter,typos
-992.0,HospitalName,st vincents blount,st viincents blount,typo_duplicated_letter,typos
-446.0,HospitalName,alaska regional hospital,ALASka regional hospital,typo_random_case,typos
-675.0,HospitalName,university of alabama hospital,  university of alabama hospital ,typo_extra_whitespace,typos
-539.0,HospitalName,baptist medical center south,  baptist medical center south ,typo_extra_whitespace,typos
-85.0,HospitalName,eliza coffee memorial hospital,ELIZA COFFEE MEMORIAL Hospital,typo_random_case,typos
-441.0,HospitalName,alaska regional hospital,ALASKA REGIONAL Hospital,typo_random_case,typos
-634.0,HospitalName,east alabama medical center and snf,east alabama medical centerr and snf,typo_duplicated_letter,typos
-417.0,HospitalName,coosa valley medical center,coosa valle ymedical center,typo_swapped_letters,typos
-125.0,HospitalName,crenshaw community hospital,crenshaw commuinty hospital,typo_swapped_letters,typos
-225.0,HospitalName,dekalb regional medical center,dekab regional medical center,typo_missing_letter,typos
-631.0,HospitalName,east alabama medical center and snf,eastt alabama medical center and snf,typo_duplicated_letter,typos
-490.0,HospitalName,dale medical center,dale medicalc enter,typo_swapped_letters,typos
-822.0,HospitalName,gadsden regional medical center,GADSDEN REGIONAL MEDICAL Center,typo_random_case,typos
-699.0,HospitalName,community hospital inc,cmomunity hospital inc,typo_swapped_letters,typos
-501.0,HospitalName,cherokee medical center,CHEROKEE MEDICal center,typo_random_case,typos
-423.0,HospitalName,coosa valley medical center,coosa valley mdeical center,typo_swapped_letters,typos
-855.0,HospitalName,marion regional medical center,marion regional edical center,typo_missing_letter,typos
-744.0,HospitalName,andalusia regional hospital,ANDALUSIA REGIONal hospital,typo_random_case,typos
-825.0,HospitalName,gadsden regional medical center,gadsden reional medical center,typo_missing_letter,typos
-715.0,HospitalName,community hospital inc,community hospital icn,typo_swapped_letters,typos
-511.0,HospitalName,cherokee medical center,cherokeee medical center,typo_duplicated_letter,typos
-829.0,HospitalName,chilton medical center,chilton medical centre,typo_swapped_letters,typos
-179.0,HospitalName,marshall medical center north,  marshall medical center north ,typo_extra_whitespace,typos
-769.0,HospitalName,stringfellow memorial hospital,stringfellow memorial hoospital,typo_duplicated_letter,typos
-364.0,HospitalName,northwest medical center,northwest medical cnter,typo_missing_letter,typos
-276.0,HospitalName,shelby baptist medical center,shelby baptist medical cennter,typo_duplicated_letter,typos
-767.0,HospitalName,stringfellow memorial hospital,stringfellow  memorial hospital,typo_duplicated_letter,typos
-551.0,HospitalName,jackson hospital & clinic inc,JACKSON HOSPITAL & clinic inc,typo_random_case,typos
-630.0,HospitalName,east alabama medical center and snf,east alabama medical cente rand snf,typo_swapped_letters,typos
-741.0,HospitalName,andalusia regional hospital,  andalusia regional hospital ,typo_extra_whitespace,typos
-397.0,HospitalName,prattville baptist hospital,prattvilleb aptist hospital,typo_swapped_letters,typos
-438.0,HospitalName,alaska regional hospital,alaska regional hopsital,typo_swapped_letters,typos
-83.0,HospitalName,eliza coffee memorial hospital,elizaa coffee memorial hospital,typo_duplicated_letter,typos
-116.0,City,opp,opp,typo_swapped_letters,typos
-976.0,City,enterprise,eterprise,typo_missing_letter,typos
-296.0,City,birmingham,brimingham,typo_swapped_letters,typos
-763.0,City,andalusia,andaluusia,typo_duplicated_letter,typos
-234.0,City,fort payne,fort pyne,typo_missing_letter,typos
-492.0,City,centre,entre,typo_missing_letter,typos
-373.0,City,winfield,winfiled,typo_swapped_letters,typos
-21.0,City,dothan,dthan,typo_missing_letter,typos
-598.0,City,elba,  elba ,typo_extra_whitespace,typos
-903.0,City,gadsden,gasdden,typo_swapped_letters,typos
-744.0,City,andalusia,andallusia,typo_duplicated_letter,typos
-672.0,City,birmingham,bimringham,typo_swapped_letters,typos
-265.0,City,thomasville,tomasville,typo_missing_letter,typos
-673.0,City,birmingham,  birmingham ,typo_extra_whitespace,typos
-487.0,City,ozark,oazrk,typo_swapped_letters,typos
-321.0,City,anniston,Anniston,typo_random_case,typos
-484.0,City,ozark,ozzark,typo_duplicated_letter,typos
-363.0,City,winfield,WINField,typo_random_case,typos
-987.0,City,oneonta,  oneonta ,typo_extra_whitespace,typos
-969.0,City,enterprise,enteprrise,typo_swapped_letters,typos
-696.0,City,tallassee,tallasese,typo_swapped_letters,typos
-620.0,City,opelika,opelikka,typo_duplicated_letter,typos
-447.0,City,anchorage,anchoorage,typo_duplicated_letter,typos
-436.0,City,,,typo_too_short_unchanged,typos
-697.0,City,tallassee,tallasese,typo_swapped_letters,typos
-162.0,City,hartselle,hatrselle,typo_swapped_letters,typos
-912.0,City,gadsden,gasden,typo_missing_letter,typos
-86.0,City,florence,  florence ,typo_extra_whitespace,typos
-456.0,City,sheffield,  sheffield ,typo_extra_whitespace,typos
-148.0,City,hartselle,hatselle,typo_missing_letter,typos
-954.0,City,georgiana,gerogiana,typo_swapped_letters,typos
-102.0,City,opp,op,typo_missing_letter,typos
-694.0,City,tallassee,TALlassee,typo_random_case,typos
-356.0,City,winfield,winfiield,typo_duplicated_letter,typos
-679.0,City,birmingham,BIRMINGHAm,typo_random_case,typos
-338.0,City,dothan,Dothan,typo_random_case,typos
-947.0,City,georgiana,GEORGIANa,typo_random_case,typos
-156.0,City,hartselle,haartselle,typo_duplicated_letter,typos
-335.0,City,dothan,othan,typo_missing_letter,typos
-874.0,City,NA,AN,typo_swapped_letters,typos
-443.0,State,ak,k,typo_missing_letter,typos
-968.0,State,al,l,typo_missing_letter,typos
-44.0,State,al,aal,typo_duplicated_letter,typos
-428.0,State,al,aal,typo_duplicated_letter,typos
-780.0,State,al,l,typo_missing_letter,typos
-306.0,State,al,l,typo_missing_letter,typos
-838.0,State,al,Al,typo_random_case,typos
-516.0,State,al,  al ,typo_extra_whitespace,typos
-915.0,State,al,l,typo_missing_letter,typos
-924.0,State,al,aal,typo_duplicated_letter,typos
-315.0,State,al,la,typo_swapped_letters,typos
-176.0,State,al,  al ,typo_extra_whitespace,typos
-298.0,State,NA,Na,typo_random_case,typos
-888.0,State,al,Al,typo_random_case,typos
-468.0,State,al,la,typo_swapped_letters,typos
-282.0,State,al,la,typo_swapped_letters,typos
-616.0,State,al,l,typo_missing_letter,typos
-89.0,State,al,  al ,typo_extra_whitespace,typos
-523.0,State,al,  al ,typo_extra_whitespace,typos
-882.0,State,NA,A,typo_missing_letter,typos
-221.0,State,al,Al,typo_random_case,typos
-293.0,State,al,l,typo_missing_letter,typos
-356.0,State,al,Al,typo_random_case,typos
-115.0,State,al,  al ,typo_extra_whitespace,typos
-741.0,State,al,l,typo_missing_letter,typos
-931.0,State,al,la,typo_swapped_letters,typos
-149.0,State,,,typo_too_short_unchanged,typos
-880.0,State,al,l,typo_missing_letter,typos
-525.0,State,al,la,typo_swapped_letters,typos
-196.0,State,al,  al ,typo_extra_whitespace,typos
-605.0,State,al,l,typo_missing_letter,typos
-954.0,State,al,aal,typo_duplicated_letter,typos
-22.0,State, , ,typo_too_short_unchanged,typos
-799.0,State,al,  al ,typo_extra_whitespace,typos
-883.0,State,al,aal,typo_duplicated_letter,typos
-772.0,State,al,l,typo_missing_letter,typos
-249.0,State,al,la,typo_swapped_letters,typos
-978.0,State,al,la,typo_swapped_letters,typos
-501.0,State,al,Al,typo_random_case,typos
-286.0,ZipCode,35007,3S5007,typo_letter_inside_number,typos
-24.0,ZipCode,36302,363j02,typo_letter_inside_number,typos
-893.0,ZipCode,35555,35555O,typo_zero_as_letter_O,typos
-585.0,ZipCode,36854,36854l,typo_unit_suffix_injected,typos
-462.0,ZipCode,35660,35660l,typo_unit_suffix_injected,typos
-461.0,ZipCode,35660,35660O,typo_unit_suffix_injected,typos
-727.0,ZipCode,35058,3O5058,typo_letter_inside_number,typos
-795.0,ZipCode,35801,358O1,typo_zero_as_letter_O,typos
-301.0,ZipCode,35233,35233O,typo_zero_as_letter_O,typos
-578.0,ZipCode,36854,36854B,typo_unit_suffix_injected,typos
-919.0,ZipCode,35901,3590B1,typo_letter_inside_number,typos
-232.0,ZipCode,35968,35S968,typo_letter_inside_number,typos
-249.0,ZipCode,36784,36784j,typo_unit_suffix_injected,typos
-705.0,ZipCode,36078,3607kg8,typo_letter_inside_number,typos
-426.0,ZipCode,35150,35150kg,typo_unit_suffix_injected,typos
-136.0,ZipCode,36049,36049O,typo_unit_suffix_injected,typos
-409.0,ZipCode,36067,3l6067,typo_letter_inside_number,typos
-6.0,ZipCode,35233,35233O,typo_zero_as_letter_O,typos
-926.0,ZipCode,35901,35901€,typo_unit_suffix_injected,typos
-627.0,ZipCode,36801,36801j,typo_unit_suffix_injected,typos
-17.0,ZipCode,35660,3566O,typo_zero_as_letter_O,typos
-482.0,ZipCode,36360,36360O,typo_unit_suffix_injected,typos
-658.0,ZipCode,36278,36278j,typo_unit_suffix_injected,typos
-918.0,ZipCode,35901,359O1,typo_zero_as_letter_O,typos
-731.0,ZipCode,35058,3O5058,typo_letter_inside_number,typos
-501.0,ZipCode,35960,35960O,typo_unit_suffix_injected,typos
-616.0,ZipCode,36801,3j6801,typo_letter_inside_number,typos
-826.0,ZipCode,35903,3590kg3,typo_letter_inside_number,typos
-143.0,ZipCode,36049,36O49,typo_zero_as_letter_O,typos
-276.0,ZipCode,35007,35O07,typo_zero_as_letter_O,typos
-818.0,ZipCode,35903,35903kg,typo_unit_suffix_injected,typos
-538.0,ZipCode,36116,36116kg,typo_unit_suffix_injected,typos
-946.0,ZipCode,36033,36033€,typo_unit_suffix_injected,typos
-793.0,ZipCode,35801,3kg5801,typo_letter_inside_number,typos
-839.0,ZipCode,35045,35045kg,typo_unit_suffix_injected,typos
-108.0,ZipCode,36467,36467S,typo_unit_suffix_injected,typos
-178.0,ZipCode,35976,3597j6,typo_letter_inside_number,typos
-776.0,ZipCode,35801,35B801,typo_letter_inside_number,typos
-162.0,ZipCode,35640,35640€,typo_unit_suffix_injected,typos
-103.0,ZipCode,36467,36467O,typo_zero_as_letter_O,typos
+14,ProviderNumber,10019,1xx19,real_world,typos
+46,ProviderNumber,10005,x0005,real_world,typos
+82,ProviderNumber,10006,1000x,real_world,typos
+214,ProviderNumber,10011,x00xx,real_world,typos
+245,ProviderNumber,10015,x00x5,real_world,typos
+254,ProviderNumber,10015,1xx15,real_world,typos
+274,ProviderNumber,10016,1xx16,real_world,typos
+315,ProviderNumber,10038,100x8,real_world,typos
+361,ProviderNumber,10086,100x6,real_world,typos
+409,ProviderNumber,10108,x0x08,real_world,typos
+560,ProviderNumber,10024,1xx24,real_world,typos
+609,ProviderNumber,10027,x0027,real_world,typos
+628,ProviderNumber,10029,x0029,real_world,typos
+640,ProviderNumber,10029,1xx29,real_world,typos
+646,ProviderNumber,10032,1xx32,real_world,typos
+656,ProviderNumber,10032,1xx32,real_world,typos
+705,ProviderNumber,10034,100x4,real_world,typos
+722,ProviderNumber,10035,100x5,real_world,typos
+725,ProviderNumber,10035,1xx35,real_world,typos
+756,ProviderNumber,10036,1xx36,real_world,typos
+781,ProviderNumber,10039,1003x,real_world,typos
+790,ProviderNumber,10039,1xx39,real_world,typos
+794,ProviderNumber,10039,100x9,real_world,typos
+860,ProviderNumber,10044,1xx44,real_world,typos
+879,ProviderNumber,10045,1xx45,real_world,typos
+889,ProviderNumber,10045,x0045,real_world,typos
+934,ProviderNumber,10047,1xx47,real_world,typos
+956,ProviderNumber,10049,1004x,real_world,typos
+27,HospitalName,southeast alabama medical center,southeast alabama medxcal center,real_world,typos
+132,HospitalName,crenshaw community hospital,crenshaw cxmmunity hxspital,real_world,typos
+172,HospitalName,marshall medical center north,marshall medical cenxer norxh,real_world,typos
+244,HospitalName,dekalb regional medical center,dexalb regional medical center,real_world,typos
+338,HospitalName,flowers hospital,floxers hospital,real_world,typos
+385,HospitalName,univ of south alabama medical center,univ ox south alabama medical center,real_world,typos
+386,HospitalName,univ of south alabama medical center,xniv of soxth alabama medical center,real_world,typos
+449,HospitalName,alaska regional hospital,xlxskx regionxl hospitxl,real_world,typos
+533,HospitalName,baptist medical center south,baptist medical cexter south,real_world,typos
+561,HospitalName,jackson hospital & clinic inc,jaxkson hospital & xlinix inx,real_world,typos
+655,HospitalName,wedowee hospital,wedowee hosxital,real_world,typos
+698,HospitalName,community hospital inc,communitx hospital inc,real_world,typos
+711,HospitalName,community hospital inc,communixy hospixal inc,real_world,typos
+731,HospitalName,cullman regional medical center,cullmxn regionxl medicxl center,real_world,typos
+759,HospitalName,andalusia regional hospital,andaxusia regionax hospitax,real_world,typos
+766,HospitalName,andalusia regional hospital,andaluxia regional hoxpital,real_world,typos
+778,HospitalName,huntsville hospital,huntsvxlle hospxtal,real_world,typos
+904,HospitalName,riverview regional medical center,rivxrvixw rxgional mxdical cxntxr,real_world,typos
+922,HospitalName,riverview regional medical center,xivexview xegional medical centex,real_world,typos
+923,HospitalName,riverview regional medical center,riverview rexional medical center,real_world,typos
+939,HospitalName,georgiana hospital,georgiaxa hospital,real_world,typos
+957,HospitalName,medical center enterprise,medixal xenter enterprise,real_world,typos
+963,HospitalName,medical center enterprise,medxcal center enterprxse,real_world,typos
+988,HospitalName,st vincents blount,st vincents bxount,real_world,typos
+58,Address1,2505 u s highway 431 north,2505xuxsxhighwayx431xnorth,real_world,typos
+95,Address1,702 n main st,702xnxmainxst,real_world,typos
+107,Address1,702 n main st,702 x maix st,real_world,typos
+162,Address1,201 pine street northwest,201 pine sxreex norxhwesx,real_world,typos
+176,Address1,8000 alabama highway 69,8000 alabama xigxway 69,real_world,typos
+261,Address1,33700 highway 43,33700 hxghway 43,real_world,typos
+265,Address1,33700 highway 43,33700 highway x3,real_world,typos
+276,Address1,1000 first street north,1000 fixst stxeet noxth,real_world,typos
+296,Address1,1720 university blvd,1720 univxrsity blvd,real_world,typos
+317,Address1,301 east 18th st,301xeastx18thxst,real_world,typos
+335,Address1,4370 west main street,4370xwestxmainxstreet,real_world,typos
+351,Address1,810 st vincents drive,810 st vxncents drxve,real_world,typos
+364,Address1,1530 u s highway 43,1530xuxsxhighwayx43,real_world,typos
+394,Address1,124 s memorial dr,124xsxmemorialxdr,real_world,typos
+412,Address1,124 s memorial dr,124 s mxmorial dr,real_world,typos
+416,Address1,315 w hickory st,315 w hickxry st,real_world,typos
+432,Address1,315 w hickory st,315xwxhickoryxst,real_world,typos
+452,Address1,po box 287,poxboxx287,real_world,typos
+473,Address1,126 hospital ave,126xhospitalxave,real_world,typos
+485,Address1,126 hospital ave,1x6 hospital ave,real_world,typos
+653,Address1,209 north main street,209 xorth maix street,real_world,typos
+737,Address1,1912 alabama highway 157,1912xalabamaxhighwayx157,real_world,typos
+768,Address1,301 east 18th st,301 east 1xth st,real_world,typos
+850,Address1,1010 lay dam road,x0x0 lay dam road,real_world,typos
+858,Address1,1256 military street south,1256 military street sxuth,real_world,typos
+916,Address1,600 south third street,600 souxh xhird sxreex,real_world,typos
+935,Address1,515 miranda st,515 miranda sx,real_world,typos
+936,Address1,515 miranda st,515 miranxa st,real_world,typos
+946,Address1,515 miranda st,515 mirxndx st,real_world,typos
+957,Address1,400 n edwards street,400xnxedwardsxstreet,real_world,typos
+987,Address1,150 gilbreath drive,150 gilxreath drive,real_world,typos
+4,City,birmingham,birminghxm,real_world,typos
+8,City,birmingham,birmingxam,real_world,typos
+11,City,sheffield,sheffxeld,real_world,typos
+57,City,boaz,boxz,real_world,typos
+80,City,florence,fxorence,real_world,typos
+89,City,florence,florxncx,real_world,typos
+94,City,florence,flxrence,real_world,typos
+181,City,guntersville,guntxrsvillx,real_world,typos
+208,City,birmingham,birmixgham,real_world,typos
+213,City,birmingham,bxrmxngham,real_world,typos
+229,City,fort payne,fort payxe,real_world,typos
+312,City,anniston,axxistox,real_world,typos
+368,City,winfield,winfielx,real_world,typos
+438,City,anchorage,anchoraxe,real_world,typos
+475,City,ozark,ozarx,real_world,typos
+486,City,ozark,xzark,real_world,typos
+518,City,montgomery,montxomery,real_world,typos
+579,City,valley,vallex,real_world,typos
+591,City,valley,vxlley,real_world,typos
+602,City,elba,exba,real_world,typos
+655,City,wedowee,wxdowxx,real_world,typos
+691,City,birmingham,birminxham,real_world,typos
+697,City,tallassee,tallaxxee,real_world,typos
+737,City,cullman,cuxxman,real_world,typos
+757,City,andalusia,andaluxia,real_world,typos
+773,City,anniston,annxston,real_world,typos
+822,City,gadsden,gxdsden,real_world,typos
+856,City,hamilton,hamilxon,real_world,typos
+896,City,fayette,faxette,real_world,typos
+950,City,georgiana,geoxgiana,real_world,typos
+961,City,enterprise,enterprxse,real_world,typos
+969,City,enterprise,xntxrprisx,real_world,typos
+986,City,oneonta,onxonta,real_world,typos
+43,State,al,xl,real_world,typos
+47,State,al,xl,real_world,typos
+51,State,al,xl,real_world,typos
+84,State,al,xl,real_world,typos
+99,State,al,xl,real_world,typos
+120,State,al,ax,real_world,typos
+141,State,al,ax,real_world,typos
+166,State,al,ax,real_world,typos
+183,State,al,xl,real_world,typos
+229,State,al,ax,real_world,typos
+279,State,al,xl,real_world,typos
+357,State,al,ax,real_world,typos
+387,State,al,xl,real_world,typos
+403,State,al,ax,real_world,typos
+478,State,al,xl,real_world,typos
+484,State,al,xl,real_world,typos
+505,State,al,ax,real_world,typos
+560,State,al,xl,real_world,typos
+573,State,al,ax,real_world,typos
+593,State,al,ax,real_world,typos
+702,State,al,xl,real_world,typos
+765,State,al,xl,real_world,typos
+792,State,al,xl,real_world,typos
+885,State,al,xl,real_world,typos
+887,State,al,xl,real_world,typos
+923,State,al,ax,real_world,typos
+45,ZipCode,35957,x5957,real_world,typos
+64,ZipCode,35957,3595x,real_world,typos
+71,ZipCode,35631,3563x,real_world,typos
+94,ZipCode,35631,3563x,real_world,typos
+138,ZipCode,36049,36x49,real_world,typos
+140,ZipCode,36049,360x9,real_world,typos
+150,ZipCode,35640,3x640,real_world,typos
+158,ZipCode,35640,3x640,real_world,typos
+197,ZipCode,35235,3x23x,real_world,typos
+233,ZipCode,35968,359x8,real_world,typos
+268,ZipCode,36784,x6784,real_world,typos
+284,ZipCode,35007,3x007,real_world,typos
+291,ZipCode,35007,x5007,real_world,typos
+326,ZipCode,36201,36x01,real_world,typos
+333,ZipCode,36305,3x305,real_world,typos
+341,ZipCode,36305,x6x05,real_world,typos
+367,ZipCode,35594,3xx94,real_world,typos
+376,ZipCode,35594,3xx94,real_world,typos
+407,ZipCode,36067,3x0x7,real_world,typos
+421,ZipCode,35150,x5150,real_world,typos
+429,ZipCode,35150,3x1x0,real_world,typos
+491,ZipCode,36360,x6x60,real_world,typos
+500,ZipCode,35960,x5960,real_world,typos
+545,ZipCode,36106,3x10x,real_world,typos
+680,ZipCode,35233,3x233,real_world,typos
+686,ZipCode,35233,x52xx,real_world,typos
+711,ZipCode,36078,36x78,real_world,typos
+751,ZipCode,36420,3642x,real_world,typos
+816,ZipCode,35903,x590x,real_world,typos
+924,ZipCode,35901,3590x,real_world,typos
+68,CountyName,marshall,mxrshxll,real_world,typos
+73,CountyName,lauderdale,laudxrdalx,real_world,typos
+78,CountyName,lauderdale,laudexdale,real_world,typos
+137,CountyName,crenshaw,crxnshaw,real_world,typos
+217,CountyName,jefferson,jeffersxn,real_world,typos
+222,CountyName,de kalb,dx kalb,real_world,typos
+224,CountyName,de kalb,xe kalb,real_world,typos
+228,CountyName,de kalb,dx kalb,real_world,typos
+239,CountyName,de kalb,xe kalb,real_world,typos
+253,CountyName,clarke,xlarke,real_world,typos
+313,CountyName,calhoun,calhoxn,real_world,typos
+325,CountyName,calhoun,caxhoun,real_world,typos
+347,CountyName,houston,housxon,real_world,typos
+416,CountyName,talladega,tallaxega,real_world,typos
+457,CountyName,jefferson,jxffxrson,real_world,typos
+458,CountyName,jefferson,xefferson,real_world,typos
+466,CountyName,jefferson,jexxerson,real_world,typos
+503,CountyName,cherokee,chxrokxx,real_world,typos
+514,CountyName,cherokee,chxrokxx,real_world,typos
+528,CountyName,montgomery,monxgomery,real_world,typos
+541,CountyName,montgomery,montgomexy,real_world,typos
+552,CountyName,montgomery,monxgomery,real_world,typos
+579,CountyName,chambers,xhambers,real_world,typos
+591,CountyName,chambers,chaxbers,real_world,typos
+603,CountyName,coffee,coffxx,real_world,typos
+634,CountyName,lee,xee,real_world,typos
+673,CountyName,jefferson,jxffxrson,real_world,typos
+690,CountyName,jefferson,jexxerson,real_world,typos
+693,CountyName,elmore,elmoxe,real_world,typos
+699,CountyName,elmore,elxore,real_world,typos
+723,CountyName,cullman,cxllman,real_world,typos
+731,CountyName,cullman,cxllman,real_world,typos
+753,CountyName,covington,coxington,real_world,typos
+786,CountyName,madison,madisxn,real_world,typos
+799,CountyName,madison,madisox,real_world,typos
+896,CountyName,fayette,fayexxe,real_world,typos
+918,CountyName,etowah,etowxh,real_world,typos
+944,CountyName,butler,butxer,real_world,typos
+967,CountyName,coffee,cxffee,real_world,typos
+25,PhoneNumber,3347938701,334793870x,real_world,typos
+37,PhoneNumber,3347938701,xx479x8701,real_world,typos
+58,PhoneNumber,2565938310,2x6x938310,real_world,typos
+61,PhoneNumber,2565938310,2x6x938310,real_world,typos
+66,PhoneNumber,2565938310,2565x38310,real_world,typos
+102,PhoneNumber,3344933541,3344x33541,real_world,typos
+218,PhoneNumber,2058383122,2058x8x122,real_world,typos
+229,PhoneNumber,2568453150,2568453x50,real_world,typos
+248,PhoneNumber,3346366221,xx46x66221,real_world,typos
+262,PhoneNumber,3346366221,334x3xx221,real_world,typos
+322,PhoneNumber,2562358900,256235x900,real_world,typos
+343,PhoneNumber,3347935000,xx479x5000,real_world,typos
+382,PhoneNumber,2514717110,25x47x7xx0,real_world,typos
+385,PhoneNumber,2514717110,25x47x7xx0,real_world,typos
+387,PhoneNumber,2514717110,25x47x7xx0,real_world,typos
+394,PhoneNumber,3343614267,33x361x267,real_world,typos
+472,PhoneNumber,3347742601,334774x601,real_world,typos
+517,PhoneNumber,3342882100,3342xx2100,real_world,typos
+549,PhoneNumber,3342938000,3342938xxx,real_world,typos
+562,PhoneNumber,3342938000,33x2938000,real_world,typos
+563,PhoneNumber,3342938000,3342938xxx,real_world,typos
+573,PhoneNumber,3347561400,334x561400,real_world,typos
+594,PhoneNumber,3348972257,33x8972257,real_world,typos
+667,PhoneNumber,2059344011,20593xx011,real_world,typos
+700,PhoneNumber,3342836541,334x836541,real_world,typos
+714,PhoneNumber,3342836541,33x28365x1,real_world,typos
+752,PhoneNumber,3342228466,334xxx8466,real_world,typos
+764,PhoneNumber,3342228466,33422284xx,real_world,typos
+825,PhoneNumber,2564944000,2564944xxx,real_world,typos
+856,PhoneNumber,2059216200,x059x16x00,real_world,typos
+866,PhoneNumber,2059216200,20x9216200,real_world,typos
+882,PhoneNumber,2059325966,x0593x5966,real_world,typos
+884,PhoneNumber,2059325966,x0593x5966,real_world,typos
+917,PhoneNumber,2565435200,x565435x00,real_world,typos
+17,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+40,HospitalType,acute care hospitals,acxte care hospitals,real_world,typos
+99,HospitalType,acute care hospitals,acute care hosxitals,real_world,typos
+200,HospitalType,acute care hospitals,acute care hosxitals,real_world,typos
+214,HospitalType,acute care hospitals,acutx carx hospitals,real_world,typos
+267,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+281,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+294,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+412,HospitalType,acute care hospitals,acute care hosxitals,real_world,typos
+414,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+454,HospitalType,acute care hospitals,acute care hospitaxs,real_world,typos
+491,HospitalType,acute care hospitals,acute caxe hospitals,real_world,typos
+494,HospitalType,acute care hospitals,acute care hxspitals,real_world,typos
+498,HospitalType,acute care hospitals,acutx carx hospitals,real_world,typos
+512,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+533,HospitalType,acute care hospitals,acute care hosxitals,real_world,typos
+589,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+635,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+696,HospitalType,acute care hospitals,acute cxre hospitxls,real_world,typos
+706,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+730,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+780,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+783,HospitalType,acute care hospitals,acute care hospitaxs,real_world,typos
+815,HospitalType,acute care hospitals,axute care hospitals,real_world,typos
+849,HospitalType,acute care hospitals,acute caxe hospitals,real_world,typos
+878,HospitalType,acute care hospitals,acute care hoxpitalx,real_world,typos
+903,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+927,HospitalType,acute care hospitals,acuxe care hospixals,real_world,typos
+950,HospitalType,acute care hospitals,acute care hosxitals,real_world,typos
+957,HospitalType,acute care hospitals,acute xare hospitals,real_world,typos
+965,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+977,HospitalType,acute care hospitals,acutexcarexhospitals,real_world,typos
+23,HospitalOwner,government - hospital district or authority,government - hospxtal dxstrxct or authorxty,real_world,typos
+28,HospitalOwner,government - hospital district or authority,government - hospital xistrict or authority,real_world,typos
+32,HospitalOwner,government - hospital district or authority,governmenx - hospixal disxricx or auxhorixy,real_world,typos
+43,HospitalOwner,government - hospital district or authority,gxvernment - hxspital district xr authxrity,real_world,typos
+114,HospitalOwner,voluntary non-profit - private,volunxary non-profix - privaxe,real_world,typos
+158,HospitalOwner,proprietary,pxopxietaxy,real_world,typos
+160,HospitalOwner,proprietary,proxrietary,real_world,typos
+163,HospitalOwner,proprietary,xroprietary,real_world,typos
+165,HospitalOwner,proprietary,pxopxietaxy,real_world,typos
+217,HospitalOwner,voluntary non-profit - private,volunxary non-profix - privaxe,real_world,typos
+219,HospitalOwner,voluntary non-profit - private,voluntary nonxprofit x private,real_world,typos
+222,HospitalOwner,voluntary non-profit - church,voluntaryxnon-profitx-xchurch,real_world,typos
+239,HospitalOwner,voluntary non-profit - church,voxuntary non-profit - church,real_world,typos
+248,HospitalOwner,government - federal,governxent - federal,real_world,typos
+314,HospitalOwner,proprietary,prxprietary,real_world,typos
+333,HospitalOwner,proprietary,proxrietary,real_world,typos
+357,HospitalOwner,proprietary,prxprietary,real_world,typos
+450,HospitalOwner,proprietary,proxrietary,real_world,typos
+457,HospitalOwner,government - hospital district or authority,gxvernment - hxspital district xr authxrity,real_world,typos
+494,HospitalOwner,voluntary non-profit - private,voluntaryxnon-profitx-xprivate,real_world,typos
+527,HospitalOwner,voluntary non-profit - church,volxntary non-profit - chxrch,real_world,typos
+573,HospitalOwner,voluntary non-profit - other,voluntary non-profit - otxer,real_world,typos
+745,HospitalOwner,proprietary,prxprietary,real_world,typos
+785,HospitalOwner,government - hospital district or authority,goverxmext - hospital district or authority,real_world,typos
+847,HospitalOwner,voluntary non-profit - private,voluntaxy non-pxofit - pxivate,real_world,typos
+869,HospitalOwner,voluntary non-profit - private,voluxtary xox-profit - private,real_world,typos
+873,HospitalOwner,voluntary non-profit - private,voluntaxy non-pxofit - pxivate,real_world,typos
+25,EmergencyService,yes,yxs,real_world,typos
+44,EmergencyService,yes,yex,real_world,typos
+52,EmergencyService,yes,yxs,real_world,typos
+158,EmergencyService,yes,yxs,real_world,typos
+319,EmergencyService,yes,xes,real_world,typos
+328,EmergencyService,yes,yex,real_world,typos
+333,EmergencyService,yes,yex,real_world,typos
+351,EmergencyService,yes,yxs,real_world,typos
+375,EmergencyService,yes,yex,real_world,typos
+390,EmergencyService,yes,yxs,real_world,typos
+411,EmergencyService,yes,yxs,real_world,typos
+419,EmergencyService,no,xo,real_world,typos
+493,EmergencyService,yes,yxs,real_world,typos
+522,EmergencyService,yes,yxs,real_world,typos
+537,EmergencyService,yes,yex,real_world,typos
+565,EmergencyService,yes,xes,real_world,typos
+580,EmergencyService,yes,xes,real_world,typos
+588,EmergencyService,yes,xes,real_world,typos
+629,EmergencyService,yes,yex,real_world,typos
+654,EmergencyService,no,xo,real_world,typos
+675,EmergencyService,yes,yex,real_world,typos
+798,EmergencyService,yes,yxs,real_world,typos
+810,EmergencyService,yes,xes,real_world,typos
+867,EmergencyService,yes,yxs,real_world,typos
+890,EmergencyService,yes,yex,real_world,typos
+920,EmergencyService,yes,yex,real_world,typos
+922,EmergencyService,yes,yxs,real_world,typos
+22,Condition,heart attack,heart attaxk,real_world,typos
+23,Condition,heart attack,hearx axxack,real_world,typos
+74,Condition,heart attack,hearx axxack,real_world,typos
+128,Condition,heart failure,heaxt failuxe,real_world,typos
+200,Condition,heart attack,heaxt attack,real_world,typos
+226,Condition,heart attack,hexrt attxck,real_world,typos
+230,Condition,heart failure,heart faxlure,real_world,typos
+237,Condition,surgical infection prevention,suxgical infection pxevention,real_world,typos
+240,Condition,surgical infection prevention,surgxcal infectxon preventxon,real_world,typos
+257,Condition,pneumonia,xneumonia,real_world,typos
+280,Condition,heart failure,xeart failure,real_world,typos
+367,Condition,pneumonia,pnxumonia,real_world,typos
+370,Condition,pneumonia,pnexmonia,real_world,typos
+387,Condition,heart failure,hxart failurx,real_world,typos
+401,Condition,heart failure,hxart failurx,real_world,typos
+468,Condition,heart attack,hexrt attxck,real_world,typos
+507,Condition,pneumonia,pneumonix,real_world,typos
+556,Condition,pneumonia,pxeumoxia,real_world,typos
+600,Condition,heart failure,heart faixure,real_world,typos
+609,Condition,surgical infection prevention,surgical ixfectiox prevextiox,real_world,typos
+632,Condition,pneumonia,pneumonxa,real_world,typos
+680,Condition,pneumonia,xneumonia,real_world,typos
+696,Condition,heart attack,heart attaxk,real_world,typos
+699,Condition,heart failure,hexrt fxilure,real_world,typos
+713,Condition,surgical infection prevention,surgical infection xrevention,real_world,typos
+717,Condition,heart attack,heartxattack,real_world,typos
+734,Condition,surgical infection prevention,suxgical infection pxevention,real_world,typos
+781,Condition,heart attack,heart attaxk,real_world,typos
+852,Condition,surgical infection prevention,surgical infxction prxvxntion,real_world,typos
+870,Condition,surgical infection prevention,surgical ixfectiox prevextiox,real_world,typos
+956,Condition,heart attack,hexrt attxck,real_world,typos
+975,Condition,surgical infection prevention,surgical xnfection prevention,real_world,typos
+98,MeasureCode,ami-4,axi-4,real_world,typos
+102,MeasureCode,hf-1,hfx1,real_world,typos
+109,MeasureCode,pn-5c,pnx5c,real_world,typos
+121,MeasureCode,ami-2,axi-2,real_world,typos
+178,MeasureCode,hf-2,hf-x,real_world,typos
+191,MeasureCode,scip-inf-4,scip-inx-4,real_world,typos
+265,MeasureCode,scip-inf-3,scxp-xnf-3,real_world,typos
+350,MeasureCode,ami-2,amix2,real_world,typos
+392,MeasureCode,pn-3b,pn-xb,real_world,typos
+399,MeasureCode,hf-1,hx-1,real_world,typos
+410,MeasureCode,scip-inf-1,scipxinfx1,real_world,typos
+465,MeasureCode,scip-vte-1,sxip-vte-1,real_world,typos
+496,MeasureCode,ami-5,ami-x,real_world,typos
+581,MeasureCode,pn-5c,px-5c,real_world,typos
+640,MeasureCode,scip-vte-1,scip-vtx-1,real_world,typos
+649,MeasureCode,hf-1,hfx1,real_world,typos
+674,MeasureCode,hf-1,xf-1,real_world,typos
+677,MeasureCode,hf-4,hfx4,real_world,typos
+692,MeasureCode,ami-1,amix1,real_world,typos
+695,MeasureCode,ami-4,amx-4,real_world,typos
+719,MeasureCode,ami-3,amx-3,real_world,typos
+730,MeasureCode,pn-4,px-4,real_world,typos
+736,MeasureCode,scip-inf-2,scix-inf-2,real_world,typos
+750,MeasureCode,hf-2,hx-2,real_world,typos
+775,MeasureCode,cac-1,xax-1,real_world,typos
+789,MeasureCode,pn-2,pn-x,real_world,typos
+843,MeasureCode,pn-6,pnx6,real_world,typos
+866,MeasureCode,pn-4,px-4,real_world,typos
+931,MeasureCode,ami-1,amix1,real_world,typos
+1,MeasureName,surgery patients who were taking heart drugs called beta blockers before coming to the hospital who were kept on the beta blockers during the period just before and after their surgery,surgery patients who were taking heart drugs caxxed beta bxockers before coming to the hospitax who were kept on the beta bxockers during the period just before and after their surgery,real_world,typos
+95,MeasureName,heart attack patients given aspirin at arrival,xeart attack patients given aspirin at arrival,real_world,typos
+112,MeasureName,surgery patients who were taking heart drugs called beta blockers before coming to the hospital who were kept on the beta blockers during the period just before and after their surgery,surgery patiexts who were takixg heart drugs called beta blockers before comixg to the hospital who were kept ox the beta blockers durixg the period just before axd after their surgery,real_world,typos
+120,MeasureName,heart attack patients given aspirin at arrival,heart attack patients given aspirin at arrivax,real_world,typos
+146,MeasureName,heart attack patients given aspirin at discharge,heart attaxk patients given aspirin at disxharge,real_world,typos
+211,MeasureName,pneumonia patients assessed and given influenza vaccination,pneumoniaxpatientsxassessedxandxgivenxinfluenzaxvaccination,real_world,typos
+220,MeasureName,heart attack patients given aspirin at arrival,heartxattackxpatientsxgivenxaspirinxatxarrival,real_world,typos
+257,MeasureName,pneumonia patients whose initial emergency room blood culture was performed prior to the administration of the first hospital dose of antibiotics,pneumonxa patxents whose inxtxal emergency room blood culture was performed prxor to the admxnxstratxon of the fxrst hospxtal dose of antxbxotxcs,real_world,typos
+282,MeasureName,pneumonia patients whose initial emergency room blood culture was performed prior to the administration of the first hospital dose of antibiotics,pnxumonia patixnts whosx initial emxrgxncy room blood culturx was pxrformxd prior to thx administration of thx first hospital dosx of antibiotics,real_world,typos
+291,MeasureName,all heart surgery patients whose blood sugar (blood glucose) is kept under good control in the days right after surgery,all heart surgerx patients whose blood sugar (blood glucose) is kept under good control in the daxs right after surgerx,real_world,typos
+347,MeasureName,surgery patients whose doctors ordered treatments to prevent blood clots after certain types of surgeries,surgery pxtients whose doctors ordered trextments to prevent blood clots xfter certxin types of surgeries,real_world,typos
+381,MeasureName,heart attack patients given aspirin at discharge,heaxt attack patients given aspixin at dischaxge,real_world,typos
+390,MeasureName,heart failure patients given smoking cessation advice/counseling,heart xailure patients given smoking cessation advice/counseling,real_world,typos
+435,MeasureName,heart failure patients given ace inhibitor or arb for left ventricular systolic dysfunction (lvsd),heart faxlure patxents gxven ace inhxbxtor or arb for left ventrxcular systolxc dysfunctxon (lvsd),real_world,typos
+448,MeasureName,surgery patients needing hair removed from the surgical area before surgery who had hair removed using a safer method (electric clippers or hair removal cream c not a razor),surgeryxpatientsxneedingxhairxremovedxfromxthexsurgicalxareaxbeforexsurgery& xwhoxhadxhairxremovedxusingxaxsaferxmethodx(electricxclippersxorxhairxremovalxcreamxï¿½cxnotxaxrazor),real_world,typos
+474,MeasureName,heart failure patients given discharge instructions,heaxt failuxe patients given dischaxge instxuctions,real_world,typos
+494,MeasureName,heart attack patients given ace inhibitor or arb for left ventricular systolic dysfunction (lvsd),hxart attack patixnts givxn ace inhibitor or arb for lxft vxntricular systolic dysfunction (lvsd),real_world,typos
+508,MeasureName,pneumonia patients assessed and given influenza vaccination,pneumonix pxtients assessed xnd given influenzx vxccinxtion,real_world,typos
+533,MeasureName,pneumonia patients assessed and given influenza vaccination,pxeumoxia patiexts assessed axd givex ixfluexza vaccixatiox,real_world,typos
+542,MeasureName,heart attack patients given aspirin at arrival,hexrt attxck pxtients given aspirin xt arrivxl,real_world,typos
+546,MeasureName,heart attack patients given beta blocker at discharge,heaxt attack patients given beta blockex at dischaxge,real_world,typos
+563,MeasureName,all heart surgery patients whose blood sugar (blood glucose) is kept under good control in the days right after surgery,allxheartxsurgeryxpatientsxwhosexbloodxsugarx(bloodxglucose)xisxkeptxunderxgoodxcontrolxinxthexdaysxrightxafterxsurgery,real_world,typos
+613,MeasureName,all heart surgery patients whose blood sugar (blood glucose) is kept under good control in the days right after surgery,all heaxt suxgexy patients whose blood sugax (blood glucose) is kept undex good contxol in the days xight aftex suxgexy,real_world,typos
+651,MeasureName,heart failure patients given ace inhibitor or arb for left ventricular systolic dysfunction (lvsd),heart failure patients given ace inhibitor or arb for left xentricular systolic dysfunction (lxsd),real_world,typos
+652,MeasureName,heart failure patients given smoking cessation advice/counseling,heart faxlure patxents gxven smokxng cessatxon advxce/counselxng,real_world,typos
+673,MeasureName,heart attack patients given pci within 90 minutes of arrival,heartxattackxpatientsxgivenxpcixwithinx90xminutesxofxarrival,real_world,typos
+706,MeasureName,pneumonia patients given initial antibiotic(s) within 6 hours after arrival,pxeumoxia patiexts givex ixitial axtibiotic(s) withix 6 hours after arrival,real_world,typos
+707,MeasureName,pneumonia patients given the most appropriate initial antibiotic(s),pxeumoxia patiexts givex the most appropriate ixitial axtibiotic(s),real_world,typos
+714,MeasureName,surgery patients needing hair removed from the surgical area before surgery who had hair removed using a safer method (electric clippers or hair removal cream c not a razor),surgery paxienxs needing hair removed from xhe surgical area before surgery who had hair removed using a safer mexhod (elecxric clippers or hair removal cream c nox a razor),real_world,typos
+786,MeasureName,heart failure patients given an evaluation of left ventricular systolic (lvs) function,heaxt failuxe patients given an evaluation of left ventxiculax systolic (lvs) function,real_world,typos
+803,MeasureName,heart attack patients given aspirin at arrival,heart attack patxents gxven aspxrxn at arrxval,real_world,typos
+817,MeasureName,pneumonia patients given initial antibiotic(s) within 6 hours after arrival,pneumonix pxtients given initixl antibiotic(s) within 6 hours after arrivxl,real_world,typos
+894,MeasureName,pneumonia patients assessed and given influenza vaccination,pneumonia patients assessed and given influenza vaxxination,real_world,typos
+903,MeasureName,children who received reliever medication while hospitalized for asthma,childrenxwhoxreceivedxrelieverxmedicationxwhilexhospitalizedxforxasthma,real_world,typos
+916,MeasureName,heart failure patients given smoking cessation advice/counseling,hearx failure paxienxs given smoking cessaxion advice/counseling,real_world,typos
+998,MeasureName,surgery patients who were taking heart drugs called beta blockers before coming to the hospital who were kept on the beta blockers during the period just before and after their surgery,surgery pxtients who were txking hexrt drugs cxlled betx blockers before coming to the hospitxl who were kept on the betx blockers during the period just before xnd xfter their surgery,real_world,typos
+121,Score,100%,x00%,real_world,typos
+159,Score,98%,9x%,real_world,typos
+164,Score,57%,x7%,real_world,typos
+188,Score,95%,95x,real_world,typos
+209,Score,95%,x5%,real_world,typos
+238,Score,97%,9x%,real_world,typos
+239,Score,99%,xx%,real_world,typos
+253,Score,89%,89x,real_world,typos
+257,Score,96%,x6%,real_world,typos
+337,Score,100%,x00%,real_world,typos
+379,Score,95%,x5%,real_world,typos
+406,Score,94%,x4%,real_world,typos
+412,Score,100%,1xx%,real_world,typos
+427,Score,97%,x7%,real_world,typos
+489,Score,100%,1xx%,real_world,typos
+507,Score,93%,93x,real_world,typos
+515,Score,100%,1xx%,real_world,typos
+699,Score,88%,xx%,real_world,typos
+712,Score,100%,1xx%,real_world,typos
+719,Score,67%,x7%,real_world,typos
+770,Score,93%,x3%,real_world,typos
+861,Score,80%,80x,real_world,typos
+889,Score,85%,x5%,real_world,typos
+18,Sample,37 patients,3x patients,real_world,typos
+92,Sample,619 patients,619 paxienxs,real_world,typos
+116,Sample,0 patients,0 patixnts,real_world,typos
+134,Sample,21 patients,21 pxtients,real_world,typos
+167,Sample,11 patients,xx patients,real_world,typos
+171,Sample,6 patients,6xpatients,real_world,typos
+225,Sample,1 patients,1 patiexts,real_world,typos
+235,Sample,82 patients,82 patientx,real_world,typos
+317,Sample,29 patients,29 xatients,real_world,typos
+355,Sample,10 patients,1x patients,real_world,typos
+414,Sample,125 patients,125 patixnts,real_world,typos
+419,Sample,4 patients,4 xatients,real_world,typos
+445,Sample,521 patients,521 patiexts,real_world,typos
+463,Sample,0 patients,x patients,real_world,typos
+483,Sample,62 patients,62 patientx,real_world,typos
+497,Sample,0 patients,0 patxents,real_world,typos
+503,Sample,44 patients,44 paxienxs,real_world,typos
+524,Sample,257 patients,25x patients,real_world,typos
+533,Sample,87 patients,87 patientx,real_world,typos
+547,Sample,0 patients,x patients,real_world,typos
+555,Sample,74 patients,74 patxents,real_world,typos
+581,Sample,50 patients,50 pxtients,real_world,typos
+589,Sample,172 patients,172 patxents,real_world,typos
+669,Sample,87 patients,87 paxienxs,real_world,typos
+674,Sample,618 patients,618 xatients,real_world,typos
+777,Sample,193 patients,193 paxienxs,real_world,typos
+846,Sample,4 patients,4 patiexts,real_world,typos
+867,Sample,121 patients,121 patiexts,real_world,typos
+873,Sample,15 patients,15 patiexts,real_world,typos
+906,Sample,126 patients,126 patxents,real_world,typos
+973,Sample,27 patients,27 paxienxs,real_world,typos
+57,Stateavg,al_pn-3b,al_pn-xb,real_world,typos
+70,Stateavg,al_ami-1,al_amx-1,real_world,typos
+194,Stateavg,al_scip-vte-2,al_scix-vte-2,real_world,typos
+214,Stateavg,al_scip-inf-2,al_sxip-inf-2,real_world,typos
+245,Stateavg,al_ami-1,ax_ami-1,real_world,typos
+249,Stateavg,al_ami-5,xl_xmi-5,real_world,typos
+270,Stateavg,al_ami-1,al_axi-1,real_world,typos
+335,Stateavg,al_pn-2,al_pnx2,real_world,typos
+348,Stateavg,al_scip-vte-2,al_scipxvtex2,real_world,typos
+371,Stateavg,al_pn-7,alxpn-7,real_world,typos
+374,Stateavg,al_scip-inf-2,al_sxip-inf-2,real_world,typos
+388,Stateavg,al_hf-2,al_hx-2,real_world,typos
+478,Stateavg,al_pn-2,ax_pn-2,real_world,typos
+556,Stateavg,al_pn-5c,al_pn-5x,real_world,typos
+565,Stateavg,al_scip-vte-1,al_scipxvtex1,real_world,typos
+568,Stateavg,al_ami-2,xl_xmi-2,real_world,typos
+623,Stateavg,al_ami-8a,al_amix8a,real_world,typos
+647,Stateavg,al_ami-7a,alxami-7a,real_world,typos
+679,Stateavg,al_pn-3b,alxpn-3b,real_world,typos
+722,Stateavg,al_ami-7a,al_amx-7a,real_world,typos
+761,Stateavg,al_scip-inf-2,al_scipxinfx2,real_world,typos
+765,Stateavg,al_scip-vte-1,al_scix-vte-1,real_world,typos
+788,Stateavg,al_hf-4,al_hf-x,real_world,typos
+797,Stateavg,al_scip-inf-2,xl_scip-inf-2,real_world,typos
+828,Stateavg,al_ami-1,xl_xmi-1,real_world,typos
+843,Stateavg,al_pn-6,al_pnx6,real_world,typos
+921,Stateavg,al_pn-6,alxpn-6,real_world,typos

@@ -36,7 +36,20 @@ METRICS_DIR = Path("results/metrics")
 
 MAX_ATTEMPTS = 3
 APPROACH = "profile"
-NOISE_LEVELS = ["low", "medium", "high"]
+
+# Detection automatique des niveaux de bruit disponibles pour ce dataset : certains
+# datasets (donnees reelles, un seul fichier "dirty") n'ont qu'un seul niveau ("low"),
+# d'autres (bruit synthetique) en ont 3. Une liste fixe ["low","medium","high"] plante
+# des qu'un niveau n'existe pas -> on ne garde que les niveaux dont noisy_{level}.csv
+# existe reellement sur le disque.
+_ALL_POSSIBLE_LEVELS = ["low", "medium", "high"]
+NOISE_LEVELS = [lvl for lvl in _ALL_POSSIBLE_LEVELS if (DATASET_DIR / f"noisy_{lvl}.csv").exists()]
+if not NOISE_LEVELS:
+    raise FileNotFoundError(
+        f"Aucun fichier noisy_{{level}}.csv trouve dans {DATASET_DIR} -- "
+        f"verifiez que le dataset '{DATASET_NAME}' a bien ete prepare (injection ou donnees reelles)."
+    )
+print(f"Niveaux de bruit detectes pour '{DATASET_NAME}' : {NOISE_LEVELS}\n")
 
 for d in [CLEANED_DIR, GENERATED_DIR, FAILED_DIR, METRICS_DIR]:
     d.mkdir(parents=True, exist_ok=True)
