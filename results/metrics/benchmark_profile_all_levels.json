@@ -9,21 +9,33 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.1419,
-    "recall": 0.3065,
-    "f1": 0.194,
-    "tp": 156,
-    "fp": 943,
-    "fn": 353,
+    "precision": 0.0301,
+    "recall": 0.0093,
+    "f1": 0.0143,
+    "tp": 46,
+    "fp": 1482,
+    "fn": 4874,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
+      "missing_values": {
+        "tp": 45,
+        "fn": 2267,
+        "recall": 0.0195,
+        "f1_sans_fp": 0.0382
+      },
       "typos": {
-        "tp": 156,
-        "fn": 353,
-        "recall": 0.3065,
-        "f1_sans_fp": 0.4692
+        "tp": 1,
+        "fn": 2578,
+        "recall": 0.0004,
+        "f1_sans_fp": 0.0008
+      },
+      "format_errors": {
+        "tp": 0,
+        "fn": 29,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
       }
     }
   }

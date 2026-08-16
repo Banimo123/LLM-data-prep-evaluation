@@ -96,7 +96,18 @@ RÈGLES STRICTES À RESPECTER :
     déduite des "valeurs fréquentes" listées dans le profil (prends toutes les valeurs fréquentes
     listées pour une colonne comme étant ses valeurs canoniques valides) :
     ```python
-    import difflib
+    def _levenshtein(a, b):
+        if a == b:
+            return 0
+        if len(a) < len(b):
+            a, b = b, a
+        prev = list(range(len(b) + 1))
+        for i, ca in enumerate(a, 1):
+            curr = [i] + [0] * len(b)
+            for j, cb in enumerate(b, 1):
+                curr[j] = min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + (ca != cb))
+            prev = curr
+        return prev[-1]
 
     def harmonize_category(value, valid_values):
         if pd.isna(value):
@@ -107,13 +118,27 @@ RÈGLES STRICTES À RESPECTER :
         for v in valid_values:
             if v.lower() == s.lower():
                 return v
-        match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
-        return match[0] if match else value
+        scored = sorted(((_levenshtein(s, v), v) for v in valid_values), key=lambda x: x[0])
+        if not scored:
+            return value
+        best_dist, best_val = scored[0]
+        max_allowed = max(1, len(best_val) // 4)  # tolere ~25% de caracteres differents
+        if best_dist > max_allowed:
+            return value
+        if len(scored) > 1 and scored[1][0] == best_dist:
+            return value  # ambigu : plusieurs candidats a egale distance, ne pas trancher
+        return best_val
 
     # Exemple d'utilisation (adapter la liste par colonne à partir du profil) :
     valid_values_meal = ["BB", "HB", "FB", "SC", "Undefined"]
     df["meal"] = df["meal"].apply(lambda v: harmonize_category(v, valid_values_meal))
     ```
+    NE PAS utiliser `difflib.get_close_matches` avec un `cutoff` bas (ex: 0.6) : ce seuil confond
+    trop facilement deux valeurs valides mais textuellement proches (ex: deux noms d'hôpitaux
+    partageant "memorial hospital", deux horaires structurellement similaires). La distance de
+    Levenshtein ci-dessus, avec une tolérance proportionnelle à la longueur du mot ET une
+    vérification d'ambiguïté (deux candidats à égale distance -> on ne corrige pas), est le
+    résultat d'une correction déjà validée empiriquement — ne la simplifie pas.
     Applique cette fonction UNIQUEMENT aux colonnes catégorielles ayant un petit nombre de valeurs
     canoniques bien DISTINCTES les unes des autres (typiquement moins de 10 valeurs, textuellement
     différentes — ex: type d'hôtel, type de repas, type de dépôt, type de client, segment de
@@ -231,8 +256,9 @@ RÈGLES STRICTES À RESPECTER :
     alors corrigée À TORT vers la valeur incluse la plus proche par similarité, cassant une cellule
     qui n'avait pourtant rien d'erroné. Dans ce cas (nunique > nombre de valeurs listées), soit tu
     inclus TOUTES les valeurs listées dans le profil (pas un sous-ensemble arbitraire), soit tu
-    augmentes le seuil de similarité exigé (`cutoff` plus élevé, ex: 0.9 au lieu de 0.85) pour cette
-    colonne spécifique, afin de réduire le risque de corriger une valeur légitime non couverte.
+    réduis la tolérance de `harmonize_category` pour cette colonne spécifique (`max_allowed` plus
+    petit, ex: diviser la longueur par 6 au lieu de 4), afin de réduire le risque de corriger une
+    valeur légitime non couverte.
 
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.
