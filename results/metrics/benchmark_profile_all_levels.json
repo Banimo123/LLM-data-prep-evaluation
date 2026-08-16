@@ -9,113 +9,21 @@
     },
     "execution_success": true,
     "execution_error": null,
-    "precision": 0.0718,
-    "recall": 0.4766,
-    "f1": 0.1248,
-    "tp": 173,
-    "fp": 2236,
-    "fn": 190,
+    "precision": 0.1419,
+    "recall": 0.3065,
+    "f1": 0.194,
+    "tp": 156,
+    "fp": 943,
+    "fn": 353,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 41,
-        "fn": 118,
-        "recall": 0.2579,
-        "f1_sans_fp": 0.41
-      },
-      "missing_values": {
-        "tp": 132,
-        "fn": 62,
-        "recall": 0.6804,
-        "f1_sans_fp": 0.8098
-      },
-      "outliers": {
-        "tp": 0,
-        "fn": 10,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
-      }
-    }
-  },
-  {
-    "noise_level": "medium",
-    "noise_rates": {
-      "missing": 0.1,
-      "format": 0.15,
-      "outliers": 0.02,
-      "typos": 0.08
-    },
-    "execution_success": true,
-    "execution_error": null,
-    "precision": 0.0308,
-    "recall": 0.2729,
-    "f1": 0.0553,
-    "tp": 197,
-    "fp": 6209,
-    "fn": 525,
-    "n_rows_lost_by_workflow": 0,
-    "n_error_cells_lost_with_dropped_rows": 0,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 65,
-        "fn": 251,
-        "recall": 0.2057,
-        "f1_sans_fp": 0.3412
-      },
-      "missing_values": {
-        "tp": 132,
-        "fn": 254,
-        "recall": 0.342,
-        "f1_sans_fp": 0.5097
-      },
-      "outliers": {
-        "tp": 0,
-        "fn": 20,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
-      }
-    }
-  },
-  {
-    "noise_level": "high",
-    "noise_rates": {
-      "missing": 0.2,
-      "format": 0.3,
-      "outliers": 0.04,
-      "typos": 0.16
-    },
-    "execution_success": true,
-    "execution_error": null,
-    "precision": 0.4282,
-    "recall": 0.5184,
-    "f1": 0.469,
-    "tp": 731,
-    "fp": 976,
-    "fn": 679,
-    "n_rows_lost_by_workflow": 0,
-    "n_error_cells_lost_with_dropped_rows": 0,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 248,
-        "fn": 381,
-        "recall": 0.3943,
-        "f1_sans_fp": 0.5656
-      },
-      "missing_values": {
-        "tp": 482,
-        "fn": 264,
-        "recall": 0.6461,
-        "f1_sans_fp": 0.785
-      },
-      "outliers": {
-        "tp": 1,
-        "fn": 34,
-        "recall": 0.0286,
-        "f1_sans_fp": 0.0556
+        "tp": 156,
+        "fn": 353,
+        "recall": 0.3065,
+        "f1_sans_fp": 0.4692
       }
     }
   }

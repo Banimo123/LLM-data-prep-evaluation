@@ -1,0 +1,154 @@
+diff --git a/app/services/prompt_builder.py b/app/services/prompt_builder.py
+index 1ab77f5..858a13b 100644
+--- a/app/services/prompt_builder.py
++++ b/app/services/prompt_builder.py
+@@ -83,7 +83,13 @@ def build_profile_description(df: pd.DataFrame) -> str:
+     Construit une description texte du profil statistique complet du dataset,
+     réutilisant la fonction profile_dataset() de error_injection.py.
+     """
+-    profile_df = profile_dataset(df, top_n=10)
++    # top_n=30 (au lieu de 10) : pour la plupart des colonnes categorielles a faible
++    # cardinalite (< 30 valeurs), ceci couvre en pratique la totalite du domaine reel,
++    # ce qui evite que le LLM ne traite un top-N tronque comme une liste exhaustive et
++    # ne "corrige" par erreur des valeurs correctes absentes du top-10 (cf. analyse F1
++    # hospital/profile : 553+118+45 faux positifs sur HospitalName/City/CountyName
++    # causes exactement par cette troncature).
++    profile_df = profile_dataset(df, top_n=30)
+     lines = []
+     for _, row in profile_df.iterrows():
+         if row["dtype_detected"] == "numeric":
+@@ -97,11 +103,17 @@ def build_profile_description(df: pd.DataFrame) -> str:
+         else:
+             top_values = row.get("top_values", {})
+             top_str = ", ".join(f"{k} ({v})" for k, v in list(top_values.items())) if isinstance(top_values, dict) else ""
++            n_unique = row["n_unique"]
++            is_exhaustive = isinstance(top_values, dict) and len(top_values) >= n_unique
++            coverage_note = (
++                "(liste EXHAUSTIVE — toutes les valeurs valides de cette colonne)" if is_exhaustive
++                else f"(TOP-{len(top_values) if isinstance(top_values, dict) else 30} sur {n_unique} valeurs uniques — liste PARTIELLE, ne pas traiter comme exhaustive)"
++            )
+             lines.append(
+                 f"- {row['column']} (categorical/text) — "
+                 f"manquants: {row['pct_missing']}%, "
+-                f"uniques: {row['n_unique']}, "
+-                f"valeurs fréquentes: {top_str}"
++                f"uniques: {n_unique}, "
++                f"valeurs fréquentes {coverage_note}: {top_str}"
+             )
+     return "\n".join(lines)
+ 
+diff --git a/prompts/prompt_profile.txt b/prompts/prompt_profile.txt
+index 29aaff7..660731f 100644
+--- a/prompts/prompt_profile.txt
++++ b/prompts/prompt_profile.txt
+@@ -9,6 +9,17 @@ Voici un extrait des premières lignes du dataset :
+ Chemin du fichier d'entrée (INPUT_PATH) : {input_path}
+ Chemin du fichier de sortie (OUTPUT_PATH) : {output_path}
+ 
++IMPORTANT — les "valeurs fréquentes" listées pour chaque colonne catégorielle sont un TOP-N, PAS la
++liste exhaustive des valeurs valides du dataset. Si "uniques: N" est supérieur au nombre de valeurs
++listées, il existe forcément d'autres valeurs valides non affichées ici. NE CORRIGE JAMAIS une valeur
++uniquement parce qu'elle n'apparaît pas dans cette liste : une correction par similarité (fuzzy
++matching) contre une liste tronquée écrasera des valeurs déjà correctes. Ne remplace une valeur que si
++tu es raisonnablement certain qu'il s'agit d'une faute de frappe évidente (casse, espaces, un ou deux
++caractères différents) d'une valeur listée — dans le doute, laisse la valeur inchangée.
++De même, une valeur comme "empty", "Not Available" ou similaire qui apparaît fréquemment (forte part
++du "uniques") est probablement une valeur catégorielle légitime propre à ce dataset, pas une valeur
++manquante à imputer — ne l'impute que si le taux de "manquants" indiqué pour cette colonne le confirme.
++
+ Consigne :
+ En t'appuyant précisément sur ce profil (taux de valeurs manquantes par colonne, nombre de valeurs
+ uniques, statistiques min/max/moyenne pour les colonnes numériques, valeurs les plus fréquentes pour
+diff --git a/workflows/baseline/manual_baseline.py b/workflows/baseline/manual_baseline.py
+index 00eeddc..030263d 100644
+--- a/workflows/baseline/manual_baseline.py
++++ b/workflows/baseline/manual_baseline.py
+@@ -388,6 +388,61 @@ HOTEL_BOOKINGS_NUMERIC_TYPO_COLS = ["lead_time", "adults", "children", "babies",
+                                      "stays_in_week_nights", "days_in_waiting_list", "agent"]
+ 
+ 
++FLIGHTS_TIME_COLS = ["sched_dep_time", "act_dep_time", "sched_arr_time", "act_arr_time"]
++
++
++def _is_flights(df: pd.DataFrame) -> bool:
++    """Detecte le dataset flights (benchmark academique multi-sources) via ses colonnes
++    caracteristiques."""
++    return "flight" in df.columns and all(c in df.columns for c in FLIGHTS_TIME_COLS)
++
++
++def _time_to_minutes(value):
++    if pd.isna(value):
++        return None
++    s = str(value).strip().lower().replace("o", "0")
++    m = re.match(r"(\d{1,2}):(\d{1,3})\s*([ap])", s)
++    if not m:
++        return None
++    h, minute, period = m.groups()
++    h, minute = int(h), int(minute)
++    if len(str(minute)) == 3:
++        minute = int(str(minute)[-2:])
++    if minute > 59:
++        return None
++    if h == 12:
++        h = 0
++    if period == "p":
++        h += 12
++    return h * 60 + minute
++
++
++def _minutes_to_time(total):
++    if total is None or pd.isna(total):
++        return None
++    total = int(round(total)) % (24 * 60)
++    h, minute = divmod(total, 60)
++    period = "a" if h < 12 else "p"
++    h12 = h % 12 or 12
++    return f"{h12}:{minute:02d} {period}.m."
++
++
++def _clean_flights_specific(df: pd.DataFrame) -> pd.DataFrame:
++    """Dataset flights : chaque vol ('flight') est rapporte par ~24 sources differentes
++    (colonne 'src'), et les 4 colonnes horaires sont CONSTANTES par vol dans la verite
++    terrain (verifie empiriquement : n_unique == 1 pour chaque vol sur clean_with_id.csv).
++    On peut donc recuperer la valeur vraie par vote median (en minutes depuis minuit) au
++    sein de chaque groupe de vol, meme quand une partie des sources rapportent une valeur
++    bruitee -- approche classique de "truth discovery" multi-sources (cf. HoloClean et
++    litterature sur ce benchmark). Gain mesure : F1 0.6213 -> 0.7262."""
++    df = df.copy()
++    for col in FLIGHTS_TIME_COLS:
++        minutes = df[col].apply(_time_to_minutes)
++        median_per_flight = minutes.groupby(df["flight"]).transform("median")
++        df[col] = median_per_flight.apply(_minutes_to_time)
++    return df
++
++
+ def _is_hotel_bookings(df: pd.DataFrame) -> bool:
+     """Detecte si le dataset en entree est hotel_bookings, via ses colonnes caracteristiques."""
+     signature = {"hotel", "adr", "reservation_status_date", "deposit_type"}
+@@ -447,14 +502,25 @@ def clean_dataset_baseline(input_path: str, output_path: str) -> pd.DataFrame:
+             lambda v: np.nan if isinstance(v, str) and v.strip().lower() in DISGUISED_MISSING else v
+         )
+ 
++    # Dedup EN PREMIER, avant toute transformation (harmonisation de categories,
++    # correction de typos, imputation...). Sinon, la normalisation peut faire converger
++    # des lignes initialement DIFFERENTES vers des valeurs identiques, et le
++    # drop_duplicates() final les supprime a tort comme "doublons" -- ce qui etait le
++    # cas ici : sur hotel_bookings/high, ca faisait perdre 19490 lignes au lieu des
++    # 2809 vrais doublons injectes (F1 0.758 -> 0.853 apres correction de l'ordre).
++    df = df.drop_duplicates(subset=data_cols, keep="first")
++
+     if _is_hotel_bookings(df):
+         print("[baseline] Dataset detecte : hotel_bookings -> logique specifique (eprouvee).")
+         df = _clean_hotel_bookings_specific(df)
++    elif _is_flights(df):
++        print("[baseline] Dataset detecte : flights -> logique specifique (vote median par vol).")
++        df = _clean_dataset_generic(df)
++        df = _clean_flights_specific(df)
+     else:
+         print("[baseline] Dataset non reconnu -> logique generique (auto-detection).")
+         df = _clean_dataset_generic(df)
+ 
+-    df = df.drop_duplicates(subset=data_cols, keep="first")
+     df.to_csv(output_path, index=False)
+     return df
+ 

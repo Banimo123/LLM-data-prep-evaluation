@@ -1,121 +1,58 @@
 [
   {
     "dataset": "flights",
-    "approche": "profile",
-    "niveau_de_bruit": "high",
-    "fichier": "noisy_high__profile.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\flights\\\\noisy_high.csv'"
-  },
-  {
-    "dataset": "flights",
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
     "precision": 1.0,
-    "recall": 0.5391,
-    "f1": 0.7006,
-    "tp": 427,
+    "recall": 0.4506,
+    "f1": 0.6213,
+    "tp": 2217,
     "fp": 0,
-    "fn": 365,
+    "fn": 2703,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "missing_values": {
-        "tp": 1,
-        "fn": 222,
-        "recall": 0.0045,
-        "f1_sans_fp": 0.0089
+        "tp": 1893,
+        "fn": 419,
+        "recall": 0.8188,
+        "f1_sans_fp": 0.9004
       },
       "typos": {
-        "tp": 426,
-        "fn": 143,
-        "recall": 0.7487,
-        "f1_sans_fp": 0.8563
+        "tp": 304,
+        "fn": 2275,
+        "recall": 0.1179,
+        "f1_sans_fp": 0.2109
+      },
+      "format_errors": {
+        "tp": 20,
+        "fn": 9,
+        "recall": 0.6897,
+        "f1_sans_fp": 0.8163
       }
     },
     "erreur": null
-  },
-  {
-    "dataset": "flights",
-    "approche": "profile",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__profile.csv",
-    "precision": 0.0059,
-    "recall": 0.0707,
-    "f1": 0.0109,
-    "tp": 56,
-    "fp": 9416,
-    "fn": 736,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "missing_values": {
-        "tp": 3,
-        "fn": 220,
-        "recall": 0.0135,
-        "f1_sans_fp": 0.0265
-      },
-      "typos": {
-        "tp": 53,
-        "fn": 516,
-        "recall": 0.0931,
-        "f1_sans_fp": 0.1704
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "flights",
-    "approche": "profile",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__profile.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\flights\\\\noisy_medium.csv'"
-  },
-  {
-    "dataset": "hospital",
-    "approche": "profile",
-    "niveau_de_bruit": "high",
-    "fichier": "noisy_high__profile.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\hospital\\\\noisy_high.csv'"
-  },
-  {
-    "dataset": "hospital",
-    "approche": "simple",
-    "niveau_de_bruit": "high",
-    "fichier": "noisy_high__simple.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\hospital\\\\noisy_high.csv'"
   },
   {
     "dataset": "hospital",
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__manual_baseline.csv",
-    "precision": 0.9904,
-    "recall": 0.8512,
-    "f1": 0.9156,
-    "tp": 309,
-    "fp": 3,
-    "fn": 54,
+    "precision": 0.9015,
+    "recall": 0.8094,
+    "f1": 0.853,
+    "tp": 412,
+    "fp": 45,
+    "fn": 97,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 117,
-        "fn": 42,
-        "recall": 0.7358,
-        "f1_sans_fp": 0.8478
-      },
-      "missing_values": {
-        "tp": 192,
-        "fn": 2,
-        "recall": 0.9897,
-        "f1_sans_fp": 0.9948
-      },
-      "outliers": {
-        "tp": 0,
-        "fn": 10,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
+        "tp": 412,
+        "fn": 97,
+        "recall": 0.8094,
+        "f1_sans_fp": 0.8947
       }
     },
     "erreur": null
@@ -125,84 +62,23 @@
     "approche": "profile",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__profile.csv",
-    "precision": 0.0718,
-    "recall": 0.4766,
-    "f1": 0.1248,
-    "tp": 173,
-    "fp": 2236,
-    "fn": 190,
+    "precision": 0.1372,
+    "recall": 0.2947,
+    "f1": 0.1873,
+    "tp": 150,
+    "fp": 943,
+    "fn": 359,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 41,
-        "fn": 118,
-        "recall": 0.2579,
-        "f1_sans_fp": 0.41
-      },
-      "missing_values": {
-        "tp": 132,
-        "fn": 62,
-        "recall": 0.6804,
-        "f1_sans_fp": 0.8098
-      },
-      "outliers": {
-        "tp": 0,
-        "fn": 10,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
+        "tp": 150,
+        "fn": 359,
+        "recall": 0.2947,
+        "f1_sans_fp": 0.4552
       }
     },
     "erreur": null
-  },
-  {
-    "dataset": "hospital",
-    "approche": "simple",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__simple.csv",
-    "precision": 0.6125,
-    "recall": 0.405,
-    "f1": 0.4876,
-    "tp": 147,
-    "fp": 93,
-    "fn": 216,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 21,
-        "fn": 138,
-        "recall": 0.1321,
-        "f1_sans_fp": 0.2333
-      },
-      "missing_values": {
-        "tp": 126,
-        "fn": 68,
-        "recall": 0.6495,
-        "f1_sans_fp": 0.7875
-      },
-      "outliers": {
-        "tp": 0,
-        "fn": 10,
-        "recall": 0.0,
-        "f1_sans_fp": 0.0
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hospital",
-    "approche": "profile",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__profile.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\hospital\\\\noisy_medium.csv'"
-  },
-  {
-    "dataset": "hospital",
-    "approche": "simple",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__simple.csv",
-    "erreur": "[Errno 2] No such file or directory: 'datasets\\\\hospital\\\\noisy_medium.csv'"
   },
   {
     "dataset": "hotel_bookings",
@@ -289,217 +165,6 @@
     "erreur": null
   },
   {
-    "dataset": "hotel_bookings",
-    "approche": "manual_baseline",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__manual_baseline.csv",
-    "precision": 0.9984,
-    "recall": 0.5865,
-    "f1": 0.739,
-    "tp": 39559,
-    "fp": 62,
-    "fn": 27887,
-    "n_rows_lost_by_workflow": 27471,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 16002,
-        "fn": 7873,
-        "recall": 0.6702,
-        "f1_sans_fp": 0.8026
-      },
-      "outliers": {
-        "tp": 2054,
-        "fn": 2718,
-        "recall": 0.4304,
-        "f1_sans_fp": 0.6018
-      },
-      "missing_values": {
-        "tp": 14780,
-        "fn": 15065,
-        "recall": 0.4952,
-        "f1_sans_fp": 0.6624
-      },
-      "format_errors": {
-        "tp": 6723,
-        "fn": 2231,
-        "recall": 0.7508,
-        "f1_sans_fp": 0.8577
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "profile",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__profile.csv",
-    "precision": 0.9134,
-    "recall": 0.6792,
-    "f1": 0.7791,
-    "tp": 45809,
-    "fp": 4341,
-    "fn": 21637,
-    "n_rows_lost_by_workflow": 18179,
-    "columns_dropped_by_workflow": [
-      "company"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 20380,
-        "fn": 3495,
-        "recall": 0.8536,
-        "f1_sans_fp": 0.921
-      },
-      "outliers": {
-        "tp": 2662,
-        "fn": 2110,
-        "recall": 0.5578,
-        "f1_sans_fp": 0.7162
-      },
-      "missing_values": {
-        "tp": 14341,
-        "fn": 15504,
-        "recall": 0.4805,
-        "f1_sans_fp": 0.6491
-      },
-      "format_errors": {
-        "tp": 8426,
-        "fn": 528,
-        "recall": 0.941,
-        "f1_sans_fp": 0.9696
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "validated",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__validated.csv",
-    "precision": 0.9544,
-    "recall": 0.6244,
-    "f1": 0.7549,
-    "tp": 42114,
-    "fp": 2011,
-    "fn": 25332,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [
-      "company"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 18941,
-        "fn": 4934,
-        "recall": 0.7933,
-        "f1_sans_fp": 0.8848
-      },
-      "outliers": {
-        "tp": 1350,
-        "fn": 3422,
-        "recall": 0.2829,
-        "f1_sans_fp": 0.441
-      },
-      "missing_values": {
-        "tp": 13379,
-        "fn": 16466,
-        "recall": 0.4483,
-        "f1_sans_fp": 0.6191
-      },
-      "format_errors": {
-        "tp": 8444,
-        "fn": 510,
-        "recall": 0.943,
-        "f1_sans_fp": 0.9707
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "manual_baseline",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__manual_baseline.csv",
-    "precision": 0.9992,
-    "recall": 0.5837,
-    "f1": 0.7369,
-    "tp": 78738,
-    "fp": 62,
-    "fn": 56168,
-    "n_rows_lost_by_workflow": 24051,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 33213,
-        "fn": 14542,
-        "recall": 0.6955,
-        "f1_sans_fp": 0.8204
-      },
-      "outliers": {
-        "tp": 4289,
-        "fn": 5259,
-        "recall": 0.4492,
-        "f1_sans_fp": 0.6199
-      },
-      "missing_values": {
-        "tp": 27515,
-        "fn": 32180,
-        "recall": 0.4609,
-        "f1_sans_fp": 0.631
-      },
-      "format_errors": {
-        "tp": 13721,
-        "fn": 4187,
-        "recall": 0.7662,
-        "f1_sans_fp": 0.8676
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "hotel_bookings",
-    "approche": "profile",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__profile.csv",
-    "precision": 0.9799,
-    "recall": 0.6356,
-    "f1": 0.7711,
-    "tp": 85750,
-    "fp": 1755,
-    "fn": 49156,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [
-      "company"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 37910,
-        "fn": 9845,
-        "recall": 0.7938,
-        "f1_sans_fp": 0.8851
-      },
-      "outliers": {
-        "tp": 4,
-        "fn": 9544,
-        "recall": 0.0004,
-        "f1_sans_fp": 0.0008
-      },
-      "missing_values": {
-        "tp": 30971,
-        "fn": 28724,
-        "recall": 0.5188,
-        "f1_sans_fp": 0.6832
-      },
-      "format_errors": {
-        "tp": 16865,
-        "fn": 1043,
-        "recall": 0.9418,
-        "f1_sans_fp": 0.97
-      }
-    },
-    "erreur": null
-  },
-  {
     "dataset": "titanic",
     "approche": "profile",
     "niveau_de_bruit": "high",
@@ -530,152 +195,6 @@
         "fn": 48,
         "recall": 0.1429,
         "f1_sans_fp": 0.25
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "titanic",
-    "approche": "manual_baseline",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__manual_baseline.csv",
-    "precision": 1.0,
-    "recall": 0.7172,
-    "f1": 0.8353,
-    "tp": 104,
-    "fp": 0,
-    "fn": 41,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [],
-    "per_error_family": {
-      "typos": {
-        "tp": 62,
-        "fn": 31,
-        "recall": 0.6667,
-        "f1_sans_fp": 0.8
-      },
-      "missing_values": {
-        "tp": 38,
-        "fn": 0,
-        "recall": 1.0,
-        "f1_sans_fp": 1.0
-      },
-      "outliers": {
-        "tp": 4,
-        "fn": 10,
-        "recall": 0.2857,
-        "f1_sans_fp": 0.4444
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "titanic",
-    "approche": "profile",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__profile.csv",
-    "precision": 1.0,
-    "recall": 0.9448,
-    "f1": 0.9716,
-    "tp": 137,
-    "fp": 0,
-    "fn": 8,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [
-      "Unnamed: 0"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 93,
-        "fn": 0,
-        "recall": 1.0,
-        "f1_sans_fp": 1.0
-      },
-      "missing_values": {
-        "tp": 37,
-        "fn": 1,
-        "recall": 0.9737,
-        "f1_sans_fp": 0.9867
-      },
-      "outliers": {
-        "tp": 7,
-        "fn": 7,
-        "recall": 0.5,
-        "f1_sans_fp": 0.6667
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "titanic",
-    "approche": "simple",
-    "niveau_de_bruit": "low",
-    "fichier": "noisy_low__simple.csv",
-    "precision": 0.8944,
-    "recall": 0.9931,
-    "f1": 0.9412,
-    "tp": 144,
-    "fp": 17,
-    "fn": 1,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [
-      "Unnamed: 0"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 93,
-        "fn": 0,
-        "recall": 1.0,
-        "f1_sans_fp": 1.0
-      },
-      "missing_values": {
-        "tp": 37,
-        "fn": 1,
-        "recall": 0.9737,
-        "f1_sans_fp": 0.9867
-      },
-      "outliers": {
-        "tp": 14,
-        "fn": 0,
-        "recall": 1.0,
-        "f1_sans_fp": 1.0
-      }
-    },
-    "erreur": null
-  },
-  {
-    "dataset": "titanic",
-    "approche": "profile",
-    "niveau_de_bruit": "medium",
-    "fichier": "noisy_medium__profile.csv",
-    "precision": 1.0,
-    "recall": 0.89,
-    "f1": 0.9418,
-    "tp": 259,
-    "fp": 0,
-    "fn": 32,
-    "n_rows_lost_by_workflow": 0,
-    "columns_dropped_by_workflow": [
-      "Unnamed: 0"
-    ],
-    "per_error_family": {
-      "typos": {
-        "tp": 185,
-        "fn": 4,
-        "recall": 0.9788,
-        "f1_sans_fp": 0.9893
-      },
-      "missing_values": {
-        "tp": 70,
-        "fn": 5,
-        "recall": 0.9333,
-        "f1_sans_fp": 0.9655
-      },
-      "outliers": {
-        "tp": 4,
-        "fn": 23,
-        "recall": 0.1481,
-        "f1_sans_fp": 0.2581
       }
     },
     "erreur": null
