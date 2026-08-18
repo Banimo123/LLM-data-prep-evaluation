@@ -17,9 +17,7 @@
     "fn": 53,
     "n_rows_lost_by_workflow": 0,
     "n_error_cells_lost_with_dropped_rows": 0,
-    "columns_dropped_by_workflow": [
-      "Unnamed: 0"
-    ],
+    "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
         "tp": 364,

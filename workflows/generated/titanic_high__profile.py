@@ -2,7 +2,6 @@ import pandas as pd
 import numpy as np
 import re
 from datetime import datetime
-import difflib
 
 INPUT_PATH = "datasets/titanic/noisy_high.csv"
 OUTPUT_PATH = "results/cleaned_datasets/titanic/noisy_high__profile.csv"
@@ -15,6 +14,19 @@ def extract_numeric(value):
     match = re.search(r"-?\d+\.?\d*", s)
     return float(match.group()) if match else np.nan
 
+def _levenshtein(a, b):
+    if a == b:
+        return 0
+    if len(a) < len(b):
+        a, b = b, a
+    prev = list(range(len(b) + 1))
+    for i, ca in enumerate(a, 1):
+        curr = [i] + [0] * len(b)
+        for j, cb in enumerate(b, 1):
+            curr[j] = min(prev[j] + 1, curr[j - 1] + 1, prev[j - 1] + (ca != cb))
+        prev = curr
+    return prev[-1]
+
 def harmonize_category(value, valid_values):
     if pd.isna(value):
         return value
@@ -24,24 +36,16 @@ def harmonize_category(value, valid_values):
     for v in valid_values:
         if v.lower() == s.lower():
             return v
-    match = difflib.get_close_matches(s, valid_values, n=1, cutoff=0.6)
-    return match[0] if match else value
-
-def parse_date(value):
-    if pd.isna(value):
+    scored = sorted(((_levenshtein(s, v), v) for v in valid_values), key=lambda x: x[0])
+    if not scored:
         return value
-    formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d"]
-    for fmt in formats:
-        try:
-            return datetime.strptime(str(value), fmt).strftime("%Y-%m-%d")
-        except (ValueError, TypeError):
-            continue
-    try:
-        if str(value).isdigit() and len(str(value)) in (9, 10):
-            return datetime.fromtimestamp(int(value)).strftime("%Y-%m-%d")
-    except (ValueError, TypeError):
-        pass
-    return str(value)
+    best_dist, best_val = scored[0]
+    max_allowed = max(1, len(best_val) // 4)
+    if best_dist > max_allowed:
+        return value
+    if len(scored) > 1 and scored[1][0] == best_dist:
+        return value
+    return best_val
 
 def find_best_grouping_column(df, target_col, is_numeric):
     target = df[target_col]
@@ -78,85 +82,107 @@ def find_best_grouping_column(df, target_col, is_numeric):
                 best_gain, best_col = w_share - global_share, cand
     return best_col
 
-# Chargement des données
+def parse_date(value):
+    if pd.isna(value):
+        return value
+    formats = ["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%B %d, %Y", "%d-%b-%Y", "%Y/%m/%d"]
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(str(value), fmt)
+            return dt.strftime("%Y-%m-%d")
+        except ValueError:
+            continue
+    if str(value).isdigit() and len(str(value)) in (9, 10):
+        try:
+            dt = datetime.fromtimestamp(int(value))
+            return dt.strftime("%Y-%m-%d")
+        except (ValueError, OSError):
+            pass
+    return str(value)
+
 df = pd.read_csv(INPUT_PATH)
 
-# Suppression des doublons (conservation de la première occurrence)
-initial_rows = len(df)
-df = df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep="first")
-duplicates_removed = initial_rows - len(df)
+operations_log = []
 
-# Nettoyage colonne par colonne
-operations = []
-
-# Unnamed: 0 - colonne technique à conserver telle quelle (pas de nettoyage)
+# Suppression de la colonne Unnamed: 0 (redondante avec row_id)
 if "Unnamed: 0" in df.columns:
-    operations.append("Unnamed: 0 conservée (colonne technique)")
+    df.drop(columns=["Unnamed: 0"], inplace=True)
+    operations_log.append("Suppression colonne Unnamed: 0 (redondante)")
 
-# PassengerId - colonne technique à conserver telle quelle
-if "PassengerId" in df.columns:
-    operations.append("PassengerId conservée (colonne technique)")
+# Suppression des doublons (en conservant le premier)
+initial_rows = len(df)
+df.drop_duplicates(subset=[col for col in df.columns if col != "row_id"], keep="first", inplace=True)
+final_rows = len(df)
+if initial_rows != final_rows:
+    operations_log.append(f"Suppression de {initial_rows - final_rows} doublons")
 
-# Survived - colonne binaire (0/1) sans valeurs manquantes
-if "Survived" in df.columns:
-    operations.append("Survived: colonne binaire valide (0/1)")
-
-# Sex - colonne binaire (0/1) sans valeurs manquantes
-if "Sex" in df.columns:
-    operations.append("Sex: colonne binaire valide (0/1)")
-
-# Age - colonne catégorielle avec 28% de valeurs manquantes et valeurs numériques sous forme texte
+# Traitement colonne Age (catégorielle avec valeurs numériques sous forme texte)
 if "Age" in df.columns:
     # Extraction des valeurs numériques
     df["Age"] = df["Age"].apply(extract_numeric)
-    # Imputation des valeurs manquantes
-    group_col = find_best_grouping_column(df, "Age", True)
+    # Imputation des valeurs manquantes (28.16%)
+    group_col = find_best_grouping_column(df, "Age", is_numeric=True)
     if group_col:
         df["Age"] = df.groupby(group_col)["Age"].transform(
             lambda s: s.fillna(s.median())
         )
     df["Age"] = df["Age"].fillna(df["Age"].median())
-    operations.append(f"Age: {df['Age'].isna().sum()} valeurs manquantes imputées par médiane")
+    operations_log.append("Colonne Age : extraction numérique + imputation par médiane")
 
-# Fare - colonne avec valeurs numériques sous forme texte et fautes de frappe (O au lieu de 0)
+# Traitement colonne Fare (texte avec valeurs numériques corrompues)
 if "Fare" in df.columns:
     # Extraction des valeurs numériques
     df["Fare"] = df["Fare"].apply(extract_numeric)
-    # Détection des outliers (bornes basées sur le profil: min=0, max=0.139)
-    q99 = df["Fare"].quantile(0.99)
-    outliers = df["Fare"] > q99
+    # Détection des outliers (valeurs > 99.5e percentile)
+    q995 = df["Fare"].quantile(0.995)
+    outliers = df["Fare"] > q995
     if outliers.any():
-        df.loc[outliers, "Fare"] = df["Fare"].median()
-        operations.append(f"Fare: {outliers.sum()} outliers corrigés par médiane")
-    operations.append("Fare: valeurs numériques extraites et formatées")
+        median_fare = df.loc[~outliers, "Fare"].median()
+        df.loc[outliers, "Fare"] = median_fare
+        operations_log.append(f"Colonne Fare : {outliers.sum()} outliers remplacés par médiane")
+    operations_log.append("Colonne Fare : extraction numérique + correction outliers")
 
-# Pclass_1, Pclass_2, Pclass_3 - colonnes binaires (0/1) sans valeurs manquantes
-for col in ["Pclass_1", "Pclass_2", "Pclass_3"]:
+# Colonnes numériques binaires (Pclass_*, Title_*, Emb_*) - pas de traitement nécessaire
+binary_cols = [col for col in df.columns if col.startswith(("Pclass_", "Title_", "Emb_"))]
+for col in binary_cols:
     if col in df.columns:
-        operations.append(f"{col}: colonne binaire valide (0/1)")
+        # Vérification que les valeurs sont bien 0 ou 1
+        unique_vals = df[col].dropna().unique()
+        if not all(val in (0, 1) for val in unique_vals):
+            df[col] = df[col].apply(lambda x: 1 if x == 1 else 0)
+            operations_log.append(f"Colonne {col} : correction des valeurs non binaires")
 
-# Family_size - colonne numérique discrète (0.0 à 1.0) sans valeurs manquantes
+# Traitement colonne Family_size (valeurs entre 0 et 1)
 if "Family_size" in df.columns:
-    operations.append("Family_size: colonne numérique valide (0.0-1.0)")
+    # Vérification des valeurs hors [0,1]
+    outliers = (df["Family_size"] < 0) | (df["Family_size"] > 1)
+    if outliers.any():
+        mode_family = df.loc[~outliers, "Family_size"].mode()[0]
+        df.loc[outliers, "Family_size"] = mode_family
+        operations_log.append(f"Colonne Family_size : {outliers.sum()} valeurs hors [0,1] remplacées par mode")
 
-# Title_1 à Title_4 - colonnes binaires (0/1) sans valeurs manquantes
-for col in ["Title_1", "Title_2", "Title_3", "Title_4"]:
+# Vérification des colonnes PassengerId et Survived (pas de valeurs manquantes)
+for col in ["PassengerId", "Survived", "Sex"]:
     if col in df.columns:
-        operations.append(f"{col}: colonne binaire valide (0/1)")
-
-# Emb_1 à Emb_3 - colonnes binaires (0/1) sans valeurs manquantes
-for col in ["Emb_1", "Emb_2", "Emb_3"]:
-    if col in df.columns:
-        operations.append(f"{col}: colonne binaire valide (0/1)")
+        # Vérification que les valeurs sont dans les bornes attendues
+        if col == "Survived":
+            unique_vals = df[col].dropna().unique()
+            if not all(val in (0, 1) for val in unique_vals):
+                df[col] = df[col].apply(lambda x: 1 if x == 1 else 0)
+                operations_log.append(f"Colonne {col} : correction des valeurs non binaires")
+        elif col == "Sex":
+            unique_vals = df[col].dropna().unique()
+            if not all(val in (0, 1) for val in unique_vals):
+                df[col] = df[col].apply(lambda x: 1 if x == 1 else 0)
+                operations_log.append(f"Colonne {col} : correction des valeurs non binaires")
 
 # Sauvegarde du dataset nettoyé
 df.to_csv(OUTPUT_PATH, index=False)
 
-# Résumé des opérations
-print("=== Résumé du nettoyage ===")
-print(f"Lignes initiales: {initial_rows}")
-print(f"Doublons supprimés: {duplicates_removed}")
-print(f"Lignes finales: {len(df)}")
-print("\nOpérations effectuées:")
-for op in operations:
+# Log des opérations
+print("=== Résumé des opérations de nettoyage ===")
+for op in operations_log:
     print(f"- {op}")
+print(f"\nDataset nettoyé sauvegardé dans : {OUTPUT_PATH}")
+print(f"Nombre final de lignes : {len(df)}")
+print(f"Nombre final de colonnes : {len(df.columns)}")

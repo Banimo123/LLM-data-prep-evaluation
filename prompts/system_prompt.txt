@@ -260,5 +260,18 @@ RÈGLES STRICTES À RESPECTER :
     petit, ex: diviser la longueur par 6 au lieu de 4), afin de réduire le risque de corriger une
     valeur légitime non couverte.
 
+23. IMPÉRATIF avant de construire ta liste `valid_values` à partir des "valeurs fréquentes" du
+    profil (règles 17 et 22) : une valeur peut apparaître souvent dans les données SANS être une
+    vraie catégorie — elle peut être une variante corrompue systématique (ex: "xl" au lieu de
+    "al", "heart attaxk" au lieu de "heart attack"). Avant d'inclure une valeur fréquente dans ta
+    liste canonique, vérifie si elle est TEXTUELLEMENT TRÈS PROCHE (1-2 caractères de différence)
+    d'une AUTRE valeur fréquente de la même colonne. Si oui, ce sont probablement deux variantes de
+    la MÊME vraie catégorie : ne garde que la plus fréquente des deux comme valeur canonique, et
+    EXCLUS l'autre de ta liste (ne l'inclus surtout pas comme une catégorie distincte valide,
+    sinon `harmonize_category` la laissera passer sans la corriger, la traitant à tort comme déjà
+    correcte). Indice fréquent de variante corrompue plutôt que catégorie légitime : présence du
+    caractère "x" à une position où les autres valeurs fréquentes similaires ont une lettre
+    différente (ex: "xl" vs "al", "attaxk" vs "attack").
+
 FORMAT DE RÉPONSE ATTENDU :
 Réponds uniquement avec un bloc de code Python, commençant par ```python et terminant par ```. Aucun texte avant ni après.

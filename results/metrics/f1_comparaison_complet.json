@@ -35,6 +35,41 @@
     "erreur": null
   },
   {
+    "dataset": "flights",
+    "approche": "profile",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__profile.csv",
+    "precision": 0.0301,
+    "recall": 0.0093,
+    "f1": 0.0143,
+    "tp": 46,
+    "fp": 1482,
+    "fn": 4874,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "missing_values": {
+        "tp": 45,
+        "fn": 2267,
+        "recall": 0.0195,
+        "f1_sans_fp": 0.0382
+      },
+      "typos": {
+        "tp": 1,
+        "fn": 2578,
+        "recall": 0.0004,
+        "f1_sans_fp": 0.0008
+      },
+      "format_errors": {
+        "tp": 0,
+        "fn": 29,
+        "recall": 0.0,
+        "f1_sans_fp": 0.0
+      }
+    },
+    "erreur": null
+  },
+  {
     "dataset": "hospital",
     "approche": "manual_baseline",
     "niveau_de_bruit": "low",
@@ -62,20 +97,43 @@
     "approche": "profile",
     "niveau_de_bruit": "low",
     "fichier": "noisy_low__profile.csv",
-    "precision": 0.1372,
-    "recall": 0.2947,
-    "f1": 0.1873,
-    "tp": 150,
-    "fp": 943,
-    "fn": 359,
+    "precision": 0.8758,
+    "recall": 0.277,
+    "f1": 0.4209,
+    "tp": 141,
+    "fp": 20,
+    "fn": 368,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
       "typos": {
-        "tp": 150,
-        "fn": 359,
-        "recall": 0.2947,
-        "f1_sans_fp": 0.4552
+        "tp": 141,
+        "fn": 368,
+        "recall": 0.277,
+        "f1_sans_fp": 0.4338
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "hospital",
+    "approche": "schema",
+    "niveau_de_bruit": "low",
+    "fichier": "noisy_low__schema.csv",
+    "precision": 0.015,
+    "recall": 0.1827,
+    "f1": 0.0278,
+    "tp": 93,
+    "fp": 6096,
+    "fn": 416,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [],
+    "per_error_family": {
+      "typos": {
+        "tp": 93,
+        "fn": 416,
+        "recall": 0.1827,
+        "f1_sans_fp": 0.309
       }
     },
     "erreur": null
@@ -170,11 +228,48 @@
     "niveau_de_bruit": "high",
     "fichier": "noisy_high__profile.csv",
     "precision": 1.0,
-    "recall": 0.8917,
-    "f1": 0.9427,
-    "tp": 502,
+    "recall": 0.8845,
+    "f1": 0.9387,
+    "tp": 498,
     "fp": 0,
-    "fn": 61,
+    "fn": 65,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [
+      "Unnamed: 0"
+    ],
+    "per_error_family": {
+      "typos": {
+        "tp": 364,
+        "fn": 8,
+        "recall": 0.9785,
+        "f1_sans_fp": 0.9891
+      },
+      "missing_values": {
+        "tp": 130,
+        "fn": 5,
+        "recall": 0.963,
+        "f1_sans_fp": 0.9811
+      },
+      "outliers": {
+        "tp": 4,
+        "fn": 52,
+        "recall": 0.0714,
+        "f1_sans_fp": 0.1333
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "schema",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__schema.csv",
+    "precision": 0.9922,
+    "recall": 0.9059,
+    "f1": 0.9471,
+    "tp": 510,
+    "fp": 4,
+    "fn": 53,
     "n_rows_lost_by_workflow": 0,
     "columns_dropped_by_workflow": [],
     "per_error_family": {
@@ -191,10 +286,47 @@
         "f1_sans_fp": 0.9811
       },
       "outliers": {
-        "tp": 8,
-        "fn": 48,
-        "recall": 0.1429,
-        "f1_sans_fp": 0.25
+        "tp": 16,
+        "fn": 40,
+        "recall": 0.2857,
+        "f1_sans_fp": 0.4444
+      }
+    },
+    "erreur": null
+  },
+  {
+    "dataset": "titanic",
+    "approche": "simple",
+    "niveau_de_bruit": "high",
+    "fichier": "noisy_high__simple.csv",
+    "precision": 0.9922,
+    "recall": 0.9059,
+    "f1": 0.9471,
+    "tp": 510,
+    "fp": 4,
+    "fn": 53,
+    "n_rows_lost_by_workflow": 0,
+    "columns_dropped_by_workflow": [
+      "Unnamed: 0"
+    ],
+    "per_error_family": {
+      "typos": {
+        "tp": 364,
+        "fn": 8,
+        "recall": 0.9785,
+        "f1_sans_fp": 0.9891
+      },
+      "missing_values": {
+        "tp": 130,
+        "fn": 5,
+        "recall": 0.963,
+        "f1_sans_fp": 0.9811
+      },
+      "outliers": {
+        "tp": 16,
+        "fn": 40,
+        "recall": 0.2857,
+        "f1_sans_fp": 0.4444
       }
     },
     "erreur": null

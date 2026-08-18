@@ -1,2 +1,2 @@
 noise_level,noise_rates,execution_success,execution_error,precision,recall,f1,tp,fp,fn,n_rows_lost_by_workflow,n_error_cells_lost_with_dropped_rows,columns_dropped_by_workflow
-high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,1.0,0.8845,0.9387,498,0,65,0,0,['Unnamed: 0']
+high,"{'missing': 0.2, 'format': 0.3, 'outliers': 0.04, 'typos': 0.16}",True,,0.9922,0.9059,0.9471,510,4,53,0,0,[]
